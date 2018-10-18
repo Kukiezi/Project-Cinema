@@ -20,6 +20,7 @@ namespace CinemaApi.Controllers
         [Route("GetMovies")]
         public ActionResult GetMovies()
         {
+
             var moviesss = "xd";
             using (var context = new CinemaDbContext())
             {
