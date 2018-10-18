@@ -13,6 +13,14 @@ namespace CinemaApi.Controllers
     [ApiController]
     public class MoviesController : ControllerBase
     {
+
+        private readonly CinemaDbContext context;
+
+        public MoviesController(CinemaDbContext context)
+        {
+            this.context = context;
+        }
+
         /// <summary>
         /// Metoda dostaje Get request z Front-endu i oddaje filmy z bazy danych jako JSON
         /// </summary>
@@ -20,23 +28,9 @@ namespace CinemaApi.Controllers
         [Route("GetMovies")]
         public ActionResult GetMovies()
         {
-            using (var context = new CinemaDbContext())
-            {
-                var movie = context.Movies.Where(m => m.Id == 1).FirstOrDefault();
-                if (movie != null)
-                {
-                    var movies = new List<MoviesDataModel>
-                    {
-                        new MoviesDataModel
-                        {
-                            Title = movie.Title,
-                            Description = movie.Description
-                        }
-                    };
-                    return Ok(movies);
-                }
-      
-            }
+                var moviesList = context.Movies.ToList();
+                if (moviesList.Count != 0)
+                    return Ok(moviesList);
 
             return NotFound();
 
@@ -51,13 +45,11 @@ namespace CinemaApi.Controllers
         [HttpPost]
         public ActionResult AddMovies(MoviesDataModel movies)
         {
-            using (var context = new CinemaDbContext())
-            {
-               
                 context.Movies.Add(new MoviesDataModel
                 {
                     Title = movies.Title,
-                    Description = movies.Description
+                    Description = movies.Description,
+                    Picture = movies.Picture
                 });
 
                 var movieExist = MovieExists(movies.Title);
@@ -68,10 +60,10 @@ namespace CinemaApi.Controllers
                 }
 
                 else
-                context.SaveChanges();
+                    context.SaveChanges();
                 return Ok(movies);
-            }
-
+         
+           
         }
 
         /// <summary>
@@ -82,11 +74,8 @@ namespace CinemaApi.Controllers
         [NonAction]
         public bool MovieExists(string title)
         {
-            using (var context = new CinemaDbContext())
-            {
                 var v = context.Movies.Where(a => a.Title == title).FirstOrDefault();
                 return v != null;
-            }
         }
     }
 }

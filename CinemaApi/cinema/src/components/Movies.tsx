@@ -6,6 +6,7 @@ public render() {
 
         return (
             <div className="text-left">
+             <img src={this.props.movie.picture}/>
             <h3> Tytuł: {this.props.movie.title}</h3> 
             <h3> Opis: {this.props.movie.description}</h3> 
              </div>
