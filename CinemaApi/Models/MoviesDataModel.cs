@@ -12,6 +12,12 @@ namespace CinemaApi.Models
         public int Id { get; set; }
 
         [Required]
+        public string Picture { get; set; }
+
+        [Required]
+        public int AgeRestriction { get; set; }
+
+        [Required]
         [MaxLength(64)]
         public string Title { get; set; }
 

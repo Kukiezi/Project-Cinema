@@ -28,7 +28,7 @@ public async componentDidMount() {
           dzisiaj gramy:
         </p>
      <div className="App-intro"> 
-          <img src="https://vignette.wikia.nocookie.net/garfield/images/b/ba/Garfield-profile.png/revision/latest?cb=20130807215550&path-prefix=pl"/>
+         
           {this.state.movies.map(movie => 
                         <Movies key={movie.id} movie={movie}/>)}
       </div>
@@ -45,5 +45,6 @@ export interface IState {
 export interface IMovies {
   id: number,
   title: string,
-  description: string
+  description: string,
+  picuture: string
 }
