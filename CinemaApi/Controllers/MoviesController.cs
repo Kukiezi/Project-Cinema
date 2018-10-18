@@ -20,7 +20,7 @@ namespace CinemaApi.Controllers
         [Route("GetMovies")]
         public ActionResult GetMovies()
         {
-            
+            var moviesss = "xd";
             using (var context = new CinemaDbContext())
             {
                 var movie = context.Movies.Where(m => m.Id == 1).FirstOrDefault();
