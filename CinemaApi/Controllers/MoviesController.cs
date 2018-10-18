@@ -16,7 +16,7 @@ namespace CinemaApi.Controllers
         /// <summary>
         /// Metoda dostaje Get request z Front-endu i oddaje filmy z bazy danych jako JSON
         /// </summary>
-        /// <returns>Filmy z bazy danych; Wiadomość jeżeli nie ma filmów</returns>
+        /// <returns>Filmy z bazy dasnych; Wiadomość jeżeli nie ma filmów</returns>
         [Route("GetMovies")]
         public ActionResult GetMovies()
         {
