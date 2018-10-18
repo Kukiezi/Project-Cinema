@@ -13,7 +13,7 @@ constructor(props: IState) {
 } 
 
 public async componentDidMount() {
-  const result = await fetch('https://localhost:44371/v1/GetMovies');
+  const result = await fetch('https://localhost:44371/cinema/GetMovies');
   const movies = await result.json();
   this.setState({ movies });
    }
