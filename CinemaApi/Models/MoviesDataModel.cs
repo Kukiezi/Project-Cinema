@@ -2,8 +2,12 @@
 
 namespace CinemaApi.Models
 {
+    /// <summary>
+    /// Model tabeli z bazy danych
+    /// </summary>
     public class MoviesDataModel
     {
+
         [Key]
         public int Id { get; set; }
 
