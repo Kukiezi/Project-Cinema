@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CinemaApi.Data;
 using CinemaApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,9 +13,9 @@ namespace CinemaApi.Controllers
     public class MoviesController : ControllerBase
     {
 
-        private readonly CinemaDbContext context;
+        private readonly CinemaDBContext context;
 
-        public MoviesController(CinemaDbContext context)
+        public MoviesController(CinemaDBContext context)
         {
             this.context = context;
         }
@@ -43,9 +42,9 @@ namespace CinemaApi.Controllers
         /// <returns>Dodane filmy; Wiadomość jeżeli nie zostały dodane z jakiegoś powodu</returns>
         [Route("AddMovie")]
         [HttpPost]
-        public ActionResult AddMovies(MoviesDataModel movies)
+        public ActionResult AddMovies(Movies movies)
         {
-                context.Movies.Add(new MoviesDataModel
+                context.Movies.Add(new Movies
                 {
                     Title = movies.Title,
                     Description = movies.Description,
