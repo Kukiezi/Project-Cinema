@@ -25,7 +25,7 @@ public async componentDidMount() {
     return (
       
       <div className="App">
-    
+
         <Slider/>
         <Fade>
         <p className="App-intro">
