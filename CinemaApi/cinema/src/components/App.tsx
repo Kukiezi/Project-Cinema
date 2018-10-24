@@ -1,6 +1,14 @@
+
 import * as React from 'react';
 import 'src/assets/css/App.css'
+import Fade from './Fade';
+import Footer from './Footer';
 import Movies from './Movies'
+import Navbar from './Navbar';
+import Slider from './Slider';
+
+
+
 
 class App extends React.Component<any, IState> {
 
@@ -12,26 +20,33 @@ constructor(props: IState) {
 
 } 
 
+
 public async componentDidMount() {
   const result = await fetch('https://localhost:44371/cinema/GetMovies');
   const movies = await result.json();
   this.setState({ movies });
    }
+   
   public render() {
     return (
+      
       <div className="App">
-        <div className="App-header">
-          <h1 className="App-title">Kino Studyjne</h1>
-          </div>
+      <Navbar/>
+        <Slider/>
+        <Fade>
         <p className="App-intro">
-          Witaj w najlepszym kinie do jakiego mogłeś zajrzeć!<br/><br/>
-          dzisiaj gramy:
+          DZISIAJ NA DUŻYM EKRANIE
         </p>
-     <div className="App-intro"> 
+        </Fade>
+    
+        <Fade>
+     <div className="Movie-list" id="Movie-list"> 
          
           {this.state.movies.map(movie => 
                         <Movies key={movie.id} movie={movie}/>)}
       </div>
+      </Fade>
+      <Footer footer={"2018"}/>
       </div>
     );
   }

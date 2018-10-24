@@ -5,10 +5,13 @@ export default class Movies extends React.Component<any, any>{
 public render() {
 
         return (
-            <div className="text-left">
-             <img src={this.props.movie.picture}/>
-            <h3> Tytuł: {this.props.movie.title}</h3> 
-            <h3> Opis: {this.props.movie.description}</h3> 
+            <div className="img__wrap">
+            <img src={this.props.movie.picture} width="203.66px" height="300.89px"/>
+              <a href="#"><div className="img__description_layer">
+         
+             <p> {this.props.movie.description}</p> 
+             </div></a>
+             <p> {this.props.movie.title}</p>
              </div>
            )
 }

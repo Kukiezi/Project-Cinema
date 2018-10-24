@@ -1,0 +1,94 @@
+
+.container{
+    width:100%;
+    position:relative;
+    overflow: hidden;
+    height: 600px;
+    background-color: black;
+  }
+  .slider{
+    width:500%;
+    position:relative;
+    animation:animate 20s linear infinite;
+  }
+  .slide{
+    width:20%;
+    position:relative;
+    float:left;
+    height:100vh;
+    background-size:cover;
+  }
+  h1{
+    margin:0;
+    padding:0;
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    text-align:center;
+    font-size:6em;
+    width:100%;
+    background:rgba(0,0,0,.6);
+    color:#fff;
+    font-family: Monte;
+  }
+  .slide:nth-child(1)
+  {
+    background: url(http://badfeelingmag.com/wp-content/uploads/2018/09/contest-win-tickets-to-the-montreal-premiere-of-venom-2.jpg) no-repeat center center;
+  }
+  .slide:nth-child(2)
+  {
+    background: url(https://i.ytimg.com/vi/ZFL0REtkocY/maxresdefault.jpg) no-repeat center center;
+  }
+  .slide:nth-child(3)
+  {
+    background: url(https://www.tapeciarnia.pl/tapety/normalne/tapeta-elsa-i-anna-w-filmie-dla-dzieci-kraina-lodu.jpg) no-repeat center center;
+  }
+  .slide:nth-child(4)
+  {
+    background: url(http://www.okiemkrytyka.com/wp-content/uploads/2018/07/mabuNsGJgRuCTuGqjFkWe1xdu19-e1531660433799.jpg) no-repeat center center;
+  }
+  .slide:nth-child(5)
+  {
+    background: url(https://cdn.cnn.com/cnnnext/dam/assets/180618215259-garfield-comic-strip-image.jpg) no-repeat center center;
+  }
+  @keyframes animate{
+    0%{
+      left:0;
+    }
+    16%{
+      left:0;
+    }
+    20%{
+      left:-100%;
+    }
+    36%{
+      left:-100%;
+    }
+    40%{
+      left:-200%;
+    }
+    56%{
+      left:-200%;
+    }
+    60%{
+      left:-300%;
+    }
+    76%{
+      left:-300%;
+    }
+    80%{
+      left:-400%;
+    }
+    96%{
+      left:-400%;
+    }
+    100%{
+      left:0;
+    }
+  }
+  @media screen and(max-width:768px){
+    .menu ul li{
+       text-align: center;
+      margin: 15px auto;
+    }
+  }
