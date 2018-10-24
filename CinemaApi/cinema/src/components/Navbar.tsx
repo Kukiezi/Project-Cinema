@@ -1,6 +1,7 @@
 import * as React from "react";
 import 'src/assets/css/Navbar.css'
 import Fade from './Fade';
+import { NavLink } from 'react-router-dom';
 
 class Navbar extends React.Component<any, IState>{
 
@@ -10,7 +11,6 @@ class Navbar extends React.Component<any, IState>{
 
 constructor(props: IState) {
   super(props);
-
 } 
 
 public render() {
@@ -20,10 +20,10 @@ public render() {
               <div className="menu">
                 <ul>
                 <Fade>
-                <li><a href="#" className="menu-item">Kino Studyjne</a></li>
-                <li><a href="#" className="menu-item">Repertuar</a></li>
-                <li><a href="#" className="menu-item">Wydarzenia</a></li>
-                <li><a href="#" className="menu-item">Newsy</a></li>
+                <li><NavLink to="/" className="menu-item">Kino Studyjne</NavLink></li>
+                <li><NavLink to="Repertuar"  className="menu-item">Repertuar</NavLink></li>
+                <li><NavLink to="Wydarzenia" className="menu-item">Wydarzenia</NavLink></li>
+                <li><NavLink to="Newsy" className="menu-item">Newsy</NavLink></li>
                 </Fade>
              </ul>
               </div>
