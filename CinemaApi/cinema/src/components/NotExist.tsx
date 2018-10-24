@@ -5,7 +5,7 @@ class NotExist extends React.Component<any, any> {
   public render() {
     return (
       
-        <h1>Strona której szukasz nie istnieje!</h1>
+        <h1>Strona której szukasz nie istnieje!!</h1>
      
     );
   }
