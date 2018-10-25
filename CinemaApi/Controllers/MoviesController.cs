@@ -19,6 +19,7 @@ namespace CinemaApi.Controllers
         ///     Metoda dostaje Get request z Front-endu i oddaje filmy z bazy danych jako JSON
         /// </summary>
         /// <returns>Filmy z bazy dasnych; Wiadomość jeżeli nie ma filmów</returns>
+        [HttpGet]
         [Route("GetMovies")]
         public ActionResult GetMovies()
         {
@@ -28,12 +29,25 @@ namespace CinemaApi.Controllers
 
             return NotFound();
         }
+        [HttpGet]
+        [Route("GetMovie")]
+        public ActionResult<Movies> GetMovie(int id)
+        {
+            var movie = context.Movies.Where(a => a.Id == id).FirstOrDefault();
+
+            if (movie != null) { 
+                return movie;
+            }
+
+            return NotFound();
+        }
 
         /// <summary>
         ///     Metoda dostaje Get request z Front-endu i oddaje filmy z bazy danych jako JSON
         /// </summary>
         /// <param name="movies"></param>
         /// <returns>Dodane filmy; Wiadomość jeżeli nie zostały dodane z jakiegoś powodu</returns>
+        [HttpPost]
         [Route("AddMovie")]
         [HttpPost]
         public ActionResult AddMovies(Movies movies)

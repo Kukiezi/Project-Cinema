@@ -1,0 +1,16 @@
+.details{
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+.details-title{
+    font-family: MonteBold;
+    font-size: 70px;
+}
+
+.details-desc{
+    font-family: Monte;
+    font-size: 30px;
+}
+

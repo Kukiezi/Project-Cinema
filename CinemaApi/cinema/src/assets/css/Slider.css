@@ -18,7 +18,7 @@
     height:100vh;
     background-size:cover;
   }
-  h1{
+  .slider-text{
     margin:0;
     padding:0;
     position:absolute;

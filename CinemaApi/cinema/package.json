@@ -5,6 +5,7 @@
   "dependencies": {
     "@types/history": "^4.7.2",
     "@types/react-router-dom": "^4.3.1",
+    "@types/webpack-env": "^1.13.6",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-reveal": "^1.2.2",

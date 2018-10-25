@@ -21,9 +21,9 @@ public render() {
                 <ul>
                 <Fade>
                 <li><NavLink to="/" className="menu-item">Kino Studyjne</NavLink></li>
-                <li><NavLink to="Repertuar"  className="menu-item">Repertuar</NavLink></li>
-                <li><NavLink to="Wydarzenia" className="menu-item">Wydarzenia</NavLink></li>
-                <li><NavLink to="Newsy" className="menu-item">Newsy</NavLink></li>
+                <li><NavLink to="/Repertuar"  className="menu-item">Repertuar</NavLink></li>
+                <li><NavLink to="/Wydarzenia" className="menu-item">Wydarzenia</NavLink></li>
+                <li><NavLink to="/Newsy" className="menu-item">Newsy</NavLink></li>
                 </Fade>
              </ul>
               </div>
