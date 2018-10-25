@@ -1,9 +1,10 @@
 import * as React from 'react';
-import 'src/assets/css/Details.css'
+import 'src/assets/css/Details.css';
+import 'src/assets/css/Spinner.css';
 class Details extends React.Component<any, IState> {
 
   public state: IState = {
-    "id": 0,
+    "loading": true,
     "movie": {
       "id": 0,
       "title": "",
@@ -18,19 +19,32 @@ constructor(props: IState) {
 
   public async componentDidMount() {
     const { Id } = this.props.match.params;
-    const { movie } = this.props.location.state
+    // const { movie } = this.props.location.state
+    const result = await fetch('https://localhost:44371/cinema/GetMovie?id='+Id);
+    const movie = await result.json();
      this.setState({ 
          movie,
-        id: Id,
+         loading: false
       });
      }
 
   public render() {
+    let content;
+    if (this.state.loading){
+      content = <div className="lds-ring"><div/><div/><div/><div/></div>;
+    }
+    else{
+     content =<div className="details-picture">  <img src={this.state.movie.picture} width="1920px" height="500px"/>  </div>
+      
+     
+    }
     return (
+      
       <div className="details"> 
-       <div className="details-picture">
-       <img src={this.state.movie.picture} width="1920px" height="500px"/>
-       </div>
+     
+    
+      { content }
+    
         <h1 className="details-title">{this.state.movie.title}</h1>
         <h3 className="details-desc">{this.state.movie.description}</h3>
       </div>
@@ -40,8 +54,8 @@ constructor(props: IState) {
 
 export default Details;
 export interface IState {
-  id: number,
-  movie: IMovie;
+  movie: IMovie,
+  loading: boolean
 }
 export interface IMovie {
   id: number,

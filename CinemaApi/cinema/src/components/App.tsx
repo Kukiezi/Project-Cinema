@@ -21,6 +21,7 @@ return(
      <Route component={NotExist}/>
     </Switch>
     <Footer footer={"2018"}/>
+    
     </div>
 )
 }

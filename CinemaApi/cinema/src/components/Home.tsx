@@ -48,7 +48,7 @@ public async componentDidMount() {
 
 export default Home;
 export interface IState {
-  movies: IMovies[];
+  movies: IMovies[]
 }
 
 export interface IMovies {
