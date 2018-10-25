@@ -21,7 +21,7 @@ public render() {
                 <h1 className="slider-text">Iniemamocni 2</h1>
               </div>
               <div className="slide">
-                <h1 className="slider-text">Garfield</h1>
+                <h1 className="slider-text">Venom</h1>
               </div>
             </div>
           </div>
