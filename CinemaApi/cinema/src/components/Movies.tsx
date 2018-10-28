@@ -11,7 +11,10 @@ public render() {
 
         return (
             <div className="img__wrap">
-            <img src={this.props.movie.picture} width="203.66px" height="300.89px"/>
+            <div className="movie-picture">
+            <img src={this.props.movie.icon}/>
+            </div>
+         
             {/* <img src={image} width="203.66px" height="300.89px"/> */}
               <NavLink to={{
                 pathname: 'Details/'+this.props.movie.id,

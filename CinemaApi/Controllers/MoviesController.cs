@@ -56,7 +56,8 @@ namespace CinemaApi.Controllers
             {
                 Title = movies.Title,
                 Description = movies.Description,
-                Picture = movies.Picture
+                Picture = movies.Picture,
+             
             });
 
             var movieExist = MovieExists(movies.Title);
