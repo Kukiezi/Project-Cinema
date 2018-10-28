@@ -9,7 +9,9 @@ public render() {
             <div className="container">
             <div className="slider">
               <div className="slide">
+       
                 <h1 className="slider-text">Venom</h1>
+             
               </div>
               <div className="slide">
                 <h1 className="slider-text">Tarzan</h1>

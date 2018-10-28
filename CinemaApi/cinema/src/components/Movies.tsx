@@ -21,7 +21,7 @@ public render() {
               }}>
                 <div className="img__description_layer">
          
-             <p> {this.props.movie.description}</p> 
+             <p>Więcej Informacji</p> 
              </div></NavLink>
              <p> {this.props.movie.title}</p>
              </div>

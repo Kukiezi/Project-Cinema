@@ -45,7 +45,7 @@ body{
   color: white;
   font-family: Monte;
   font-size: 10px;
-  display: inline-block;
+  
 }
 
 .text-left{
@@ -98,6 +98,12 @@ body{
   transition: opacity .2s, visibility .2s;
 }
 
+.img__description_layer p{
+ font-family: Monte;
+ font-weight: 100;
+ top: 35%;
+}
+
 .img__wrap:hover .img__description_layer {
   visibility: visible;
   opacity: 1;
@@ -138,4 +144,13 @@ footer {
   font-family: 'MonteBold';
   font-weight: 500;
   src: url('../fonts/Montserrat-Bold.ttf');
+}
+
+@media screen and (max-width: 838px) {
+  .img__wrap {
+
+    height: 221.14px;
+    width: 148.66px;
+ 
+  }
 }

@@ -3,6 +3,7 @@ import 'src/assets/css/Details.css';
 import 'src/assets/css/Spinner.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { NavLink } from 'react-router-dom';
+import Fade from './Fade';
 
 
 class Details extends React.Component<any, IState> {
@@ -34,33 +35,49 @@ class Details extends React.Component<any, IState> {
 
   public render() {
     let content;
+    let details;
     if (this.state.loading) {
       content = <div className="lds-ring"><div /><div /><div /><div /></div>;
     }
     else {
       content = <div className="details-picture"> <img src={this.state.movie.picture} /></div>
-
+      details =        <Fade >  <div className="details-text">
+      <div className="buy-absolute">
+        <div className="fontawesome">
+          <FontAwesomeIcon icon="ticket-alt" />
+        </div>
+        <NavLink className="subnav" to="/BuyTicket"  >
+          Kup Bilet<br />
+        </NavLink>
+        <NavLink className="subnav" to="/ReserveTicket" >
+         Zarezerwuj Bilet
+        </NavLink>
+      </div>
+    </div></Fade>
     }
     return (
       <div className="details">
 
+     <Fade cascade={true}>
         {content}
+        </Fade>
 
-        <div className="fontawesome">
-          <FontAwesomeIcon icon="ticket-alt" />
-        </div>
-        <br/><br/>
+        <br /><br />
+        <div className="details-right">
+        <Fade cascade={true}>  
+        <div className="cont">
         <h1 className="details-title">{this.state.movie.title}</h1>
+       
         <h3 className="details-desc">{this.state.movie.description}</h3>
-        <div className="details-text">
-          <NavLink className="subnav" to="/BuyTicket"  >
-            Kup Bilet<br />
-          </NavLink>
-          <NavLink className="subnav" to="/ReserveTicket" >
-            Zarezerwuj Bilet
-       </NavLink>
         </div>
+        </Fade>
+        
+        {details}
+        
       </div>
+    
+      </div>
+      
     );
   }
 }

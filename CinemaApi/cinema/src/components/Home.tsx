@@ -26,7 +26,9 @@ public async componentDidMount() {
       
       <div className="App">
         
+        <Fade>
         <Slider/>
+        </Fade>
         <Fade>
         <p className="App-intro">
           DZISIAJ NA DUŻYM EKRANIE
