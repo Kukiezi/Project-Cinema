@@ -7,8 +7,14 @@ import Home from "./Home";
 import Details from "./Details";
 import NotExist from "./NotExist";
 import Navbar from './Navbar';
+import { library } from '@fortawesome/fontawesome-svg-core'
+
+import { faTicketAlt } from '@fortawesome/free-solid-svg-icons'
 class App extends React.Component<any, any> {
+
+  
 public render() {
+  library.add(faTicketAlt);
 return(
 
   <div>
