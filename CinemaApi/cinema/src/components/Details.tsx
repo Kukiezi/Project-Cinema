@@ -37,10 +37,10 @@ class Details extends React.Component<any, IState> {
     let content;
     let details;
     if (this.state.loading) {
-      content = <div className="lds-ring"><div /><div /><div /><div /></div>;
+      content = <div className="lds-ring"><div /><div /><div /><div /></div>
     }
     else {
-      content = <div className="details-picture"> <img src={this.state.movie.picture} /></div>
+      content =  <Fade cascade={true}><div className="details-picture"> <img src={this.state.movie.picture} /></div>  </Fade>
       details =        <Fade >  <div className="details-text">
       <div className="buy-absolute">
         <div className="fontawesome">
@@ -58,9 +58,9 @@ class Details extends React.Component<any, IState> {
     return (
       <div className="details">
 
-     <Fade cascade={true}>
+    
         {content}
-        </Fade>
+      
 
         <br /><br />
         <div className="details-right">

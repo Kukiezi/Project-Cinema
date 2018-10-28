@@ -42,7 +42,7 @@ public async componentDidMount() {
                         <Movies key={movie.id} movie={movie}/>)}
       </div>
       </Fade>
-     
+
       </div>
     );
   }
@@ -57,5 +57,6 @@ export interface IMovies {
   id: number,
   title: string,
   description: string,
-  picuture: string
+  picuture: string,
+  icon: string
 }
