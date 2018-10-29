@@ -29,5 +29,9 @@
     "src/setupTests.ts",
     "lib", 
     "tests"
-  ]
+  ],
+  "include": [
+    "src"
+]
+  
 }

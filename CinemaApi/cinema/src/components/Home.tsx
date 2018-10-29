@@ -34,6 +34,7 @@ public async componentDidMount() {
         <p className="p-8 App-intro">
           DZISIAJ NA DUŻYM EKRANIE
         </p>
+      
         </Fade>
     
         <Fade>
