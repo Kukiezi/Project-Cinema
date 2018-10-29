@@ -119,9 +119,14 @@ footer {
   right: 0;
   bottom: 0;
   left: 0;
- color: white;
+  color: white;
+  height: 30px;
   background-color: rgb(19, 18, 18);
   text-align: center;
+}
+
+footer p{
+  margin-top:5px;
 }
 
 .movie-picture img{
