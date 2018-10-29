@@ -1,7 +1,7 @@
 import * as React from 'react';
 import 'src/assets/css/Details.css';
 import 'src/assets/css/Spinner.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { NavLink } from 'react-router-dom';
 import Fade from './Fade';
 
@@ -40,35 +40,35 @@ class Details extends React.Component<any, IState> {
       content = <div className="lds-ring"><div /><div /><div /><div /></div>
     }
     else {
-      content = <div className="flex flex-wrap bg-black ">
+      content = <div className="flex flex-wrap bg-black">
       
         <div className="xl:w-1/2 sm:w-full flex-none text-white text-center  bg-black px-4 py-2 m-2">
-        <Fade cascade={true}>
+        <Fade>
           <img src={this.state.movie.picture} />
           </Fade>
         </div>
       
        
-        <div className="xl:w-2/5 sm:w-full  flex-none monte text-white text-justify bg-black px-4 py-2 m-2">
-        <Fade cascade={true}>
+        <div className="xl:w-2/5 sm:w-full flex-none monte text-white text-justify bg-black px-4 py-2 m-2">
+        <Fade>
           <h1 className="leading-loose font-normal tracking-wide">{this.state.movie.title}</h1>
           <h3 className="font-thin">{this.state.movie.description}</h3>
           </Fade>
-          <Fade cascade={true}>
-          <div className="buy-absolute">
+        
+        
+              {/* <FontAwesomeIcon className="fontawesome" icon="ticket-alt" /> */}
 
-          
-              <FontAwesomeIcon className="fontawesome" icon="ticket-alt" />
-          
-            <NavLink className="subnav" to="/BuyTicket"  >
-              Kup Bilet<br />
+          <NavLink className="buy-btn" to="/BuyTicket" >
+              Kup Bilet
             </NavLink>
-            <NavLink className="subnav" to="/ReserveTicket" >
+          <NavLink className="buy-btn" to="/ReserveTicket" >
               Zarezerwuj Bilet
       </NavLink>
+  
+      
      
-          </div>
-          </Fade>
+         
+         
         </div>
         
         </div>
@@ -78,12 +78,11 @@ class Details extends React.Component<any, IState> {
     }
     return (
       
-   
-<div> {content}</div>
+        
+      <div>
+    {content}
+      </div>
      
-    
-
-
 
     );
   }
