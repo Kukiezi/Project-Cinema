@@ -24,7 +24,7 @@ class ReserveTicket extends React.Component {
 
       <div className="flex content-center">
         <div className="w-full h-64 text-grey-darker text-center bg-grey-light px-4 py-2 m-2 row-left">
-        <button id="A1" className={menuVis} onClick={this.toggleMenu} />
+          <button id="A1" className={menuVis} onClick={this.toggleMenu} />
           <button id="A2" className={menuVis} onClick={this.toggleMenu} />
           <button id="A3" className={menuVis} onClick={this.toggleMenu} />
           <button id="A4" className={menuVis} onClick={this.toggleMenu} />

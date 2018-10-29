@@ -40,16 +40,16 @@ class Details extends React.Component<any, IState> {
       content = <div className="lds-ring"><div /><div /><div /><div /></div>
     }
     else {
-      content = <div className="flex flex-no-wrap bg-black ">
+      content = <div className="flex flex-wrap bg-black ">
       
-        <div className="w-1/2 flex-none text-white text-center  bg-black px-4 py-2 m-2">
+        <div className="xl:w-1/2 sm:w-full flex-none text-white text-center  bg-black px-4 py-2 m-2">
         <Fade cascade={true}>
           <img src={this.state.movie.picture} />
           </Fade>
         </div>
       
        
-        <div className="w-1/2 flex-none monte text-white text-justify bg-black px-4 py-2 m-2">
+        <div className="xl:w-2/5 sm:w-full  flex-none monte text-white text-justify bg-black px-4 py-2 m-2">
         <Fade cascade={true}>
           <h1 className="leading-loose font-normal tracking-wide">{this.state.movie.title}</h1>
           <h3 className="font-thin">{this.state.movie.description}</h3>
@@ -57,9 +57,9 @@ class Details extends React.Component<any, IState> {
           <Fade cascade={true}>
           <div className="buy-absolute">
 
-            <div className="fontawesome">
-              <FontAwesomeIcon icon="ticket-alt" />
-            </div>
+          
+              <FontAwesomeIcon className="fontawesome" icon="ticket-alt" />
+          
             <NavLink className="subnav" to="/BuyTicket"  >
               Kup Bilet<br />
             </NavLink>
