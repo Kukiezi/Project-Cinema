@@ -62,11 +62,11 @@ class Details extends React.Component<any, IState> {
     return (
 
       <div className="flex flex-wrap bg-black ">
-        <div className="xl:w-1/2 ph:w-full flex-none text-white text-center  bg-black px-4 py-2 m-2">
+        <div className="xl:w-1/2 sm:w-full flex-none text-white text-center  bg-black px-4 py-2 m-2">
           <img src={this.state.movie.picture} />
         </div>
         
-        <div className="xl:w-2/5 ph:w-full  flex-none monte text-white text-justify bg-black px-4 py-2 m-2">
+        <div className="xl:w-2/5 sm:w-full  flex-none monte text-white text-justify bg-black px-4 py-2 m-2">
           <h1 className="leading-loose font-normal tracking-wide">{this.state.movie.title}</h1>
           <h3 className="font-thin">{this.state.movie.description}</h3>
           <div className="buy-absolute">
