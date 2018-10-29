@@ -24,6 +24,7 @@ return(
     <Switch>
      <Route path="/" component={Home} exact={true}/>
      <Route path="/Details/:Id" component={Details}/>
+     <Route path="/ReserveTicket" />
      <Route component={NotExist}/>
     </Switch>
     <Footer footer={"2018"}/>
