@@ -31,7 +31,6 @@
     "tests"
   ],
   "include": [
-    "src"
-]
-  
+        "src"
+    ]
 }
