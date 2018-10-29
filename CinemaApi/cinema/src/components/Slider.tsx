@@ -6,7 +6,7 @@ class Navbar extends React.Component<any, any>{
 public render() {
 
         return (
-            <div className="container">
+            <div className="container2">
             <div className="slider">
               <div className="slide">
        

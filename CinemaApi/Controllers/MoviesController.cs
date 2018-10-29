@@ -29,6 +29,7 @@ namespace CinemaApi.Controllers
 
             return NotFound();
         }
+
         [HttpGet]
         [Route("GetMovie")]
         public ActionResult<Movies> GetMovie(int id)
@@ -57,7 +58,7 @@ namespace CinemaApi.Controllers
                 Title = movies.Title,
                 Description = movies.Description,
                 Picture = movies.Picture,
-             
+                Icon = movies.Icon
             });
 
             var movieExist = MovieExists(movies.Title);

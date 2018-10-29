@@ -6,6 +6,14 @@
     border-bottom: 1px solid white;
   }
   
+  .monte{
+    font-family: Monte;
+  }
+
+  .monte-bold{
+    font-family: MonteBold;
+  }
+
   .Nav-header {
     vertical-align:top;
     display: inline-block;
