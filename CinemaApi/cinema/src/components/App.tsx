@@ -10,6 +10,7 @@ import Navbar from './Navbar';
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 import { faTicketAlt } from '@fortawesome/free-solid-svg-icons'
+import ReserveTicket from './ReserveTicket';
 class App extends React.Component<any, any> {
 
   
@@ -24,7 +25,7 @@ return(
     <Switch>
      <Route path="/" component={Home} exact={true}/>
      <Route path="/Details/:Id" component={Details}/>
-     <Route path="/ReserveTicket" />
+     <Route path="/ReserveTicket" component={ReserveTicket} />
      <Route component={NotExist}/>
     </Switch>
     <Footer footer={"2018"}/>
