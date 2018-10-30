@@ -12,5 +12,8 @@
     "object-literal-sort-keys": [false],
     "no-console": [false],
     "only-arrow-functions": [false]
+  },
+  "jsRules": {
+    "object-literal-sort-keys": false 
   }
 }

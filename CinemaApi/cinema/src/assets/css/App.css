@@ -45,8 +45,9 @@ body{
   color: white;
   font-family: Monte;
   font-size: 10px;
-  display: inline-block;
+  
 }
+
 
 .text-left{
   text-align: center;
@@ -56,24 +57,19 @@ body{
   padding: 20px;
   text-align: center;
   position: relative;
-  height: 300.88px;
-  width: 203.66px;
+  height: 340.89px;
+  width: 243.66px;
   display: inline-block;
   -webkit-box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
   -moz-box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
   box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
 }
 
-.img__wrap img{
-  position: relative;
-  top: -10px;
-}
-
 .img__wrap p{
   position: relative;
   font-size:20px;
-  font-family: MonteBold;
-  top: -27px;
+  font-family: Monte;
+  bottom: 8px;
 }
 
 .img__description_layer {
@@ -98,6 +94,12 @@ body{
   transition: opacity .2s, visibility .2s;
 }
 
+.img__description_layer p{
+ font-family: Monte;
+ font-weight: 100;
+ top: 35%;
+}
+
 .img__wrap:hover .img__description_layer {
   visibility: visible;
   opacity: 1;
@@ -117,15 +119,79 @@ footer {
   right: 0;
   bottom: 0;
   left: 0;
- color: white;
+  color: white;
+  height: 30px;
   background-color: rgb(19, 18, 18);
   text-align: center;
+}
+
+footer p{
+  margin-top:5px;
+}
+
+.movie-picture img{
+  width: 203.66px;
+  height: 300.89px;
+  position: relative;
+  top: -10px;
 }
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+@media screen and (max-width: 1479px) {
+  .movie-picture img{
+    width: 148.66px;
+    height: 221.14px;
+  }
+  .img__wrap {
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    height: 261.14px;
+    width: 188.66px;
+    display: inline-block;
+    -webkit-box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+    -moz-box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+    box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+  }
+
+  .img__wrap p{
+    position: relative;
+    font-size:15px;
+    font-family: Monte;
+    bottom: 5px;
+  }
+ 
+  }
+
+  @media screen and (max-width: 1149px) {
+    .movie-picture img{
+      width: 253.66px;
+      height: 350.89px;
+    }
+    .img__wrap {
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      height: 390.89px;
+      width: 293.66px;
+      display: inline-block;
+      -webkit-box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+      -moz-box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+      box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+    }
+  
+    .img__wrap p{
+      position: relative;
+      font-size:20px;
+      font-family: Monte;
+      bottom: 8px;
+    }
+   
+    }
 
 
 @font-face {
@@ -139,3 +205,7 @@ footer {
   font-weight: 500;
   src: url('../fonts/Montserrat-Bold.ttf');
 }
+
+
+
+

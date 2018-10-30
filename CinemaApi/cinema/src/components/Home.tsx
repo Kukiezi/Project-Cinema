@@ -4,6 +4,7 @@ import Fade from './Fade';
 import Movies from './Movies'
 import Slider from './Slider';
 
+
 class Home extends React.Component<any, IState> {
 
   public state: IState = {
@@ -26,11 +27,14 @@ public async componentDidMount() {
       
       <div className="App">
         
-        <Slider/>
         <Fade>
-        <p className="App-intro">
+        <Slider/>
+        </Fade>
+        <Fade>
+        <p className="p-8 App-intro">
           DZISIAJ NA DUŻYM EKRANIE
         </p>
+      
         </Fade>
     
         <Fade>
@@ -40,7 +44,7 @@ public async componentDidMount() {
                         <Movies key={movie.id} movie={movie}/>)}
       </div>
       </Fade>
-     
+
       </div>
     );
   }
@@ -55,5 +59,10 @@ export interface IMovies {
   id: number,
   title: string,
   description: string,
-  picuture: string
+  picuture: string,
+  icon: string,
+  genre: string,
+  watchingTime: string,
+  director: string,
+  
 }

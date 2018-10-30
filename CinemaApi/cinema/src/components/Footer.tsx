@@ -14,7 +14,5 @@ public render() {
             <p>&copy; {this.props.footer} - Kino Studyjne</p>
             </footer>
            )
-}
-
-
+    }
 }
