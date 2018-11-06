@@ -11,6 +11,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 
 import { faTicketAlt } from '@fortawesome/free-solid-svg-icons'
 import ReserveTicket from './ReserveTicket';
+import Reservation from './Reservation';
 class App extends React.Component<any, any> {
 
   
@@ -26,6 +27,7 @@ return(
      <Route path="/" component={Home} exact={true}/>
      <Route path="/Details/:Id" component={Details}/>
      <Route path="/ReserveTicket" component={ReserveTicket}/>
+     <Route path="/Reservation/:idSeat" component={Reservation}/>
      <Route component={NotExist}/>
     </Switch>
     <Footer footer={"2018"}/>
