@@ -206,6 +206,46 @@ footer p{
   src: url('../fonts/Montserrat-Bold.ttf');
 }
 
+.registration-form, .login-form {
+  background: #22292f;
+  position: fixed;
+  right: 0;
+  top: 66px;
+  min-width: 300px;
+  bottom: 0;
+  z-index: 9999;
+  font-family: Monte;
+  color: #fff;
+}
 
+.registration-form-inner, .login-form-inner{
+    padding: 40px;
+}
+
+.form-item > label {
+    padding: 20px 0 5px 0;
+}
+
+.form-title{
+  padding: 20px 0;
+  font-size: 25px;
+  font-weight: 900;
+  text-align: center;
+  display: block;
+}
+
+.regtoogle{
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  right: 140px;
+}
+
+.logtoogle{
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
 
 
