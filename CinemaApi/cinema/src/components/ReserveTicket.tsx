@@ -5,10 +5,13 @@ import Seats from './Seats'
 
 
 
+
 class ReserveTicket extends React.Component{
  
   public state: IState = {
     "seats": [],
+    
+    
   
 };
 
@@ -21,8 +24,7 @@ public async componentDidMount() {
   const result = await fetch('https://localhost:44371/cinema/GetSeats');
   const seats = await result.json();
   this.setState({
-  seats,
-  showMenu:true });
+  seats });
    }
    
 
@@ -37,9 +39,12 @@ public async componentDidMount() {
       <div className="w-full h-64 text-grey-darker text-center bg-grey-light px-4 py-2 m-2 row-left">
          
       {this.state.seats.map(seat => 
-                    <Seats key={seat.id} seat={seat}/>)}
+                    <Seats key={seat.idSeat} seat={seat}/>)}
+                    
   </div> 
+
   </div>
+
       
     );
   }
@@ -51,9 +56,9 @@ export interface IState {
 }
 
 export interface ISeats {
-  id: number,
-  row_number: string;
-  seat_number: number;
+  idSeat: number,
+  rowNumb: string,
+  seatNumb: number,
   
 }
 
