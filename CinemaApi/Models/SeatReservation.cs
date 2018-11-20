@@ -5,6 +5,7 @@ namespace CinemaApi.Models
 {
     public partial class SeatReservation
     {
+        public int IdSeatReservation { get; set; }
         public int IdSeat { get; set; }
         public int IdReservation { get; set; }
 

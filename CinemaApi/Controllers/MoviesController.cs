@@ -50,7 +50,6 @@ namespace CinemaApi.Controllers
         /// <returns>Dodane filmy; Wiadomość jeżeli nie zostały dodane z jakiegoś powodu</returns>
         [HttpPost]
         [Route("AddMovie")]
-        [HttpPost]
         public ActionResult AddMovies(Movies movies)
         {
             context.Movies.Add(new Movies
@@ -79,6 +78,20 @@ namespace CinemaApi.Controllers
         {
             var v = context.Movies.Where(a => a.Title == title).FirstOrDefault();
             return v != null;
+        }
+        [HttpPost]
+        [Route("AddRating")]
+        public ActionResult AddRating(int rating)
+        {
+            context.Rating.Add(new Rating
+            {
+                RatingNumber = rating,
+                IdMovies = 1
+                
+            });
+
+            context.SaveChanges();
+            return Ok(rating);
         }
     }
 }

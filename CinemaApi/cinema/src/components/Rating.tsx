@@ -5,47 +5,66 @@ import 'src/assets/css/Rating.css'
 
 export default class Rating extends React.Component<any, any>{
 
+  public onChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const checkValue = document.querySelectorAll("input");
+    const checkStar = document.querySelectorAll("label");
+    const checkSmiley = document.querySelectorAll("i");
+    let checkCount = 0;
+    for(let i=0; i<checkValue.length; i++){
+        if(checkValue[i]===e.target){
+            checkCount = i+1;
+        }
+    }
+    for(let j=0; j<checkCount; j++){
+        checkValue[j].checked = true;
+        checkStar[j].className = "rated";
+        checkSmiley[j].style.display = "none";
+    }
+    
+    for(let k=checkCount; k<checkValue.length; k++){
+        checkValue[k].checked = false;
+        checkStar[k].className = "check"
+        checkSmiley[k].style.display = "none";	
+    }
+    if(checkCount === 1){
+        document.querySelectorAll("i")[0].style.display = "block";
+    }
+    if(checkCount === 2){
+        document.querySelectorAll("i")[1].style.display = "block";
+    }
+    if(checkCount === 3){
+        document.querySelectorAll("i")[2].style.display = "block";
+    }
+    if(checkCount === 4){
+        document.querySelectorAll("i")[3].style.display = "block";
+    }
+    if(checkCount === 5){
+        document.querySelectorAll("i")[4].style.display = "block";
+    }
+    console.log(e.currentTarget.value);
+    this.FetchIt();
+}
 
+public async FetchIt(){
+
+  const result = await fetch('https://localhost:44371/cinema/GetMovies');
+  const movies = await result.json();
+  this.setState({ movies });
+}
 
 public render() {
 
+
         return (
-            <div>
-           <h1 className="rating-text">OCEŃ FILM</h1>
-            <div className="rating">
-             
-              <input aria-flowto="rating0" className="rating__input" type="radio" name="rating" value="5" id="rating5"/>
-              <label className="rating__label" htmlFor="rating5">☆
-                <span className="rating__star">5 Stars</span> 
-              </label>
-              
-              <input aria-flowto="rating5"  className="rating__input" type="radio" name="rating" value="4" id="rating4"/>
-              <label className="rating__label" htmlFor="rating4">☆
-                <span className="rating__star">4 Stars</span> 
-              </label>
-              
-              <input aria-flowto="rating4" className="rating__input" type="radio" name="rating" value="3" id="rating3"/>
-              <label className="rating__label" htmlFor="rating3">☆
-                <span className="rating__star">3 Stars</span> 
-              </label>
-              
-              <input aria-flowto="rating3" className="rating__input" type="radio" name="rating" value="2" id="rating2"/>
-              <label className="rating__label" htmlFor="rating2">☆
-                <span className="rating__star">2 Stars</span> 
-              </label>
-              
-              <input aria-flowto="rating2" className="rating__input" type="radio" name="rating" value="1" id="rating1"/>
-              <label className="rating__label" htmlFor="rating1">☆
-                <span className="rating__star">1 Stars</span> 
-              </label>
-              
-              <input aria-flowto="rating1" className="rating__input" type="radio" name="rating" value="0" id="rating0"/>
-              <label className="rating__label rating__label--hidden" htmlFor="rating0">
-                <span className="rating__star">Not rated yet </span>
-              </label>
-                
-            </div>
-            </div>
+          <div className="container">
+          <div className="smileybox">	
+              <label htmlFor="r1" className="check"><input value="1" type="checkbox" id="r1" onChange={this.onChange}/><i className="em em-weary"/></label>
+              <label htmlFor="r2" className="check"><input value="2" type="checkbox" id="r2" onChange={this.onChange}/><i className="em em-worried"/></label>
+              <label htmlFor="r3" className="check"><input value="3" type="checkbox" id="r3" onChange={this.onChange}/><i className="em em-blush"/></label>
+              <label htmlFor="r4" className="check"><input value="4" type="checkbox" id="r4" onChange={this.onChange}/><i className="em em-smiley"/></label>
+              <label htmlFor="r5" className="check"><input value="5" type="checkbox" id="r5" onChange={this.onChange}/><i className="em em-sunglasses"/></label>
+          </div>
+      </div>
            )
 }
 

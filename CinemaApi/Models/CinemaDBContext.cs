@@ -20,6 +20,7 @@ namespace CinemaApi.Models
         public virtual DbSet<Movies> Movies { get; set; }
         public virtual DbSet<Newsletter> Newsletter { get; set; }
         public virtual DbSet<PersonalData> PersonalData { get; set; }
+        public virtual DbSet<Rating> Rating { get; set; }
         public virtual DbSet<Reservation> Reservation { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Room> Room { get; set; }
@@ -111,6 +112,18 @@ namespace CinemaApi.Models
                     .IsRequired()
                     .HasMaxLength(2048);
 
+                entity.Property(e => e.Director)
+                    .IsRequired()
+                    .HasMaxLength(40)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(N'')");
+
+                entity.Property(e => e.Genre)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(N'')");
+
                 entity.Property(e => e.Icon)
                     .IsRequired()
                     .IsUnicode(false)
@@ -120,9 +133,17 @@ namespace CinemaApi.Models
                     .IsRequired()
                     .HasDefaultValueSql("(N'')");
 
+                entity.Property(e => e.Rating).HasDefaultValueSql("(N'')");
+
                 entity.Property(e => e.Title)
                     .IsRequired()
                     .HasMaxLength(64);
+
+                entity.Property(e => e.WatchingTime)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("(N'')");
             });
 
             modelBuilder.Entity<Newsletter>(entity =>
@@ -133,13 +154,13 @@ namespace CinemaApi.Models
                     .HasColumnName("id_newsletter")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.IdPersonalData).HasColumnName("id_personal_data");
+                entity.Property(e => e.IdUserAccount).HasColumnName("id_user_account");
 
-                entity.HasOne(d => d.IdPersonalDataNavigation)
+                entity.HasOne(d => d.IdUserAccountNavigation)
                     .WithMany(p => p.Newsletter)
-                    .HasForeignKey(d => d.IdPersonalData)
+                    .HasForeignKey(d => d.IdUserAccount)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Newslette__id_pe__75A278F5");
+                    .HasConstraintName("FK__Newslette__id_us__04E4BC85");
             });
 
             modelBuilder.Entity<PersonalData>(entity =>
@@ -165,6 +186,25 @@ namespace CinemaApi.Models
                     .IsUnicode(false);
             });
 
+            modelBuilder.Entity<Rating>(entity =>
+            {
+                entity.HasKey(e => e.IdRating);
+
+                entity.Property(e => e.IdRating)
+                    .HasColumnName("id_rating")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.IdMovies).HasColumnName("id_Movies");
+
+                entity.Property(e => e.RatingNumber).HasColumnName("rating_number");
+
+                entity.HasOne(d => d.IdMoviesNavigation)
+                    .WithMany(p => p.RatingNavigation)
+                    .HasForeignKey(d => d.IdMovies)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Rating__id_Movie__7C4F7684");
+            });
+
             modelBuilder.Entity<Reservation>(entity =>
             {
                 entity.HasKey(e => e.IdReservation);
@@ -173,13 +213,21 @@ namespace CinemaApi.Models
                     .HasColumnName("id_reservation")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.IdPersonalData).HasColumnName("id_personal_data");
+                entity.Property(e => e.IdScreening).HasColumnName("id_screening");
 
-                entity.HasOne(d => d.IdPersonalDataNavigation)
+                entity.Property(e => e.IdUserAccount).HasColumnName("id_user_account");
+
+                entity.HasOne(d => d.IdScreeningNavigation)
                     .WithMany(p => p.Reservation)
-                    .HasForeignKey(d => d.IdPersonalData)
+                    .HasForeignKey(d => d.IdScreening)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Reservati__id_pe__656C112C");
+                    .HasConstraintName("FK__Reservati__id_sc__05D8E0BE");
+
+                entity.HasOne(d => d.IdUserAccountNavigation)
+                    .WithMany(p => p.Reservation)
+                    .HasForeignKey(d => d.IdUserAccount)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Reservati__id_us__06CD04F7");
             });
 
             modelBuilder.Entity<Roles>(entity =>
@@ -269,25 +317,29 @@ namespace CinemaApi.Models
 
             modelBuilder.Entity<SeatReservation>(entity =>
             {
-                entity.HasKey(e => new { e.IdSeat, e.IdReservation });
+                entity.HasKey(e => e.IdSeatReservation);
 
                 entity.ToTable("Seat_Reservation");
 
-                entity.Property(e => e.IdSeat).HasColumnName("id_seat");
+                entity.Property(e => e.IdSeatReservation)
+                    .HasColumnName("id_seat_reservation")
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.IdReservation).HasColumnName("id_reservation");
+
+                entity.Property(e => e.IdSeat).HasColumnName("id_seat");
 
                 entity.HasOne(d => d.IdReservationNavigation)
                     .WithMany(p => p.SeatReservation)
                     .HasForeignKey(d => d.IdReservation)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Seat_Rese__id_re__693CA210");
+                    .HasConstraintName("FK__Seat_Rese__id_re__03F0984C");
 
                 entity.HasOne(d => d.IdSeatNavigation)
                     .WithMany(p => p.SeatReservation)
                     .HasForeignKey(d => d.IdSeat)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Seat_Rese__id_se__68487DD7");
+                    .HasConstraintName("FK__Seat_Rese__id_se__02FC7413");
             });
 
             modelBuilder.Entity<SigningIn>(entity =>
@@ -302,7 +354,7 @@ namespace CinemaApi.Models
 
                 entity.Property(e => e.IdEvent).HasColumnName("id_event");
 
-                entity.Property(e => e.IdPersonalData).HasColumnName("id_personal_data");
+                entity.Property(e => e.IdUserAccount).HasColumnName("id_user_account");
 
                 entity.HasOne(d => d.IdEventNavigation)
                     .WithMany(p => p.SigningIn)
@@ -310,11 +362,11 @@ namespace CinemaApi.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Signing_I__id_ev__5CD6CB2B");
 
-                entity.HasOne(d => d.IdPersonalDataNavigation)
+                entity.HasOne(d => d.IdUserAccountNavigation)
                     .WithMany(p => p.SigningIn)
-                    .HasForeignKey(d => d.IdPersonalData)
+                    .HasForeignKey(d => d.IdUserAccount)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Signing_I__id_pe__5DCAEF64");
+                    .HasConstraintName("FK__Signing_I__id_us__07C12930");
             });
 
             modelBuilder.Entity<UserAccount>(entity =>
@@ -328,41 +380,51 @@ namespace CinemaApi.Models
                     .ValueGeneratedNever();
 
                 entity.Property(e => e.Email)
-                    .IsRequired()
                     .HasColumnName("email")
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
-                entity.Property(e => e.IdUserRole).HasColumnName("id_user_role");
+                entity.Property(e => e.UserName)
+                    .HasColumnName("user_name")
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.UserPassword)
-                    .IsRequired()
                     .HasColumnName("user_password")
                     .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserSurname)
+                    .HasColumnName("user_surname")
+                    .HasMaxLength(25)
                     .IsUnicode(false);
             });
 
             modelBuilder.Entity<UserRole>(entity =>
             {
-                entity.HasKey(e => new { e.IdUserAccount, e.IdRoles });
+                entity.HasKey(e => e.IdUserRole);
 
                 entity.ToTable("User_Role");
 
-                entity.Property(e => e.IdUserAccount).HasColumnName("id_user_account");
+                entity.Property(e => e.IdUserRole)
+                    .HasColumnName("id_user_role")
+                    .ValueGeneratedNever();
 
                 entity.Property(e => e.IdRoles).HasColumnName("id_roles");
+
+                entity.Property(e => e.IdUserAccount).HasColumnName("id_user_account");
 
                 entity.HasOne(d => d.IdRolesNavigation)
                     .WithMany(p => p.UserRole)
                     .HasForeignKey(d => d.IdRoles)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__User_Role__id_ro__6EF57B66");
+                    .HasConstraintName("FK__User_role__id_ro__0B91BA14");
 
                 entity.HasOne(d => d.IdUserAccountNavigation)
                     .WithMany(p => p.UserRole)
                     .HasForeignKey(d => d.IdUserAccount)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__User_Role__id_us__6E01572D");
+                    .HasConstraintName("FK__User_role__id_us__0A9D95DB");
             });
         }
     }
