@@ -11,9 +11,11 @@ namespace CinemaApi.Models
         }
 
         public int IdReservation { get; set; }
-        public int IdPersonalData { get; set; }
+        public int IdScreening { get; set; }
+        public int IdUserAccount { get; set; }
 
-        public PersonalData IdPersonalDataNavigation { get; set; }
+        public Screening IdScreeningNavigation { get; set; }
+        public UserAccount IdUserAccountNavigation { get; set; }
         public ICollection<SeatReservation> SeatReservation { get; set; }
     }
 }
