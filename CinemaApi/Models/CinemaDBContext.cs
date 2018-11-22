@@ -19,7 +19,6 @@ namespace CinemaApi.Models
         public virtual DbSet<EventAddress> EventAddress { get; set; }
         public virtual DbSet<Movies> Movies { get; set; }
         public virtual DbSet<Newsletter> Newsletter { get; set; }
-        public virtual DbSet<PersonalData> PersonalData { get; set; }
         public virtual DbSet<Rating> Rating { get; set; }
         public virtual DbSet<Reservation> Reservation { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
@@ -32,7 +31,6 @@ namespace CinemaApi.Models
         public virtual DbSet<UserRole> UserRole { get; set; }
 
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CulturalEvent>(entity =>
@@ -41,9 +39,7 @@ namespace CinemaApi.Models
 
                 entity.ToTable("Cultural_Event");
 
-                entity.Property(e => e.IdCulturalEvent)
-                    .HasColumnName("id_cultural_event")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.IdCulturalEvent).HasColumnName("id_cultural_event");
 
                 entity.Property(e => e.EventDate)
                     .HasColumnName("event_date")
@@ -68,7 +64,7 @@ namespace CinemaApi.Models
                     .WithMany(p => p.CulturalEvent)
                     .HasForeignKey(d => d.IdEventAddress)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Cultural___id_ev__59FA5E80");
+                    .HasConstraintName("FK__Cultural___id_ev__1332DBDC");
             });
 
             modelBuilder.Entity<EventAddress>(entity =>
@@ -77,9 +73,7 @@ namespace CinemaApi.Models
 
                 entity.ToTable("Event_Address");
 
-                entity.Property(e => e.IdEventAddress)
-                    .HasColumnName("id_event_address")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.IdEventAddress).HasColumnName("id_event_address");
 
                 entity.Property(e => e.City)
                     .IsRequired()
@@ -150,9 +144,7 @@ namespace CinemaApi.Models
             {
                 entity.HasKey(e => e.IdNewsletter);
 
-                entity.Property(e => e.IdNewsletter)
-                    .HasColumnName("id_newsletter")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.IdNewsletter).HasColumnName("id_newsletter");
 
                 entity.Property(e => e.IdUserAccount).HasColumnName("id_user_account");
 
@@ -160,39 +152,14 @@ namespace CinemaApi.Models
                     .WithMany(p => p.Newsletter)
                     .HasForeignKey(d => d.IdUserAccount)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Newslette__id_us__04E4BC85");
-            });
-
-            modelBuilder.Entity<PersonalData>(entity =>
-            {
-                entity.HasKey(e => e.IdPersonalData);
-
-                entity.ToTable("Personal_Data");
-
-                entity.Property(e => e.IdPersonalData)
-                    .HasColumnName("id_personal_data")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.ClientName)
-                    .IsRequired()
-                    .HasColumnName("client_name")
-                    .HasMaxLength(25)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ClientSurname)
-                    .IsRequired()
-                    .HasColumnName("client_surname")
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
+                    .HasConstraintName("FK__Newslette__id_us__160F4887");
             });
 
             modelBuilder.Entity<Rating>(entity =>
             {
                 entity.HasKey(e => e.IdRating);
 
-                entity.Property(e => e.IdRating)
-                    .HasColumnName("id_rating")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.IdRating).HasColumnName("id_rating");
 
                 entity.Property(e => e.IdMovies).HasColumnName("id_Movies");
 
@@ -202,7 +169,7 @@ namespace CinemaApi.Models
                     .WithMany(p => p.RatingNavigation)
                     .HasForeignKey(d => d.IdMovies)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Rating__id_Movie__7C4F7684");
+                    .HasConstraintName("FK__Rating__id_Movie__29221CFB");
             });
 
             modelBuilder.Entity<Reservation>(entity =>
@@ -221,22 +188,20 @@ namespace CinemaApi.Models
                     .WithMany(p => p.Reservation)
                     .HasForeignKey(d => d.IdScreening)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Reservati__id_sc__05D8E0BE");
+                    .HasConstraintName("FK__Reservati__id_sc__395884C4");
 
                 entity.HasOne(d => d.IdUserAccountNavigation)
                     .WithMany(p => p.Reservation)
                     .HasForeignKey(d => d.IdUserAccount)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Reservati__id_us__06CD04F7");
+                    .HasConstraintName("FK__Reservati__id_us__2180FB33");
             });
 
             modelBuilder.Entity<Roles>(entity =>
             {
                 entity.HasKey(e => e.IdRoles);
 
-                entity.Property(e => e.IdRoles)
-                    .HasColumnName("id_roles")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.IdRoles).HasColumnName("id_roles");
 
                 entity.Property(e => e.RoleDescription)
                     .IsRequired()
@@ -254,9 +219,7 @@ namespace CinemaApi.Models
             {
                 entity.HasKey(e => e.IdRoom);
 
-                entity.Property(e => e.IdRoom)
-                    .HasColumnName("id_room")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.IdRoom).HasColumnName("id_room");
 
                 entity.Property(e => e.IdSeat).HasColumnName("id_seat");
 
@@ -266,16 +229,14 @@ namespace CinemaApi.Models
                     .WithMany(p => p.Room)
                     .HasForeignKey(d => d.IdSeat)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Room__id_seat__628FA481");
+                    .HasConstraintName("FK__Room__id_seat__30C33EC3");
             });
 
             modelBuilder.Entity<Screening>(entity =>
             {
                 entity.HasKey(e => e.IdScreening);
 
-                entity.Property(e => e.IdScreening)
-                    .HasColumnName("id_screening")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.IdScreening).HasColumnName("id_screening");
 
                 entity.Property(e => e.IdMovies).HasColumnName("id_Movies");
 
@@ -289,22 +250,20 @@ namespace CinemaApi.Models
                     .WithMany(p => p.Screening)
                     .HasForeignKey(d => d.IdMovies)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Screening__id_Mo__71D1E811");
+                    .HasConstraintName("FK__Screening__id_Mo__339FAB6E");
 
                 entity.HasOne(d => d.IdRoomNavigation)
                     .WithMany(p => p.Screening)
                     .HasForeignKey(d => d.IdRoom)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Screening__id_Ro__72C60C4A");
+                    .HasConstraintName("FK__Screening__id_Ro__3493CFA7");
             });
 
             modelBuilder.Entity<Seat>(entity =>
             {
                 entity.HasKey(e => e.IdSeat);
 
-                entity.Property(e => e.IdSeat)
-                    .HasColumnName("id_seat")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.IdSeat).HasColumnName("id_seat");
 
                 entity.Property(e => e.RowNumb)
                     .IsRequired()
@@ -321,9 +280,7 @@ namespace CinemaApi.Models
 
                 entity.ToTable("Seat_Reservation");
 
-                entity.Property(e => e.IdSeatReservation)
-                    .HasColumnName("id_seat_reservation")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.IdSeatReservation).HasColumnName("id_seat_reservation");
 
                 entity.Property(e => e.IdReservation).HasColumnName("id_reservation");
 
@@ -333,13 +290,13 @@ namespace CinemaApi.Models
                     .WithMany(p => p.SeatReservation)
                     .HasForeignKey(d => d.IdReservation)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Seat_Rese__id_re__03F0984C");
+                    .HasConstraintName("FK__Seat_Rese__id_re__25518C17");
 
                 entity.HasOne(d => d.IdSeatNavigation)
                     .WithMany(p => p.SeatReservation)
                     .HasForeignKey(d => d.IdSeat)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Seat_Rese__id_se__02FC7413");
+                    .HasConstraintName("FK__Seat_Rese__id_se__245D67DE");
             });
 
             modelBuilder.Entity<SigningIn>(entity =>
@@ -348,25 +305,23 @@ namespace CinemaApi.Models
 
                 entity.ToTable("Signing_In");
 
-                entity.Property(e => e.IdSigningIn)
-                    .HasColumnName("id_signing_in")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.IdSigningIn).HasColumnName("id_signing_in");
 
-                entity.Property(e => e.IdEvent).HasColumnName("id_event");
+                entity.Property(e => e.IdCulturalEvent).HasColumnName("id_cultural_event");
 
                 entity.Property(e => e.IdUserAccount).HasColumnName("id_user_account");
 
-                entity.HasOne(d => d.IdEventNavigation)
+                entity.HasOne(d => d.IdCulturalEventNavigation)
                     .WithMany(p => p.SigningIn)
-                    .HasForeignKey(d => d.IdEvent)
+                    .HasForeignKey(d => d.IdCulturalEvent)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Signing_I__id_ev__5CD6CB2B");
+                    .HasConstraintName("FK__Signing_I__id_cu__1CBC4616");
 
                 entity.HasOne(d => d.IdUserAccountNavigation)
                     .WithMany(p => p.SigningIn)
                     .HasForeignKey(d => d.IdUserAccount)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Signing_I__id_us__07C12930");
+                    .HasConstraintName("FK__Signing_I__id_us__1DB06A4F");
             });
 
             modelBuilder.Entity<UserAccount>(entity =>
@@ -375,9 +330,7 @@ namespace CinemaApi.Models
 
                 entity.ToTable("User_Account");
 
-                entity.Property(e => e.IdUserAccount)
-                    .HasColumnName("id_user_account")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.IdUserAccount).HasColumnName("id_user_account");
 
                 entity.Property(e => e.Email)
                     .HasColumnName("email")
@@ -404,11 +357,9 @@ namespace CinemaApi.Models
             {
                 entity.HasKey(e => e.IdUserRole);
 
-                entity.ToTable("User_Role");
+                entity.ToTable("User_role");
 
-                entity.Property(e => e.IdUserRole)
-                    .HasColumnName("id_user_role")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.IdUserRole).HasColumnName("id_user_role");
 
                 entity.Property(e => e.IdRoles).HasColumnName("id_roles");
 
@@ -418,13 +369,13 @@ namespace CinemaApi.Models
                     .WithMany(p => p.UserRole)
                     .HasForeignKey(d => d.IdRoles)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__User_role__id_ro__0B91BA14");
+                    .HasConstraintName("FK__User_role__id_ro__3864608B");
 
                 entity.HasOne(d => d.IdUserAccountNavigation)
                     .WithMany(p => p.UserRole)
                     .HasForeignKey(d => d.IdUserAccount)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__User_role__id_us__0A9D95DB");
+                    .HasConstraintName("FK__User_role__id_us__37703C52");
             });
         }
     }

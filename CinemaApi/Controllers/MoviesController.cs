@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using CinemaApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -79,19 +81,46 @@ namespace CinemaApi.Controllers
             var v = context.Movies.Where(a => a.Title == title).FirstOrDefault();
             return v != null;
         }
+
+        [HttpGet]
+        [Route("GetRating")]
+        public ActionResult<double> GetRating(int id)
+        {
+            var movie = context.Movies.Where(e => e.Id == id).FirstOrDefault();
+            var rating = movie.Rating;
+            return rating;
+        }
         [HttpPost]
         [Route("AddRating")]
-        public ActionResult AddRating(int rating)
+        public ActionResult<float> AddRating(int rating, int id)
         {
             context.Rating.Add(new Rating
             {
-                RatingNumber = rating,
-                IdMovies = 1
-                
+                IdMovies = id,
+                RatingNumber = rating
             });
-
             context.SaveChanges();
-            return Ok(rating);
+            var movie = context.Movies.Where(e => e.Id == id).FirstOrDefault();
+            var newRating = RatingCounter(id);
+            movie.Rating = newRating;
+            context.SaveChanges();
+            return newRating;
+        }
+        [NonAction]
+
+        public float RatingCounter(int idMovie)
+        {
+            var rating = context.Rating.Where(e => e.IdMovies == idMovie).ToList();
+            int ratingSum = 0;
+            foreach (Rating r in rating)
+            {
+                ratingSum += r.RatingNumber;
+            }
+            int countRating = rating.Count();
+            float newRating = (float)ratingSum / countRating;
+            //var test1 = Math.Round(newRating * 2, MidpointRounding.AwayFromZero);
+            //var test2 = test1 / 2;
+            return newRating; 
         }
     }
 }
