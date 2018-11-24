@@ -2,7 +2,7 @@ import * as React from 'react';
 import 'src/assets/css/App.css';
 import 'src/assets/css/ReserveTicket.css';
 import Seats from './Seats'
-
+import { NavLink } from 'react-router-dom';
 
 
 
@@ -42,7 +42,9 @@ public async componentDidMount() {
                     <Seats key={seat.idSeat} seat={seat}/>)}
                     
   </div> 
-
+  <NavLink className="buy-btn" to="/Reservation" >
+              Zarezerwuj 
+      </NavLink>
   </div>
 
       
