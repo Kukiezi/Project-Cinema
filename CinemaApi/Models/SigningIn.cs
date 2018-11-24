@@ -6,10 +6,10 @@ namespace CinemaApi.Models
     public partial class SigningIn
     {
         public int IdSigningIn { get; set; }
-        public int IdEvent { get; set; }
-        public int IdPersonalData { get; set; }
+        public int IdCulturalEvent { get; set; }
+        public int IdUserAccount { get; set; }
 
-        public CulturalEvent IdEventNavigation { get; set; }
-        public PersonalData IdPersonalDataNavigation { get; set; }
+        public CulturalEvent IdCulturalEventNavigation { get; set; }
+        public UserAccount IdUserAccountNavigation { get; set; }
     }
 }

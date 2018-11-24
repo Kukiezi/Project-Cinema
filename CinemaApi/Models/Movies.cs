@@ -7,6 +7,7 @@ namespace CinemaApi.Models
     {
         public Movies()
         {
+            RatingNavigation = new HashSet<Rating>();
             Screening = new HashSet<Screening>();
         }
 
@@ -16,7 +17,12 @@ namespace CinemaApi.Models
         public string Picture { get; set; }
         public int AgeRestriction { get; set; }
         public string Icon { get; set; }
+        public string Genre { get; set; }
+        public string Director { get; set; }
+        public string WatchingTime { get; set; }
+        public double Rating { get; set; }
 
+        public ICollection<Rating> RatingNavigation { get; set; }
         public ICollection<Screening> Screening { get; set; }
     }
 }

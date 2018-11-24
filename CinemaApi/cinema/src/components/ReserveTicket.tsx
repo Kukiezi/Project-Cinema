@@ -10,9 +10,6 @@ class ReserveTicket extends React.Component{
  
   public state: IState = {
     "seats": [],
-    
-    
-  
 };
 
 constructor(props: IState) {

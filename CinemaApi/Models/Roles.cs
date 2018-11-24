@@ -10,9 +10,9 @@ namespace CinemaApi.Models
             UserRole = new HashSet<UserRole>();
         }
 
-        public int IdRoles { get; set; }
         public string RoleName { get; set; }
         public string RoleDescription { get; set; }
+        public int IdRoles { get; set; }
 
         public ICollection<UserRole> UserRole { get; set; }
     }

@@ -5,6 +5,7 @@ namespace CinemaApi.Models
 {
     public partial class UserRole
     {
+        public int IdUserRole { get; set; }
         public int IdUserAccount { get; set; }
         public int IdRoles { get; set; }
 
