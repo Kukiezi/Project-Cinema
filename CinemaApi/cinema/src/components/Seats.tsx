@@ -9,7 +9,7 @@ class Seats extends React.Component<any, IState>{
 
     public state: IState={
         "free": true,
-        "currentRating":0,
+ 
         "reservation":{
             "IdReservation": 1,
             "IdUserAccount": 1,
@@ -82,7 +82,6 @@ public render() {
 export default Seats;
 export interface IState {
     free: boolean,
-    currentRating:number,
     seat: ISeat,
     reservation: IReservation,
     seatReservation: ISeatReservation
