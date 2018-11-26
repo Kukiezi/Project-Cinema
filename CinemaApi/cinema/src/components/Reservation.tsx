@@ -1,9 +1,15 @@
 import * as React from 'react';
+import SeatReservation from './Info';
 
 class Reservation extends React.Component<any, IState> {
 
     public state: IState = {
-        
+      "seatsReservation":[],
+      "reservation":{
+        "IdReservation": 1,
+        "IdUserAccount": 1,
+        "IdScreening": 3
+    },
         "seat": {
           "idSeat": 0,
           "rowNumb": "",
@@ -17,11 +23,11 @@ class Reservation extends React.Component<any, IState> {
       }
     
       public async componentDidMount() {
-        const { idSeat } = this.props.match.params;
-        const result = await fetch('https://localhost:44371/cinema/GetSeat?idSeat=' + idSeat);
-        const seat = await result.json();
+
+        const result = await fetch('https://localhost:44371/cinema/GetSeat?reservation=' + 1);
+        const seatsReservation = await result.json();
         this.setState({
-          seat
+          seatsReservation
           
         });
     }
@@ -29,8 +35,9 @@ class Reservation extends React.Component<any, IState> {
     return (
         <div>
         <h3 className="white">Potwierdzenie</h3>
-        <h3 className="white">Rząd:{this.state.seat.rowNumb}</h3>
-        <h3 className="white">Numer:{this.state.seat.seatNumb}</h3 >
+        {this.state.seatsReservation.map(seatReservation => 
+                    <SeatReservation key={seatReservation.idReservation} seatReservation={seatReservation}/>)}
+
         </div>
 
     );
@@ -40,12 +47,24 @@ class Reservation extends React.Component<any, IState> {
 export default Reservation;
 export interface IState {
   
-  seat: ISeat
-  
+  seat: ISeat,
+  reservation: IReservation
+  seatsReservation: ISeatReservation[]
   }
   export interface ISeat {
     idSeat: number,
     rowNumb: string,
     seatNumb: number,
+    
+  }
+  export interface IReservation {
+    IdReservation: number,
+    IdUserAccount: number,
+    IdScreening: number,
+  }
+  export interface ISeatReservation {
+    idSeatReservation: number,
+    idSeat:number,
+    idReservation: number,
     
   }

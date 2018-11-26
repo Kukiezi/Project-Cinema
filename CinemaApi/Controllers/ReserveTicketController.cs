@@ -31,18 +31,31 @@ namespace CinemaApi.Controllers
         }
         [HttpGet]
         [Route("GetSeat")]
-        public ActionResult<Seat> GetSeat(int idSeat)
+        public ActionResult<SeatReservation> GetSeat(int reservation)
         {
-            var seat = context.Seat.Where(a => a.IdSeat == idSeat).FirstOrDefault();
+            var seatList = context.SeatReservation.Where(a => a.IdReservation == reservation).ToList();
 
-            if (seat != null)
+            if (seatList.Count != 0)
             {
-                return seat;
+                return Ok(seatList);
             }
 
             return NotFound();
         }
         [HttpGet]
+        [Route("GetReserved")]
+        public ActionResult<Seat> GetReserved(int idSeat)
+        {
+            var seatList = context.Seat.Where(a => a.IdSeat == idSeat).ToList();
+
+            if (seatList.Count != 0)
+            {
+                return Ok(seatList);
+            }
+
+            return NotFound();
+        }
+        [HttpPost]
         [Route("AddSeat")]
         public ActionResult<int> AddSeat(int reservation, int seat)
         {
@@ -50,13 +63,24 @@ namespace CinemaApi.Controllers
             {
                 IdSeat = seat,
                 IdReservation = reservation
-               
-
             });
             context.SaveChanges();
 
             return reservation;
         }
+        [HttpGet]
+        [Route("RemoveSeat")]
+        public ActionResult RemoveSeat(int reservation, int seat)
+        {
+            var rm = context.SeatReservation.Where(a => a.IdReservation==reservation && a.IdSeat == seat).FirstOrDefault();
 
+            if(rm != null)
+            {
+                context.SeatReservation.Remove(rm);
+            }
+            context.SaveChanges();
+
+            return Ok(seat);
+        }
     }
 }

@@ -20,6 +20,12 @@ class Seats extends React.Component<any, IState>{
             "idSeat": this.props.seat.idSeat,
             "rowNumb": this.props.seat.rowNumb,
             "seatNumb": this.props.seat.seatNumb
+        },
+        "seatReservation":
+        {
+            "idSeatReservation":10,
+            "idSeat":8,
+            "idReservation":1
         }
 
         };
@@ -32,28 +38,28 @@ class Seats extends React.Component<any, IState>{
         this.setState({
           free: !this.state.free        
         })
-        this.SendSeat();
+        if(this.state.free)
+        {this.SendSeat();}
+        else 
+        {
+            this.RemoveSeat();
+        }
       }
-      public async SendSeeat(){
+      public async SendSeat(){
 
     
         const result = await fetch('https://localhost:44371/cinema/AddSeat?reservation=' + this.state.reservation.IdReservation + '&seat=' + this.state.seat.idSeat, {
           method: 'POST'
         });
         await result.json();
-
-
     }
-    public async SendSeat(){
+    public async RemoveSeat(){
 
     
-        const result = await fetch('https://localhost:44371/cinema/AddSeat?reservation=' + this.state.reservation.IdReservation + '&seat=' + this.state.seat.idSeat, {
-          method: 'POST'
+        const result = await fetch('https://localhost:44371/cinema/RemoveSeat?reservation=' + this.state.reservation.IdReservation + '&seat=' + this.state.seat.idSeat, {
+          method: 'GET'
         });
-        let currentRating = await result.json();
-        currentRating *= 2;
-        this.setState({currentRating});
-        console.log("currentrating: "+ this.state.currentRating);
+        await result.json();
     }
 
 
@@ -78,7 +84,8 @@ export interface IState {
     free: boolean,
     currentRating:number,
     seat: ISeat,
-    reservation: IReservation
+    reservation: IReservation,
+    seatReservation: ISeatReservation
   }
   export interface IReservation {
     IdReservation: number,
@@ -89,5 +96,11 @@ export interface IState {
     idSeat: number,
     rowNumb: string,
     seatNumb: number,
+    
+  }
+  export interface ISeatReservation {
+    idSeatReservation: number,
+    idSeat:number,
+    idReservation: number,
     
   }
