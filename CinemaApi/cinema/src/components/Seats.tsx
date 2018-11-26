@@ -9,7 +9,7 @@ class Seats extends React.Component<any, IState>{
 
     public state: IState={
         "free": true,
-        
+        "currentRating":0,
         "reservation":{
             "IdReservation": 1,
             "IdUserAccount": 1,
@@ -30,22 +30,32 @@ class Seats extends React.Component<any, IState>{
     public isFree = () => {
 
         this.setState({
-          free: !this.state.free
-          
+          free: !this.state.free        
         })
         this.SendSeat();
       }
-      public async SendSeat(){
+      public async SendSeeat(){
 
     
-        await fetch('https://localhost:44371/cinema/AddSeat?reservation=' + this.state.reservation.IdReservation + '&seat=' + this.state.seat.idSeat, {
+        const result = await fetch('https://localhost:44371/cinema/AddSeat?reservation=' + this.state.reservation.IdReservation + '&seat=' + this.state.seat.idSeat, {
           method: 'POST'
         });
-       
+        await result.json();
 
 
     }
+    public async SendSeat(){
+
     
+        const result = await fetch('https://localhost:44371/cinema/AddSeat?reservation=' + this.state.reservation.IdReservation + '&seat=' + this.state.seat.idSeat, {
+          method: 'POST'
+        });
+        let currentRating = await result.json();
+        currentRating *= 2;
+        this.setState({currentRating});
+        console.log("currentrating: "+ this.state.currentRating);
+    }
+
 
 public render() {
     const seatState = this.state.free ? 'seat-free' : 'seat-taken';
@@ -53,8 +63,6 @@ public render() {
            
             <div className={seatState} onClick={this.isFree}>
             <p className="white">{this.props.seat.seatNumb}</p>
-
-         
            
              </div>
              
@@ -68,6 +76,7 @@ public render() {
 export default Seats;
 export interface IState {
     free: boolean,
+    currentRating:number,
     seat: ISeat,
     reservation: IReservation
   }
