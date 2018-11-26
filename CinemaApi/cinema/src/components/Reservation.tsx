@@ -39,7 +39,8 @@ class Reservation extends React.Component<any, IState> {
 
 export default Reservation;
 export interface IState {
-    seat: ISeat
+  
+  seat: ISeat
   
   }
   export interface ISeat {

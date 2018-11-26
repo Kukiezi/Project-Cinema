@@ -44,15 +44,16 @@ namespace CinemaApi.Controllers
         }
         [HttpGet]
         [Route("AddSeat")]
-        public ActionResult AddSeat(SeatReservation reservation)
+        public ActionResult AddSeat(int reservation, int seat)
         {
             context.SeatReservation.Add(new SeatReservation
             {
-                IdReservation = reservation.IdReservation,
-                IdSeat = reservation.IdSeat,
+                IdSeat = seat,
+                IdReservation = reservation
+               
 
             });
-
+            context.SaveChanges();
 
             return Ok(reservation);
         }
