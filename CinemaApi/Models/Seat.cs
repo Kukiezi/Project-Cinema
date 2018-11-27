@@ -11,9 +11,9 @@ namespace CinemaApi.Models
             SeatReservation = new HashSet<SeatReservation>();
         }
 
-        public int IdSeat { get; set; }
         public string RowNumb { get; set; }
         public int SeatNumb { get; set; }
+        public int IdSeat { get; set; }
 
         public ICollection<Room> Room { get; set; }
         public ICollection<SeatReservation> SeatReservation { get; set; }

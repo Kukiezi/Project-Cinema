@@ -8,11 +8,18 @@ import 'src/assets/css/Rating.css'
 
 
 
+
 class Details extends React.Component<any, IState> {
 
   public state: IState = {
     "loading": true,
     "currentRating": 0,
+    "rating": [],
+    "ratingTest": {
+      "idRating": 0,
+      "idMovies": 0,
+      "ratingNumber": 0
+    },
     "movie": {
       "id": 0,
       "title": "",
@@ -27,6 +34,7 @@ class Details extends React.Component<any, IState> {
   }
 
   public onChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const { Id } = this.props.match.params;
     const checkValue = document.querySelectorAll("input");
     const checkStar = document.querySelectorAll("label");
     const checkSmiley = document.querySelectorAll("i");
@@ -63,20 +71,25 @@ class Details extends React.Component<any, IState> {
         document.querySelectorAll("i")[4].style.display = "block";
     }
     console.log(e.currentTarget.value);
-    this.setState({currentRating: +e.currentTarget.value})
+    const ratingCopy = this.state.ratingTest;
+    ratingCopy.ratingNumber = +e.currentTarget.value;
+    ratingCopy.idMovies = Id;
+    this.setState({ratingTest: ratingCopy})
    this.SendRating();
 }
 
 public async SendRating(){
 
-    // const result =await fetch('https://localhost:44371/cinema/AddRating?rating=' + this.state.currentRating);
-    const result =  await fetch('https://localhost:44371/cinema/AddRating?rating=' + this.state.currentRating, {
+    
+    const result =  await fetch('https://localhost:44371/cinema/AddRating?rating=' + this.state.ratingTest.ratingNumber + '&id=' + this.state.ratingTest.idMovies, {
       method: 'POST'
     });
-    const movie = await result.json();
-    
-
-    console.log(movie);
+    let currentRating = await result.json();
+    currentRating *= 2;
+    currentRating = Math.round(currentRating);
+    currentRating /= 2;
+    this.setState({currentRating});
+    console.log("currentrating: "+ this.state.currentRating);
 }
 
 
@@ -85,9 +98,15 @@ public async SendRating(){
     // const { movie } = this.props.location.state
     const result = await fetch('https://localhost:44371/cinema/GetMovie?id=' + Id);
     const movie = await result.json();
+    const result2 = await fetch('https://localhost:44371/cinema/GetRating?id=' + Id);
+    let currentRating = await result2.json();
+    currentRating *= 2;
+    currentRating = Math.round(currentRating);
+    currentRating /= 2;
     this.setState({
       movie,
-      loading: false
+      loading: false,
+      currentRating
     });
   }
 
@@ -130,13 +149,14 @@ public async SendRating(){
  
     }
     return (
-      
         
       <div>
     {content}
+
+
     <div className="container">
           <div className="smileybox">	
-              <h1>Rating Stars</h1>
+          <h1 className="RatingNumb">{this.state.currentRating}</h1>
               <label htmlFor="r1" className="check"><input value="1" type="checkbox" id="r1" onChange={this.onChange}/><i className="em em-weary"/></label>
               <label htmlFor="r2" className="check"><input value="2" type="checkbox" id="r2" onChange={this.onChange}/><i className="em em-worried"/></label>
               <label htmlFor="r3" className="check"><input value="3" type="checkbox" id="r3" onChange={this.onChange}/><i className="em em-blush"/></label>
@@ -155,7 +175,9 @@ export default Details;
 export interface IState {
   movie: IMovie,
   loading: boolean,
-  currentRating: number
+  currentRating: number,
+  rating: IRating[]
+  ratingTest: IRating
 }
 export interface IMovie {
   id: number,
@@ -163,4 +185,9 @@ export interface IMovie {
   description: string,
   picture: string,
   rating: number
+}
+export interface IRating {
+  idRating: number,
+  idMovies: number,
+  ratingNumber: number,
 }
