@@ -117,7 +117,7 @@ public async SendRating(){
       content = <div className="lds-ring"><div /><div /><div /><div /></div>
     }
     else {
-      content = <div className="flex flex-wrap bg-black">
+      content =<div> <div className="flex flex-wrap bg-black">
       
         <div className="xl:w-1/2 sm:w-full flex-none text-white text-center  bg-black px-4 py-2 m-2">
         <Fade>
@@ -144,7 +144,17 @@ public async SendRating(){
         </div>
      
         </div>
-
+    <div className="container">
+    <div className="smileybox">	
+    <h1 className="RatingNumb">{this.state.currentRating}</h1>
+        <label htmlFor="r1" className="check"><input value="1" type="checkbox" id="r1" onChange={this.onChange}/><i className="em em-weary"/></label>
+        <label htmlFor="r2" className="check"><input value="2" type="checkbox" id="r2" onChange={this.onChange}/><i className="em em-worried"/></label>
+        <label htmlFor="r3" className="check"><input value="3" type="checkbox" id="r3" onChange={this.onChange}/><i className="em em-blush"/></label>
+        <label htmlFor="r4" className="check"><input value="4" type="checkbox" id="r4" onChange={this.onChange}/><i className="em em-smiley"/></label>
+        <label htmlFor="r5" className="check"><input value="5" type="checkbox" id="r5" onChange={this.onChange}/><i className="em em-sunglasses"/></label>
+    </div>
+</div>
+</div>
 
  
     }
@@ -154,16 +164,7 @@ public async SendRating(){
     {content}
 
 
-    <div className="container">
-          <div className="smileybox">	
-          <h1 className="RatingNumb">{this.state.currentRating}</h1>
-              <label htmlFor="r1" className="check"><input value="1" type="checkbox" id="r1" onChange={this.onChange}/><i className="em em-weary"/></label>
-              <label htmlFor="r2" className="check"><input value="2" type="checkbox" id="r2" onChange={this.onChange}/><i className="em em-worried"/></label>
-              <label htmlFor="r3" className="check"><input value="3" type="checkbox" id="r3" onChange={this.onChange}/><i className="em em-blush"/></label>
-              <label htmlFor="r4" className="check"><input value="4" type="checkbox" id="r4" onChange={this.onChange}/><i className="em em-smiley"/></label>
-              <label htmlFor="r5" className="check"><input value="5" type="checkbox" id="r5" onChange={this.onChange}/><i className="em em-sunglasses"/></label>
-          </div>
-      </div>
+
       </div>
      
 
