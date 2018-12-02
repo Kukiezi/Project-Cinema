@@ -66,7 +66,10 @@ class Seats extends React.Component<any, IState>{
 public render() {
     // if(this.props.seat.seatNumb !== 0){this.state.map = "seat-taken"  }
     // else { this.state.map = "seat-free" }
-    const seatState = this.state.free ? 'seat-free' : 'seat-taken';
+    let seatState = this.state.free ? 'seat-free' : 'seat-taken';
+    if (this.state.seat.seatNumb === 0) {
+        seatState = 'seat-empty';
+      }
     if(this.props.seat.rowNumb === "Q")
     {
         

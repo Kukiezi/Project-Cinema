@@ -28,6 +28,9 @@
 .line{
   display: inline-block;  
 }
-div {
-  white-space: pre-wrap;
+.seat-empty{
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  opacity: 0;
 }
