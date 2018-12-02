@@ -66,17 +66,25 @@ class Seats extends React.Component<any, IState>{
 public render() {
     // if(this.props.seat.seatNumb !== 0){this.state.map = "seat-taken"  }
     // else { this.state.map = "seat-free" }
-      const seatState = this.state.free ? 'seat-free' : 'seat-taken';
+    const seatState = this.state.free ? 'seat-free' : 'seat-taken';
+    if(this.props.seat.rowNumb === "Q")
+    {
+        
+        return(
+            <br/>           
+        )
+    }
+    else{
         return (
-           
-            <div className={seatState} onClick={this.isFree}>
+            <div className= "line"> 
+            <button className={seatState} onClick={this.isFree}>
             <p className="white">{this.props.seat.seatNumb}</p>
-           
-             </div>
-             
+            </button>
+            </div>
            
              
            )
+        }
 }
 
 

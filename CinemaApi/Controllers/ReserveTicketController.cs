@@ -88,7 +88,7 @@ namespace CinemaApi.Controllers
         public ActionResult MapRoom(string mask)
         {
             //mask = "A2P10P2B3P12P3";
-            Match match = Regex.Match(mask, @"[A-K]\d+[P]+\d+[P]+\d+");
+            Match match = Regex.Match(mask, @"[A-K]\d+[P]+\d+[P]+\d+[Q]");
             //int i = 1;
             //Console.Write(match.Value);
             int seats = 0;
@@ -99,6 +99,7 @@ namespace CinemaApi.Controllers
                 int x = 1;
                 string mask2 = match.Value;
                 var Row = Regex.Match(mask2, @"[A-K]");
+                var End = Regex.Match(mask2, @"[Q]");
                 var Number = Regex.Matches(mask2, @"\d+")
                 .OfType<Match>()
                 .Select(m => m.Groups[0].Value)
@@ -119,6 +120,7 @@ namespace CinemaApi.Controllers
                     s.Add(context.Seat.Where(a => a.SeatNumb == 0).FirstOrDefault());
                     
                 }
+                s.Add(context.Seat.Where(a => a.RowNumb == End.Value).FirstOrDefault());
                 x = 1;
                 match = match.NextMatch();
 

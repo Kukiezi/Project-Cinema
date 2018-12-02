@@ -25,3 +25,9 @@
 .white{
   color:white;
 }
+.line{
+  display: inline-block;  
+}
+div {
+  white-space: pre-wrap;
+}
