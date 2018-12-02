@@ -25,3 +25,12 @@
 .white{
   color:white;
 }
+.line{
+  display: inline-block;  
+}
+.seat-empty{
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  opacity: 0;
+}
