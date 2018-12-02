@@ -24,7 +24,7 @@ constructor(props: IState) {
 } 
 
 public async componentDidMount() {
-  const result = await fetch('https://localhost:44371/cinema/GetSeats');
+  const result = await fetch('https://localhost:44371/cinema/MapRoom?mask=' + "A2P7P2B3P4P3");
   const seats = await result.json();
   this.setState({
   seats });

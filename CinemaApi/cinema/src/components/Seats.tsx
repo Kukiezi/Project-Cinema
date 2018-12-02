@@ -9,7 +9,7 @@ class Seats extends React.Component<any, IState>{
 
     public state: IState={
         "free": true,
- 
+        
         "reservation":{
             "IdReservation": 1,
             "IdUserAccount": 1,
@@ -64,7 +64,9 @@ class Seats extends React.Component<any, IState>{
 
 
 public render() {
-    const seatState = this.state.free ? 'seat-free' : 'seat-taken';
+    // if(this.props.seat.seatNumb !== 0){this.state.map = "seat-taken"  }
+    // else { this.state.map = "seat-free" }
+      const seatState = this.state.free ? 'seat-free' : 'seat-taken';
         return (
            
             <div className={seatState} onClick={this.isFree}>
@@ -82,6 +84,7 @@ public render() {
 export default Seats;
 export interface IState {
     free: boolean,
+    
     seat: ISeat,
     reservation: IReservation,
     seatReservation: ISeatReservation

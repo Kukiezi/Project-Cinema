@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using CinemaApi.Models;
+using System.Text.RegularExpressions;
 
 namespace CinemaApi.Controllers
 {
@@ -81,6 +82,52 @@ namespace CinemaApi.Controllers
             context.SaveChanges();
 
             return Ok(seat);
+        }
+        [HttpGet]
+        [Route("MapRoom")]
+        public ActionResult MapRoom(string mask)
+        {
+            //mask = "A2P10P2B3P12P3";
+            Match match = Regex.Match(mask, @"[A-K]\d+[P]+\d+[P]+\d+");
+            //int i = 1;
+            //Console.Write(match.Value);
+            int seats = 0;
+            
+            List<Seat> s = new List<Seat>();
+            for (int i = 1; i <= 2; i++)
+            {
+                int x = 1;
+                string mask2 = match.Value;
+                var Row = Regex.Match(mask2, @"[A-K]");
+                var Number = Regex.Matches(mask2, @"\d+")
+                .OfType<Match>()
+                .Select(m => m.Groups[0].Value)
+                .ToArray();
+                var Space = Regex.Matches(mask2, @"[P]+")
+                .OfType<Match>()
+                .Select(m => m.Groups[0].Value)
+                .ToArray();
+                for (int j = 0; j < Number.Length; j++)
+                {
+                    Int32.TryParse(Number[j], out seats);
+                    for (int z = 1; z <= seats; z++)
+                    {
+                      s.Add(context.Seat.Where(a => a.SeatNumb == x && a.RowNumb == Row.Value).FirstOrDefault());
+                      x++;
+                    }
+                    
+                    s.Add(context.Seat.Where(a => a.SeatNumb == 0).FirstOrDefault());
+                    
+                }
+                x = 1;
+                match = match.NextMatch();
+
+            }
+            if (s.Count != 0)
+            {
+                return Ok(s);
+            }
+            return NotFound();
         }
     }
 }
