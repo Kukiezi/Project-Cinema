@@ -32,22 +32,25 @@ public async componentDidMount() {
 
 
   public render() {  
-    return (     
-      <div className="flex content-center">
-      <div className="w-full h-64 text-grey-darker text-center bg-white px-4 py-2 m-2 row-left">
+    return (     <div>
+
+   
+      <div className="flex content-center whitespace-nowrap">
+      <div className="w-full h-64 text-grey-darker text-center bg-white px-4 py-2 m-2 row-left room-width">
          
       {this.state.seats.map(seat => 
                     <Seats key={seat.idSeat} seat={seat}/>)}
                     
   </div> 
   
-  <NavLink className="buy-btn" to={{
+ 
+  </div>
+  <NavLink className="reserve-btn" to={{
                 pathname: 'Reservation/'+this.state.reservation.IdReservation,
               }}> 
               Zarezerwuj 
       </NavLink>
   </div>
-
       
     );
   }
