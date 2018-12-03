@@ -1,17 +1,23 @@
 .seat-free {
-    background: green;
+    background: #3f9177;
     height: 30px;
     width: 30px;   
     display: inline-block;  
+    border: 2px solid white;
     -webkit-box-shadow: -1px 7px 7px -1px rgba(255,255,255,1);
     -moz-box-shadow: -1px 7px 7px -1px rgba(255,255,255,1);
     box-shadow: -1px 7x 7px -1px rgba(255,255,255,1);
+    
   }
 .seat-taken {
     background: gray;
     width: 30px;
     height: 30px;
     display: inline-block;  
+    border: 2px solid white;
+    -webkit-box-shadow: -1px 7px 7px -1px rgba(255,255,255,1);
+    -moz-box-shadow: -1px 7px 7px -1px rgba(255,255,255,1);
+    box-shadow: -1px 7x 7px -1px rgba(255,255,255,1);
   }
 .seat-free:hover{
     background: red;
@@ -24,6 +30,7 @@
 }
 .white{
   color:white;
+  font-family: 'Courier New', Courier, monospace;
 }
 .line{
   display: inline-block;  

@@ -24,7 +24,7 @@ constructor(props: IState) {
 } 
 
 public async componentDidMount() {
-  const result = await fetch('https://localhost:44371/cinema/MapRoom?mask=' + "A2P7P2QB3P4P3Q");
+  const result = await fetch('https://localhost:44371/cinema/MapRoom?mask=' + "A2P7P1QB3P4P3Q");
   const seats = await result.json();
   this.setState({
   seats });
@@ -34,7 +34,7 @@ public async componentDidMount() {
   public render() {  
     return (     
       <div className="flex content-center">
-      <div className="w-full h-64 text-grey-darker text-center bg-grey-light px-4 py-2 m-2 row-left">
+      <div className="w-full h-64 text-grey-darker text-center bg-white px-4 py-2 m-2 row-left">
          
       {this.state.seats.map(seat => 
                     <Seats key={seat.idSeat} seat={seat}/>)}
