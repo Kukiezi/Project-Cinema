@@ -23,8 +23,8 @@ class Reservation extends React.Component<any, IState> {
       }
     
       public async componentDidMount() {
-
-        const result = await fetch('https://localhost:44371/cinema/GetSeat?reservation=' + 1);
+        const { Reserved } = this.props.match.params;
+        const result = await fetch('https://localhost:44371/cinema/GetSeat2?mask=' + Reserved);
         const seatsReservation = await result.json();
         this.setState({
           seatsReservation
@@ -36,7 +36,7 @@ class Reservation extends React.Component<any, IState> {
         <div>
         <h3 className="white">Potwierdzenie</h3>
         {this.state.seatsReservation.map(seatReservation => 
-                    <SeatReservation key={seatReservation.idReservation} seatReservation={seatReservation}/>)}
+                    <SeatReservation key={seatReservation} seatReservation={seatReservation}/>)}
 
         </div>
 
@@ -49,7 +49,7 @@ export interface IState {
   
   seat: ISeat,
   reservation: IReservation
-  seatsReservation: ISeatReservation[]
+  seatsReservation: string[]
   }
   export interface ISeat {
     idSeat: number,
@@ -62,9 +62,9 @@ export interface IState {
     IdUserAccount: number,
     IdScreening: number,
   }
-  export interface ISeatReservation {
+ /* export interface ISeatReservation {
     idSeatReservation: number,
     idSeat:number,
     idReservation: number,
     
-  }
+  } */

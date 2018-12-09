@@ -1,7 +1,7 @@
 import * as React from "react";
 import 'src/assets/css/App.css'
 import 'src/assets/css/ReserveTicket.css';
-import SeatR from './Reserved';
+
 
 
 
@@ -17,21 +17,16 @@ class SeatReservation extends React.Component<any, IState>{
             "IdScreening": 3
         },
         
-        "seats":[],
+        "seats":[]
 
-        "seatReservation":
-        {
-            "idSeatReservation":this.props.seatReservation.idSeatReservation,
-            "idSeat":this.props.seatReservation.idSeat,
-            "idReservation":this.props.seatReservation.idReservation
-        }
+
 
         };
 
     constructor(props: IState) {
             super(props);
           }
-     public async componentDidMount() {
+    /* public async componentDidMount() {
 
             const result = await fetch('https://localhost:44371/cinema/GetReserved?idSeat=' + this.state.seatReservation.idSeat);
             const seats = await result.json();
@@ -39,14 +34,13 @@ class SeatReservation extends React.Component<any, IState>{
                 seats
               
             });
-        }
+        } */
 
 public render() {
 
         return (
             <div>
-            {this.state.seats.map(seat => 
-                <SeatR key={seat.idSeat} seat={seat}/>)}
+            <p className ="white">Miejsce: {this.props.seatReservation}</p>
             </div>
            )
 }
@@ -59,7 +53,7 @@ export interface IState {
     currentRating:number,
     seats: ISeats[],
     reservation: IReservation,
-    seatReservation: ISeatReservation
+
   }
   export interface IReservation {
     IdReservation: number,
@@ -70,11 +64,5 @@ export interface IState {
     idSeat: number,
     rowNumb: string,
     seatNumb: number,
-    
-  }
-  export interface ISeatReservation {
-    idSeatReservation: number,
-    idSeat:number,
-    idReservation: number,
     
   }

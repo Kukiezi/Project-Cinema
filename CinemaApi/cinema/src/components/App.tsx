@@ -33,7 +33,7 @@ public render() {
      <Route path="/Details/:Id" component={Details}/>
      <Route path="/ReserveTicket" component={ReserveTicket}/>
      <Route path="/ResetPassword" component={ResetPassword}/>
-     <Route path="/Reservation/:idSeat" component={Reservation}/>
+     <Route path="/Reservation/:Reserved" component={Reservation}/>
      <Route component={NotExist}/>
     </Switch>
     <Footer footer={"2018"}/>

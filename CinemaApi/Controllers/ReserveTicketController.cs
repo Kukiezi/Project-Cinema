@@ -14,6 +14,7 @@ namespace CinemaApi.Controllers
     public class ReserveTicketController : ControllerBase
     {
         private readonly CinemaDBContext context;
+        static List<string> Reservation = new List<string>();
 
         public ReserveTicketController(CinemaDBContext context)
         {
@@ -44,6 +45,18 @@ namespace CinemaApi.Controllers
             return NotFound();
         }
         [HttpGet]
+        [Route("GetSeat2")]
+        public ActionResult GetSeat2(string mask)
+        {
+            List<string> s = ReservedSeats(mask);
+            if (s.Count != 0)
+            {
+                return Ok(s);
+            }
+            return NotFound();
+
+        }
+        [HttpGet]
         [Route("GetReserved")]
         public ActionResult<Seat> GetReserved(int idSeat)
         {
@@ -69,6 +82,13 @@ namespace CinemaApi.Controllers
 
             return reservation;
         }
+        [HttpPost]
+        [Route("AddSeat")]
+        public void AddSeat2(string seat)
+        {
+            Reservation.Add(seat);
+          
+        }
         [HttpGet]
         [Route("RemoveSeat")]
         public ActionResult RemoveSeat(int reservation, int seat)
@@ -84,17 +104,59 @@ namespace CinemaApi.Controllers
             return Ok(seat);
         }
         [HttpGet]
+        [Route("RemoveSeat2")]
+        public ActionResult<List<string>> RemoveSeat2(string seat)
+        {
+            Reservation.Remove(seat);
+            return Reservation;
+        }
+        [HttpGet]
         [Route("MapRoom")]
         public ActionResult MapRoom(string mask)
         {
-            //mask = "A2P10P2B3P12P3";
-            Match match = Regex.Match(mask, @"[A-K]\d+[P]+\d+[P]+\d+[Q]");
-            //int i = 1;
-            //Console.Write(match.Value);
+            List<string> s = MapSeats(mask);
+            List<string> t = MapSeatsTaken();
+            for (int i = 0; i < s.Count; i++)
+            {
+                for (int j = 0; j < t.Count; j++)
+                {
+                    if (s[i] == t[j])
+                    {
+                        s[i] = "Taken";
+                    }
+                }
+            }
+            if (s.Count != 0)
+            {
+                return Ok(s);
+            }
+            return NotFound();
+        }
+        [NonAction]
+
+        public List<string> ReservedSeats(string mask)
+        {
+            Match match = Regex.Match(mask, @"[A-K]\d+");
+            int matches = Regex.Matches(mask, @"[A-K]\d+").Count;
+            List<string> s = new List<string>();
+            for (int i = 1; i <= matches; i++)
+            {
+                s.Add(match.Value);
+                match = match.NextMatch();
+
+            }
+            return s;
+        }
+        [NonAction]
+
+        public List<string> MapSeats(string mask)
+        {
+            Match match = Regex.Match(mask, @"[A-K]\d*[P]*\d*[P]*\d*[Q]");
+            int matches = Regex.Matches(mask, @"[A-K]\d+").Count;
             int seats = 0;
-            
-            List<Seat> s = new List<Seat>();
-            for (int i = 1; i <= 2; i++)
+            char[] breaks;
+            List<string> s = new List<string>();
+            for (int i = 1; i <= matches; i++)
             {
                 int x = 1;
                 string mask2 = match.Value;
@@ -113,23 +175,43 @@ namespace CinemaApi.Controllers
                     Int32.TryParse(Number[j], out seats);
                     for (int z = 1; z <= seats; z++)
                     {
-                      s.Add(context.Seat.Where(a => a.SeatNumb == x && a.RowNumb == Row.Value).FirstOrDefault());
-                      x++;
+                        s.Add(Row.Value + x);
+                        x++;
                     }
-                    
-                    s.Add(context.Seat.Where(a => a.SeatNumb == 0).FirstOrDefault());
-                    
+                    if (j != Number.Length - 1)
+                    {
+                        breaks = Space[j].ToCharArray();
+                        for (int k = 0; k < breaks.Length; k++)
+                        {
+                            s.Add("P");
+                        }
+                    }
+
+
                 }
-                s.Add(context.Seat.Where(a => a.RowNumb == End.Value).FirstOrDefault());
+                s.Add("Q");
                 x = 1;
                 match = match.NextMatch();
 
             }
-            if (s.Count != 0)
+            return s;
+        }
+        [NonAction]
+
+        public List<string> MapSeatsTaken()
+        {
+            //List<string> reservations = new List<string>();
+            string reservations="";
+           // var seats = context.Reservation.Where(a => a.IdScreening == 3).ToList();
+            List<string> seats = context.Reservation.Where(a => a.IdScreening == 3).Select(a=>a.SeatsReserved).ToList();
+            foreach(string element in seats )
             {
-                return Ok(s);
+                reservations += element;
             }
-            return NotFound();
+            
+            List<string> s = ReservedSeats(reservations);
+            return s;
+            
         }
     }
 }
