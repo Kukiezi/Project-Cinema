@@ -77,6 +77,75 @@ text-align:left;
     overflow: hidden;
 }
 
+.yes-btn {
+    padding: 15px 50px;
+    position: relative;
+    background: transparent;
+    color: #fff;
+    font-size: 18px;
+    transition: .5s;
+    line-height: 20px;
+    border-radius: 3px;
+    border: 1px solid lightgreen;
+    font-family: Monte;
+    font-weight: 400;
+    text-decoration: none;
+    top: 10px;
+    left: 40%;
+}
+.yes-btn:hover{
+    color: rgb(54, 241, 30);
+    -webkit-box-shadow: 0px 0px 58px -8px rgb(14, 156, 73);
+    -moz-box-shadow: 0px 0px 58px -8px rgb(12, 134, 77);
+    box-shadow: 0px 0px 58px -8px rgb(9, 114, 65);
+}
+
+.no-btn {
+    padding: 15px 50px;
+    position: relative;
+    background: transparent;
+    color: #fff;
+    font-size: 18px;
+    transition: .5s;
+    line-height: 20px;
+    border-radius: 3px;
+    border: 1px solid red;
+    font-family: Monte;
+    font-weight: 400;
+    text-decoration: none;
+    top: 10px;
+    left: 44%;
+}
+
+.no-btn:hover{
+    color: rgba(240,5,5,1);
+    -webkit-box-shadow: 0px 0px 58px -8px rgba(240,5,5,1);
+    -moz-box-shadow: 0px 0px 58px -8px rgba(240,5,5,1);
+    box-shadow: 0px 0px 58px -8px rgba(240,5,5,1);
+}
+
+.mm-btn {
+    padding: 15px 50px;
+    position: relative;
+    background: transparent;
+    color: #fff;
+    font-size: 18px;
+    transition: .5s;
+    line-height: 52px;
+    border-radius: 3px;
+    border: 1px solid red;
+    font-family: Monte;
+    font-weight: 400;
+    text-decoration: none;
+    top: 10px;
+}
+
+.mm-btn:hover{
+    color: rgba(240,5,5,1);
+    -webkit-box-shadow: 0px 0px 58px -8px rgba(240,5,5,1);
+    -moz-box-shadow: 0px 0px 58px -8px rgba(240,5,5,1);
+    box-shadow: 0px 0px 58px -8px rgba(240,5,5,1);
+}
 
 .buy-btn {
     padding: 15px 50px;

@@ -28,6 +28,10 @@ namespace CinemaApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
             services.AddDbContext<CinemaDBContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -46,8 +50,9 @@ namespace CinemaApi
             {
                 app.UseHsts();
             }
+            //app.UseCors("AllowSpecificOrigin");
             app.UseCors(builder =>
-                builder.WithOrigins("http://localhost:3000"));
+                builder.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader());
             app.UseHttpsRedirection();
             app.UseMvc();
         }

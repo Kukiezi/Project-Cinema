@@ -100,6 +100,17 @@ body{
  top: 35%;
 }
 
+.desc_layer{
+  font-family: Monte;
+  font-weight: 100;
+  top: 35%;
+  color: white;
+}
+
+.desc_layer:hover{
+  color: red;
+}
+
 .img__wrap:hover .img__description_layer {
   visibility: visible;
   opacity: 1;
@@ -156,6 +167,10 @@ footer p{
     -webkit-box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
     -moz-box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
     box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+  }
+
+  .img__wrap a{
+    text-decoration: none;
   }
 
   .img__wrap p{

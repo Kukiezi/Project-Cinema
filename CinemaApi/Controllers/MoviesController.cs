@@ -2,10 +2,12 @@
 using System.Diagnostics;
 using System.Linq;
 using CinemaApi.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaApi.Controllers
 {
+    
     [Route("cinema/")]
     [ApiController]
     public class MoviesController : ControllerBase
@@ -50,16 +52,22 @@ namespace CinemaApi.Controllers
         /// </summary>
         /// <param name="movies"></param>
         /// <returns>Dodane filmy; Wiadomość jeżeli nie zostały dodane z jakiegoś powodu</returns>
-        [HttpPost]
+  
         [Route("AddMovie")]
-        public ActionResult AddMovies(Movies movies)
+        [HttpPost]
+        public ActionResult AddMovie(Movies movies)
         {
             context.Movies.Add(new Movies
             {
                 Title = movies.Title,
                 Description = movies.Description,
                 Picture = movies.Picture,
-                Icon = movies.Icon
+                AgeRestriction = movies.AgeRestriction,
+                Icon = movies.Icon,
+                Genre = movies.Genre,
+                Director = movies.Director,
+                WatchingTime = movies.WatchingTime
+
             });
 
             var movieExist = MovieExists(movies.Title);
@@ -106,6 +114,41 @@ namespace CinemaApi.Controllers
             context.SaveChanges();
             return newRating;
         }
+
+        [HttpPost]
+        [Route("UpdateMovie")]
+        public ActionResult UpdateMovie(int id, string title, string description, string picture)
+        {
+            var movie = context.Movies.Where(e => e.Id == id).FirstOrDefault();
+
+            if (title != movie.Title || description != movie.Description || picture != movie.Picture)
+            {
+                movie.Title = title;
+                movie.Description = description;
+                movie.Picture = picture;
+                context.SaveChanges();
+            }
+          
+           
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("DeleteMovie")]
+        public ActionResult DeleteMovie(int id)
+        {
+           var movie = context.Movies.Where(e => e.Id == id).FirstOrDefault();
+
+           if (movie != null)
+            {
+                context.Movies.Remove(movie);
+                context.SaveChanges();
+            }
+
+            return Ok();
+        }
+
+
         [NonAction]
 
         public float RatingCounter(int idMovie)
