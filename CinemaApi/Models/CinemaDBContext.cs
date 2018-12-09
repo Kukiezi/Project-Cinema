@@ -30,6 +30,7 @@ namespace CinemaApi.Models
         public virtual DbSet<UserAccount> UserAccount { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
 
+ 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -183,6 +184,11 @@ namespace CinemaApi.Models
                 entity.Property(e => e.IdScreening).HasColumnName("id_screening");
 
                 entity.Property(e => e.IdUserAccount).HasColumnName("id_user_account");
+
+                entity.Property(e => e.SeatsReserved)
+                    .HasColumnName("seats_reserved")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.HasOne(d => d.IdScreeningNavigation)
                     .WithMany(p => p.Reservation)
