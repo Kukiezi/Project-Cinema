@@ -31,19 +31,19 @@ namespace CinemaApi.Controllers
 
             return NotFound();
         }
-        [HttpGet]
-        [Route("GetSeat")]
-        public ActionResult<SeatReservation> GetSeat(int reservation)
-        {
-            var seatList = context.SeatReservation.Where(a => a.IdReservation == reservation).ToList();
+        //[HttpGet]
+        //[Route("GetSeat")]
+        //public ActionResult<SeatReservation> GetSeat(int reservation)
+        //{
+        //    var seatList = context.SeatReservation.Where(a => a.IdReservation == reservation).ToList();
 
-            if (seatList.Count != 0)
-            {
-                return Ok(seatList);
-            }
+        //    if (seatList.Count != 0)
+        //    {
+        //        return Ok(seatList);
+        //    }
 
-            return NotFound();
-        }
+        //    return NotFound();
+        //}
         [HttpGet]
         [Route("GetSeat2")]
         public ActionResult GetSeat2(string mask)
@@ -71,46 +71,47 @@ namespace CinemaApi.Controllers
         }
         [HttpPost]
         [Route("AddSeat")]
-        public ActionResult<int> AddSeat(int reservation, int seat)
+        public ActionResult<int> AddSeat(int seat)
         {
-            context.SeatReservation.Add(new SeatReservation
+            context.Seat.Add(new Seat
             {
-                IdSeat = seat,
-                IdReservation = reservation
+                SeatNumb = seat,
+                RowNumb = "A"
             });
             context.SaveChanges();
 
-            return reservation;
+            return seat;
         }
         [HttpPost]
         [Route("AddReservation")]
-        public ActionResult<int> AddReservation(int user, int screening, string seat)
+        public ActionResult AddReservation(int user, int screening, string seat)
         {
             context.Reservation.Add(new Reservation
-            {              
+            {
+               
                 IdUserAccount = user,
                 IdScreening = screening,
                 SeatsReserved = seat
             });
             context.SaveChanges();
 
-            return user;
+            return Ok();
 
         }
-        [HttpGet]
-        [Route("RemoveSeat")]
-        public ActionResult RemoveSeat(int reservation, int seat)
-        {
-            var rm = context.SeatReservation.Where(a => a.IdReservation==reservation && a.IdSeat == seat).FirstOrDefault();
+        //[HttpGet]
+        //[Route("RemoveSeat")]
+        //public ActionResult RemoveSeat(int reservation, int seat)
+        //{
+        //    //var rm = context.SeatReservation.Where(a => a.IdReservation==reservation && a.IdSeat == seat).FirstOrDefault();
 
-            if(rm != null)
-            {
-                context.SeatReservation.Remove(rm);
-            }
-            context.SaveChanges();
+        //    //if(rm != null)
+        //    //{
+        //    //    context.SeatReservation.Remove(rm);
+        //    //}
+        //    //context.SaveChanges();
 
-            return Ok(seat);
-        }
+        //    //return Ok(seat);
+        //}
         [HttpGet]
         [Route("RemoveSeat2")]
         public ActionResult<List<string>> RemoveSeat2(string seat)

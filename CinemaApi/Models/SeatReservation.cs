@@ -7,9 +7,7 @@ namespace CinemaApi.Models
     {
         public int IdSeatReservation { get; set; }
         public int IdSeat { get; set; }
-        public int IdReservation { get; set; }
 
-        public Reservation IdReservationNavigation { get; set; }
         public Seat IdSeatNavigation { get; set; }
     }
 }

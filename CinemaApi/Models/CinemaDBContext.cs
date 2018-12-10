@@ -30,7 +30,13 @@ namespace CinemaApi.Models
         public virtual DbSet<UserAccount> UserAccount { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
 
- 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Server = az1.shaikat.net; Database = CinemaDB; User Id = cinemadb_user; Password = JGFiu93p;Trusted_Connection=True;Integrated Security=False;MultipleActiveResultSets=true;");
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -177,15 +183,14 @@ namespace CinemaApi.Models
             {
                 entity.HasKey(e => e.IdReservation);
 
-                entity.Property(e => e.IdReservation)
-                    .HasColumnName("id_reservation")
-                    .ValueGeneratedNever();
+                entity.Property(e => e.IdReservation).HasColumnName("id_reservation");
 
                 entity.Property(e => e.IdScreening).HasColumnName("id_screening");
 
                 entity.Property(e => e.IdUserAccount).HasColumnName("id_user_account");
 
                 entity.Property(e => e.SeatsReserved)
+                    .IsRequired()
                     .HasColumnName("seats_reserved")
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -194,13 +199,13 @@ namespace CinemaApi.Models
                     .WithMany(p => p.Reservation)
                     .HasForeignKey(d => d.IdScreening)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Reservati__id_sc__395884C4");
+                    .HasConstraintName("FK__Reservati__id_sc__41EDCAC5");
 
                 entity.HasOne(d => d.IdUserAccountNavigation)
                     .WithMany(p => p.Reservation)
                     .HasForeignKey(d => d.IdUserAccount)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Reservati__id_us__2180FB33");
+                    .HasConstraintName("FK__Reservati__id_us__40F9A68C");
             });
 
             modelBuilder.Entity<Roles>(entity =>
@@ -288,15 +293,7 @@ namespace CinemaApi.Models
 
                 entity.Property(e => e.IdSeatReservation).HasColumnName("id_seat_reservation");
 
-                entity.Property(e => e.IdReservation).HasColumnName("id_reservation");
-
                 entity.Property(e => e.IdSeat).HasColumnName("id_seat");
-
-                entity.HasOne(d => d.IdReservationNavigation)
-                    .WithMany(p => p.SeatReservation)
-                    .HasForeignKey(d => d.IdReservation)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Seat_Rese__id_re__25518C17");
 
                 entity.HasOne(d => d.IdSeatNavigation)
                     .WithMany(p => p.SeatReservation)

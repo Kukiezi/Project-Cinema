@@ -30,6 +30,8 @@ class Reservation extends React.Component<any, IState> {
           mode: 'no-cors'
 
         });
+
+
         // await result.json();
     }
       public async componentDidMount() {
