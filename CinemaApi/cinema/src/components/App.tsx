@@ -44,6 +44,7 @@ public render() {
      <Route path="/Reservation/:idSeat" component={Reservation}/>
      <Route path="/AdminPanel" component={AdminPanel}/>
      <Route path="/MovieManagment" component={MovieManagment}/>
+     <Route path="/Reservation/:Reserved" component={Reservation}/>
      <Route component={NotExist}/>
     </Switch>
     <Footer footer={"2018"}/>

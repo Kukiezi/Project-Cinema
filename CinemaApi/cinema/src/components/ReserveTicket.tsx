@@ -14,35 +14,50 @@ class ReserveTicket extends React.Component{
       "IdReservation": 1,
       "IdUserAccount": 1,
       "IdScreening": 3
-  }
+  },
+  "Reserved":""
 
 };
 
 constructor(props: IState) {
   super(props);
-
+  this.updateReservation = this.updateReservation.bind(this);
 } 
 
 public async componentDidMount() {
-  const result = await fetch('https://localhost:44371/cinema/GetSeats');
+  const result = await fetch('https://localhost:44371/cinema/MapRoom?mask=' + "A2P7P2QB3PPP4PPP3QC3P4P3Q");
   const seats = await result.json();
   this.setState({
   seats });
    }
+public updateReservation(value: string, check: boolean)
+{
+  let Res = this.state.Reserved;
+  if(check){
+  this.setState({Reserved: this.state.Reserved + value})
+  }
+  else 
+  {
+    Res = Res.replace(value,"")
+    this.setState({Reserved: Res})
+  }
 
+  
+}
 
   public render() {  
+    let i = 1;
     return (     
-      <div className="flex content-center">
-      <div className="w-full h-64 text-grey-darker text-center bg-grey-light px-4 py-2 m-2 row-left">
+      <div className="flex content-center whitespace-nowrap">
+      <div className="w-full h-64 text-grey-darker text-center bg-white px-4 py-2 m-2 row-left room-width">
          
       {this.state.seats.map(seat => 
-                    <Seats key={seat.idSeat} seat={seat}/>)}
+                    <Seats triggerUpdate={this.updateReservation} key={i=i+1} seat={seat}/>)}
                     
   </div> 
   
   <NavLink className="buy-btn" to={{
-                pathname: 'Reservation/'+this.state.reservation.IdReservation,
+                pathname: 'Reservation/'+this.state.Reserved,
               }}> 
               Zarezerwuj 
       </NavLink>
@@ -55,15 +70,11 @@ public async componentDidMount() {
 
 export default ReserveTicket;
 export interface IState {
-  seats: ISeats[],
-  reservation: IReservation
+  seats: string[],
+  reservation: IReservation,
+  Reserved:string
 }
 
-export interface ISeats {
-  idSeat: number,
-  rowNumb: string,
-  seatNumb: number,
-  
-}
+
 
 
