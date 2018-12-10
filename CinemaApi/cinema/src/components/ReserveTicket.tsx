@@ -48,8 +48,8 @@ public updateReservation(value: string, check: boolean)
   public render() {  
     let i = 1;
     return (     
-      <div className="flex content-center">
-      <div className="w-full h-64 text-grey-darker text-center bg-grey-light px-4 py-2 m-2 row-left">
+      <div className="flex content-center whitespace-nowrap">
+      <div className="w-full h-64 text-grey-darker text-center bg-white px-4 py-2 m-2 row-left room-width">
          
       {this.state.seats.map(seat => 
                     <Seats triggerUpdate={this.updateReservation} key={i=i+1} seat={seat}/>)}
