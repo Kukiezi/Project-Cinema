@@ -22,29 +22,6 @@ namespace CinemaApi.Controllers
         }
 
         [HttpGet]
-        [Route("GetSeats")]
-        public ActionResult GetSeats()
-        {
-            var seatList = context.Seat.ToList();
-            if (seatList.Count != 0)
-                return Ok(seatList);
-
-            return NotFound();
-        }
-        //[HttpGet]
-        //[Route("GetSeat")]
-        //public ActionResult<SeatReservation> GetSeat(int reservation)
-        //{
-        //    var seatList = context.SeatReservation.Where(a => a.IdReservation == reservation).ToList();
-
-        //    if (seatList.Count != 0)
-        //    {
-        //        return Ok(seatList);
-        //    }
-
-        //    return NotFound();
-        //}
-        [HttpGet]
         [Route("GetSeat2")]
         public ActionResult GetSeat2(string mask)
         {
@@ -56,32 +33,7 @@ namespace CinemaApi.Controllers
             return NotFound();
 
         }
-        [HttpGet]
-        [Route("GetReserved")]
-        public ActionResult<Seat> GetReserved(int idSeat)
-        {
-            var seatList = context.Seat.Where(a => a.IdSeat == idSeat).ToList();
 
-            if (seatList.Count != 0)
-            {
-                return Ok(seatList);
-            }
-
-            return NotFound();
-        }
-        [HttpPost]
-        [Route("AddSeat")]
-        public ActionResult<int> AddSeat(int seat)
-        {
-            context.Seat.Add(new Seat
-            {
-                SeatNumb = seat,
-                RowNumb = "A"
-            });
-            context.SaveChanges();
-
-            return seat;
-        }
         [HttpPost]
         [Route("AddReservation")]
         public ActionResult AddReservation(int user, int screening, string seat)
@@ -97,27 +49,6 @@ namespace CinemaApi.Controllers
 
             return Ok();
 
-        }
-        //[HttpGet]
-        //[Route("RemoveSeat")]
-        //public ActionResult RemoveSeat(int reservation, int seat)
-        //{
-        //    //var rm = context.SeatReservation.Where(a => a.IdReservation==reservation && a.IdSeat == seat).FirstOrDefault();
-
-        //    //if(rm != null)
-        //    //{
-        //    //    context.SeatReservation.Remove(rm);
-        //    //}
-        //    //context.SaveChanges();
-
-        //    //return Ok(seat);
-        //}
-        [HttpGet]
-        [Route("RemoveSeat2")]
-        public ActionResult<List<string>> RemoveSeat2(string seat)
-        {
-            Reservation.Remove(seat);
-            return Reservation;
         }
         [HttpGet]
         [Route("MapRoom")]

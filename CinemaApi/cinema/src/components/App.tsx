@@ -41,7 +41,6 @@ public render() {
      <Route path="/DetailsPanel/:Id" component={DetailsPanel}/>
      <Route path="/ReserveTicket" component={ReserveTicket}/>
      <Route path="/ResetPassword" component={ResetPassword}/>
-     <Route path="/Reservation/:idSeat" component={Reservation}/>
      <Route path="/AdminPanel" component={AdminPanel}/>
      <Route path="/MovieManagment" component={MovieManagment}/>
      <Route path="/Reservation/:Reserved" component={Reservation}/>
