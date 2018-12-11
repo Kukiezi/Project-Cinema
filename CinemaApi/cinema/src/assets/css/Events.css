@@ -1,0 +1,147 @@
+body{
+    overflow: hidden;
+}
+
+.form{
+    display: flex;
+    justify-content: center
+}
+
+.inner{
+    
+    width: 70%;
+    color: white;
+    background-color: black;
+    position: fixed;
+    font-family: Monte;
+    bottom: 0;
+    top: 66px;
+    
+}
+
+.list-of-events{
+    width:60%;
+    height: 100%;
+    border-right: 1px solid red;
+    color:white;
+}
+
+.event-wrap{
+    width: 100%;
+    height: 80px;
+   /* border-bottom: 3px solid red; */
+    background-color: #22292f;
+    margin-bottom: 10px;
+
+}
+
+.event-title{
+    width: 70%;
+    /* font-size: 15px; */
+    line-height: 80px;
+    overflow-x: hidden;
+    padding-left: 10px;
+    display: inline-block;
+}
+
+.event-details{
+    width: 30%;
+    height: 80px;
+    display: inline-block;
+
+}
+
+.event-description{
+    background-color: rgb(0, 0, 0, 0.5);
+    color:white;
+    text-align: justify;
+    height: 50%;
+    width: 75%;
+    padding: 10px 10px 10px 10px;
+    position: relative;
+    border-radius: 5px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.modal-style{
+        background-color: #22292f;
+        width: 50%;
+        height: 75%;
+        font-family: Monte;
+        position: absolute; 
+        top: 0;
+        right: 0; 
+        bottom: 0; 
+        left: 0; 
+        margin: auto;
+        text-align: center;
+}
+
+.details-btn{
+    background-color: darkred;
+    color: white;
+    /* font-size: 13px; */
+    font-style: bold;
+    border-radius: 5px;
+    padding: 4px 4px 4px 4px;
+} 
+
+.details-btn-inner{
+    background-color: darkred;
+    color: white;
+    /* font-size: 13px; */
+    font-style: bold;
+    border-radius: 5px;
+    padding: 4px 4px 4px 4px;
+    position: absolute;
+    top: 8px;
+    right: 20px;
+}
+
+.details-btn:hover{
+    
+    background-color: red;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.details-btn-inner:hover{
+
+    background-color: red;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
+}
+
+.sign-in-btn{
+
+    background-color: darkred;
+    color: white;
+    /* font-size: 16px; */
+    border-radius: 5px;
+    padding: 4px 4px 4px 4px;
+    position: absolute;
+    bottom: 15px;
+    right: 300px;
+    margin: 0 auto;
+    
+}
+
+.sign-in-btn:hover{
+
+    background-color: red;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+
+}
+
+.title{
+    
+    text-align: center;
+    width:100%;
+    margin: 40px 5px 15px 5px;
+    top: 20px;
+}
+
+.event-more-details{
+    display:inline-block;
+}
+
