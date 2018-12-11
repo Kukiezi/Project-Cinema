@@ -7,14 +7,15 @@ import Home from "./Home";
 import Details from "./Details";
 import NotExist from "./NotExist";
 import Navbar from './Navbar';
-// import LogToogle from './LogToogle';
-// import RegToogle from './RegToogle';
+
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 import { faTicketAlt } from '@fortawesome/free-solid-svg-icons'
 import ReserveTicket from './ReserveTicket';
 import ResetPassword from './ResetPassword';
 
+import Reservation from './Reservation';
+import Events from './Events';
 
 import Reservation from './Reservation';
 import { AdminPanel } from './AdminPanel';
@@ -44,6 +45,8 @@ public render() {
      <Route path="/AdminPanel" component={AdminPanel}/>
      <Route path="/MovieManagment" component={MovieManagment}/>
      <Route path="/Reservation/:Reserved" component={Reservation}/>
+     <Route path="/Reservation/:idSeat" component={Reservation}/>
+     <Route path="/Events" component={Events}/>
      <Route component={NotExist}/>
     </Switch>
     <Footer footer={"2018"}/>

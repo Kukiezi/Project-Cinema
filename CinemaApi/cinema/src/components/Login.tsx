@@ -2,15 +2,35 @@ import * as React from 'react';
 import 'src/assets/css/Spinner.css';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { NavLink } from 'react-router-dom';
+import Modal from 'react-modal';
 
 
-class Login extends React.Component {
 
+class Login extends React.Component<{}, {isActive: boolean}> {
+    constructor(props:any){
+        super(props)
+
+        this.state = {
+            isActive: false
+        }
+    }
+
+    public componentWillMount(){
+        Modal.setAppElement('body');
+    }
+
+   public toggleModal = () => {
+        this.setState({
+            isActive:!this.state.isActive
+        })
+    }
 
     public render() {
 
         return (
             <div className="login-form">
+            <button className="login-btn" onClick={this.toggleModal}>Zaloguj</button>
+                <Modal className="modal-style"isOpen={this.state.isActive} onRequestClose={this.toggleModal}>
                 <div className="login-form-inner">
                     <h2 className="form-title">Logowanie</h2>
                     <form>
@@ -30,9 +50,10 @@ class Login extends React.Component {
                         </div>
                     </form>
                  </div>
+                 </Modal>
             </div>
         )
-}
+    }
 }
 
 export default Login;
