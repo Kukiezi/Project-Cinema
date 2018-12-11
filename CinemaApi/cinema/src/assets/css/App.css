@@ -100,6 +100,17 @@ body{
  top: 35%;
 }
 
+.desc_layer{
+  font-family: Monte;
+  font-weight: 100;
+  top: 35%;
+  color: white;
+}
+
+.desc_layer:hover{
+  color: red;
+}
+
 .img__wrap:hover .img__description_layer {
   visibility: visible;
   opacity: 1;
@@ -158,6 +169,10 @@ footer p{
     box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
   }
 
+  .img__wrap a{
+    text-decoration: none;
+  }
+
   .img__wrap p{
     position: relative;
     font-size:15px;
@@ -206,18 +221,6 @@ footer p{
   src: url('../fonts/Montserrat-Bold.ttf');
 }
 
-.registration-form, .login-form {
-  background: #22292f;
-  position: fixed;
-  right: 0;
-  top: 66px;
-  min-width: 300px;
-  bottom: 0;
-  z-index: 9999;
-  font-family: Monte;
-  color: #fff;
-}
-
 .registration-form-inner, .login-form-inner{
     padding: 40px;
 }
@@ -234,18 +237,37 @@ footer p{
   display: block;
 }
 
-.regtoogle{
-  display: inline-block;
+.registration-btn{
+  display: block;
   position: absolute;
   top: 10px;
-  right: 140px;
-}
+  right: 130px;
+  color: white;
+  font-family: Monte;
 
-.logtoogle{
-  display: inline-block;
+}
+.login-btn{
+  display: block;
   position: absolute;
   top: 10px;
   right: 10px;
+  color: white;
+  font-family: Monte;
 }
+
+.modal-style{
+  background-color: #22292f;
+  width: 50%;
+  height: 75%;
+  font-family: Monte;
+  position: absolute; 
+  top: 0;
+  right: 0; 
+  bottom: 0; 
+  left: 0; 
+  margin: auto;
+  color: white;
+}
+
 
 

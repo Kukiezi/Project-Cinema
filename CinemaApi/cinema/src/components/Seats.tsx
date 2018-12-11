@@ -5,11 +5,12 @@ import 'src/assets/css/ReserveTicket.css';
 
 
 
+
 class Seats extends React.Component<any, IState>{
 
     public state: IState={
         "free": true,
- 
+        
         "reservation":{
             "IdReservation": 1,
             "IdUserAccount": 1,
@@ -17,16 +18,10 @@ class Seats extends React.Component<any, IState>{
         },
         
         "seat":{
-            "idSeat": this.props.seat.idSeat,
-            "rowNumb": this.props.seat.rowNumb,
-            "seatNumb": this.props.seat.seatNumb
-        },
-        "seatReservation":
-        {
-            "idSeatReservation":10,
-            "idSeat":8,
-            "idReservation":1
+            "s": this.props.seat
+
         }
+        
 
         };
 
@@ -38,25 +33,22 @@ class Seats extends React.Component<any, IState>{
         this.setState({
           free: !this.state.free        
         })
-        if(this.state.free)
-        {this.SendSeat();}
-        else 
-        {
-            this.RemoveSeat();
-        }
+        this.props.triggerUpdate(this.state.seat.s,this.state.free)
+ 
       }
       public async SendSeat(){
 
     
-        const result = await fetch('https://localhost:44371/cinema/AddSeat?reservation=' + this.state.reservation.IdReservation + '&seat=' + this.state.seat.idSeat, {
-          method: 'POST'
-        });
-        await result.json();
+       //  await fetch('https://localhost:44371/cinema/AddSeat2?seat=' +  this.state.seat.s, {
+       //   method: 'POST'
+       // });
+        // await result.json();
+        
     }
     public async RemoveSeat(){
 
     
-        const result = await fetch('https://localhost:44371/cinema/RemoveSeat?reservation=' + this.state.reservation.IdReservation + '&seat=' + this.state.seat.idSeat, {
+        const result = await fetch('https://localhost:44371/cinema/RemoveSeat2?seat=' + this.state.seat.s, {
           method: 'GET'
         });
         await result.json();
@@ -64,17 +56,36 @@ class Seats extends React.Component<any, IState>{
 
 
 public render() {
-    const seatState = this.state.free ? 'seat-free' : 'seat-taken';
+    // if(this.props.seat.seatNumb !== 0){this.state.map = "seat-taken"  }
+    // else { this.state.map = "seat-free" }
+    let seatState = this.state.free ? 'seat-free' : 'seat-taken';
+    let snumber = this.state.seat.s;
+    if (this.state.seat.s === "P") {
+        seatState = 'seat-empty';
+        
+      }
+    if (this.state.seat.s === "Taken") {
+        seatState = 'seat-reserved';
+        snumber = "T";
+      }
+    if(this.state.seat.s === "Q")
+    {
+        
+        return(
+            <br/>           
+        )
+    }
+    else{
         return (
-           
-            <div className={seatState} onClick={this.isFree}>
-            <p className="white">{this.props.seat.seatNumb}</p>
-           
-             </div>
-             
+            <div className= "line"> 
+            <button className={seatState} onClick={this.isFree}>
+            <p className="white">{snumber}</p>
+            </button>
+            </div>
            
              
            )
+        }
 }
 
 
@@ -82,9 +93,9 @@ public render() {
 export default Seats;
 export interface IState {
     free: boolean,
+    
     seat: ISeat,
     reservation: IReservation,
-    seatReservation: ISeatReservation
   }
   export interface IReservation {
     IdReservation: number,
@@ -92,14 +103,5 @@ export interface IState {
     IdScreening: number,
   }
   export interface ISeat {
-    idSeat: number,
-    rowNumb: string,
-    seatNumb: number,
-    
-  }
-  export interface ISeatReservation {
-    idSeatReservation: number,
-    idSeat:number,
-    idReservation: number,
-    
+    s: string,
   }
