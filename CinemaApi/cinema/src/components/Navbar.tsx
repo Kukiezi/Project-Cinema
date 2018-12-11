@@ -30,8 +30,6 @@ class Navbar extends React.Component<any, IState>{
             <NavLink to="/Events" className="block no-underline mt-4 lg:inline-block lg:mt-0 text-white mr-6">Wydarzenia</NavLink>
             <Registration/>
             <Login/>
-            <NavLink to="/Wydarzenia" className="block no-underline mt-4 lg:inline-block lg:mt-0 text-white mr-6">Wydarzenia</NavLink>
-            <NavLink to="/Newsy" className="block mt-4 no-underline lg:inline-block lg:mt-0 text-white mr-6">Newsy</NavLink>
             <NavLink to="/AdminPanel" className="block mt-4 no-underline lg:inline-block lg:mt-0 text-white">Administracja</NavLink>
           </div>
           </Fade>

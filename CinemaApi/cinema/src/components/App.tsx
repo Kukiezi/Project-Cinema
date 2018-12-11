@@ -17,7 +17,6 @@ import ResetPassword from './ResetPassword';
 import Reservation from './Reservation';
 import Events from './Events';
 
-import Reservation from './Reservation';
 import { AdminPanel } from './AdminPanel';
 import { MovieManagment } from './MovieManagment';
 import DetailsPanel from './DetailsPanel';
@@ -45,7 +44,6 @@ public render() {
      <Route path="/AdminPanel" component={AdminPanel}/>
      <Route path="/MovieManagment" component={MovieManagment}/>
      <Route path="/Reservation/:Reserved" component={Reservation}/>
-     <Route path="/Reservation/:idSeat" component={Reservation}/>
      <Route path="/Events" component={Events}/>
      <Route component={NotExist}/>
     </Switch>
