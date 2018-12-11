@@ -222,12 +222,20 @@ footer p{
   display: block;
 }
 
-.registration-btn,
+.registration-btn{
+  display: block;
+  position: absolute;
+  top: 10px;
+  right: 130px;
+  color: white;
+  font-family: Monte;
+
+}
 .login-btn{
   display: block;
   position: absolute;
   top: 10px;
-  right: 140px;
+  right: 10px;
   color: white;
   font-family: Monte;
 }

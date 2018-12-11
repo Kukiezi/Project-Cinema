@@ -27,7 +27,7 @@ class Registration extends React.Component<{}, {isActive: boolean}> {
         return (
            
                 <div className="registration-form ">
-                <button className="registration-btn" onClick={this.toggleModal}>Zarejestruj się</button>
+                <button className="registration-btn" onClick={this.toggleModal}>Zarejestruj </button>
                 <Modal className="modal-style"isOpen={this.state.isActive} onRequestClose={this.toggleModal}>
                     <div className="registration-form-inner">
                         <h2 className="form-title">Załóż konto</h2>
