@@ -1,10 +1,10 @@
 import * as React from "react";
-import 'src/assets/css/Navbar.css'
+import './Navbar.css'
 
-import Fade from './Fade';
+import Fade from '../App/Fade';
 import { NavLink } from 'react-router-dom';
-import Registration from './Registration';
-import Login from './Login';
+import Registration from '../Users/Registration';
+import Login from '../Users/Login';
 
 class Navbar extends React.Component<any, IState>{
 

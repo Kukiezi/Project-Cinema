@@ -1,6 +1,6 @@
-body{
+/* body{
     overflow: hidden;
-}
+} */
 
 .form{
     display: flex;
@@ -141,7 +141,14 @@ body{
     top: 20px;
 }
 
-.event-more-details{
+/* .event-more-details{
+ 
+} */
+
+.date{
+
     display:inline-block;
-}
+} 
+
+
 

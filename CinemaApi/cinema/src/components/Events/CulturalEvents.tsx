@@ -1,5 +1,5 @@
 import * as React from "react";
-import 'src/assets/css/Events.css'
+import './Events.css'
 import Modal from 'react-modal';
 
 
@@ -46,11 +46,11 @@ export default class CulturalEvents extends React.Component<any, any>{
                     </div>
                     <div className="event-more-details">
                         <div className="date">
-                            Kiedy?<br/>
+                            <h3>Kiedy?<br/></h3>
                             {this.props.culturalevent.eventDate}
                         </div>
                         <div className="seats">
-                            Liczba miejsc:<br/>
+                            <h3>Liczba miejsc:<br/></h3>
                             {this.props.culturalevent.seatsLimit}
                         </div>
                     </div>

@@ -4,7 +4,7 @@ import 'src/assets/css/Spinner.css';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { NavLink } from 'react-router-dom';
 // import Fade from './Fade';
-import 'src/assets/css/Rating.css'
+import '../../Movies/Rating.css'
 
 class DetailsPanel extends React.Component<any, IState> {
 

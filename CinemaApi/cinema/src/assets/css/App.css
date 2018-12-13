@@ -269,5 +269,23 @@ footer p{
   color: white;
 }
 
+.close-btn{
+  background-color: red;
+  color: white;
+  /* font-size: 13px; */
+  font-style: bold;
+  border-radius: 5px;
+  padding: 4px 4px 4px 4px;
+  position: absolute;
+  top: 8px;
+  right: 20px;
+}
+
+.close-btn:hover{
+  background-color: darkred;
+}
+
+
+
 
 

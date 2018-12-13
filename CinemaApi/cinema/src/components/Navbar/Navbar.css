@@ -104,11 +104,11 @@
   @font-face {
     font-family: 'Monte';
     font-weight: 500;
-    src: url('../fonts/Montserrat-Regular.ttf');
+    src: url('../../assets/fonts/Montserrat-Regular.ttf');
   }
   
   @font-face {
     font-family: 'MonteBold';
     font-weight: 500;
-    src: url('../fonts/Montserrat-Bold.ttf');
+    src: url('../../assets/fonts/Montserrat-Black.ttf');
   }

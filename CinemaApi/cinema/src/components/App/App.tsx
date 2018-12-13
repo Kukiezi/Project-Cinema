@@ -2,26 +2,26 @@ import * as React from 'react';
 import 'src/assets/css/App.css'
 import { Route, Switch} from 'react-router-dom';
 // import Fade from './Fade';
-import Footer from './Footer';
-import Home from "./Home";
-import Details from "./Details";
+import Footer from '../HomePage/Footer';
+import Home from "../HomePage/Home";
+import Details from "../Movies/Details";
 import NotExist from "./NotExist";
-import Navbar from './Navbar';
+import Navbar from '../Navbar/Navbar';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 import { faTicketAlt } from '@fortawesome/free-solid-svg-icons'
-import ReserveTicket from './ReserveTicket';
-import ResetPassword from './ResetPassword';
+import ReserveTicket from '../Reservations/ReserveTicket';
+import ResetPassword from '../Users/ResetPassword';
 
-import Reservation from './Reservation';
-import Events from './Events';
+import Reservation from '../Reservations/Reservation';
+import Events from '../Events/Events';
 
-import { AdminPanel } from './AdminPanel';
-import { MovieManagment } from './MovieManagment';
-import DetailsPanel from './DetailsPanel';
-import { AddMovie } from './AddMovie';
-import { DeleteMovie } from './DeleteMovie';
+import { AdminPanel } from '../AdminPanel/AdminPanel';
+import { MovieManagment } from '../AdminPanel/Movies/MovieManagment';
+import DetailsPanel from '../AdminPanel/Movies/DetailsPanel';
+import { AddMovie } from '../AdminPanel/Movies/AddMovie';
+import { DeleteMovie } from '../AdminPanel/Movies/DeleteMovie';
 class App extends React.Component<any, any> {
 
 

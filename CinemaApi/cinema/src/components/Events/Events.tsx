@@ -1,6 +1,6 @@
 import * as React from 'react';
-import 'src/assets/css/Events.css';
-import CulturalEvents from './CulturalEvents';
+import './Events.css';
+import CulturalEvents from '../Events/CulturalEvents';
 
 
 

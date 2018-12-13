@@ -1,6 +1,6 @@
 import * as React from "react";
-import 'src/assets/css/App.css'
-import 'src/assets/css/ReserveTicket.css';
+import 'src/assets/css/App.css';
+import './ReserveTicket.css';
 
 
 

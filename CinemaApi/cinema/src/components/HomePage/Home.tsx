@@ -1,7 +1,7 @@
 import * as React from 'react';
 import 'src/assets/css/App.css'
-import Fade from './Fade';
-import Movies from './Movies'
+import Fade from '../App/Fade';
+import Movies from '../Movies/Movies'
 import Slider from './Slider';
 
 

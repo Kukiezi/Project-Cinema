@@ -1,5 +1,5 @@
 import * as React from "react";
-import 'src/assets/css/Slider.css'
+import './Slider.css'
 
 class Navbar extends React.Component<any, any>{
 

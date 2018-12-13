@@ -1,6 +1,5 @@
 import * as React from "react";
-import 'src/assets/css/Rating.css'
-
+import './Rating.css';
 
 
 export default class Rating extends React.Component<any, any>{
