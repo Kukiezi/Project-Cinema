@@ -45,6 +45,7 @@ body{
   color: white;
   font-family: Monte;
   font-size: 10px;
+  text-align: center;
   
 }
 
@@ -103,7 +104,7 @@ body{
 .desc_layer{
   font-family: Monte;
   font-weight: 100;
-  top: 35%;
+  top: 55%;
   color: white;
 }
 
@@ -221,7 +222,7 @@ footer p{
   src: url('../fonts/Montserrat-Bold.ttf');
 }
 
-.registration-form-inner, .login-form-inner{
+.form-inner{
     padding: 40px;
 }
 
@@ -237,13 +238,14 @@ footer p{
   display: block;
 }
 
-.registration-btn{
+/* .registration-btn{
   display: block;
   position: absolute;
   top: 10px;
   right: 130px;
   color: white;
   font-family: Monte;
+  monte-bold text-white no-underline text-3xl tracking-tight text-center mr-20
 
 }
 .login-btn{
@@ -253,7 +255,8 @@ footer p{
   right: 10px;
   color: white;
   font-family: Monte;
-}
+} */
+
 
 .modal-style{
   background-color: #22292f;
@@ -275,7 +278,7 @@ footer p{
   /* font-size: 13px; */
   font-style: bold;
   border-radius: 5px;
-  padding: 4px 4px 4px 4px;
+  padding:6px 9px 6px 9px;
   position: absolute;
   top: 8px;
   right: 20px;

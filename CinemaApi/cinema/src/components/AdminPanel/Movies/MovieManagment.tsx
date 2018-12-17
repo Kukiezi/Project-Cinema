@@ -26,7 +26,7 @@ export class MovieManagment extends React.Component<any, IState>{
             <div>
                 <h1 className="text-white text-center font-monte">Panel Filmów</h1>
 
-                <h2 className="text-white font-monte">Lista filmów:</h2>
+                {/* <h2 className="text-white font-monte">Lista filmów:</h2> */}
                 <div className="Movie-list" id="Movie-list"> 
          
                    {this.state.movies.map(movie => 

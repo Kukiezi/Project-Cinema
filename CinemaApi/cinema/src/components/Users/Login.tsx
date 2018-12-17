@@ -28,13 +28,13 @@ class Login extends React.Component<{}, {isActive: boolean}> {
     public render() {
 
         return (
-            <div className="login-form">
-            <button className="login-btn" onClick={this.toggleModal}>Zaloguj</button>
+            <div className="form monte text-white text-center text-xl lg:flex-grow">
+            <button className="login-btn block no-underline mt-4 lg:inline-block lg:mt-0 text-white mr-6" onClick={this.toggleModal}>Zaloguj</button>
                 <Modal className="modal-style"isOpen={this.state.isActive} onRequestClose={this.toggleModal}>
-                <div className="login-form-inner">
+                <div className="form-inner">
                     <h2 className="form-title">Logowanie</h2>
                     <form>
-                        <button className="close-btn" onClick={this.toggleModal}>Zamknij</button>
+                        <button className="close-btn" onClick={this.toggleModal}>x</button>
                         <div className="form-item">
                             <label htmlFor="email-id" className="block text-sm font-bold mb-2">EMAIL</label>
                             <input placeholder="Podaj email " id="email-id" type="email" name="email" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
