@@ -5,6 +5,7 @@ import Fade from '../App/Fade';
 import { NavLink } from 'react-router-dom';
 import Registration from '../Users/Registration';
 import Login from '../Users/Login';
+import Newsletter from '../Newsletter/Newsletter';
 
 class Navbar extends React.Component<any, IState>{
 
@@ -30,6 +31,7 @@ class Navbar extends React.Component<any, IState>{
             <NavLink to="/Events" className="block no-underline mt-4 lg:inline-block lg:mt-0 text-white mr-6">Wydarzenia</NavLink>
             <Registration/>
             <Login/>
+            <Newsletter/>
             <NavLink to="/AdminPanel" className="block mt-4 no-underline lg:inline-block lg:mt-0 text-white">Administracja</NavLink>
           </div>
           </Fade>
