@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Movies from './MoviesPanel'
 import { NavLink } from 'react-router-dom';
+import '../AdminPanel.css';
 
 export class MovieManagment extends React.Component<any, IState>{
 
@@ -27,14 +28,17 @@ export class MovieManagment extends React.Component<any, IState>{
                 <h1 className="text-white text-center font-monte">Panel Filmów</h1>
 
                 {/* <h2 className="text-white font-monte">Lista filmów:</h2> */}
+                <div className="add-movie">
+                    <NavLink className="add-btn btn-style" to="/AddMovie" >
+                        Dodaj film
+                    </NavLink>
+                </div>
                 <div className="Movie-list" id="Movie-list"> 
          
                    {this.state.movies.map(movie => 
                              <Movies key={movie.id} movie={movie}/>)}
                 </div>
-                <NavLink className="mm-btn" to="/AddMovie" >
-                     Dodaj film
-                </NavLink>
+
             </div>
         
         )

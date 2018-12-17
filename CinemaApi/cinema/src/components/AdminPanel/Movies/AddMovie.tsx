@@ -62,42 +62,54 @@ export class AddMovie extends React.Component<any, IState> {
       public render(){
           return(
             <div className="login-form-inner">
-            <h1 className="text-white text-center font-monte">Dodaj film</h1>
-       
-                <div className="form-item">
-                    <label htmlFor="title" className="block text-sm font-bold mb-2 text-white">TYTUŁ</label>
-                    <input onChange={this.onChange} placeholder="Podaj tytuł "  id="title" type="title" name="title" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
+            <h1 className="text-white text-center font-monte mt-4">Dodaj film</h1>
+
+                <div className="inline-block w-1/2 ">
+                    <div className="add-form-item ml-24">
+                        <label htmlFor="title" className="block text-sm font-bold mb-2 ml-8 text-white">TYTUŁ</label>
+                        <input onChange={this.onChange} placeholder="Podaj tytuł "  id="title" type="title" name="title" className="shadow appearance-none border rounded ml-8 w-4/5 py-2 px-3 mb-3 text-grey-darker leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
+                    </div>
+
+                    <div className="add-form-item ml-24 ">
+                        <label htmlFor="genre" className="block text-sm font-bold mb-2 ml-8 text-white">GATUNEK</label>
+                        <input onChange={this.onChange} placeholder="Podaj gatunek "  id="genre" type="genre" name="genre" className="shadow appearance-none border rounded ml-8  w-4/5 py-2 px-3 text-grey-darker mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
+                    </div>
+
+                    <div className="add-form-item ml-24">
+                        <label htmlFor="director" className="block text-sm font-bold mb-2 ml-8 text-white">REŻYSER</label>
+                        <input onChange={this.onChange} placeholder="Podaj reżysera "  id="director" type="director" name="director" className="shadow appearance-none border rounded ml-8 w-4/5 py-2 px-3 text-grey-darker mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
+                    </div>
                 </div>
-                <div className="form-item">
-                    <label htmlFor="description" className="block text-sm font-bold mb-2 text-white">OPIS</label>
-                    <input onChange={this.onChange}  placeholder="Podaj hasło "  id="description" type="description" name="description" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
+
+                <div className="inline-block w-1/2 ">
+                    <div className="add-form-item2">
+                        <label htmlFor="ageRestriction" className="block text-sm font-bold mb-2 text-white">OGRANICZENIA WIEKOWE</label>
+                        <input onChange={this.onChange} placeholder="Podaj ograniczenie "  id="ageRestriction" type="ageRestriction" name="ageRestriction" className="shadow appearance-none border rounded w-1/8 py-2 px-3 text-grey-darker mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
+                    </div>
+                    
+                    <div className="add-form-item2 ">
+                        <label htmlFor="watchingTime" className="block text-sm font-bold mb-2 text-white">CZAS OGLĄDANIA</label>
+                        <input onChange={this.onChange} placeholder="Podaj czas oglądania "  id="watchingTime" type="watchingTime" name="watchingTime" className="shadow appearance-none border rounded w-1/8 py-2 px-3 text-grey-darker mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
+                    </div>
                 </div>
-                <div className="form-item">
-                    <label htmlFor="picture" className="block text-sm font-bold mb-2 text-white">ZDJĘCIE</label>
-                    <input onChange={this.onChange} placeholder="Podaj link do zdjęcia "  id="picture" type="picture" name="picture" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
+
+                <div className="add-form-item">
+                    <label htmlFor="picture" className="block text-sm font-bold mb-2 ml-8 mt-4 text-white ">ZDJĘCIE</label>
+                    <input onChange={this.onChange} placeholder="Podaj link do zdjęcia "  id="picture" type="picture" name="picture" className="shadow appearance-none ml-8 border rounded w-3/5 py-2 px-3 text-grey-darker mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
                 </div>
-                <div className="form-item">
-                    <label htmlFor="ageRestriction" className="block text-sm font-bold mb-2 text-white">OGRANICZENIA WIEKOWE</label>
-                    <input onChange={this.onChange} placeholder="Podaj ograniczenie wiekowe "  id="ageRestriction" type="ageRestriction" name="ageRestriction" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
+
+                <div className="add-form-item">
+                    <label htmlFor="icon" className="block text-sm font-bold mb-2 ml-8 text-white">IKONA</label>
+                    <input onChange={this.onChange} placeholder="Podaj link do ikony "  id="icon" type="icon" name="icon" className="shadow appearance-none ml-8 border rounded w-3/5 py-2 px-3 text-grey-darker mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
                 </div>
-                <div className="form-item">
-                    <label htmlFor="icon" className="block text-sm font-bold mb-2 text-white">IKONA</label>
-                    <input onChange={this.onChange} placeholder="Podaj link do ikony "  id="icon" type="icon" name="icon" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
+
+                <div className="add-form-item">
+                    <label htmlFor="description" className="block text-sm font-bold mb-2 ml-8 text-white ">OPIS</label>
+                    <input onChange={this.onChange}  placeholder="Podaj opis"  id="description" type="description" name="description" className="shadow appearance-none ml-8 border rounded w-3/5 py-2 px-3 text-grey-darker mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
                 </div>
-                <div className="form-item">
-                    <label htmlFor="genre" className="block text-sm font-bold mb-2 text-white">GATUNEK</label>
-                    <input onChange={this.onChange} placeholder="Podaj gatunek "  id="genre" type="genre" name="genre" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
-                </div>
-                <div className="form-item">
-                    <label htmlFor="director" className="block text-sm font-bold mb-2 text-white">REŻYSER</label>
-                    <input onChange={this.onChange} placeholder="Podaj reżysera "  id="director" type="director" name="director" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
-                </div>
-                <div className="form-item">
-                    <label htmlFor="watchingTime" className="block text-sm font-bold mb-2 text-white">CZAS OGLĄDANIA</label>
-                    <input onChange={this.onChange} placeholder="Podaj czas oglądania "  id="watchingTime" type="watchingTime" name="watchingTime" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
-                </div>
+                
                 <div className="text-center pt-4">
-                    <button onClick={this.addMovies} className="button bg-red hover:bg-red-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Dodaj film</button>
+                    <button onClick={this.addMovies} className="button bg-red hover:bg-red-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Zapisz</button>
                 </div>
          </div>
           )
