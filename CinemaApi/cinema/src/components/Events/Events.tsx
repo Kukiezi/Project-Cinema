@@ -28,6 +28,7 @@ class Events extends React.Component<any, IState>{
         return(
             <div className="form">
                 <div className="inner">
+                    <h1 className="text-white text-center font-monte mt-4 pb-4 border-b border-solid border-red">Wydarzenia</h1>
                     <div className="list-of-events" id="list-of-events">
 
                         {this.state.culturalevents.map(culturalevent => 
