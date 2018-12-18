@@ -2,7 +2,6 @@
     font-family: Monte;
     color: white;
     text-align: center;
-    margin: 10px 10px 10px 10px;
 }
 
 .managment-btn{
@@ -49,6 +48,14 @@
     margin-top: 10%;
 }
 
+.add-form{
+    padding-left: 18%;
+}
+
+.add-form2{
+    padding-right: 20%;
+    padding-left: 5%;
+}
  .add-form-item2{
     margin-left:  20%;
 } 

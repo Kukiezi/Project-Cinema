@@ -25,7 +25,7 @@ export class MovieManagment extends React.Component<any, IState>{
         
         return(
             <div>
-                <h1 className="text-white text-center font-monte">Panel Filmów</h1>
+                <h1 className="text-white text-center font-monte mt-4 mb-4 pb-4 border-b border-solid border-red">Panel Filmów</h1>
 
                 {/* <h2 className="text-white font-monte">Lista filmów:</h2> */}
                 <div className="add-movie">

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import 'src/assets/css/Spinner.css';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 import Modal from 'react-modal';
 
 
@@ -46,9 +46,9 @@ class Login extends React.Component<{}, {isActive: boolean}> {
                         <div className="form-actions text-center pt-4">
                             <button className="button bg-red hover:bg-red-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Zaloguj się</button>
                         </div>
-                        <div className="form-description text-center pt-16">
+                        {/* <div className="form-description text-center pt-16">
                             <NavLink to="/ResetPassword" className="no-underline hover:text-red-dark text-white font-bold focus:outline-none focus:shadow-outline ">Zapomniałeś/aś hasła?</NavLink>
-                        </div>
+                        </div> */}
                     </form>
                  </div>
                  </Modal>
