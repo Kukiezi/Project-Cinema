@@ -21,6 +21,7 @@ namespace CinemaApi.Models
         public virtual DbSet<Newsletter> Newsletter { get; set; }
         public virtual DbSet<Rating> Rating { get; set; }
         public virtual DbSet<Reservation> Reservation { get; set; }
+        public virtual DbSet<Review> Review { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Room> Room { get; set; }
         public virtual DbSet<Screening> Screening { get; set; }
@@ -30,14 +31,7 @@ namespace CinemaApi.Models
         public virtual DbSet<UserAccount> UserAccount { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Server = az1.shaikat.net; Database = CinemaDB; User Id = cinemadb_user; Password = JGFiu93p;Trusted_Connection=True;Integrated Security=False;MultipleActiveResultSets=true;");
-            }
-        }
-
+ 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<CulturalEvent>(entity =>
@@ -208,6 +202,32 @@ namespace CinemaApi.Models
                     .HasConstraintName("FK__Reservati__id_us__40F9A68C");
             });
 
+            modelBuilder.Entity<Review>(entity =>
+            {
+                entity.HasKey(e => e.IdReview);
+
+                entity.Property(e => e.IdReview).HasColumnName("id_review");
+
+                entity.Property(e => e.Author)
+                    .IsRequired()
+                    .HasColumnName("author")
+                    .HasMaxLength(40)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IdMovies).HasColumnName("id_Movies");
+
+                entity.Property(e => e.Review1)
+                    .IsRequired()
+                    .HasColumnName("review")
+                    .IsUnicode(false);
+
+                entity.HasOne(d => d.IdMoviesNavigation)
+                    .WithMany(p => p.Review)
+                    .HasForeignKey(d => d.IdMovies)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Review__id_Movie__5224328E");
+            });
+
             modelBuilder.Entity<Roles>(entity =>
             {
                 entity.HasKey(e => e.IdRoles);
@@ -255,7 +275,9 @@ namespace CinemaApi.Models
 
                 entity.Property(e => e.ScreeningDate)
                     .HasColumnName("screening_date")
-                    .HasColumnType("datetime");
+                    .HasColumnType("date");
+
+                entity.Property(e => e.ScreeningTime).HasColumnName("screening_time");
 
                 entity.HasOne(d => d.IdMoviesNavigation)
                     .WithMany(p => p.Screening)

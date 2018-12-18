@@ -5,6 +5,7 @@ import 'src/assets/css/Spinner.css';
 import { NavLink } from 'react-router-dom';
 import Fade from '../App/Fade';
 import './Rating.css'
+import Reviews from '../Movies/Reviews'
 
 
 
@@ -12,6 +13,13 @@ import './Rating.css'
 class Details extends React.Component<any, IState> {
 
   public state: IState = {
+    "reviews":[],
+    "review": {
+      "idReview": 0,
+      "author": "",
+      "review1": "",
+      "idMovies": 0,
+    },
     "loading": true,
     "currentRating": 0,
     "rating": [],
@@ -31,6 +39,8 @@ class Details extends React.Component<any, IState> {
 
   constructor(props: IState) {
     super(props);
+    this.onChangeReview = this.onChangeReview.bind(this);
+    this.addReview = this.addReview.bind(this);
   }
 
   public onChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -79,8 +89,6 @@ class Details extends React.Component<any, IState> {
 }
 
 public async SendRating(){
-
-    
     const result =  await fetch('https://localhost:44371/cinema/AddRating?rating=' + this.state.ratingTest.ratingNumber + '&id=' + this.state.ratingTest.idMovies, {
       method: 'POST'
     });
@@ -89,29 +97,92 @@ public async SendRating(){
     currentRating = Math.round(currentRating);
     currentRating /= 2;
     this.setState({currentRating});
-    console.log("currentrating: "+ this.state.currentRating);
 }
 
 
   public async componentDidMount() {
     const { Id } = this.props.match.params;
+    let reviews;
     // const { movie } = this.props.location.state
     const result = await fetch('https://localhost:44371/cinema/GetMovie?id=' + Id);
     const movie = await result.json();
     const result2 = await fetch('https://localhost:44371/cinema/GetRating?id=' + Id);
     let currentRating = await result2.json();
+    const result3 = await fetch('https://localhost:44371/cinema/GetReviews?id=' + Id)
+    if (result3.ok){
+       reviews = await result3.json();
+    }
+    
     currentRating *= 2;
     currentRating = Math.round(currentRating);
     currentRating /= 2;
     this.setState({
       movie,
       loading: false,
-      currentRating
+      currentRating,
+      reviews
     });
+    
   }
+
+  public onChangeReview = (e: any) => {
+    e.preventDefault();
+    const reviewCopy = JSON.parse(JSON.stringify(this.state.review));
+    const { Id } = this.props.match.params;
+        reviewCopy[e.currentTarget.name] = e.currentTarget.value;
+    reviewCopy.idMovies = Id;
+  
+    this.setState({ review: reviewCopy});
+}
+
+public async addReview(){
+  await fetch('https://localhost:44371/cinema/AddReview', {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({author: this.state.review.author, review1: this.state.review.review1, idMovies: this.state.review.idMovies})
+    }).then(res=>res.json())
+      .then(res => console.log(res));
+    this.setReviews();
+}
+
+public async setReviews(){
+  let reviews;
+  const { Id } = this.props.match.params;
+  const result3 = await fetch('https://localhost:44371/cinema/GetReviews?id=' + Id)
+      if (result3.ok){
+         reviews = await result3.json();
+      }
+      this.setState({
+        reviews
+      });
+      console.log(reviews);
+     
+}
 
   public render() {
     let content;
+    let reviewContent;
+    let reviewCheck;
+  
+    
+    if (this.state.reviews !== undefined){
+      reviewCheck =   <div className="reviews comment-form">
+      
+      {this.state.reviews.map(review => 
+                        <Reviews key={review.idReview} review={review}/>)}
+      </div>
+      console.log("not null");
+      console.log(this.state.reviews.length);
+    }
+    else{
+      reviewCheck =   <div className="reviews comment-form"> <br/><br/>
+      <h1 className="text-white monte text-center">Ten film nie ma jeszcze żadnych opinii!</h1>
+      </div>
+      
+    }
   
     if (this.state.loading) {
       content = <div className="lds-ring"><div /><div /><div /><div /></div>
@@ -154,17 +225,25 @@ public async SendRating(){
         <label htmlFor="r5" className="check"><input value="5" type="checkbox" id="r5" onChange={this.onChange}/><i className="em em-sunglasses"/></label>
     </div>
 </div>
+
 </div>
 
- 
+reviewContent = <div> <h1 className="text-white monte text-center">Opinie</h1><br/><br/>
+<div className="comment-form text-center"> 
+<input name="author" onChange={this.onChangeReview} className="shadow appearance-none border rounded py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline w-1/2" placeholder="Autor..."/> <br/><br/>
+<textarea name="review1" onChange={this.onChangeReview} className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..."/><br/>
+<button onClick={this.addReview} className="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">Dodaj Opinie!</button>
+</div>
+
+
+ </div>
     }
     return (
         
       <div>
-    {content}
-
-
-
+      {content}
+      {reviewContent}
+      {reviewCheck}
       </div>
      
 
@@ -177,8 +256,10 @@ export interface IState {
   movie: IMovie,
   loading: boolean,
   currentRating: number,
-  rating: IRating[]
-  ratingTest: IRating
+  rating: IRating[],
+  ratingTest: IRating,
+  reviews: IReviews[],
+  review: IReviews
 }
 export interface IMovie {
   id: number,
@@ -190,5 +271,11 @@ export interface IMovie {
 export interface IRating {
   idRating: number,
   idMovies: number,
-  ratingNumber: number,
+  ratingNumber: number
+}
+export interface IReviews {
+  idReview: number,
+  idMovies: number,
+  review1: string,
+  author: string
 }

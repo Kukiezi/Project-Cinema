@@ -8,6 +8,7 @@ namespace CinemaApi.Models
         public Movies()
         {
             RatingNavigation = new HashSet<Rating>();
+            Review = new HashSet<Review>();
             Screening = new HashSet<Screening>();
         }
 
@@ -23,6 +24,7 @@ namespace CinemaApi.Models
         public double Rating { get; set; }
 
         public ICollection<Rating> RatingNavigation { get; set; }
+        public ICollection<Review> Review { get; set; }
         public ICollection<Screening> Screening { get; set; }
     }
 }
