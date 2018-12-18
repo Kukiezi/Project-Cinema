@@ -248,6 +248,15 @@ footer p{
   monte-bold text-white no-underline text-3xl tracking-tight text-center mr-20
 
 }
+
+.white-hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0; 
+}
 .login-btn{
   display: block;
   position: absolute;

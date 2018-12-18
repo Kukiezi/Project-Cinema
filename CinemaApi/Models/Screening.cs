@@ -13,7 +13,8 @@ namespace CinemaApi.Models
         public int IdScreening { get; set; }
         public int IdMovies { get; set; }
         public int IdRoom { get; set; }
-        public DateTime ScreeningDate { get; set; }
+        public DateTime? ScreeningDate { get; set; }
+        public TimeSpan? ScreeningTime { get; set; }
 
         public Movies IdMoviesNavigation { get; set; }
         public Room IdRoomNavigation { get; set; }
