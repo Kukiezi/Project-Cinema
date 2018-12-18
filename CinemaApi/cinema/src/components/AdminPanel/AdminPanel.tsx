@@ -6,7 +6,7 @@ export class AdminPanel extends React.Component<any, any>{
     public render(){
         return(
             <div>
-                <h2 className="font-monte">Panel Administracyjny</h2>
+                <h1 className="text-white text-center font-monte mt-4 mb-4 pb-4 border-b border-solid border-red">Panel Administracyjny</h1>
                 <div className="links">
                 <NavLink className="managment-btn btn-style" to="/MovieManagment" >
                      Filmy

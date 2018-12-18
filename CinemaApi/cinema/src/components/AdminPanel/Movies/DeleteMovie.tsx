@@ -45,8 +45,10 @@ export class DeleteMovie extends React.Component<any, IState> {
    public render(){
        return(
            <div>
-             <h1 className="text-white text-center font-monte">Czy na pewno chcesz usunąć film: {this.state.movie.title}</h1>
-             <button onClick={this.deleteMovie} className="yes-btn">TAK</button>
+             <h1 className="text-white text-center font-monte mt-4 mb-4 pb-4">Czy na pewno chcesz usunąć film: {this.state.movie.title}</h1>
+             <NavLink onClick={this.deleteMovie} className="yes-btn" to={{
+                pathname: '/MovieManagment'
+             }}>TAK</NavLink>
           
              <NavLink className="no-btn" to={{
                 pathname: '/MovieManagment'

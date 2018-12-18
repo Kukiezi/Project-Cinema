@@ -39,9 +39,9 @@
     width: 70%;
     /* font-size: 15px; */
     line-height: 80px;
-    overflow-x: hidden;
     padding-left: 10px;
     display: inline-block;
+    margin-bottom: 30px;
 }
 
 .event-details{

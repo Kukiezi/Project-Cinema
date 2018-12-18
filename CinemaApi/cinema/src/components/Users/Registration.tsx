@@ -26,13 +26,13 @@ class Registration extends React.Component<{}, {isActive: boolean}> {
 
         return (
            
-                <div className="registration-form ">
-                <button className="registration-btn" onClick={this.toggleModal}>Zarejestruj </button>
+                <div className="form block pin-r absolute">
+                <button className="registration-btn block no-underline mt-4 lg:inline-block lg:mt-0 text-white mr-" onClick={this.toggleModal}>Zarejestruj </button>
                 <Modal className="modal-style"isOpen={this.state.isActive} onRequestClose={this.toggleModal}>
-                    <div className="registration-form-inner">
+                    <div className="form-inner">
                         <h2 className="form-title">Załóż konto</h2>
                         <form>
-                            <button className="close-btn" onClick={this.toggleModal}>Zamknij</button>
+                            <button className="close-btn" onClick={this.toggleModal}>x</button>
 
                             <div className="form-item">
                                 <label htmlFor="email-id" className="block text-sm font-bold mb-2">EMAIL</label>

@@ -22,6 +22,9 @@ import { MovieManagment } from '../AdminPanel/Movies/MovieManagment';
 import DetailsPanel from '../AdminPanel/Movies/DetailsPanel';
 import { AddMovie } from '../AdminPanel/Movies/AddMovie';
 import { DeleteMovie } from '../AdminPanel/Movies/DeleteMovie';
+
+import MovieSchedule from '../MovieSchedule/MovieSchedule';
+
 class App extends React.Component<any, any> {
 
 
@@ -45,6 +48,7 @@ public render() {
      <Route path="/MovieManagment" component={MovieManagment}/>
      <Route path="/Reservation/:Reserved" component={Reservation}/>
      <Route path="/Events" component={Events}/>
+     <Route path="/Repertuar" component={MovieSchedule}/>
      <Route component={NotExist}/>
     </Switch>
     <Footer footer={"2018"}/>

@@ -29,7 +29,7 @@ export default class CulturalEvents extends React.Component<any, any>{
 
         return(
             <div className='event-wrap'>
-                <div className='event-title text-lg'>                    
+                <div className='event-title text-lg '>                    
                         {this.props.culturalevent.eventName}
                 </div>
                 <div className='event-details'>
