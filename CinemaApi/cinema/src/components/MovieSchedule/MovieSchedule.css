@@ -88,6 +88,21 @@
 
 }
 
+.title-btn {
+    padding: 10px 15px;
+    position: static;
+    background: transparent;
+    color: white;
+    font-size: 18px;
+    transition: .5s;
+    line-height: 52px;
+    border-radius: 3px;
+    border: 1px solid black;
+    font-family: Monte;
+    font-weight: 400;
+    text-decoration: none;
+    top: 10%;
+}
 
   .header1-text{
     font-size: 25px;
