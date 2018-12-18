@@ -58,7 +58,7 @@ body{
   padding: 20px;
   text-align: center;
   position: relative;
-  height: 340.89px;
+   height: 340.89px; 
   width: 243.66px;
   display: inline-block;
   -webkit-box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
@@ -143,7 +143,7 @@ footer p{
 
 .movie-picture img{
   width: 203.66px;
-  height: 300.89px;
+  /* height: 300.89px; */
   position: relative;
   top: -10px;
 }

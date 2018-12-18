@@ -26,7 +26,7 @@ class Registration extends React.Component<{}, {isActive: boolean}> {
 
         return (
            
-                <div className="form block pin-r absolute">
+                <div className="form block pin-r ">
                 <button className="registration-btn block no-underline mt-4 lg:inline-block lg:mt-0 text-white mr-" onClick={this.toggleModal}>Zarejestruj </button>
                 <Modal className="modal-style"isOpen={this.state.isActive} onRequestClose={this.toggleModal}>
                     <div className="form-inner">
