@@ -33,7 +33,6 @@ class Navbar extends React.Component<any, IState>{
             <Registration/>
             <Login/>
             <Newsletter/>
-            <NavLink to="/AdminPanel" className="block mt-4 no-underline lg:inline-block lg:mt-0 text-white">Administracja</NavLink>
           </div>
           </Fade>
         </div>
