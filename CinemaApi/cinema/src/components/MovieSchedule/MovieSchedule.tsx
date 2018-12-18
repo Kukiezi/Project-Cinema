@@ -5,7 +5,7 @@ import Fade from '../App/Fade';
 import Movies from '../Movies/Movies';
 import 'src/assets/css/Spinner.css';
 import { NavLink } from 'react-router-dom';
-import Modal from 'react-modal';
+// import Modal from 'react-modal';
 // import * as Datetime from 'react-datetime';
 
 
