@@ -1,0 +1,258 @@
+body{
+    background-color: #26262b;
+}
+
+html{
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+.managment-btn{
+    position: relative;
+    font-size: 18px;
+    line-height: 52px;
+    margin: 10px;
+}
+
+.btn-style{
+    border-radius: 3px;
+    border: 1px solid red;
+    font-family: Monte;
+    transition: .5s;
+    background: transparent;
+    text-decoration: none;
+    color: #fff;
+    padding: 15px 50px;
+}
+
+.btn-style:hover{
+    color: rgba(240,5,5,1);
+    -webkit-box-shadow: 0px 0px 58px -8px rgba(240,5,5,1);
+    -moz-box-shadow: 0px 0px 58px -8px rgba(240,5,5,1);
+    box-shadow: 0px 0px 58px -8px rgba(240,5,5,1);
+}
+
+.links{
+    text-align: center;
+    margin-top: 10%;
+}
+
+.text-left{
+    text-align: center;
+  }
+  
+  .img__wrap {
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    height: 340.89px;
+    width: 243.66px;
+    display: inline-block;
+    -webkit-box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+    -moz-box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+    box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+  }
+  
+  .img__wrap p{
+    position: relative;
+    font-size:20px;
+    font-family: Monte;
+    bottom: 8px;
+  }
+  
+  .img__description_layer {
+    font-family: Monte;
+    font-size: 30px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background:  linear-gradient(
+      rgba(0, 0, 0, 0.7), 
+      rgba(0, 0, 0, 0.7)
+    );
+    color: #fff;
+    visibility: hidden;
+    opacity: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    /* transition effect. not necessary */
+    transition: opacity .2s, visibility .2s;
+  }
+  
+  .img__description_layer p{
+   font-family: Monte;
+   font-weight: 100;
+   top: 35%;
+  }
+  
+  .desc_layer{
+    font-family: Monte;
+    font-weight: 400;
+    margin-top: 55%;
+    color: white;
+  }
+  .desc_layer2{
+    font-family: Monte;
+    font-weight: 400;
+    color: white;
+    margin-top: 4%;
+  }
+
+ 
+  
+  .desc_layer:hover{
+    color: red;
+  }
+
+  .desc_layer2:hover{
+    color: red;
+  }
+  
+  .img__wrap:hover .img__description_layer {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .img__description {
+    transition: .2s;
+    transform: translateY(1em);
+  }
+  
+  .img__wrap:hover .img__description {
+    transform: translateY(0);
+  }
+
+  @font-face {
+    font-family: 'Monte';
+    font-weight: 500;
+    src: url('../fonts/Montserrat-Regular.ttf');
+  }
+  
+  @font-face {
+    font-family: 'MonteBold';
+    font-weight: 500;
+    src: url('../fonts/Montserrat-Bold.ttf');
+  }
+  
+  @media screen and (max-width: 1479px) {
+    .movie-picture img{
+      width: 148.66px;
+      height: 221.14px;
+    }
+    .img__wrap {
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      height: 261.14px;
+      width: 188.66px;
+      display: inline-block;
+      -webkit-box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+      -moz-box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+      box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+    }
+  
+    .img__wrap a{
+      text-decoration: none;
+    }
+  
+    .img__wrap p{
+      position: relative;
+      font-size:15px;
+      font-family: Monte;
+      bottom: 5px;
+    }
+   
+    }
+  
+    @media screen and (max-width: 1149px) {
+      .movie-picture img{
+        width: 253.66px;
+        height: 350.89px;
+      }
+      .img__wrap {
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        height: 390.89px;
+        width: 293.66px;
+        display: inline-block;
+        -webkit-box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+        -moz-box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+        box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+      }
+    
+      .img__wrap p{
+        position: relative;
+        font-size:20px;
+        font-family: Monte;
+        bottom: 8px;
+      }
+     
+      }
+      
+      .white-hr {
+        display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 1em 0;
+        padding: 0; 
+      }
+
+      .Movie-list {
+        color: white;
+        font-family: Monte;
+        font-size: 10px;
+        text-align: center;
+        margin-top: 30px;
+      }
+
+      .yes-btn {
+        padding: 15px 50px;
+        position: relative;
+        background: transparent;
+        color: #fff;
+        font-size: 18px;
+        transition: .5s;
+        line-height: 20px;
+        border-radius: 3px;
+        border: 1px solid lightgreen;
+        font-family: Monte;
+        font-weight: 400;
+        text-decoration: none;
+        top: 10px;
+        left: 40%;
+    }
+    .yes-btn:hover{
+        color: rgb(54, 241, 30);
+        -webkit-box-shadow: 0px 0px 58px -8px rgb(14, 156, 73);
+        -moz-box-shadow: 0px 0px 58px -8px rgb(12, 134, 77);
+        box-shadow: 0px 0px 58px -8px rgb(9, 114, 65);
+    }
+    
+    .no-btn {
+        padding: 15px 50px;
+        position: relative;
+        background: transparent;
+        color: #fff;
+        font-size: 18px;
+        transition: .5s;
+        line-height: 20px;
+        border-radius: 3px;
+        border: 1px solid red;
+        font-family: Monte;
+        font-weight: 400;
+        text-decoration: none;
+        top: 10px;
+        left: 44%;
+    }
+    
+    .no-btn:hover{
+        color: rgba(240,5,5,1);
+        -webkit-box-shadow: 0px 0px 58px -8px rgba(240,5,5,1);
+        -moz-box-shadow: 0px 0px 58px -8px rgba(240,5,5,1);
+        box-shadow: 0px 0px 58px -8px rgba(240,5,5,1);
+    }
