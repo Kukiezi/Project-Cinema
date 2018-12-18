@@ -47,7 +47,7 @@ public async componentDidMount() {
 
       <Fade>
       <div className="Day-header">        
-        <div className="Days" ><br/><br/><NavLink className="day-btn" to="/Repertuar" >Dzisiaj</NavLink> <NavLink className="dayoff-btn" to="/Repertuar/1" >Śr</NavLink>  <NavLink className="dayoff-btn" to="/Repertuar/1" >Czw</NavLink>  <NavLink className="dayoff-btn" to="/Repertuar/1" >Pt</NavLink>  <NavLink className="dayoff-btn" to="/Repertuar/1" >Sob</NavLink>  <NavLink className="dayoff-btn" to="/Repertuar/1" >Nie</NavLink> <br/></div>
+        <div className="Days" ><br/><br/><NavLink className="day-btn" to="/Repertuar" >Dzisiaj</NavLink> <NavLink className="day-btn" to="/Repertuar/1" >Śr</NavLink>  <NavLink className="day-btn" to="/Repertuar/1" >Czw</NavLink>  <NavLink className="day-btn" to="/Repertuar/1" >Pt</NavLink>  <NavLink className="day-btn" to="/Repertuar/1" >Sob</NavLink>  <NavLink className="day-btn" to="/Repertuar/1" >Nie</NavLink> <br/></div>
        </div>
        </Fade>
     

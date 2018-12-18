@@ -55,7 +55,7 @@
 
 }
 
-.day-btn {
+.day-btn:focus {
     padding: 10px 15px;
     position: static;
     background: transparent;
@@ -71,7 +71,7 @@
     top: 10%;
 
 }
-.dayoff-btn {
+.day-btn {
     padding: 10px 15px;
     position: static;
     background: transparent;
