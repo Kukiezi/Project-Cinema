@@ -1,0 +1,309 @@
+.news-btn{
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
+    font-family: Monte;
+  }
+
+  .mews-desc{
+    padding: 50px 0;
+    font-size: 25px;
+    font-weight: 900;
+    text-align: center;
+    display: block;
+  }
+
+html{
+    height: 100%;
+    box-sizing: border-box;
+  }
+  
+  body{
+    position: relative;
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
+    background-color: black;
+  }
+  
+  .App {
+    text-align: center;
+    background-color: black;
+    height: 100%;
+  }
+  
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
+  }
+  
+  .App-header {
+    background-color: #85144B;
+    height: 150px;
+    padding: 20px;
+    color: white;
+  }
+  
+  .App-intro{
+    color: white;
+    font-family: MonteBold;
+    font-size: 50px;
+  }
+  
+  .App-title {
+    font-size: 50px;
+   font-family: MonteBold;
+   color: white;
+  }
+  
+  .Movie-list {
+    color: white;
+    font-family: Monte;
+    font-size: 10px;
+    
+  }
+  
+  
+  .text-left{
+    text-align: center;
+  }
+  
+  .img__wrap {
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    height: 340.89px;
+    width: 243.66px;
+    display: inline-block;
+    -webkit-box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+    -moz-box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+    box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+  }
+  
+  .img__wrap p{
+    position: relative;
+    font-size:20px;
+    font-family: Monte;
+    bottom: 8px;
+  }
+  
+  .img__description_layer {
+    font-family: Monte;
+    font-size: 30px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background:  linear-gradient(
+      rgba(0, 0, 0, 0.7), 
+      rgba(0, 0, 0, 0.7)
+    );
+    color: #fff;
+    visibility: hidden;
+    opacity: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    /* transition effect. not necessary */
+    transition: opacity .2s, visibility .2s;
+  }
+  
+  .img__description_layer p{
+   font-family: Monte;
+   font-weight: 100;
+   top: 35%;
+  }
+  
+  .desc_layer{
+    font-family: Monte;
+    font-weight: 100;
+    top: 35%;
+    color: white;
+  }
+  
+  .desc_layer:hover{
+    color: red;
+  }
+  
+  .img__wrap:hover .img__description_layer {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .img__description {
+    transition: .2s;
+    transform: translateY(1em);
+  }
+  
+  .img__wrap:hover .img__description {
+    transform: translateY(0);
+  }
+  
+  footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    color: white;
+    height: 30px;
+    background-color: rgb(19, 18, 18);
+    text-align: center;
+  }
+  
+  footer p{
+    margin-top:5px;
+  }
+  
+  .movie-picture img{
+    width: 203.66px;
+    height: 300.89px;
+    position: relative;
+    top: -10px;
+  }
+  
+  @keyframes App-logo-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  @media screen and (max-width: 1479px) {
+    .movie-picture img{
+      width: 148.66px;
+      height: 221.14px;
+    }
+    .img__wrap {
+      padding: 20px;
+      text-align: center;
+      position: relative;
+      height: 261.14px;
+      width: 188.66px;
+      display: inline-block;
+      -webkit-box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+      -moz-box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+      box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+    }
+  
+    .img__wrap a{
+      text-decoration: none;
+    }
+  
+    .img__wrap p{
+      position: relative;
+      font-size:15px;
+      font-family: Monte;
+      bottom: 5px;
+    }
+   
+    }
+  
+    @media screen and (max-width: 1149px) {
+      .movie-picture img{
+        width: 253.66px;
+        height: 350.89px;
+      }
+      .img__wrap {
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        height: 390.89px;
+        width: 293.66px;
+        display: inline-block;
+        -webkit-box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+        -moz-box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+        box-shadow: -1px 7px 73px -37px rgba(255,255,255,1);
+      }
+    
+      .img__wrap p{
+        position: relative;
+        font-size:20px;
+        font-family: Monte;
+        bottom: 8px;
+      }
+     
+      }
+  
+  
+  @font-face {
+    font-family: 'Monte';
+    font-weight: 500;
+    src: url('../../assets/fonts/Montserrat-Regular.ttf');
+  }
+  
+  @font-face {
+    font-family: 'MonteBold';
+    font-weight: 500;
+    src: url('../../assets/fonts/Montserrat-Bold.ttf');
+  }
+  
+  .registration-form-inner, .login-form-inner{
+      padding: 40px;
+  }
+  
+  .form-item > label {
+      padding: 20px 0 5px 0;
+  }
+  
+  .form-title{
+    padding: 20px 0;
+    font-size: 25px;
+    font-weight: 900;
+    text-align: center;
+    display: block;
+  }
+  
+  .registration-btn{
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 130px;
+    color: white;
+    font-family: Monte;
+  
+  }
+  .login-btn{
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    font-family: Monte;
+  }
+  
+  .modal-style{
+    background-color: #22292f;
+    width: 50%;
+    height: 75%;
+    font-family: Monte;
+    position: absolute; 
+    top: 0;
+    right: 0; 
+    bottom: 0; 
+    left: 0; 
+    margin: auto;
+    color: white;
+  }
+  
+  .close-btn{
+    background-color: red;
+    color: white;
+    /* font-size: 13px; */
+    font-style: bold;
+    border-radius: 5px;
+    padding: 4px 4px 4px 4px;
+    position: absolute;
+    top: 8px;
+    right: 20px;
+  }
+  
+  .close-btn:hover{
+    background-color: darkred;
+  }
+  
+  
+  
+  
+  
+  
