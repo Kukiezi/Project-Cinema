@@ -207,6 +207,11 @@ text-align:left;
     font-weight: 400;
 
 }
+
+.comment-form{
+    width: 50%;
+    margin: 0 auto;
+}
   
 @media screen and (max-width: 1718px) {
     .buy-btn:nth-child(3){
