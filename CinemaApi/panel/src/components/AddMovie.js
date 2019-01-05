@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+
 export default class AddMovie extends React.Component {
     state  = {
         "movie": {
@@ -14,7 +15,9 @@ export default class AddMovie extends React.Component {
           "director": "",
           "watchingTime": "",
           "rating": 0
-        }
+        },
+        valid: false,
+        message: "All the fields must be completed!"
       };
     
       constructor(props) {
@@ -33,13 +36,25 @@ export default class AddMovie extends React.Component {
         }
         
         this.setState({ movie: movieCopy});
+        if (movieCopy.title !== "" && movieCopy.description !== "" && movieCopy.picture !== "" && movieCopy.ageRestriction !== "" && movieCopy.icon !== "" && movieCopy.genre !== "" && movieCopy.director !== "" && movieCopy.watchingTime !== "" )
+        {
+            this.setState({
+                valid: true,
+                message: ""
+              });
+         
+        }
+        else{
+            this.setState({
+                valid: false,
+                message: "All the fields must be completed!"
+              });
+        }
+        console.log(this.state.valid);
+        console.log(this.state.movie.director);
     }
 
-    // public async addMovie(){
-    //     await fetch('https://localhost:44371/cinema/AddMovie?id=' + this.state.movie.id + '&title=' + this.state.movie.title + '&description=' + this.state.movie.description + '&picture=' + this.state.movie.picture + '&ageRestriction=' + this.state.movie.ageRestriction + '&picture=' + this.state.movie.picture, {
-    //          method: 'POST'
-    //        });
-    //  }
+ 
 
       addMovies(){
         fetch('https://localhost:44371/cinema/AddMovie', {
@@ -56,6 +71,7 @@ export default class AddMovie extends React.Component {
      
 
        render(){
+        let validState = this.state.valid ? 'button bg-red hover:bg-red-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' : 'button bg-grey hover:bg-grey-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline';
           return(
             <div className="form-inner">
             <h1 className="text-white text-center font-monte mt-4 mb-4 pb-4 border-b border-solid border-red">Dodaj film</h1>
@@ -64,6 +80,7 @@ export default class AddMovie extends React.Component {
                         &laquo; Powrót
                     </NavLink>
                 </div>
+              
                 <div className="inline-block w-1/2 add-form">
                     <div className="add-form-item ">
                         <label htmlFor="title" className="block text-sm font-bold  ml-8 text-white">TYTUŁ</label>
@@ -84,7 +101,7 @@ export default class AddMovie extends React.Component {
                 <div className="inline-block w-1/2 add-form2">
                     <div className="add-form-item2">
                         <label htmlFor="ageRestriction" className="block text-sm font-bold  text-white">OGRANICZENIA WIEKOWE</label>
-                        <input onChange={this.onChange} placeholder="Podaj ograniczenie "  id="ageRestriction" type="ageRestriction" name="ageRestriction" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
+                        <input onChange={this.onChange} placeholder="Podaj ograniczenie "  id="ageRestriction" type="text" pattern="[0-9]*" name="ageRestriction" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
                     </div>
                     
                     <div className="add-form-item2 ">
@@ -110,7 +127,8 @@ export default class AddMovie extends React.Component {
                     </div>
                     
                     <div className="text-center pt-4">
-                        <button onClick={this.addMovies} className="button bg-red hover:bg-red-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Zapisz</button>
+                        <label className="block text-sm font-bold  text-red">{this.state.message}</label><br/>
+                        <button onClick={this.addMovies} disabled={!this.state.valid} className={validState}>Zapisz</button>
                     </div>
                 </div>
          </div>
