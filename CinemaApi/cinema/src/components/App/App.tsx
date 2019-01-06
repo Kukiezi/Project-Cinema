@@ -38,7 +38,7 @@ public render() {
 //     try{
 //       const {exp} = decode(refreshToken);
 
-//       if (exp < new Date().getTime()){
+//       if (exp < new Date().getTime() / 1000){
 //         return false;
 //       }
 //     } catch (e){

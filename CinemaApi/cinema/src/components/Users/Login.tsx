@@ -3,20 +3,21 @@ import 'src/assets/css/Spinner.css';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { NavLink } from 'react-router-dom';
 import Modal from 'react-modal';
-
-
+import * as jwtDecode from 'jwt-decode';
 
 class Login extends React.Component<any, any> {
     constructor(props:any){
         super(props)
-
+        this.onChange = this.onChange.bind(this);
+        this.performLogin = this.performLogin.bind(this);
+        this.logState = this.logState.bind(this);
         this.state = {
             isActive: false,
             credentials:{
                 login: "",
-                password:""
-            }
-         
+                password:"",
+            },
+            res: []
     }
 }
 
@@ -31,23 +32,34 @@ class Login extends React.Component<any, any> {
     }
 
     
-    public performLogin(){
-        fetch('https://localhost:44371/api/login', {
+    public async performLogin(){
+        await fetch('https://localhost:44371/api/login', {
             method: 'post',
             headers: {
               'Accept': 'application/json, text/plain, */*',
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({usernameOrEmail: this.state.credentials.login, password: this.state.credentials.password})
-          }).then(res=>res.json())
-            .then(res => console.log(res));
-     }
+          }).then(res2=>res2.json())
+            // .then(res2 => console.log(res2))
+            .then(res2 => this.setState({res: res2}));
+
+            const decoded: string = jwtDecode(this.state.res.response.token)
+            console.log(this.state.res)
+            console.log(this.state.res.response.token);
+           
+            console.log(decoded);
+        }
+
+        public logState(){
+            console.log(this.state.res);
+        }
+            
 
      public onChange = (e: React.FormEvent<HTMLInputElement>) => {
       
         const credentialsCopy = JSON.parse(JSON.stringify(this.state.credentials));
         credentialsCopy[e.currentTarget.name] = e.currentTarget.value;
-        console.log(credentialsCopy);
         this.setState({ credentials: credentialsCopy});
     }
 
@@ -59,7 +71,7 @@ class Login extends React.Component<any, any> {
                 <Modal className="modal-style"isOpen={this.state.isActive} onRequestClose={this.toggleModal}>
                 <div className="form-inner">
                     <h2 className="form-title">Logowanie</h2>
-                    <form>
+                
                         <button className="close-btn" onClick={this.toggleModal}>x</button>
                         <div className="form-item">
                             <label htmlFor="email-id" className="block text-sm font-bold mb-2">EMAIL</label>
@@ -75,7 +87,7 @@ class Login extends React.Component<any, any> {
                         {/* <div className="form-description text-center pt-16">
                             <NavLink to="/ResetPassword" className="no-underline hover:text-red-dark text-white font-bold focus:outline-none focus:shadow-outline ">Zapomniałeś/aś hasła?</NavLink>
                         </div> */}
-                    </form>
+                 
                  </div>
                  </Modal>
             </div>
