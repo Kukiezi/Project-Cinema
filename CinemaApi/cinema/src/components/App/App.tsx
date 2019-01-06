@@ -28,25 +28,25 @@ class App extends React.Component<any, any> {
 public render() {
 
 
-  // const checkAuth = () => {
-  //   const token = localStorage.getItem('token');
-  //   const refreshToken = localStorage.getItem('refreshToken');
-  //   if (!token || !refreshToken){
-  //     return false;
-  //   }
+//   const checkAuth = () => {
+//     const token = localStorage.getItem('token');
+//     const refreshToken = localStorage.getItem('refreshToken');
+//     if (!token || !refreshToken){
+//       return false;
+//     }
 
-  //   try{
-  //     const {exp} = decode(refreshToken);
+//     try{
+//       const {exp} = decode(refreshToken);
 
-  //     if (exp < new Date().getTime()){
-  //       return false;
-  //     }
-  //   } catch (e){
-  //     return false;
-  //   }
+//       if (exp < new Date().getTime()){
+//         return false;
+//       }
+//     } catch (e){
+//       return false;
+//     }
 
-  //   return true
-  // }
+//     return true
+//   }
 
 //  const AuthRoute = ({ component: Component, ...rest } : any) => (
 //    <Route {...rest} render={props => (
