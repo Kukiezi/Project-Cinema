@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity;
 
 namespace CinemaApi.Models
 {
-    public partial class UserAccount
+    public partial class UserAccount : IdentityUser
     {
         public UserAccount()
         {
