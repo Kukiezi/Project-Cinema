@@ -35,15 +35,15 @@ public render() {
 //       return false;
 //     }
 
-//     try{
-//       const {exp} = decode(refreshToken);
+    // try{
+    //   const {exp} = decode(refreshToken);
 
-//       if (exp < new Date().getTime() / 1000){
-//         return false;
-//       }
-//     } catch (e){
-//       return false;
-//     }
+    //   if (exp < new Date().getTime() / 1000){
+    //     return false;
+    //   }
+    // } catch (e){
+    //   return false;
+    // }
 
 //     return true
 //   }

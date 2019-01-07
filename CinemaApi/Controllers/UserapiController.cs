@@ -70,13 +70,19 @@ namespace CinemaApi.Controllers
         {
             // TODO: Localize all strings
             // The message when we fail to login
-            var invalidErrorMessage = "Please provide all required details to register for an account";
-
+            var invalidErrorMessage = "Prosze wypełnić wszystkie pola do zarejestrowania się";
+            var invalidConfirmPassword = "Hasło i Powtórz Hasło nie zgadzają się ze sobą";
             // The error response for a failed login
             var errorResponse = new ApiResponse<RegisterResultApiModel>
             {
                 // Set error message
                 ErrorMessage = invalidErrorMessage
+            };
+
+            var errorResponse2 = new ApiResponse<RegisterResultApiModel>
+            {
+                // Set error message
+                ErrorMessage = invalidConfirmPassword
             };
 
             // If we have no credentials...
@@ -85,9 +91,12 @@ namespace CinemaApi.Controllers
                 return errorResponse;
 
             // Make sure we have a user name
-            if (string.IsNullOrWhiteSpace(registerCredentials.Username))
+            if (string.IsNullOrWhiteSpace(registerCredentials.Username) || string.IsNullOrWhiteSpace(registerCredentials.FirstName) || string.IsNullOrWhiteSpace(registerCredentials.LastName) || string.IsNullOrWhiteSpace(registerCredentials.Password) || string.IsNullOrWhiteSpace(registerCredentials.Email))
                 // Return error message to user
                 return errorResponse;
+
+            if (registerCredentials.Password != registerCredentials.ConfirmPassword)
+                return errorResponse2;
 
             // Create the desired user from the given details
             var user = new ApplicationUser
@@ -144,7 +153,7 @@ namespace CinemaApi.Controllers
         {
             // TODO: Localize all strings
             // The message when we fail to login
-            var invalidErrorMessage = "Invalid username or password";
+            var invalidErrorMessage = "Niepoprawny login lub hasło";
 
             // The error response for a failed login
             var errorResponse = new ApiResponse<UserProfileDetailsApiModel>

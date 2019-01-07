@@ -244,8 +244,6 @@ footer p{
   right: 130px;
   color: white;
   font-family: Monte;
- 
-
 }
 
 .white-hr {
@@ -256,20 +254,31 @@ footer p{
   margin: 1em 0;
   padding: 0; 
 }
+
 .login-btn{
-  display: block;
-  position: absolute;
-  top: 10px;
-  right: 10px;
   color: white;
   font-family: Monte;
 } 
 
 
-.modal-style{
+.modal-register{
   background-color: #22292f;
   width: 50%;
-  height: 75%;
+  height: 90%;
+  font-family: Monte;
+  position: absolute; 
+  top: 0;
+  right: 0; 
+  bottom: 0; 
+  left: 0; 
+  margin: auto;
+  color: white;
+}
+
+.modal-login{
+  background-color: #22292f;
+  width: 50%;
+  height: 50%;
   font-family: Monte;
   position: absolute; 
   top: 0;
@@ -296,7 +305,15 @@ footer p{
   background-color: darkred;
 }
 
+.user-options{
+   position: relative;
+  left: 26%;
+ 
+}
 
+.error-label{
+  width: 300px;
+}
 
 
 

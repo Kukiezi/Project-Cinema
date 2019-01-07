@@ -34,6 +34,10 @@ namespace CinemaApi.Models.UserModels
         /// </summary>
         public string Password { get; set; }
 
+        /// <summary>
+        /// The users confirm password
+        /// </summary>
+        public string ConfirmPassword { get; set; }
         #endregion
 
         #region Constructor
