@@ -52,7 +52,7 @@ namespace CinemaApi.Controllers
 
             var screeningExist = ScreeningExists(screenings.IdScreening);
             if (screeningExist)
-                return Ok("EVENT ALREADY EXISTS");
+                return Ok("SCREENING ALREADY EXISTS");
 
             context.SaveChanges();
             return Ok(screenings);

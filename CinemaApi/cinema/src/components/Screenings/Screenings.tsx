@@ -1,8 +1,7 @@
 import * as React from 'react';
-import './MovieSchedule.css';
+import '../Events/Events.css';
+import Screening from '../Screenings/Screening';
 import './Screening.css';
-// import MovieSchedule from './MovieSchedule';
-
 
 
 
@@ -29,10 +28,11 @@ class Screenings extends React.Component<any, IState>{
         return(
             <div className="form">
                 <div className="inner">
+                <div className="p-8 List-header">Repetuar</div>
                     <div className="list-of-events" id="list-of-events">
 
                         {this.state.screenings.map(screening => 
-                            <Screenings key={screening.idScreening} screenings={screening}/>)}
+                            <Screening key={screening.idScreening} screening={screening}/>)}
                         
                     
                     </div>
@@ -48,10 +48,10 @@ class Screenings extends React.Component<any, IState>{
 export default Screenings;
 
 export interface IState {
- screenings: IScreenings[]
+ screenings: IScreening[]
 }
 
-export interface IScreenings {
+export interface IScreening {
   idScreening: number,
-  ScreeningDate: Date,
+  screeningDate: Date,
 }

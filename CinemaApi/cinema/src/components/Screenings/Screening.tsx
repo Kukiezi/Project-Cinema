@@ -1,6 +1,6 @@
 import * as React from 'react';
 import 'src/assets/css/App.css';
-import './MovieSchedule.css';
+import './Screening.css';
 import Fade from '../App/Fade';
 import Movies from '../Movies/Movies';
 import 'src/assets/css/Spinner.css';
@@ -10,7 +10,7 @@ import { NavLink } from 'react-router-dom';
 
 
 
-class MovieSchedule extends React.Component<any, IState> {
+class Screening extends React.Component<any, IState> {
 
   public state: IState = {
     "movies": []
@@ -68,7 +68,7 @@ public async componentDidMount() {
   }
 }
 
-export default MovieSchedule;
+export default Screening;
 export interface IState {
   movies: IMovies[]
 }
@@ -84,3 +84,58 @@ export interface IMovies {
   director: string,
   
 }
+
+/*import * as React from "react";
+import '../Events/Events.css'
+import Modal from 'react-modal';
+
+
+
+export default class MovieSchedule extends React.Component<any, any>{
+
+    constructor(props:any) {
+        super(props)
+
+        this.state = {
+            isActive: false
+        }
+    }  
+    
+    
+    public componentWillMount(){
+        Modal.setAppElement('body');
+    }
+
+    public toggleModal = () => {
+        this.setState({
+            isActive:!this.state.isActive
+        })
+    }
+
+    public render(){
+
+        return(
+            <div className='event-wrap'>
+                <div className='event-details'>
+                <button className="details-btn text-sm" onClick={this.toggleModal}>Zobacz szczegóły</button>
+                <Modal className='modal-style' isOpen={this.state.isActive} onRequestClose={this.toggleModal}>
+                    
+                    <button className="details-btn-inner text-sm"onClick={this.toggleModal}>Zamknij</button>
+                   
+                    <div className="event-more-details">
+                        <div className="date">
+                            <h3>Kiedy?<br/></h3>
+                            {this.props.screening.screeningDate}
+                        </div>
+                    </div>
+                    <button className="sign-in-btn text-lg">Zapisz się</button>
+                    
+                    
+                </Modal>
+            </div>
+                          
+            </div>
+        );
+    }
+    
+}*/

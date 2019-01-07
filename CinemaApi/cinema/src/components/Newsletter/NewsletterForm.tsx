@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import PropTypes from 'prop-types';
 import validator from 'validator';
 import { Form, Input, Button, Icon } from 'antd';
@@ -26,4 +26,4 @@ NewsletterForm.propTypes = {
   handleOnChangeEmail: PropTypes.func.isRequired
 }
 
-export default NewsletterForm;
+export default NewsletterForm;*/
