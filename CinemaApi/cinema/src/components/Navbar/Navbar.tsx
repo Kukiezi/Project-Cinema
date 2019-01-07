@@ -6,6 +6,8 @@ import { NavLink } from 'react-router-dom';
 import Registration from '../Users/Registration';
 import Login from '../Users/Login';
 import Newsletter from '../Newsletter/Newsletter';
+import UserOptions from '../Users/UserOptions';
+import Logout from '../Users/Logout';
 
 class Navbar extends React.Component<any, IState>{
 
@@ -17,7 +19,26 @@ class Navbar extends React.Component<any, IState>{
     super(props);
   }
 
+
   public render() {
+    function CheckUser(){
+      let isUserLogged = false;
+  
+      const userStorage = localStorage.getItem("User");
+    
+     
+      if (userStorage != null){
+        isUserLogged = true;
+      }
+        if (isUserLogged) {
+          return     <><Logout/><UserOptions/></>;
+        }
+        else{
+          return   <><Login/><Registration/></>;  
+         
+        }
+    }
+ 
 
     return (
 
@@ -30,9 +51,9 @@ class Navbar extends React.Component<any, IState>{
             <NavLink to="/Repertuar" className="block no-underline mt-4 lg:inline-block lg:mt-0 text-white mr-6">Repertuar</NavLink>
             <NavLink to="/Events" className="block no-underline mt-4 lg:inline-block lg:mt-0 text-white mr-6">Wydarzenia</NavLink>
             <NavLink to="/AdminPanel" className="block mt-4 no-underline lg:inline-block lg:mt-0 text-white mr-6">Administracja</NavLink>
+            <CheckUser/>
             <Newsletter/>
-            <Registration/>
-            <Login/>
+     
           </div>
           </Fade>
         </div>

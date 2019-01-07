@@ -1,16 +1,12 @@
 import * as React from 'react';
 import 'src/assets/css/App.css'
-import { Route, Switch} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 // import Fade from './Fade';
 import Footer from '../HomePage/Footer';
 import Home from "../HomePage/Home";
 import Details from "../Movies/Details";
 import NotExist from "./NotExist";
 import Navbar from '../Navbar/Navbar';
-
-import { library } from '@fortawesome/fontawesome-svg-core'
-
-import { faTicketAlt } from '@fortawesome/free-solid-svg-icons'
 import ReserveTicket from '../Reservations/ReserveTicket';
 import ResetPassword from '../Users/ResetPassword';
 
@@ -24,13 +20,43 @@ import { AddMovie } from '../AdminPanel/Movies/AddMovie';
 import { DeleteMovie } from '../AdminPanel/Movies/DeleteMovie';
 
 import MovieSchedule from '../MovieSchedule/MovieSchedule';
+// import decode from 'jwt-decode';
 
 class App extends React.Component<any, any> {
 
 
 public render() {
-  library.add(faTicketAlt);
 
+
+//   const checkAuth = () => {
+//     const token = localStorage.getItem('token');
+//     const refreshToken = localStorage.getItem('refreshToken');
+//     if (!token || !refreshToken){
+//       return false;
+//     }
+
+    // try{
+    //   const {exp} = decode(refreshToken);
+
+    //   if (exp < new Date().getTime() / 1000){
+    //     return false;
+    //   }
+    // } catch (e){
+    //   return false;
+    // }
+
+//     return true
+//   }
+
+//  const AuthRoute = ({ component: Component, ...rest } : any) => (
+//    <Route {...rest} render={props => (
+//      checkAuth() ? (
+//        <Component {...props} />
+//      ) : (
+//        <Redirect to={{ pathname: '/login'}} />
+//      )
+//    )} />
+//  )
 
   return(
 
@@ -50,6 +76,7 @@ public render() {
      <Route path="/Events" component={Events}/>
      <Route path="/Repertuar" component={MovieSchedule}/>
      <Route component={NotExist}/>
+     {/* <AuthRoute exact path="/auth" component={Auth}/> */}
     </Switch>
     <Footer footer={"2018"}/>
     

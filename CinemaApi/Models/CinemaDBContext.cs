@@ -1,14 +1,12 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CinemaApi.Models
 {
-    public partial class CinemaDBContext : DbContext
+    public class CinemaDBContext : IdentityDbContext<ApplicationUser>
     {
-        public CinemaDBContext()
-        {
-        }
 
         public CinemaDBContext(DbContextOptions<CinemaDBContext> options)
             : base(options)
@@ -34,6 +32,7 @@ namespace CinemaApi.Models
  
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<CulturalEvent>(entity =>
             {
                 entity.HasKey(e => e.IdCulturalEvent);
