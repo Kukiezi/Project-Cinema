@@ -39,14 +39,28 @@ export default class MovieManagment extends React.Component{
               
                 
                 <div className="Movie-list" id="Movie-list"> 
-         
-                   {this.state.movies.map(movie => 
-                             <Movies key={movie.id} movie={movie}/>)}
+                    <table>
+                        <tr>
+                            <th/>
+                            <th>Tytuł</th>
+                            <th>Zarządzaj</th>
+                        </tr>
+                        <tr>
+                            <td>{this.state.movies.map(movie => 
+                             <Movies key={movie.id} movie={movie}/>)}</td>
+                        </tr>
+                        <tr>
+                            <td>Edytuj | Usuń</td>
+                        </tr>
+                   {/* {this.state.movies.map(movie => 
+                             <Movies key={movie.id} movie={movie}/>)} */}
+                    </table>
                 </div>
 
             </div>
         
         )
+
 
         
     }

@@ -110,7 +110,7 @@ export default class AddMovie extends React.Component {
                     </div>
                 </div>
 
-                <div className="text-center w-3/5 ml-auto mr-auto">
+                <div className="text-center w-3/5 ml-auto mr-auto align-content: center">
                     <div className="add-form-item">
                         <label htmlFor="picture" className="block text-sm font-bold  mt-4 text-white ">ZDJĘCIE</label>
                         <input onChange={this.onChange} placeholder="Podaj link do zdjęcia "  id="picture" type="picture" name="picture" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
