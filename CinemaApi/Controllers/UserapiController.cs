@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using CinemaApi.Models;
 using CinemaApi.Models.Error;
+using CinemaApi.Models.Tokens;
 using CinemaApi.Models.UserModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -128,7 +130,8 @@ namespace CinemaApi.Controllers
                         LastName = userIdentity.LastName,
                         Email = userIdentity.Email,
                         Username = userIdentity.UserName,
-                        Token = userIdentity.GenerateJwtToken()
+                        Token = userIdentity.GenerateJwtToken(),
+                        RefreshToken = userIdentity.GenerateJwtRefreshToken()
                     }
                 };
             }
@@ -213,7 +216,52 @@ namespace CinemaApi.Controllers
                     LastName = user.LastName,
                     Email = user.Email,
                     Username = user.UserName,
-                    Token = user.GenerateJwtToken()
+                    Token = user.GenerateJwtToken(),
+                    RefreshToken = user.GenerateJwtRefreshToken()
+                }
+            };
+        }
+
+        [AllowAnonymous]
+        [Route("refresh")]
+        public async Task<ApiResponse<TokenModel>> RefreshToken(
+          [FromBody] TokenModel tokenModel)
+        {
+            // TODO: Localize all strings
+            // The message when we fail to login
+            var invalidErrorMessage = "Niepoprawny login lub hasło";
+
+            // The error response for a failed login
+            var errorResponse = new ApiResponse<TokenModel>
+            {
+                // Set error message
+                ErrorMessage = invalidErrorMessage
+            };
+
+            // Make sure we have a user name
+            if (tokenModel.Token == null || tokenModel.RefreshToken == null)
+                // Return error message to user
+                return errorResponse;
+
+            // Validate if the user credentials are correct...
+
+            // Is it an email?
+            var handler = new JwtSecurityTokenHandler();
+            var accesToken = handler.ReadToken(tokenModel.Token) as JwtSecurityToken;
+            var refreshToken = handler.ReadToken(tokenModel.Token) as JwtSecurityToken;
+            //var user = accesToken.Claims.First(claim => claim.Type == "jti").Value;
+            // Find by email
+            //await mUserManager.FindByEmailAsync(tokenS.);
+
+           
+            // Return token to user
+            return new ApiResponse<TokenModel>
+            {
+                // Pass back the user details and the token
+                Response = new TokenModel
+                {
+                    Token = "22222",
+                    RefreshToken = "333"
                 }
             };
         }

@@ -16,6 +16,12 @@ namespace CinemaApi.Models.UserModels
         public string Token { get; set; }
 
         /// <summary>
+        /// The refresh token used to refresh authentication token when it expires
+        /// </summary>
+        /// <remarks>The Token is only provided when called from the login methods</remarks>
+        public string RefreshToken { get; set; }
+
+        /// <summary>
         /// The users first name
         /// </summary>
         public string FirstName { get; set; }

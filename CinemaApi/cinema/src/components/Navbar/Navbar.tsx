@@ -8,6 +8,7 @@ import Login from '../Users/Login';
 import Newsletter from '../Newsletter/Newsletter';
 import UserOptions from '../Users/UserOptions';
 import Logout from '../Users/Logout';
+import decode from 'jwt-decode';
 
 class Navbar extends React.Component<any, IState>{
 
@@ -19,12 +20,44 @@ class Navbar extends React.Component<any, IState>{
     super(props);
   }
 
+  public componentDidMount(){
+    try{
+    const userStorage = localStorage.getItem("User");
+      if (userStorage !== null){
+        const user = JSON.parse(userStorage);
+        console.log(userStorage);
+        const { exp } = decode(user.response.token);
+        console.log(exp);
+        if (exp < new Date().getTime() / 1000){
+          this.refreshToken(user);
+        }
+      }
+    } catch (e){
+      return false;
+    }
+    return true;
+}
+
+public async refreshToken(user: any){
+  await fetch('https://localhost:44371/api/refresh', {
+    method: 'post',
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({token: user.response.token, refreshToken: user.response.refreshToken})
+  }).then(res2=>res2.json())
+     .then(res2 => console.log(res2))
+}
+
 
   public render() {
     function CheckUser(){
       let isUserLogged = false;
-  
+      
       const userStorage = localStorage.getItem("User");
+    
+      
     
      
       if (userStorage != null){
