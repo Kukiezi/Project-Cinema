@@ -21,11 +21,24 @@ public async componentDidMount() {
   const movies = await result.json();
   this.setState({ movies });
    }
+
+   public dim(bool: any){
+    if (typeof bool==='undefined') {bool=true;} // so you can shorten dim(true) to dim()
+    const dimmer = document.getElementById('dimmer');
+    if (dimmer !== null){
+          dimmer.style.display=(bool?'block':'none');
+    }
+}    
+
    
   public render() {
+    this.dim(false);
     return (
       
       <div className="App">
+      <div id="dimmer">
+      <div className="lds-ring-login"><div /><div /><div /><div /></div>
+      </div>
         
         <Fade>
         <Slider/>
@@ -44,8 +57,8 @@ public async componentDidMount() {
                         <Movies key={movie.id} movie={movie}/>)}
       </div>
       </Fade>
-
       </div>
+      
     );
   }
 }
