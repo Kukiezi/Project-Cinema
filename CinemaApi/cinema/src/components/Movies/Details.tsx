@@ -8,8 +8,6 @@ import './Rating.css'
 import Reviews from '../Movies/Reviews'
 
 
-
-
 class Details extends React.Component<any, IState> {
 
   public state: IState = {
@@ -41,6 +39,7 @@ class Details extends React.Component<any, IState> {
     super(props);
     this.onChangeReview = this.onChangeReview.bind(this);
     this.addReview = this.addReview.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   public onChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -60,7 +59,8 @@ class Details extends React.Component<any, IState> {
         checkSmiley[j].style.display = "none";
     }
     
-    for(let k=checkCount; k<checkValue.length; k++){
+    for(let k=checkCount; k<checkValue.length-1; k++){
+      console.log(k)
         checkValue[k].checked = false;
         checkStar[k].className = "check"
         checkSmiley[k].style.display = "none";	
@@ -174,8 +174,7 @@ public async setReviews(){
       {this.state.reviews.map(review => 
                         <Reviews key={review.idReview} review={review}/>)}
       </div>
-      console.log("not null");
-      console.log(this.state.reviews.length);
+
     }
     else{
       reviewCheck =   <div className="reviews comment-form"> <br/><br/>
