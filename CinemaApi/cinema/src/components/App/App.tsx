@@ -20,6 +20,7 @@ import { AddMovie } from '../AdminPanel/Movies/AddMovie';
 import { DeleteMovie } from '../AdminPanel/Movies/DeleteMovie';
 
 import MovieSchedule from '../MovieSchedule/MovieSchedule';
+import UserProfil from '../Users/UserProfil';
 // import decode from 'jwt-decode';
 
 class App extends React.Component<any, any> {
@@ -75,6 +76,7 @@ public render() {
      <Route path="/Reservation/:Reserved" component={Reservation}/>
      <Route path="/Events" component={Events}/>
      <Route path="/Repertuar" component={MovieSchedule}/>
+     <Route path="/UserProfil" component={UserProfil}/>
      <Route component={NotExist}/>
      {/* <AuthRoute exact path="/auth" component={Auth}/> */}
     </Switch>

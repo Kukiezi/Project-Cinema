@@ -15,7 +15,7 @@
     position: fixed;
     font-family: Monte;
     bottom: 0;
-    top: 66px;
+    top: 70px;
     
 }
 
@@ -141,14 +141,14 @@
     top: 20px;
 }
 
-/* .event-more-details{
- 
-} */
-
-.date{
-
+ .event-more-details{
     display:inline-block;
 } 
+
+/* .date{
+
+    
+}  */
 
 
 

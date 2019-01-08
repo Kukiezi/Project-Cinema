@@ -43,10 +43,11 @@
     position: absolute;
     width: 40x;
     height: 40px;
-    top: 85%;
+    top: 50%;
     left: 50%;
     margin-top: -32px; /*set to a negative number 1/2 of your height*/
     margin-left: -32px; /*set to a negative number 1/2 of your width*/
+   
   }
   .lds-ring-login div {
     box-sizing: border-box;
@@ -83,7 +84,7 @@
     position: absolute;
     width: 40x;
     height: 40px;
-    top: 95%;
+    top: 50%;
     left: 50%;
     margin-top: -32px; /*set to a negative number 1/2 of your height*/
     margin-left: -32px; /*set to a negative number 1/2 of your width*/

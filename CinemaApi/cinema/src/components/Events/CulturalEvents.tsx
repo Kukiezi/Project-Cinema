@@ -45,10 +45,10 @@ export default class CulturalEvents extends React.Component<any, any>{
                         {this.props.culturalevent.eventDescription}
                     </div>
                     <div className="event-more-details">
-                        <div className="date">
+                        {/* <div className="date">
                             <h3>Kiedy?<br/></h3>
                             {this.props.culturalevent.eventDate}
-                        </div>
+                        </div> */}
                         <div className="seats">
                             <h3>Liczba miejsc:<br/></h3>
                             {this.props.culturalevent.seatsLimit}

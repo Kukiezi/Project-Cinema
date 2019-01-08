@@ -39,9 +39,9 @@ class Login extends React.Component<any, any> {
         })
     }
 
-    
     public async performLogin(){
         this.setState({loading: true});
+        // await this.dim(true);
         await fetch('https://localhost:44371/api/login', {
             method: 'post',
             headers: {
@@ -66,6 +66,7 @@ class Login extends React.Component<any, any> {
                 if (this.state.res.errorMessage !== null){
                     console.log(this.state.res.errorMessage);
                     this.setState({message: this.state.res.errorMessage, loading: false});
+                  
                     return false;
                 }
                 const { exp } = decode(this.state.res.response.token)
@@ -111,12 +112,21 @@ class Login extends React.Component<any, any> {
         this.setState({ credentials: credentialsCopy});
     }
 
+    public dim(bool: any){
+        if (typeof bool==='undefined') {bool=true;} // so you can shorten dim(true) to dim()
+        const dimmer = document.getElementById('dimmer');
+        if (dimmer !== null){
+              dimmer.style.display=(bool?'block':'none');
+        }
+    }    
+
     public render() {
         let content;
         if (this.state.loading) {
-            content = <div className="lds-ring-login"><div /><div /><div /><div /></div>
+            this.dim(true);
           }
           else{
+              this.dim(false);
               content = <label className="error-label font-bold text-red">{this.state.message}</label>
           }
       

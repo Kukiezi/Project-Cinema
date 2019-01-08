@@ -96,14 +96,23 @@ class Registration extends React.Component<any, any> {
         console.log(credentialsCopy);
     }
 
+    public dim(bool: any){
+        if (typeof bool==='undefined') {bool=true;} // so you can shorten dim(true) to dim()
+        const dimmer = document.getElementById('dimmer');
+        if (dimmer !== null){
+              dimmer.style.display=(bool?'block':'none');
+        }
+    }  
+
     public render() {
         let content;
         if (this.state.loading) {
-            content = <div className="lds-ring-register"><div /><div /><div /><div /></div>
+            this.dim(true);
           }
-          else{
-              content = <label className="error-label font-bold text-red">{this.state.message}</label>
-          }
+        else{
+            this.dim(false);
+            content = <label className="error-label font-bold text-red">{this.state.message}</label>
+        }         
         return (
            
                 <>
