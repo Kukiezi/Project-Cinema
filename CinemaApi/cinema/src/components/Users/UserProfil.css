@@ -1,0 +1,57 @@
+.form{
+    display: flex;
+    justify-content: center
+}
+
+.inner{
+    
+    width: 70%;
+    color: white;
+    background-color: black;
+    position: fixed;
+    font-family: Monte;
+    bottom: 0;
+    top: 70px;   
+}
+
+.profile{
+    height:150px;
+    text-align: center;
+    color:white;
+
+}
+
+.username{
+    font-size: 40px;
+    position: absolute;
+    top:60px;
+    right: 70px;
+    border-bottom: 1px solid red;
+}
+
+.menu{
+    text-align: center;
+    width: 100%;
+  border-bottom: 1px solid red;
+} 
+
+.menu-details{
+
+    padding: 8px 5px;
+    text-align: center;
+    color: white;
+    font-size: 20px;
+    font-family: Monte;  
+    display: inline-block; 
+    padding: 15px 120px 15px 120px;
+    
+}
+/* 
+.info{
+
+} */
+/* 
+.menu-details:active{
+
+} */
+

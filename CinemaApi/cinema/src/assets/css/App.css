@@ -223,7 +223,8 @@ footer p{
 }
 
 .form-inner{
-    padding: 40px;
+    padding: 15px 40px 15px 40px;
+
 }
 
 .form-item > label {
@@ -265,7 +266,8 @@ footer p{
 .modal-register{
   background-color: #22292f;
   width: 50%;
-  height: 90%;
+  max-height: 80vh;
+  /* height: 90%; */
   font-family: Monte;
   position: absolute; 
   top: 0;
@@ -274,12 +276,14 @@ footer p{
   left: 0; 
   margin: auto;
   color: white;
+  overflow-y: auto;
 }
 
 .modal-login{
   background-color: #22292f;
   width: 50%;
-  height: 50%;
+  max-height: 65vh;
+  /* height: 50%; */
   font-family: Monte;
   position: absolute; 
   top: 0;
@@ -288,6 +292,7 @@ footer p{
   left: 0; 
   margin: auto;
   color: white;
+  overflow-y: auto;
 }
 
 .close-btn{
@@ -307,9 +312,10 @@ footer p{
 }
 
 .user-options{
-   position: relative;
-  left: 26%;
- 
+  position: relative;
+  font-family: Monte;
+  font-size: 20px;
+  top: 5px;
 }
 
 .error-label{
