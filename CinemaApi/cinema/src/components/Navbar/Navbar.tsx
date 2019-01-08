@@ -7,58 +7,23 @@ import Registration from '../Users/Registration';
 import Login from '../Users/Login';
 import Newsletter from '../Newsletter/Newsletter';
 import UserOptions from '../Users/UserOptions';
-import Logout from '../Users/Logout';
-import decode from 'jwt-decode';
+// import Logout from '../Users/Logout';
 
-class Navbar extends React.Component<any, IState>{
 
-  public state: IState = {
-    "user": []
-  };
+class Navbar extends React.Component<any, any>{
 
-  constructor(props: IState) {
+  constructor(props: any) {
     super(props);
-  }
-
-  public componentDidMount(){
-    try{
-    const userStorage = localStorage.getItem("User");
-      if (userStorage !== null){
-        const user = JSON.parse(userStorage);
-        console.log(userStorage);
-        const { exp } = decode(user.response.token);
-        console.log(exp);
-        if (exp < new Date().getTime() / 1000){
-          this.refreshToken(user);
-        }
-      }
-    } catch (e){
-      return false;
+    this.state = {
+      "user": [],
+      "res": []
     }
-    return true;
-}
-
-public async refreshToken(user: any){
-  await fetch('https://localhost:44371/api/refresh', {
-    method: 'post',
-    headers: {
-      'Accept': 'application/json, text/plain, */*',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({token: user.response.token, refreshToken: user.response.refreshToken})
-  }).then(res2=>res2.json())
-     .then(res2 => console.log(res2))
-}
-
+  }
 
   public render() {
     function CheckUser(){
       let isUserLogged = false;
-      
       const userStorage = localStorage.getItem("User");
-    
-      
-    
      
       if (userStorage != null){
         isUserLogged = true;
@@ -71,8 +36,6 @@ public async refreshToken(user: any){
          
         }
     }
- 
-
     return (
 
       <nav className="flex items-center justify-between flex-wrap .bg-black p-4">
@@ -100,11 +63,3 @@ public async refreshToken(user: any){
 
 export default Navbar;
 
-export interface IState {
-  user: IUser[];
-}
-
-export interface IUser {
-  id: number,
-  username: string
-}

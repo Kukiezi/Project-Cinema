@@ -50,12 +50,11 @@ class Login extends React.Component<any, any> {
             },
             body: JSON.stringify({usernameOrEmail: this.state.credentials.login, password: this.state.credentials.password})
           }).then(res2=>res2.json())
-             .then(res2 => console.log(res2))
+            //  .then(res2 => console.log(res2))
             .then(res2 => this.setState({res: res2}));
          
             const tokenState = this.checkToken();
-            const refreshTokenState = this.checkRefreshToken();
-            if (tokenState && refreshTokenState){
+            if (tokenState){
                 await localStorage.setItem("User", JSON.stringify(this.state.res))
                  window.location.reload();
             }
@@ -81,24 +80,7 @@ class Login extends React.Component<any, any> {
               return true;
         }
 
-        public checkRefreshToken(){
-            try{
-                if (this.state.res.errorMessage !== null){
-                    console.log(this.state.res.errorMessage);
-                    this.setState({message: this.state.res.errorMessage, loading: false});
-                    return false;
-                }
-                const { exp } = decode(this.state.res.response.refreshToken)
-                console.log(exp);
-                if (exp < new Date().getTime() / 1000){
-                  return false;
-                }
-              } catch (e){
-                return false;
-              }
-
-              return true;
-        }
+       
 
         public logState(){
             console.log(this.state.res);

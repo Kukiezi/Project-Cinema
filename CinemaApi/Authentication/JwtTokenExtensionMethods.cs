@@ -47,7 +47,7 @@ namespace CinemaApi
                 claims: claims,
                 signingCredentials: credentials,
                 // Expire if not used for 3 months
-                expires: DateTime.Now.AddSeconds(10)
+                expires: DateTime.Now.AddHours(1)
                 );
 
             // Return the generated token

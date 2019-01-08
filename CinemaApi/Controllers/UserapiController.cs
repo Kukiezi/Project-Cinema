@@ -7,6 +7,7 @@ using CinemaApi.Models;
 using CinemaApi.Models.Error;
 using CinemaApi.Models.Tokens;
 using CinemaApi.Models.UserModels;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -131,7 +132,6 @@ namespace CinemaApi.Controllers
                         Email = userIdentity.Email,
                         Username = userIdentity.UserName,
                         Token = userIdentity.GenerateJwtToken(),
-                        RefreshToken = userIdentity.GenerateJwtRefreshToken()
                     }
                 };
             }
@@ -206,6 +206,15 @@ namespace CinemaApi.Controllers
             // Get username
             var username = user.UserName;
 
+            // get user table
+            var userDb = mContext.Users.Where(a => a.Id == user.Id).FirstOrDefault();
+
+            // Generate new refresh token for user
+            if (userDb != null) 
+                userDb.RefreshToken = user.GenerateJwtRefreshToken();
+
+            mContext.SaveChanges();
+
             // Return token to user
             return new ApiResponse<UserProfileDetailsApiModel>
             {
@@ -217,29 +226,40 @@ namespace CinemaApi.Controllers
                     Email = user.Email,
                     Username = user.UserName,
                     Token = user.GenerateJwtToken(),
-                    RefreshToken = user.GenerateJwtRefreshToken()
                 }
             };
         }
 
         [AllowAnonymous]
         [Route("refresh")]
-        public async Task<ApiResponse<TokenModel>> RefreshToken(
+        public async Task<ApiResponse<UserProfileDetailsApiModel>> RefreshToken(
           [FromBody] TokenModel tokenModel)
         {
             // TODO: Localize all strings
             // The message when we fail to login
-            var invalidErrorMessage = "Niepoprawny login lub hasło";
+            var invalidErrorMessage = "Nie możemy odnowić sesji!";
+            var invalidErrorMessage2 = "Coś poszło nie tak";
+            var invalidErrorMessage3 = "Prosimy o ponowne zalogowanie";
 
             // The error response for a failed login
-            var errorResponse = new ApiResponse<TokenModel>
+            var errorResponse = new ApiResponse<UserProfileDetailsApiModel>
             {
                 // Set error message
                 ErrorMessage = invalidErrorMessage
             };
+            var errorResponse2 = new ApiResponse<UserProfileDetailsApiModel>
+            {
+                // Set error message
+                ErrorMessage = invalidErrorMessage2
+            };
+            var errorResponse3 = new ApiResponse<UserProfileDetailsApiModel>
+            {
+                // Set error message
+                ErrorMessage = invalidErrorMessage3
+            };
 
             // Make sure we have a user name
-            if (tokenModel.Token == null || tokenModel.RefreshToken == null)
+            if (tokenModel.Token == null)
                 // Return error message to user
                 return errorResponse;
 
@@ -247,23 +267,48 @@ namespace CinemaApi.Controllers
 
             // Is it an email?
             var handler = new JwtSecurityTokenHandler();
-            var accesToken = handler.ReadToken(tokenModel.Token) as JwtSecurityToken;
-            var refreshToken = handler.ReadToken(tokenModel.Token) as JwtSecurityToken;
-            //var user = accesToken.Claims.First(claim => claim.Type == "jti").Value;
-            // Find by email
-            //await mUserManager.FindByEmailAsync(tokenS.);
+            var handleraccessToken = handler.ReadToken(tokenModel.Token) as JwtSecurityToken;
+            if (handleraccessToken == null)
+                return errorResponse2;
+            
+            var username = handleraccessToken.Claims.First(claim => claim.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name").Value;
+            var tokenExpirationDate = handleraccessToken.ValidTo;
+            var user = await mUserManager.FindByNameAsync(username);
+            if (user == null)
+                return errorResponse2;
+            
+            if (user.RefreshToken == null)
+                return errorResponse3;
+            
+            var refreshToken = user.RefreshToken;
+            var handlerRefreshToken = handler.ReadToken(refreshToken) as JwtSecurityToken;
+            if (handlerRefreshToken == null)
+                return errorResponse2;
 
-           
-            // Return token to user
-            return new ApiResponse<TokenModel>
+            var refreshTokenExpirationDate = handlerRefreshToken.ValidTo;
+          
+            //var refreshToken = mContext.UserAccount.Where()
+            if (tokenExpirationDate < DateTime.Now)
             {
-                // Pass back the user details and the token
-                Response = new TokenModel
+                if (refreshTokenExpirationDate < DateTime.Now)
                 {
-                    Token = "22222",
-                    RefreshToken = "333"
+                    return errorResponse3;
                 }
-            };
+                return new ApiResponse<UserProfileDetailsApiModel>
+                {
+                    // Pass back the user details and the token
+                    Response = new UserProfileDetailsApiModel
+                    {
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Email = user.Email,
+                        Username = user.UserName,
+                        Token = user.GenerateJwtToken(),
+                    }
+                };
+            }
+         
+            return errorResponse2;
         }
     }
 }

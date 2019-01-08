@@ -21,62 +21,98 @@ import { DeleteMovie } from '../AdminPanel/Movies/DeleteMovie';
 
 import MovieSchedule from '../MovieSchedule/MovieSchedule';
 import UserProfil from '../Users/UserProfil';
-// import decode from 'jwt-decode';
+import decode from 'jwt-decode';
+
+// dostaje użytkownika i w razie errora wylogowuje go bądź jeżeli dostaliśmy nowy token pomyślnie dodaje go do localStorage
+function addToStorage(res: any){
+  try{
+   
+    if (res.errorMessage !== null){
+      if (res.errorMessage === "Prosimy o ponowne zalogowanie"){
+        localStorage.removeItem("User");
+        window.location.reload()
+        return false;
+      }
+      
+        return false;
+    }
+   
+
+  } catch (e){
+    return false;
+  }
+  localStorage.setItem("User", JSON.stringify(res))
+  return true;
+}
+// komunikuje sie z api i prosi o nowy token dla użytkownika. Następnie odpala funkcje addToStorage
+async function refreshToken(user: any){
+  await fetch('https://localhost:44371/api/refresh', {
+    method: 'post',
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({token: user.response.token, refreshToken: user.response.refreshToken})
+  }).then(res2=>res2.json())
+     .then(res2 => addToStorage(res2))
+  
+}
+// pobiera usera ze storage i sprwadza ważność tokena, jeżeli jest nieważny to go wysyła do refreshToken
+async function getStorage(){
+  try{
+  
+    const userStorage = localStorage.getItem("User");
+      if (userStorage !== null){
+        const user = JSON.parse(userStorage);
+        const { exp } = decode(user.response.token);
+        if (exp < new Date().getTime() / 1000){
+          await refreshToken(user);
+        }
+      }
+    } catch (e){
+      return false;
+    }
+    return true;
+}
+// początkuje proces autoryzacji
+async function checkAuth(){
+  const result = await getStorage();
+  return result;
+}
+// route, który sprawdza autoryzacje przy każdym przejściu
+const AuthRoute = ({ component: Component, ...rest } : any) => (
+  // tslint:disable-next-line jsx-no-lambda
+  <Route {...rest} render={props => (
+    checkAuth() ? (
+      <Component {...props} />
+    ) : (
+      <Component {...props} />
+    )
+  )} />
+)
 
 class App extends React.Component<any, any> {
 
-
+ 
 public render() {
-
-
-//   const checkAuth = () => {
-//     const token = localStorage.getItem('token');
-//     const refreshToken = localStorage.getItem('refreshToken');
-//     if (!token || !refreshToken){
-//       return false;
-//     }
-
-    // try{
-    //   const {exp} = decode(refreshToken);
-
-    //   if (exp < new Date().getTime() / 1000){
-    //     return false;
-    //   }
-    // } catch (e){
-    //   return false;
-    // }
-
-//     return true
-//   }
-
-//  const AuthRoute = ({ component: Component, ...rest } : any) => (
-//    <Route {...rest} render={props => (
-//      checkAuth() ? (
-//        <Component {...props} />
-//      ) : (
-//        <Redirect to={{ pathname: '/login'}} />
-//      )
-//    )} />
-//  )
-
   return(
 
   <div>
     <Navbar/>
     <Switch>
-     <Route path="/" component={Home} exact={true}/>
-     <Route path="/AddMovie" component={AddMovie}/>
-     <Route path="/DeleteMovie/:Id" component={DeleteMovie}/>
-     <Route path="/Details/:Id" component={Details}/>
-     <Route path="/DetailsPanel/:Id" component={DetailsPanel}/>
-     <Route path="/ReserveTicket" component={ReserveTicket}/>
-     <Route path="/ResetPassword" component={ResetPassword}/>
-     <Route path="/AdminPanel" component={AdminPanel}/>
-     <Route path="/MovieManagment" component={MovieManagment}/>
-     <Route path="/Reservation/:Reserved" component={Reservation}/>
-     <Route path="/Events" component={Events}/>
-     <Route path="/Repertuar" component={MovieSchedule}/>
-     <Route path="/UserProfil" component={UserProfil}/>
+     <AuthRoute path="/" component={Home} exact={true}/>
+     <AuthRoute path="/AddMovie" component={AddMovie}/>
+     <AuthRoute path="/DeleteMovie/:Id" component={DeleteMovie}/>
+     <AuthRoute path="/Details/:Id" component={Details}/>
+     <AuthRoute path="/DetailsPanel/:Id" component={DetailsPanel}/>
+     <AuthRoute path="/ReserveTicket" component={ReserveTicket}/>
+     <AuthRoute path="/ResetPassword" component={ResetPassword}/>
+     <AuthRoute path="/AdminPanel" component={AdminPanel}/>
+     <AuthRoute path="/MovieManagment" component={MovieManagment}/>
+     <AuthRoute path="/Reservation/:Reserved" component={Reservation}/>
+     <AuthRoute path="/Events" component={Events}/>
+     <AuthRoute path="/Repertuar" component={MovieSchedule}/>
+     <AuthRoute path="/UserProfil" component={UserProfil}/>
      <Route component={NotExist}/>
      {/* <AuthRoute exact path="/auth" component={Auth}/> */}
     </Switch>

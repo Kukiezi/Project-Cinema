@@ -17,5 +17,10 @@ namespace CinemaApi.Models
         /// The users last name
         /// </summary>
         public string LastName { get; set; }
+
+        /// <summary>
+        /// The users last name
+        /// </summary>
+        public string RefreshToken { get; set; }
     }
 }
