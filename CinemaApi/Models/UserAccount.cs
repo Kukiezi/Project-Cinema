@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity;
 
 namespace CinemaApi.Models
 {
-    public partial class UserAccount : IdentityUser
+    public partial class UserAccount
     {
         public UserAccount()
         {
@@ -20,9 +19,9 @@ namespace CinemaApi.Models
         public string UserSurname { get; set; }
         public int IdUserAccount { get; set; }
 
-        public ICollection<Newsletter> Newsletter { get; set; }
-        public ICollection<Reservation> Reservation { get; set; }
-        public ICollection<SigningIn> SigningIn { get; set; }
-        public ICollection<UserRole> UserRole { get; set; }
+        public virtual ICollection<Newsletter> Newsletter { get; set; }
+        public virtual ICollection<Reservation> Reservation { get; set; }
+        public virtual ICollection<SigningIn> SigningIn { get; set; }
+        public virtual ICollection<UserRole> UserRole { get; set; }
     }
 }

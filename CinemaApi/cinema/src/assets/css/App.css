@@ -324,6 +324,15 @@ footer p{
   width: 300px;
 }
 
+.error-label2{
+  width: 450px;
+  height: auto;
+}
+
+.review-header{
+  font-size: 50px;
+}
+
 #dimmer
 {
     background:#000;

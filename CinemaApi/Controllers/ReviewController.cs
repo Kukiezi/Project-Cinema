@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CinemaApi.Models;
+using CinemaApi.Models.ValidateModels;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaApi.Controllers
@@ -12,10 +14,13 @@ namespace CinemaApi.Controllers
     [ApiController]
     public class ReviewController : ControllerBase
     {
-        private readonly CinemaDBContext context;
-        public ReviewController(CinemaDBContext context)
+        protected CinemaDBContext context;
+
+        protected UserManager<ApplicationUser> mUserManager;
+        public ReviewController(CinemaDBContext context, UserManager<ApplicationUser> userManager)
         {
             this.context = context;
+            this.mUserManager = userManager;
         }
         [HttpGet]
         [Route("GetReviews")]
@@ -29,18 +34,40 @@ namespace CinemaApi.Controllers
         }
 
         [Route("AddReview")]
+        [AuthorizeToken]
         [HttpPost]
-        public ActionResult AddReview(Review review)
+        public async Task<ApiResponse<Review>> AddReview(Review review)
         {
+
+            var errorResponse = new ApiResponse<Review>
+            {
+                // Set error message
+                ErrorMessage = "Nie mogliśmy znaleźć użytkownika, który dodawał opinie!"
+            };
+
+            var userIdentity = await mUserManager.FindByNameAsync(review.Author);
+            if (userIdentity == null)
+                return errorResponse;
+            
             context.Review.Add(new Review
             {
-                Author = review.Author,
+                UserId = userIdentity.Id,
                 Review1 = review.Review1,
-                IdMovies = review.IdMovies
+                IdMovies = review.IdMovies,
+                Author =  review.Author
             });
 
             context.SaveChanges();
-            return Ok(review);
+
+            return new ApiResponse<Review>
+            {
+                Response = new Review
+                {
+                    Author = review.Author,
+                    Review1 = review.Review1,
+                    IdMovies = review.IdMovies
+                }
+            };
         }
     }
 }

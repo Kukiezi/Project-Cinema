@@ -14,6 +14,6 @@ namespace CinemaApi.Models
         public string RoleDescription { get; set; }
         public int IdRoles { get; set; }
 
-        public ICollection<UserRole> UserRole { get; set; }
+        public virtual ICollection<UserRole> UserRole { get; set; }
     }
 }

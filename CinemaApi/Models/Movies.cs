@@ -23,8 +23,8 @@ namespace CinemaApi.Models
         public string WatchingTime { get; set; }
         public double Rating { get; set; }
 
-        public ICollection<Rating> RatingNavigation { get; set; }
-        public ICollection<Review> Review { get; set; }
-        public ICollection<Screening> Screening { get; set; }
+        public virtual ICollection<Rating> RatingNavigation { get; set; }
+        public virtual ICollection<Review> Review { get; set; }
+        public virtual ICollection<Screening> Screening { get; set; }
     }
 }

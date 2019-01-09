@@ -69,7 +69,9 @@ namespace CinemaApi.Migrations
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("" +
+                              "AspNetUsers" +
+                              "");
                 });
 
             modelBuilder.Entity("CinemaApi.Models.CulturalEvent", b =>

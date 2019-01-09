@@ -23,7 +23,7 @@ public render() {
          
             <div>
             <div className="text-white monte border-white">
-                <p >{this.state.review.author}</p><br/>
+                <p className="font-bold">{this.state.review.author}</p><br/>
                 <p className="italic">{this.state.review.review1}</p>
                 <hr className="white-hr"/>
                 <br/> <br/>

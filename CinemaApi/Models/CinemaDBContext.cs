@@ -276,7 +276,7 @@ namespace CinemaApi.Models
                     .HasColumnName("screening_date")
                     .HasColumnType("date");
 
-                entity.Property(e => e.ScreeningTime).HasColumnName("screening_time");
+              
 
                 entity.HasOne(d => d.IdMoviesNavigation)
                     .WithMany(p => p.Screening)

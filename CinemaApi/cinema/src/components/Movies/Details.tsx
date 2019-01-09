@@ -8,6 +8,7 @@ import './Rating.css'
 import Reviews from '../Movies/Reviews'
 
 
+
 class Details extends React.Component<any, IState> {
 
   public state: IState = {
@@ -32,7 +33,9 @@ class Details extends React.Component<any, IState> {
       "description": "",
       "picture": "",
       "rating": 0
-    }
+    },
+    textareaValue: "",
+    errorMessage: ""
   };
 
   constructor(props: IState) {
@@ -40,6 +43,7 @@ class Details extends React.Component<any, IState> {
     this.onChangeReview = this.onChangeReview.bind(this);
     this.addReview = this.addReview.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.changeTextArea = this.changeTextArea.bind(this);
   }
 
   public onChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -132,17 +136,47 @@ public async SendRating(){
         reviewCopy[e.currentTarget.name] = e.currentTarget.value;
     reviewCopy.idMovies = Id;
   
-    this.setState({ review: reviewCopy});
+    this.setState({ review: reviewCopy, textareaValue: e.currentTarget.value});
+}
+
+public changeTextArea(){
+  console.log("jestem");
+  this.setState({textareaValue: ''})
 }
 
 public async addReview(){
+  const userStorage = localStorage.getItem("User");
+  let user;
+  if (userStorage !== null){
+     user = JSON.parse(userStorage);
+     this.setState({errorMessage:""})
+  }
+  else{
+    this.setState({errorMessage:"Musisz być użytkownikiem, żeby dodawać opinie!"})
+    return;
+  }
+
+  if(this.state.textareaValue === ""){
+    this.setState({errorMessage:"Nie możesz dodawać pustych opinii!"})
+    return;
+  }
+  else{
+    this.setState({errorMessage:""})
+  }
+  
+ 
+  await this.changeTextArea();
+
+
+
   await fetch('https://localhost:44371/cinema/AddReview', {
       method: 'post',
       headers: {
         'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': "Bearer " + user.response.token
       },
-      body: JSON.stringify({author: this.state.review.author, review1: this.state.review.review1, idMovies: this.state.review.idMovies})
+      body: JSON.stringify({author: user.response.username, review1: this.state.review.review1, idMovies: this.state.review.idMovies})
     }).then(res=>res.json())
       .then(res => console.log(res));
     this.setReviews();
@@ -227,11 +261,13 @@ public async setReviews(){
 
 </div>
 
-reviewContent = <div> <h1 className="text-white monte text-center">Opinie</h1><br/><br/>
+reviewContent = <div> <h1 className="review-header text-white monte text-center">Opinie</h1><br/><br/>
 <div className="comment-form text-center"> 
-<input name="author" onChange={this.onChangeReview} className="shadow appearance-none border rounded py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline w-1/2" placeholder="Autor..."/> <br/><br/>
-<textarea name="review1" onChange={this.onChangeReview} className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..."/><br/>
+<label className="error-label2 font-bold text-red">{this.state.errorMessage}</label>
+<textarea value={this.state.textareaValue} rows={5} id="reviewArea" name="review1" onChange={this.onChangeReview} className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..."/><br/>
+
 <button onClick={this.addReview} className="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">Dodaj Opinie!</button>
+
 </div>
 
 
@@ -258,7 +294,9 @@ export interface IState {
   rating: IRating[],
   ratingTest: IRating,
   reviews: IReviews[],
-  review: IReviews
+  review: IReviews,
+  textareaValue: string,
+  errorMessage: string
 }
 export interface IMovie {
   id: number,

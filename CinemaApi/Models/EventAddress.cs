@@ -16,6 +16,6 @@ namespace CinemaApi.Models
         public string City { get; set; }
         public int IdEventAddress { get; set; }
 
-        public ICollection<CulturalEvent> CulturalEvent { get; set; }
+        public virtual ICollection<CulturalEvent> CulturalEvent { get; set; }
     }
 }

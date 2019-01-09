@@ -1,9 +1,9 @@
 .RatingNumb{
 	font-family: 'Playfair Display', serif;
-	font-size: 5em;
+	font-size: 50px;
     color: #9e9ba4;
     text-transform: capitalize;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
 }
 .container{
 	width:1170px;

@@ -8,6 +8,6 @@ namespace CinemaApi.Models
         public int IdNewsletter { get; set; }
         public int IdUserAccount { get; set; }
 
-        public UserAccount IdUserAccountNavigation { get; set; }
+        public virtual UserAccount IdUserAccountNavigation { get; set; }
     }
 }

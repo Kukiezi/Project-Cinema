@@ -17,7 +17,7 @@ namespace CinemaApi.Models
         public int IdCulturalEvent { get; set; }
         public int IdEventAddress { get; set; }
 
-        public EventAddress IdEventAddressNavigation { get; set; }
-        public ICollection<SigningIn> SigningIn { get; set; }
+        public virtual EventAddress IdEventAddressNavigation { get; set; }
+        public virtual ICollection<SigningIn> SigningIn { get; set; }
     }
 }

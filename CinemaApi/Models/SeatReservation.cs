@@ -8,6 +8,6 @@ namespace CinemaApi.Models
         public int IdSeatReservation { get; set; }
         public int IdSeat { get; set; }
 
-        public Seat IdSeatNavigation { get; set; }
+        public virtual Seat IdSeatNavigation { get; set; }
     }
 }
