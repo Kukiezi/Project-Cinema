@@ -81,14 +81,22 @@ namespace CinemaApi.Controllers
             var review = context.Review.Where(a => a.IdReview == userReview.IdReview).FirstOrDefault();
             var userIdentity = await mUserManager.FindByNameAsync(userReview.Username);
 
-            var checkUpvote = context.UserReview
-                .Where(a => a.UserId == userIdentity.Id && a.ReviewId == review.IdReview).FirstOrDefault();
+            var checkUpVote = context.UserReview
+                .Where(a => a.UserId == userIdentity.Id && a.ReviewId == review.IdReview && a.Vote == 1).FirstOrDefault();
+            var checkDownVote = context.UserReview
+                .Where(a => a.UserId == userIdentity.Id && a.ReviewId == review.IdReview && a.Vote == 2).FirstOrDefault();
 
-            if (checkUpvote != null && review != null)
+            if (checkUpVote != null && review != null)
             {
-                context.UserReview.Remove(checkUpvote);
+                context.UserReview.Remove(checkUpVote);
                 review.Points -= 1;
-                context.SaveChanges();
+            
+            }
+
+            else if (checkDownVote != null && review != null)
+            {
+                checkDownVote.Vote = 1;
+                review.Points += 2;
             }
 
             else
@@ -97,13 +105,11 @@ namespace CinemaApi.Controllers
                 UserReview userUpvote = new UserReview();
                 userUpvote.UserId = userIdentity.Id;
                 userUpvote.ReviewId = review.IdReview;
-
+                userUpvote.Vote = 1;
                 context.UserReview.Add(userUpvote);
-
-                context.SaveChanges();
             }
-          
-            
+
+            context.SaveChanges();
 
 
             return new ApiResponse<Review>
@@ -129,28 +135,33 @@ namespace CinemaApi.Controllers
             var userIdentity = await mUserManager.FindByNameAsync(userReview.Username);
 
             var checkDownVote = context.UserReview
-                .Where(a => a.UserId == userIdentity.Id && a.ReviewId == review.IdReview).FirstOrDefault();
+                .Where(a => a.UserId == userIdentity.Id && a.ReviewId == review.IdReview && a.Vote == 2).FirstOrDefault();
+            var checkUpVote = context.UserReview
+                .Where(a => a.UserId == userIdentity.Id && a.ReviewId == review.IdReview && a.Vote == 1).FirstOrDefault();
 
             if (checkDownVote != null && review != null)
             {
                 context.UserReview.Remove(checkDownVote);
                 review.Points += 1;
-                context.SaveChanges();
+            }
+
+            else if (checkUpVote != null && review != null)
+            {
+                checkUpVote.Vote = 2;
+                review.Points -= 2;
             }
 
             else
             {
                 review.Points -= 1;
-                UserReview userUpvote = new UserReview();
-                userUpvote.UserId = userIdentity.Id;
-                userUpvote.ReviewId = review.IdReview;
-
-                context.UserReview.Add(userUpvote);
-
-                context.SaveChanges();
+                UserReview userDownvote = new UserReview();
+                userDownvote.UserId = userIdentity.Id;
+                userDownvote.ReviewId = review.IdReview;
+                userDownvote.Vote = 2;
+                context.UserReview.Add(userDownvote);
             }
 
-
+            context.SaveChanges();
 
 
             return new ApiResponse<Review>

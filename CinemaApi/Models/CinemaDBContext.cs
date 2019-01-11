@@ -7,13 +7,14 @@ namespace CinemaApi.Models
 {
     public partial class CinemaDBContext : IdentityDbContext<ApplicationUser>
     {
+     
 
         public CinemaDBContext(DbContextOptions<CinemaDBContext> options)
             : base(options)
         {
         }
 
-      
+     
         public virtual DbSet<CulturalEvent> CulturalEvent { get; set; }
         public virtual DbSet<EventAddress> EventAddress { get; set; }
         public virtual DbSet<Movies> Movies { get; set; }
@@ -31,7 +32,7 @@ namespace CinemaApi.Models
         public virtual DbSet<UserReview> UserReview { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
 
-      
+       
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
