@@ -76,23 +76,95 @@ namespace CinemaApi.Controllers
         [Route("UpVote")]
         [AuthorizeToken]
         [HttpPost]
-        public async Task<Review> UpVote(UserReviewApiModel userReview)
+        public async Task<ApiResponse<Review>> UpVote(UserReviewApiModel userReview)
         {
             var review = context.Review.Where(a => a.IdReview == userReview.IdReview).FirstOrDefault();
             var userIdentity = await mUserManager.FindByNameAsync(userReview.Username);
 
+            var checkUpvote = context.UserReview
+                .Where(a => a.UserId == userIdentity.Id && a.ReviewId == review.IdReview).FirstOrDefault();
+
+            if (checkUpvote != null && review != null)
+            {
+                context.UserReview.Remove(checkUpvote);
+                review.Points -= 1;
+                context.SaveChanges();
+            }
+
+            else
+            {
+                review.Points += 1;
+                UserReview userUpvote = new UserReview();
+                userUpvote.UserId = userIdentity.Id;
+                userUpvote.ReviewId = review.IdReview;
+
+                context.UserReview.Add(userUpvote);
+
+                context.SaveChanges();
+            }
+          
             
 
 
-            if (review != null)
+            return new ApiResponse<Review>
             {
+                Response = new Review
+                {
+                    Author = review.Author,
+                    Review1 = review.Review1,
+                    IdMovies = review.IdMovies,
+                    Points = review.Points,
+                    UserId = userIdentity.Id,
+                    IdReview = review.IdReview
+                }
+            };
+        }
+
+        [Route("DownVote")]
+        [AuthorizeToken]
+        [HttpPost]
+        public async Task<ApiResponse<Review>> DownVote(UserReviewApiModel userReview)
+        {
+            var review = context.Review.Where(a => a.IdReview == userReview.IdReview).FirstOrDefault();
+            var userIdentity = await mUserManager.FindByNameAsync(userReview.Username);
+
+            var checkDownVote = context.UserReview
+                .Where(a => a.UserId == userIdentity.Id && a.ReviewId == review.IdReview).FirstOrDefault();
+
+            if (checkDownVote != null && review != null)
+            {
+                context.UserReview.Remove(checkDownVote);
                 review.Points += 1;
+                context.SaveChanges();
+            }
+
+            else
+            {
+                review.Points -= 1;
+                UserReview userUpvote = new UserReview();
+                userUpvote.UserId = userIdentity.Id;
+                userUpvote.ReviewId = review.IdReview;
+
+                context.UserReview.Add(userUpvote);
+
                 context.SaveChanges();
             }
 
 
 
-            return review;
+
+            return new ApiResponse<Review>
+            {
+                Response = new Review
+                {
+                    Author = review.Author,
+                    Review1 = review.Review1,
+                    IdMovies = review.IdMovies,
+                    Points = review.Points,
+                    UserId = userIdentity.Id,
+                    IdReview = review.IdReview
+                }
+            };
         }
         [Route("GetPoints")]
         [HttpGet]

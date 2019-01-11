@@ -22,5 +22,7 @@ namespace CinemaApi.Models
         /// The users last name
         /// </summary>
         public string RefreshToken { get; set; }
+
+        public ICollection<UserReview> UserReview { get; set; }
     }
 }

@@ -32,10 +32,6 @@ export default class Reviews extends React.Component<any, any>{
         let data;
         if (userStorage !== null){
            user = JSON.parse(userStorage);
-           this.setState({errorMessage:""})
-            data = JSON.stringify(this.state.review);
-            console.log(data);
-         
             await this.setState({userReview:{
                 username: user.response.username,
                 idReview: this.state.review.idReview,
@@ -56,7 +52,9 @@ export default class Reviews extends React.Component<any, any>{
             },
             body: data
           }).then(res=>res.json())
-            .then(res => this.setState({review: res}));
+            .then(res => this.setState({review: res.response}));
+
+            console.log(this.state.review);
 
         // console.log(this.state.review.idReview);
         // const result = await fetch('https://localhost:44371/cinema/UpVote?id='+ this.state.review.idReview);

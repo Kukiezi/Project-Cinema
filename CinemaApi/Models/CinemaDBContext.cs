@@ -8,13 +8,12 @@ namespace CinemaApi.Models
     public partial class CinemaDBContext : IdentityDbContext<ApplicationUser>
     {
 
-
         public CinemaDBContext(DbContextOptions<CinemaDBContext> options)
             : base(options)
         {
         }
 
-       
+      
         public virtual DbSet<CulturalEvent> CulturalEvent { get; set; }
         public virtual DbSet<EventAddress> EventAddress { get; set; }
         public virtual DbSet<Movies> Movies { get; set; }
@@ -29,9 +28,10 @@ namespace CinemaApi.Models
         public virtual DbSet<SeatReservation> SeatReservation { get; set; }
         public virtual DbSet<SigningIn> SigningIn { get; set; }
         public virtual DbSet<UserAccount> UserAccount { get; set; }
+        public virtual DbSet<UserReview> UserReview { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
 
-
+      
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -230,6 +230,7 @@ namespace CinemaApi.Models
                     .HasForeignKey(d => d.IdMovies)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Review__id_Movie__5224328E");
+
             });
 
             modelBuilder.Entity<Roles>(entity =>
@@ -378,6 +379,27 @@ namespace CinemaApi.Models
                     .HasColumnName("user_surname")
                     .HasMaxLength(25)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<UserReview>(entity =>
+            {
+                entity.ToTable("User_Review");
+
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
+                entity.HasOne(d => d.Review)
+                    .WithMany(p => p.UserReview)
+                    .HasForeignKey(d => d.ReviewId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__User_Revi__Revie__05A3D694");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.UserReview)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__User_Revi__UserI__04AFB25B");
             });
 
             modelBuilder.Entity<UserRole>(entity =>
