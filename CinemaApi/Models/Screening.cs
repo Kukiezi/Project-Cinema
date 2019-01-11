@@ -15,8 +15,8 @@ namespace CinemaApi.Models
         public int IdRoom { get; set; }
         public DateTime? ScreeningDate { get; set; }
 
-        public virtual Movies IdMoviesNavigation { get; set; }
-        public virtual Room IdRoomNavigation { get; set; }
-        public virtual ICollection<Reservation> Reservation { get; set; }
+        public Movies IdMoviesNavigation { get; set; }
+        public Room IdRoomNavigation { get; set; }
+        public ICollection<Reservation> Reservation { get; set; }
     }
 }

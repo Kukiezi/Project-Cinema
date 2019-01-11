@@ -9,6 +9,6 @@ namespace CinemaApi.Models
         public int IdMovies { get; set; }
         public int RatingNumber { get; set; }
 
-        public virtual Movies IdMoviesNavigation { get; set; }
+        public Movies IdMoviesNavigation { get; set; }
     }
 }

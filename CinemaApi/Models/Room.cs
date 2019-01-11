@@ -14,7 +14,7 @@ namespace CinemaApi.Models
         public int RoomNumber { get; set; }
         public int IdSeat { get; set; }
 
-        public virtual Seat IdSeatNavigation { get; set; }
-        public virtual ICollection<Screening> Screening { get; set; }
+        public Seat IdSeatNavigation { get; set; }
+        public ICollection<Screening> Screening { get; set; }
     }
 }

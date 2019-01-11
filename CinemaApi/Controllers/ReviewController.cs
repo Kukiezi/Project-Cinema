@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CinemaApi.Models;
+using CinemaApi.Models.UserModels;
 using CinemaApi.Models.ValidateModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -75,12 +76,31 @@ namespace CinemaApi.Controllers
         [Route("UpVote")]
         [AuthorizeToken]
         [HttpPost]
-        public IActionResult UpVote(Review rev)
+        public async Task<Review> UpVote(UserReviewApiModel userReview)
         {
-            var review = context.Review.Where(a => a.IdReview == rev.IdReview).FirstOrDefault();
+            var review = context.Review.Where(a => a.IdReview == userReview.IdReview).FirstOrDefault();
+            var userIdentity = await mUserManager.FindByNameAsync(userReview.Username);
 
             
-            return Ok();
+
+
+            if (review != null)
+            {
+                review.Points += 1;
+                context.SaveChanges();
+            }
+
+
+
+            return review;
+        }
+        [Route("GetPoints")]
+        [HttpGet]
+        public IActionResult GetPoints(int id)
+        {
+            var review = context.Review.Where(a => a.IdReview == id).FirstOrDefault();
+     
+            return Ok(review);
         }
     }
 }

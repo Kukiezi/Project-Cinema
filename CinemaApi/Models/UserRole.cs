@@ -9,7 +9,7 @@ namespace CinemaApi.Models
         public int IdUserAccount { get; set; }
         public int IdRoles { get; set; }
 
-        public virtual Roles IdRolesNavigation { get; set; }
-        public virtual UserAccount IdUserAccountNavigation { get; set; }
+        public Roles IdRolesNavigation { get; set; }
+        public UserAccount IdUserAccountNavigation { get; set; }
     }
 }

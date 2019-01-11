@@ -9,7 +9,7 @@ namespace CinemaApi.Models
         public int IdCulturalEvent { get; set; }
         public int IdUserAccount { get; set; }
 
-        public virtual CulturalEvent IdCulturalEventNavigation { get; set; }
-        public virtual UserAccount IdUserAccountNavigation { get; set; }
+        public CulturalEvent IdCulturalEventNavigation { get; set; }
+        public UserAccount IdUserAccountNavigation { get; set; }
     }
 }

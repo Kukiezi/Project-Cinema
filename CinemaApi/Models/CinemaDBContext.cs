@@ -5,14 +5,16 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CinemaApi.Models
 {
-    public class CinemaDBContext : IdentityDbContext<ApplicationUser>
+    public partial class CinemaDBContext : IdentityDbContext<ApplicationUser>
     {
+
 
         public CinemaDBContext(DbContextOptions<CinemaDBContext> options)
             : base(options)
         {
         }
 
+       
         public virtual DbSet<CulturalEvent> CulturalEvent { get; set; }
         public virtual DbSet<EventAddress> EventAddress { get; set; }
         public virtual DbSet<Movies> Movies { get; set; }
@@ -29,7 +31,8 @@ namespace CinemaApi.Models
         public virtual DbSet<UserAccount> UserAccount { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
 
- 
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -220,6 +223,8 @@ namespace CinemaApi.Models
                     .HasColumnName("review")
                     .IsUnicode(false);
 
+                entity.Property(e => e.UserId).HasMaxLength(450);
+
                 entity.HasOne(d => d.IdMoviesNavigation)
                     .WithMany(p => p.Review)
                     .HasForeignKey(d => d.IdMovies)
@@ -274,9 +279,7 @@ namespace CinemaApi.Models
 
                 entity.Property(e => e.ScreeningDate)
                     .HasColumnName("screening_date")
-                    .HasColumnType("date");
-
-              
+                    .HasColumnType("datetime");
 
                 entity.HasOne(d => d.IdMoviesNavigation)
                     .WithMany(p => p.Screening)

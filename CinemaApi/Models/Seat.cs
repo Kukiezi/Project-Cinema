@@ -15,7 +15,7 @@ namespace CinemaApi.Models
         public int SeatNumb { get; set; }
         public int IdSeat { get; set; }
 
-        public virtual ICollection<Room> Room { get; set; }
-        public virtual ICollection<SeatReservation> SeatReservation { get; set; }
+        public ICollection<Room> Room { get; set; }
+        public ICollection<SeatReservation> SeatReservation { get; set; }
     }
 }

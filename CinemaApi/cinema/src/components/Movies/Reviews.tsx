@@ -7,18 +7,66 @@ export default class Reviews extends React.Component<any, any>{
 
     constructor(props: any) {
         super(props);
-        this.state = {review: this.props.review};
+        this.upVote = this.upVote.bind(this);
+        this.state = {
+            review: this.props.review,
+            points: 0,
+            userReview: {
+                "username": "",
+                "idReview": 0,
+            }
+        };
       }
-    // public componentWillReceiveProps(props: any) {
-    //     const { review } = this.props;
-    //     if (props.review !== review) {
-    //         this.setState({review: props.review});
-    //     // console.log(props.review);
-    //     }
-    //   }
+
+      public async componentDidMount(){
+      
+        const result = await fetch('https://localhost:44371/cinema/GetPoints?id='+ this.state.review.idReview);
+        const review = await result.json();
+        await this.setState({ review });
+  
+      }
+
+      public async upVote(){
+        const userStorage = localStorage.getItem("User");
+        let user;
+        let data;
+        if (userStorage !== null){
+           user = JSON.parse(userStorage);
+           this.setState({errorMessage:""})
+            data = JSON.stringify(this.state.review);
+            console.log(data);
+         
+            await this.setState({userReview:{
+                username: user.response.username,
+                idReview: this.state.review.idReview,
+            }})
+            data = JSON.stringify(this.state.userReview);
+            console.log(this.state.userReview);
+        }
+        else{
+        //   this.setState({errorMessage:"Musisz być użytkownikiem, żeby dodawać opinie!"})
+          return;
+        }
+        await fetch('https://localhost:44371/cinema/UpVote', {
+            method: 'post',
+            headers: {
+              'Accept': 'application/json, text/plain, */*',
+              'Content-Type': 'application/json',
+              'Authorization': "Bearer " + user.response.token
+            },
+            body: data
+          }).then(res=>res.json())
+            .then(res => this.setState({review: res}));
+
+        // console.log(this.state.review.idReview);
+        // const result = await fetch('https://localhost:44371/cinema/UpVote?id='+ this.state.review.idReview);
+        // const review = await result.json();
+        // this.setState({ review });
+      }
+ 
 
 public render() {
-   // console.log(this.state.review.author);
+   
         return (
          
             <div>
@@ -26,7 +74,7 @@ public render() {
                 <p className="font-bold">{this.state.review.author}</p><br/>
                 <p className="review-text italic">{this.state.review.review1}</p><br/>
                 <div className="points-section">
-                    <p>0</p>
+                    <p>{this.state.review.points}</p>
                 </div>
                 <div className="vote-section">
                 <a onClick={this.upVote}><FontAwesomeIcon className="arrow-up" icon="arrow-up" /> </a>
