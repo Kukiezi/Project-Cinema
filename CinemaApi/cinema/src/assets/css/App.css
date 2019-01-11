@@ -346,4 +346,19 @@ footer p{
     z-index:9999; /* may not be necessary */
 }
 
+.review-text{
+  word-wrap: break-word;
+}
+.vote-section{
+  line-height: 20px;
+  color: grey;
+}
 
+.arrow-up:hover {
+  color: white !important;
+}
+
+.points-section{
+  position: relative;
+  left: 8px;
+}

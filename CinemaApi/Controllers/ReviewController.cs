@@ -17,11 +17,13 @@ namespace CinemaApi.Controllers
         protected CinemaDBContext context;
 
         protected UserManager<ApplicationUser> mUserManager;
+
         public ReviewController(CinemaDBContext context, UserManager<ApplicationUser> userManager)
         {
             this.context = context;
             this.mUserManager = userManager;
         }
+
         [HttpGet]
         [Route("GetReviews")]
         public ActionResult GetReviews(int id)
@@ -48,13 +50,13 @@ namespace CinemaApi.Controllers
             var userIdentity = await mUserManager.FindByNameAsync(review.Author);
             if (userIdentity == null)
                 return errorResponse;
-            
+
             context.Review.Add(new Review
             {
                 UserId = userIdentity.Id,
                 Review1 = review.Review1,
                 IdMovies = review.IdMovies,
-                Author =  review.Author
+                Author = review.Author
             });
 
             context.SaveChanges();
@@ -68,6 +70,17 @@ namespace CinemaApi.Controllers
                     IdMovies = review.IdMovies
                 }
             };
+        }
+
+        [Route("UpVote")]
+        [AuthorizeToken]
+        [HttpPost]
+        public IActionResult UpVote(Review rev)
+        {
+            var review = context.Review.Where(a => a.IdReview == rev.IdReview).FirstOrDefault();
+
+            
+            return Ok();
         }
     }
 }
