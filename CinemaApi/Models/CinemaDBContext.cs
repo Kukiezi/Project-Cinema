@@ -5,8 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CinemaApi.Models
 {
-    public class CinemaDBContext : IdentityDbContext<ApplicationUser>
+    public partial class CinemaDBContext : IdentityDbContext<ApplicationUser>
     {
+    
 
         public CinemaDBContext(DbContextOptions<CinemaDBContext> options)
             : base(options)
@@ -27,9 +28,10 @@ namespace CinemaApi.Models
         public virtual DbSet<SeatReservation> SeatReservation { get; set; }
         public virtual DbSet<SigningIn> SigningIn { get; set; }
         public virtual DbSet<UserAccount> UserAccount { get; set; }
+        public virtual DbSet<UserReview> UserReview { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
 
- 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -220,6 +222,8 @@ namespace CinemaApi.Models
                     .HasColumnName("review")
                     .IsUnicode(false);
 
+                entity.Property(e => e.UserId).HasMaxLength(450);
+
                 entity.HasOne(d => d.IdMoviesNavigation)
                     .WithMany(p => p.Review)
                     .HasForeignKey(d => d.IdMovies)
@@ -268,21 +272,18 @@ namespace CinemaApi.Models
 
                 entity.Property(e => e.IdScreening).HasColumnName("id_screening");
 
-                entity.Property(e => e.IdMovies).HasColumnName("id_Movies");
+                entity.Property(e => e.IdMovies).HasColumnName("id_movies");
 
                 entity.Property(e => e.IdRoom).HasColumnName("id_Room");
 
                 entity.Property(e => e.ScreeningDate)
                     .HasColumnName("screening_date")
-                    .HasColumnType("date");
-
-                entity.Property(e => e.ScreeningTime).HasColumnName("screening_time");
+                    .HasColumnType("datetime");
 
                 entity.HasOne(d => d.IdMoviesNavigation)
                     .WithMany(p => p.Screening)
                     .HasForeignKey(d => d.IdMovies)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Screening__id_Mo__339FAB6E");
+                    .HasConstraintName("FK__Screening__id_mo__09746778");
 
                 entity.HasOne(d => d.IdRoomNavigation)
                     .WithMany(p => p.Screening)
@@ -375,6 +376,27 @@ namespace CinemaApi.Models
                     .HasColumnName("user_surname")
                     .HasMaxLength(25)
                     .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<UserReview>(entity =>
+            {
+                entity.ToTable("User_Review");
+
+                entity.Property(e => e.UserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
+                entity.HasOne(d => d.Review)
+                    .WithMany(p => p.UserReview)
+                    .HasForeignKey(d => d.ReviewId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__User_Revi__Revie__05A3D694");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.UserReview)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__User_Revi__UserI__04AFB25B");
             });
 
             modelBuilder.Entity<UserRole>(entity =>
