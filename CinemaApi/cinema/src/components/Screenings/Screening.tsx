@@ -1,5 +1,3 @@
-
-
 import * as React from 'react';
 import 'src/assets/css/App.css';
 import './Screening.css';
@@ -51,12 +49,7 @@ public async componentDidMount() {
       <Fade>
       <div className="Day-header">        
         <div className="Days" ><br/><br/>
-        <NavLink className="day-btn" to="/Repertuar" >{this.props.screening.screeningDate}</NavLink> 
-        <NavLink className="day-btn" to="/Repertuar/1" >Śr</NavLink>  
-        <NavLink className="day-btn" to="/Repertuar/1" >Czw</NavLink>  
-        <NavLink className="day-btn" to="/Repertuar/1" >Pt</NavLink>  
-        <NavLink className="day-btn" to="/Repertuar/1" >Sob</NavLink>  
-        <NavLink className="day-btn" to="/Repertuar/1" >Nie</NavLink> <br/>
+        <button className="day-btn">{this.props.screening.screeningDate}</button> 
         </div>
        </div>
        </Fade>
@@ -93,38 +86,3 @@ export interface IMovies {
   director: string,
   
 }
-
-// import * as React from "react";
-// import '../Events/Events.css'
-
-
-
-
-// export default class Screening extends React.Component<any, any>{
-
-//     constructor(props:any) {
-//         super(props)
-
-//     }
-    
-    
-
-//     public render(){
-
-//         return(
-//             <div className='event-wrap'>
-//                 <div className='event-details'>
-
-//                     <div className="event-more-details">
-//                         <div className="date">
-                       
-//                             {this.props.screening.screeningDate}
-//                         </div>
-
-//                 </div>
-//             </div>
-                          
-//          </div>
-//         );
-//     }
-// }
