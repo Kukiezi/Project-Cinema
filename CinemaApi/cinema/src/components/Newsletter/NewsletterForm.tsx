@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import PropTypes from 'prop-types';
 import validator from 'validator';
 
@@ -27,4 +27,4 @@ NewsletterForm.propTypes = {
   handleOnChangeEmail: PropTypes.func.isRequired
 }
 
-export default NewsletterForm;
+export default NewsletterForm;*/
