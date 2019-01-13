@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Screening from '../Screenings/Screening';
+import Screening from './Screening';
 import './Screening.css';
 import Fade from '../App/Fade';
 import Movies from '../Movies/Movies';
@@ -52,7 +52,7 @@ class Screenings extends React.Component<any, IState>{
             <div className="Days" ><br/><br/>
               <div>
 
-                       {this.state.screenings.map(screening => 
+                       ({this.state.screenings.map(screening => 
                            <Screening key={screening.idScreening} screening={screening}/>)} 
                         
                    

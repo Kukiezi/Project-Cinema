@@ -35,6 +35,7 @@ constructor(props: IState) {
 
       // <Fade>
       // <div className="Movie-list" id="Movie-list"> 
+      
          
       // {this.state.movies.map(movie => <Movies key={movie.id} movie={movie}/>)}<br/>
 

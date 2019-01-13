@@ -19,7 +19,7 @@ import DetailsPanel from '../AdminPanel/Movies/DetailsPanel';
 import { AddMovie } from '../AdminPanel/Movies/AddMovie';
 import { DeleteMovie } from '../AdminPanel/Movies/DeleteMovie';
 
-import Screenings from '../Screenings/Screenings';
+import Screenings from '../Screenings/MovieSchedule';
 // import decode from 'jwt-decode';
 
 class App extends React.Component<any, any> {
