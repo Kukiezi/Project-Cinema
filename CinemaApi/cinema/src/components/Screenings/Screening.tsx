@@ -1,3 +1,5 @@
+
+
 import * as React from 'react';
 import 'src/assets/css/App.css';
 import './Screening.css';
@@ -48,7 +50,14 @@ public async componentDidMount() {
 
       <Fade>
       <div className="Day-header">        
-        <div className="Days" ><br/><br/><NavLink className="day-btn" to="/Repertuar" >Dzisiaj</NavLink> <NavLink className="day-btn" to="/Repertuar/1" >Śr</NavLink>  <NavLink className="day-btn" to="/Repertuar/1" >Czw</NavLink>  <NavLink className="day-btn" to="/Repertuar/1" >Pt</NavLink>  <NavLink className="day-btn" to="/Repertuar/1" >Sob</NavLink>  <NavLink className="day-btn" to="/Repertuar/1" >Nie</NavLink> <br/></div>
+        <div className="Days" ><br/><br/>
+        <NavLink className="day-btn" to="/Repertuar" >{this.props.screening.screeningDate}</NavLink> 
+        <NavLink className="day-btn" to="/Repertuar/1" >Śr</NavLink>  
+        <NavLink className="day-btn" to="/Repertuar/1" >Czw</NavLink>  
+        <NavLink className="day-btn" to="/Repertuar/1" >Pt</NavLink>  
+        <NavLink className="day-btn" to="/Repertuar/1" >Sob</NavLink>  
+        <NavLink className="day-btn" to="/Repertuar/1" >Nie</NavLink> <br/>
+        </div>
        </div>
        </Fade>
     
@@ -85,57 +94,37 @@ export interface IMovies {
   
 }
 
-/*import * as React from "react";
-import '../Events/Events.css'
-import Modal from 'react-modal';
+// import * as React from "react";
+// import '../Events/Events.css'
 
 
 
-export default class MovieSchedule extends React.Component<any, any>{
 
-    constructor(props:any) {
-        super(props)
+// export default class Screening extends React.Component<any, any>{
 
-        this.state = {
-            isActive: false
-        }
-    }  
+//     constructor(props:any) {
+//         super(props)
+
+//     }
     
     
-    public componentWillMount(){
-        Modal.setAppElement('body');
-    }
 
-    public toggleModal = () => {
-        this.setState({
-            isActive:!this.state.isActive
-        })
-    }
+//     public render(){
 
-    public render(){
+//         return(
+//             <div className='event-wrap'>
+//                 <div className='event-details'>
 
-        return(
-            <div className='event-wrap'>
-                <div className='event-details'>
-                <button className="details-btn text-sm" onClick={this.toggleModal}>Zobacz szczegóły</button>
-                <Modal className='modal-style' isOpen={this.state.isActive} onRequestClose={this.toggleModal}>
-                    
-                    <button className="details-btn-inner text-sm"onClick={this.toggleModal}>Zamknij</button>
-                   
-                    <div className="event-more-details">
-                        <div className="date">
-                            <h3>Kiedy?<br/></h3>
-                            {this.props.screening.screeningDate}
-                        </div>
-                    </div>
-                    <button className="sign-in-btn text-lg">Zapisz się</button>
-                    
-                    
-                </Modal>
-            </div>
+//                     <div className="event-more-details">
+//                         <div className="date">
+                       
+//                             {this.props.screening.screeningDate}
+//                         </div>
+
+//                 </div>
+//             </div>
                           
-            </div>
-        );
-    }
-    
-}*/
+//          </div>
+//         );
+//     }
+// }
