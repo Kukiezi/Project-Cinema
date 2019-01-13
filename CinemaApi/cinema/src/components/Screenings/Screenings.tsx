@@ -1,5 +1,4 @@
 import * as React from 'react';
-import '../Events/Events.css';
 import Screening from '../Screenings/Screening';
 import './Screening.css';
 
@@ -26,10 +25,10 @@ class Screenings extends React.Component<any, IState>{
     public render() {
 
         return(
-            <div className="form">
-                <div className="inner">
-                <div className="p-8 List-header">Repetuar</div>
-                    <div className="list-of-events" id="list-of-events">
+            <div>
+                <div>
+                <div >Repetuar</div>
+                    <div>
 
                        {this.state.screenings.map(screening => 
                            <Screening key={screening.idScreening} screening={screening}/>)} 
