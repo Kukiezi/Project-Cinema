@@ -31,14 +31,11 @@ class Screenings extends React.Component<any, IState>{
                 <div className="p-8 List-header">Repetuar</div>
                     <div className="list-of-events" id="list-of-events">
 
-                        {this.state.screenings.map(screening => 
-                            <Screening key={screening.idScreening} screening={screening}/>)}
+                       {this.state.screenings.map(screening => 
+                           <Screening key={screening.idScreening} screening={screening}/>)} 
                         
-                    
+                   
                     </div>
-                    {/* <div className="date-picker">
-                        <DatePicker/>
-                    </div> */}
                 </div>
             </div>
         );
