@@ -33,6 +33,18 @@ namespace CinemaApi.Controllers
             return NotFound();
 
         }
+        [HttpGet]
+        [Route("GetLayout")]
+        public List<string> GetLayout(int id)
+        {
+            var room = context.Screening.Where(a => a.IdScreening == id).Select(a => a.IdRoom).FirstOrDefault();
+            List<string> layout = new List<string>
+            {
+                context.Room.Where(a => a.IdRoom == room).Select(a => a.Layout).FirstOrDefault()
+            };
+            return layout;
+
+        }
 
         [HttpPost]
         [Route("AddReservation")]
@@ -52,10 +64,10 @@ namespace CinemaApi.Controllers
         }
         [HttpGet]
         [Route("MapRoom")]
-        public ActionResult MapRoom(string mask)
+        public ActionResult MapRoom(string mask, int id)
         {
             List<string> s = MapSeats(mask);
-            List<string> t = MapSeatsTaken();
+            List<string> t = MapSeatsTaken(id);
             for (int i = 0; i < s.Count; i++)
             {
                 for (int j = 0; j < t.Count; j++)
@@ -138,12 +150,12 @@ namespace CinemaApi.Controllers
         }
         [NonAction]
 
-        public List<string> MapSeatsTaken()
+        public List<string> MapSeatsTaken(int id)
         {
             //List<string> reservations = new List<string>();
             string reservations="";
            // var seats = context.Reservation.Where(a => a.IdScreening == 3).ToList();
-            List<string> seats = context.Reservation.Where(a => a.IdScreening == 3).Select(a=>a.SeatsReserved).ToList();
+            List<string> seats = context.Reservation.Where(a => a.IdScreening == id).Select(a=>a.SeatsReserved).ToList();
             foreach(string element in seats )
             {
                 reservations += element;

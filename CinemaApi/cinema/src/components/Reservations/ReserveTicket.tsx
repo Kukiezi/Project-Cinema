@@ -6,7 +6,11 @@ import { NavLink } from 'react-router-dom';
 
 
 
-class ReserveTicket extends React.Component{
+
+
+
+
+class ReserveTicket extends React.Component <any, IState>{
  
   public state: IState = {
     "seats": [],
@@ -15,8 +19,8 @@ class ReserveTicket extends React.Component{
       "IdUserAccount": 1,
       "IdScreening": 3
   },
-  "Reserved":""
-
+  "Reserved":"",
+  "Layout": ""
 };
 
 constructor(props: IState) {
@@ -25,11 +29,18 @@ constructor(props: IState) {
 } 
 
 public async componentDidMount() {
-  const result = await fetch('https://localhost:44371/cinema/MapRoom?mask=' + "A2P7P2QB3PPP4PPP3QC3P4P3Q");
+  const { Screening } = this.props.match.params;
+  
+  const result2 = await fetch('https://localhost:44371/cinema/GetLayout?id=' + Screening ,{
+    method: 'GET'
+  });
+  const layout = await result2.json();
+  const result = await fetch('https://localhost:44371/cinema/MapRoom?mask=' + layout + "&id=" + Screening);
   const seats = await result.json();
   this.setState({
   seats });
    }
+
 public updateReservation(value: string, check: boolean)
 {
   let Res = this.state.Reserved;
@@ -72,7 +83,8 @@ export default ReserveTicket;
 export interface IState {
   seats: string[],
   reservation: IReservation,
-  Reserved:string
+  Reserved:string,
+  Layout:string
 }
 
 

@@ -109,7 +109,7 @@ public render() {
      <AuthRoute path="/DeleteMovie/:Id" component={DeleteMovie}/>
      <AuthRoute path="/Details/:Id" component={Details}/>
      <AuthRoute path="/DetailsPanel/:Id" component={DetailsPanel}/>
-     <AuthRoute path="/ReserveTicket" component={ReserveTicket}/>
+     <AuthRoute path="/ReserveTicket/:Screening" component={ReserveTicket}/>
      <AuthRoute path="/ResetPassword" component={ResetPassword}/>
      <AuthRoute path="/AdminPanel" component={AdminPanel}/>
      <AuthRoute path="/MovieManagment" component={MovieManagment}/>
