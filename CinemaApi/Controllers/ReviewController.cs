@@ -30,6 +30,24 @@ namespace CinemaApi.Controllers
         public ActionResult GetReviews(int id, string user)
         {
             var reviewList = context.Review.Where(a => a.IdMovies == id).ToList();
+            if (user != null)
+            {
+                var userContext = context.Users.Where(a => a.UserName == user).FirstOrDefault();
+                foreach (var rev in reviewList)
+                {
+                    var checkVote = context.UserReview
+                        .Where(a => a.UserId == userContext.Id && a.ReviewId == rev.IdReview).FirstOrDefault();
+
+                    if (checkVote == null)
+                        rev.Vote = 0;
+                    else if (checkVote.Vote == 1)
+                        rev.Vote = 1;
+                    else if (checkVote.Vote == 2)
+                        rev.Vote = 2;
+
+                    rev.UserReview.Clear();
+                }
+            }
             if (reviewList.Count != 0)
                 return Ok(reviewList);
 
@@ -90,7 +108,7 @@ namespace CinemaApi.Controllers
             {
                 context.UserReview.Remove(checkUpVote);
                 review.Points -= 1;
-            
+
             }
 
             else if (checkDownVote != null && review != null)
@@ -179,11 +197,47 @@ namespace CinemaApi.Controllers
         }
         [Route("GetPoints")]
         [HttpGet]
-        public IActionResult GetPoints(int id)
+        public IActionResult GetPoints(int id, string user)
         {
             var review = context.Review.Where(a => a.IdReview == id).FirstOrDefault();
-     
+            if (user != null)
+            {
+                var userContext = context.Users.Where(a => a.UserName == user).FirstOrDefault();
+
+                var checkVote = context.UserReview
+                    .Where(a => a.UserId == userContext.Id && a.ReviewId == review.IdReview).FirstOrDefault();
+
+                if (checkVote == null)
+                    review.Vote = 0;
+                else if (checkVote.Vote == 1)
+                    review.Vote = 1;
+                else if (checkVote.Vote == 2)
+                    review.Vote = 2;
+            }
+            review.UserReview.Clear();
             return Ok(review);
         }
+
+        //[Route("GetVote")]
+        //[HttpGet]
+        //public IActionResult GetVote(int id, string user)
+        //{
+        //    var review = context.Review.Where(a => a.IdReview == id).FirstOrDefault();
+        //    if (user != null)
+        //    {
+        //        var userContext = context.Users.Where(a => a.UserName == user).FirstOrDefault();
+
+        //        var checkVote = context.UserReview
+        //            .Where(a => a.UserId == userContext.Id && a.ReviewId == review.IdReview).FirstOrDefault();
+
+        //        if (checkVote == null)
+        //            review.Vote = 0;
+        //        else if (checkVote.Vote == 1)
+        //            review.Vote = 1;
+        //        else if (checkVote.Vote == 2)
+        //            review.Vote = 2;
+        //    }
+        //    return Ok(review);
+        //}
     }
 }
