@@ -117,6 +117,7 @@ public render() {
      <AuthRoute path="/Events" component={Events}/>
      <AuthRoute path="/Repertuar" component={MovieSchedule}/>
      <AuthRoute path="/UserProfil" component={UserProfil}/>
+     <AuthRoute path="/ReviewSection/:Id" component={UserProfil}/>
      <Route component={NotExist}/>
      {/* <AuthRoute exact path="/auth" component={Auth}/> */}
     </Switch>
