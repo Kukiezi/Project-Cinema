@@ -13,6 +13,7 @@ namespace CinemaApi.Models
         public int IdRoom { get; set; }
         public int RoomNumber { get; set; }
         public int IdSeat { get; set; }
+        public string Layout { get; set; }
 
         public Seat IdSeatNavigation { get; set; }
         public ICollection<Screening> Screening { get; set; }

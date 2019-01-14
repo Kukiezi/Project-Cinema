@@ -7,14 +7,16 @@ namespace CinemaApi.Models
 {
     public partial class CinemaDBContext : IdentityDbContext<ApplicationUser>
     {
-     
+        public CinemaDBContext()
+        {
+        }
 
         public CinemaDBContext(DbContextOptions<CinemaDBContext> options)
             : base(options)
         {
         }
 
-     
+       
         public virtual DbSet<CulturalEvent> CulturalEvent { get; set; }
         public virtual DbSet<EventAddress> EventAddress { get; set; }
         public virtual DbSet<Movies> Movies { get; set; }
@@ -260,6 +262,10 @@ namespace CinemaApi.Models
 
                 entity.Property(e => e.IdSeat).HasColumnName("id_seat");
 
+                entity.Property(e => e.Layout)
+                    .HasColumnName("layout")
+                    .IsUnicode(false);
+
                 entity.Property(e => e.RoomNumber).HasColumnName("room_number");
 
                 entity.HasOne(d => d.IdSeatNavigation)
@@ -275,7 +281,7 @@ namespace CinemaApi.Models
 
                 entity.Property(e => e.IdScreening).HasColumnName("id_screening");
 
-                entity.Property(e => e.IdMovies).HasColumnName("id_Movies");
+                entity.Property(e => e.IdMovies).HasColumnName("id_movies");
 
                 entity.Property(e => e.IdRoom).HasColumnName("id_Room");
 
@@ -286,8 +292,7 @@ namespace CinemaApi.Models
                 entity.HasOne(d => d.IdMoviesNavigation)
                     .WithMany(p => p.Screening)
                     .HasForeignKey(d => d.IdMovies)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Screening__id_Mo__339FAB6E");
+                    .HasConstraintName("FK__Screening__id_mo__09746778");
 
                 entity.HasOne(d => d.IdRoomNavigation)
                     .WithMany(p => p.Screening)
