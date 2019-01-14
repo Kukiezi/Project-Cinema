@@ -16,7 +16,6 @@ namespace CinemaApi.Models
         {
         }
 
-       
         public virtual DbSet<CulturalEvent> CulturalEvent { get; set; }
         public virtual DbSet<EventAddress> EventAddress { get; set; }
         public virtual DbSet<Movies> Movies { get; set; }
@@ -186,6 +185,10 @@ namespace CinemaApi.Models
 
                 entity.Property(e => e.IdScreening).HasColumnName("id_screening");
 
+                entity.Property(e => e.IdUser)
+                    .HasColumnName("id_user")
+                    .HasMaxLength(450);
+
                 entity.Property(e => e.IdUserAccount).HasColumnName("id_user_account");
 
                 entity.Property(e => e.SeatsReserved)
@@ -220,6 +223,8 @@ namespace CinemaApi.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.IdMovies).HasColumnName("id_Movies");
+
+                entity.Property(e => e.IdResponse).HasColumnName("id_response");
 
                 entity.Property(e => e.Review1)
                     .IsRequired()
