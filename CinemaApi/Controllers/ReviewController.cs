@@ -27,7 +27,7 @@ namespace CinemaApi.Controllers
 
         [HttpGet]
         [Route("GetReviews")]
-        public ActionResult GetReviews(int id)
+        public ActionResult GetReviews(int id, string user)
         {
             var reviewList = context.Review.Where(a => a.IdMovies == id).ToList();
             if (reviewList.Count != 0)

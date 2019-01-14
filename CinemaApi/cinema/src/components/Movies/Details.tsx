@@ -105,6 +105,16 @@ public async SendRating(){
 
 
   public async componentDidMount() {
+    const userStorage = localStorage.getItem("User");
+    let user;
+    if (userStorage !== null){
+       user = JSON.parse(userStorage);
+       this.setState({errorMessage:""})
+    }
+    else{
+      this.setState({errorMessage:"Musisz być użytkownikiem, żeby dodawać opinie!"})
+      return;
+    }
     const { Id } = this.props.match.params;
     let reviews;
     // const { movie } = this.props.location.state
@@ -112,7 +122,7 @@ public async SendRating(){
     const movie = await result.json();
     const result2 = await fetch('https://localhost:44371/cinema/GetRating?id=' + Id);
     let currentRating = await result2.json();
-    const result3 = await fetch('https://localhost:44371/cinema/GetReviews?id=' + Id)
+    const result3 = await fetch('https://localhost:44371/cinema/GetReviews?id=' + Id + '&user=' + user.response.username)
     if (result3.ok){
        reviews = await result3.json();
     }
