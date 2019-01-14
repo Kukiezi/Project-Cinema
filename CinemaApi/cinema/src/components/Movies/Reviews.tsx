@@ -15,16 +15,29 @@ export default class Reviews extends React.Component<any, any>{
             userReview: {
                 "username": "",
                 "idReview": 0,
-            }
+            },
+            vote: 0
         };
       }
 
-      public async componentDidMount(){
       
-        const result = await fetch('https://localhost:44371/cinema/GetPoints?id='+ this.state.review.idReview);
+      public async componentDidMount(){
+        const userStorage = localStorage.getItem("User");
+        let user;
+      
+        if (userStorage !== null){
+           user = JSON.parse(userStorage);
+        }
+        else{
+        //   this.setState({errorMessage:"Musisz być użytkownikiem, żeby dodawać opinie!"})
+          return;
+        }
+
+        
+        const result = await fetch('https://localhost:44371/cinema/GetPoints?id='+ this.state.review.idReview + '&user=' + user.response.username);
         const review = await result.json();
         await this.setState({ review });
-  
+    
       }
 
       public async upVote(){
@@ -38,24 +51,24 @@ export default class Reviews extends React.Component<any, any>{
                 idReview: this.state.review.idReview,
             }})
             data = JSON.stringify(this.state.userReview);
-            console.log(this.state.userReview);
+            await fetch('https://localhost:44371/cinema/UpVote', {
+                method: 'post',
+                headers: {
+                  'Accept': 'application/json, text/plain, */*',
+                  'Content-Type': 'application/json',
+                  'Authorization': "Bearer " + user.response.token
+                },
+                body: data
+              }).then(res=>res.json())
+                .then(res => this.setState({review: res.response}));
         }
         else{
         //   this.setState({errorMessage:"Musisz być użytkownikiem, żeby dodawać opinie!"})
           return;
         }
-        await fetch('https://localhost:44371/cinema/UpVote', {
-            method: 'post',
-            headers: {
-              'Accept': 'application/json, text/plain, */*',
-              'Content-Type': 'application/json',
-              'Authorization': "Bearer " + user.response.token
-            },
-            body: data
-          }).then(res=>res.json())
-            .then(res => this.setState({review: res.response}));
+       
 
-            console.log(this.state.review);
+         
 
         // console.log(this.state.review.idReview);
         // const result = await fetch('https://localhost:44371/cinema/UpVote?id='+ this.state.review.idReview);
@@ -74,13 +87,13 @@ export default class Reviews extends React.Component<any, any>{
                 idReview: this.state.review.idReview,
             }})
             data = JSON.stringify(this.state.userReview);
-            console.log(this.state.userReview);
+         
         }
         else{
         //   this.setState({errorMessage:"Musisz być użytkownikiem, żeby dodawać opinie!"})
           return;
         }
-        console.log("siema downvote");
+    
         await fetch('https://localhost:44371/cinema/DownVote', {
             method: 'post',
             headers: {
@@ -92,7 +105,7 @@ export default class Reviews extends React.Component<any, any>{
           }).then(res=>res.json())
             .then(res => this.setState({review: res.response}));
 
-            console.log(this.state.review);
+            // console.log(this.state.review);
 
         // console.log(this.state.review.idReview);
         // const result = await fetch('https://localhost:44371/cinema/UpVote?id='+ this.state.review.idReview);
@@ -102,6 +115,25 @@ export default class Reviews extends React.Component<any, any>{
  
 
 public render() {
+    const arrowUp = document.getElementById('arrow-up');
+    const arrowDown = document.getElementById('arrow-down');
+    let arrowUpClass;
+    let arrowDownClass;
+    if (arrowUp !== null && arrowDown !== null){
+        if (this.state.review.vote === 0){
+            arrowUpClass = 'arrow-grey'
+            arrowDownClass = 'arrow-grey'
+        }
+        else if (this.state.review.vote === 1){
+            arrowUpClass = 'arrow-white'
+            arrowDownClass = 'arrow-grey'
+        }
+        else if (this.state.review.vote === 2){
+            arrowUpClass = 'arrow-grey'
+            arrowDownClass = 'arrow-white'
+        }
+    }
+  
    
         return (
          
@@ -113,8 +145,8 @@ public render() {
                     <p>{this.state.review.points}</p>
                 </div>
                 <div className="vote-section">
-                <a onClick={this.upVote}><FontAwesomeIcon className="arrow-up" icon="arrow-up" /> </a>
-                <a onClick={this.downVote}><FontAwesomeIcon className="arrow-up" icon="arrow-down" /></a>
+                <a id="arrow-up" onClick={this.upVote}><FontAwesomeIcon className={arrowUpClass} icon="arrow-up" /> </a>
+                <a id="arrow-down" onClick={this.downVote}><FontAwesomeIcon className={arrowDownClass} icon="arrow-down" /></a>
                 </div>
                
                 <hr className="white-hr"/>

@@ -18,6 +18,7 @@ class Details extends React.Component<any, IState> {
       "author": "",
       "review1": "",
       "idMovies": 0,
+      "vote": 0
     },
     "loading": true,
     "currentRating": 0,
@@ -64,7 +65,7 @@ class Details extends React.Component<any, IState> {
     }
     
     for(let k=checkCount; k<checkValue.length-1; k++){
-      console.log(k)
+     
         checkValue[k].checked = false;
         checkStar[k].className = "check"
         checkSmiley[k].style.display = "none";	
@@ -84,7 +85,7 @@ class Details extends React.Component<any, IState> {
     if(checkCount === 5){
         document.querySelectorAll("i")[4].style.display = "block";
     }
-    console.log(e.currentTarget.value);
+   
     const ratingCopy = this.state.ratingTest;
     ratingCopy.ratingNumber = +e.currentTarget.value;
     ratingCopy.idMovies = Id;
@@ -107,14 +108,16 @@ public async SendRating(){
   public async componentDidMount() {
     const userStorage = localStorage.getItem("User");
     let user;
+    let username;
     if (userStorage !== null){
        user = JSON.parse(userStorage);
        this.setState({errorMessage:""})
+       username = user.response.username;
     }
     else{
-      this.setState({errorMessage:"Musisz być użytkownikiem, żeby dodawać opinie!"})
-      return;
+      username = ""
     }
+ 
     const { Id } = this.props.match.params;
     let reviews;
     // const { movie } = this.props.location.state
@@ -122,7 +125,7 @@ public async SendRating(){
     const movie = await result.json();
     const result2 = await fetch('https://localhost:44371/cinema/GetRating?id=' + Id);
     let currentRating = await result2.json();
-    const result3 = await fetch('https://localhost:44371/cinema/GetReviews?id=' + Id + '&user=' + user.response.username)
+    const result3 = await fetch('https://localhost:44371/cinema/GetReviews?id=' + Id + '&user=' + username)
     if (result3.ok){
        reviews = await result3.json();
     }
@@ -150,7 +153,7 @@ public async SendRating(){
 }
 
 public changeTextArea(){
-  console.log("jestem");
+
   this.setState({textareaValue: ''})
 }
 
@@ -187,8 +190,8 @@ public async addReview(){
         'Authorization': "Bearer " + user.response.token
       },
       body: JSON.stringify({author: user.response.username, review1: this.state.review.review1, idMovies: this.state.review.idMovies})
-    }).then(res=>res.json())
-      .then(res => console.log(res));
+    }).then(res=>res.json());
+      // .then(res => console.log(res));
     this.setReviews();
 }
 
@@ -202,7 +205,7 @@ public async setReviews(){
       this.setState({
         reviews
       });
-      console.log(reviews);
+   
      
 }
 
@@ -324,5 +327,6 @@ export interface IReviews {
   idReview: number,
   idMovies: number,
   review1: string,
-  author: string
+  author: string,
+  vote: number
 }

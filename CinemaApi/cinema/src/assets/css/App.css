@@ -357,8 +357,23 @@ footer p{
 .arrow-up:hover {
   color: white !important;
 }
+.arrow-down:hover {
+  color: white !important;
+}
 
 .points-section{
   position: relative;
   left: 8px;
+}
+
+.arrow-white{
+  color: white
+}
+
+.arrow-grey{
+  color: grey;
+}
+
+.arrow-grey:hover{
+  color: white;
 }
