@@ -1,6 +1,7 @@
 import * as React from "react";
-import 'src/assets/css/App.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import 'src/assets/css/App.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { NavLink } from 'react-router-dom';
 
 
 export default class Reviews extends React.Component<any, any>{
@@ -147,6 +148,11 @@ public render() {
                 <div className="vote-section">
                 <a id="arrow-up" onClick={this.upVote}><FontAwesomeIcon className={arrowUpClass} icon="arrow-up" /> </a>
                 <a id="arrow-down" onClick={this.downVote}><FontAwesomeIcon className={arrowDownClass} icon="arrow-down" /></a>
+                <NavLink to={{
+                pathname: '/ReviewSection/'+this.state.review.idReview
+              }}>
+              <p>Odpowiedz</p> 
+         </NavLink>
                 </div>
                
                 <hr className="white-hr"/>
