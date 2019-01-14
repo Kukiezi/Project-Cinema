@@ -9,6 +9,7 @@ import NotExist from "./NotExist";
 import Navbar from '../Navbar/Navbar';
 import ReserveTicket from '../Reservations/ReserveTicket';
 import ResetPassword from '../Users/ResetPassword';
+import ReviewSection from '../Movies/ReviewSection';
 
 import Reservation from '../Reservations/Reservation';
 import Events from '../Events/Events';
@@ -117,7 +118,7 @@ public render() {
      <AuthRoute path="/Events" component={Events}/>
      <AuthRoute path="/Repertuar" component={MovieSchedule}/>
      <AuthRoute path="/UserProfil" component={UserProfil}/>
-     <AuthRoute path="/ReviewSection/:Id" component={UserProfil}/>
+     <AuthRoute path="/ReviewSection/:Id" component={ReviewSection}/>
      <Route component={NotExist}/>
      {/* <AuthRoute exact path="/auth" component={Auth}/> */}
     </Switch>

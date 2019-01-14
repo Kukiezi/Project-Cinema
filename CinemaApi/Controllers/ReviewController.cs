@@ -56,6 +56,35 @@ namespace CinemaApi.Controllers
         }
 
         [HttpGet]
+        [Route("GetReviewOriginal")]
+        public ActionResult GetReviewOriginal(int id, string user)
+        {
+            var review= context.Review.Where(a => a.IdReview == id).ToList();
+            if (user != null)
+            {
+                var userContext = context.Users.Where(a => a.UserName == user).FirstOrDefault();
+                foreach (var rev in review)
+                {
+                    var checkVote = context.UserReview
+                        .Where(a => a.UserId == userContext.Id && a.ReviewId == rev.IdReview).FirstOrDefault();
+
+                    if (checkVote == null)
+                        rev.Vote = 0;
+                    else if (checkVote.Vote == 1)
+                        rev.Vote = 1;
+                    else if (checkVote.Vote == 2)
+                        rev.Vote = 2;
+
+                    rev.UserReview.Clear();
+                }
+            }
+            if (review.Count != 0)
+                return Ok(review);
+
+            return NotFound();
+        }
+
+        [HttpGet]
         [Route("GetReviewAnswers")]
         public ActionResult GetReviewAnswers(int id, string user)
         {
