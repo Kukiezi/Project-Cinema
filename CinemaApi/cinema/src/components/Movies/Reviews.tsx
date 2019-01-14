@@ -15,16 +15,30 @@ export default class Reviews extends React.Component<any, any>{
             userReview: {
                 "username": "",
                 "idReview": 0,
-            }
+            },
+            vote: 0
         };
       }
 
-      public async componentDidMount(){
       
-        const result = await fetch('https://localhost:44371/cinema/GetPoints?id='+ this.state.review.idReview);
+      public async componentDidMount(){
+        const userStorage = localStorage.getItem("User");
+        let user;
+      
+        if (userStorage !== null){
+           user = JSON.parse(userStorage);
+        }
+        else{
+        //   this.setState({errorMessage:"Musisz być użytkownikiem, żeby dodawać opinie!"})
+          return;
+        }
+
+        console.log(this.state.review);
+        const result = await fetch('https://localhost:44371/cinema/GetPoints?id='+ this.state.review.idReview + '&user=' + user.response.username);
         const review = await result.json();
         await this.setState({ review });
-  
+    
+        console.log(review.vote);
       }
 
       public async upVote(){
@@ -92,7 +106,7 @@ export default class Reviews extends React.Component<any, any>{
           }).then(res=>res.json())
             .then(res => this.setState({review: res.response}));
 
-            console.log(this.state.review);
+            // console.log(this.state.review);
 
         // console.log(this.state.review.idReview);
         // const result = await fetch('https://localhost:44371/cinema/UpVote?id='+ this.state.review.idReview);
@@ -102,6 +116,24 @@ export default class Reviews extends React.Component<any, any>{
  
 
 public render() {
+    const arrowUp = document.getElementById('arrow-up');
+    const arrowDown = document.getElementById('arrow-down');
+
+    if (arrowUp !== null && arrowDown !== null){
+        if (this.state.review.vote === 0){
+            arrowUp.style.color = "white";
+            arrowDown.style.color = "blue";
+        }
+        else if (this.state.review.vote === 1){
+            arrowUp.style.color = "green";
+            arrowDown.style.color = "green";
+        }
+        else if (this.state.review.vote === 2){
+            arrowUp.style.color = "yellow";
+            arrowDown.style.color = "yellow";
+        }
+    }
+  
    
         return (
          
@@ -113,8 +145,8 @@ public render() {
                     <p>{this.state.review.points}</p>
                 </div>
                 <div className="vote-section">
-                <a onClick={this.upVote}><FontAwesomeIcon className="arrow-up" icon="arrow-up" /> </a>
-                <a onClick={this.downVote}><FontAwesomeIcon className="arrow-up" icon="arrow-down" /></a>
+                <a id="arrow-up" onClick={this.upVote}><FontAwesomeIcon className="arrow-up" icon="arrow-up" /> </a>
+                <a id="arrow-down" onClick={this.downVote}><FontAwesomeIcon className="arrow-down" icon="arrow-down" /></a>
                 </div>
                
                 <hr className="white-hr"/>

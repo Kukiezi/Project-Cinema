@@ -18,6 +18,7 @@ class Details extends React.Component<any, IState> {
       "author": "",
       "review1": "",
       "idMovies": 0,
+      "vote": 0
     },
     "loading": true,
     "currentRating": 0,
@@ -324,5 +325,6 @@ export interface IReviews {
   idReview: number,
   idMovies: number,
   review1: string,
-  author: string
+  author: string,
+  vote: number
 }
