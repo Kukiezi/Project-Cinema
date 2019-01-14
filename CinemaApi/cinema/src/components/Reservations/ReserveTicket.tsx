@@ -20,7 +20,8 @@ class ReserveTicket extends React.Component <any, IState>{
       "IdScreening": 3
   },
   "Reserved":"",
-  "Layout": ""
+  "Layout": "",
+  "Screening": 0
 };
 
 constructor(props: IState) {
@@ -30,7 +31,7 @@ constructor(props: IState) {
 
 public async componentDidMount() {
   const { Screening } = this.props.match.params;
-  
+  this.state.Screening = Screening;
   const result2 = await fetch('https://localhost:44371/cinema/GetLayout?id=' + Screening ,{
     method: 'GET'
   });
@@ -68,7 +69,7 @@ public updateReservation(value: string, check: boolean)
   </div> 
   
   <NavLink className="buy-btn" to={{
-                pathname: 'Reservation/'+this.state.Reserved,
+                pathname: '/Reservation/'+this.state.Reserved +"/" + this.state.Screening,
               }}> 
               Zarezerwuj 
       </NavLink>
@@ -84,7 +85,8 @@ export interface IState {
   seats: string[],
   reservation: IReservation,
   Reserved:string,
-  Layout:string
+  Layout:string,
+  Screening: number
 }
 
 
