@@ -1,7 +1,7 @@
 import * as React from "react";
 import 'src/assets/css/App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { NavLink } from 'react-router-dom';
+
 
 
 export default class ReviewsDetails extends React.Component<any, any>{
@@ -17,11 +17,35 @@ export default class ReviewsDetails extends React.Component<any, any>{
                 "username": "",
                 "idReview": 0,
             },
-            vote: 0
+            vote: 0,
+            field: "",
+            displayField: false
         };
       }
-
       
+      public  displayField = () => {
+        this.setState({
+            displayField: !this.state.displayField
+        })
+        if(this.state.displayField)
+        {
+            this.setState({
+                field : (<div className="comment-form text-center"> 
+                <label className="error-label2 font-bold text-red">{this.state.errorMessage}</label>
+                <textarea value={this.state.textareaValue} rows={5} id="reviewArea" name="review1" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..."/><br/>
+                
+                
+                </div> )
+            })
+        }
+        else if(!this.state.displayField)
+        {
+            this.setState({
+                field: ""
+            })
+        }
+    }
+
       public async componentDidMount(){
         const userStorage = localStorage.getItem("User");
         let user;
@@ -152,11 +176,8 @@ public render() {
                 <div className="vote-section">
                 <a id="arrow-up" onClick={this.upVote}><FontAwesomeIcon className={arrowUpClass} icon="arrow-up" /> </a>
                 <a id="arrow-down" onClick={this.downVote}><FontAwesomeIcon className={arrowDownClass} icon="arrow-down" /></a>
-                <NavLink to={{
-                pathname: '/ReviewSection/'+this.state.review.idReview
-              }}>
-              <p>Odpowiedz</p> 
-         </NavLink>
+                <button className="btn" onClick = {this.displayField}>Odpowiedz</button>
+                {this.state.field}
                 </div>
                 </div>
                 <hr className="white-hr"/>
