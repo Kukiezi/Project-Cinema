@@ -108,15 +108,13 @@ export default class ReviewSection extends React.Component<any, any>{
              reviews = await result3.json();
           }
           this.setState({
-            reviews
+            reviews,
+            loading: false
           });
        
          
     }    
-            },
-            loading: true
-        };
-      }
+     
 
       public async componentDidMount() {
         const userStorage = localStorage.getItem("User");
@@ -162,7 +160,7 @@ export default class ReviewSection extends React.Component<any, any>{
           reviewCheck =   <div className="reviews comment-form">
           
           {this.state.original.map(review => 
-                            <Reviews key={review.idReview} review={review}/>)}
+                            <ReviewsDetails key={review.idReview} review={review}/>)}
           <div className="comment-form text-center"> 
           <label className="error-label2 font-bold text-red">{this.state.errorMessage}</label>
           <textarea value={this.state.textareaValue} rows={5} id="reviewArea" name="review1" onChange={this.onChangeReview} className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..."/><br/>
@@ -170,7 +168,7 @@ export default class ReviewSection extends React.Component<any, any>{
           <button onClick={this.addReview} className="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">Dodaj Opinie!</button>
 
           </div>
-                            <ReviewsDetails key={review.idReview} review={review}/>)}
+                            
           
           {this.state.reviews.map(review => 
                             <ReviewsDetails key={review.idReview} review={review}/>)}
