@@ -24,24 +24,9 @@ export default class Reviews extends React.Component<any, any>{
 
       
       public async componentDidMount(){
-        const userStorage = localStorage.getItem("User");
-        let user;
-      
-        if (userStorage !== null){
-           user = JSON.parse(userStorage);
-        }
-        else{
-        //   this.setState({errorMessage:"Musisz być użytkownikiem, żeby dodawać opinie!"})
-          return;
-        }
-
-        
-        const result = await fetch('https://localhost:44371/cinema/GetPoints?id='+ this.state.review.idReview + '&user=' + user.response.username);
-        const review = await result.json();
         const result2 = await fetch('https://localhost:44371/cinema/GetResponseCount?id='+ this.state.review.idReview);
         const responseCount = await result2.json();
-        await this.setState({ review, responseCount });
-    
+        await this.setState({ responseCount });
       }
 
       public async upVote(){

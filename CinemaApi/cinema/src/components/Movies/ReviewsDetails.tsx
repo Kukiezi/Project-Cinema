@@ -27,13 +27,12 @@ export default class ReviewsDetails extends React.Component<any, any>{
             "textareaValue": "",
             "errorMessage": "",
             loading: true,
-            review: this.props.review,
+            review: [],
             points: 0,
             userReview: {
                 "username": "",
                 "idReview": 0,
             },
-            vote: 0,
             field: "",
             displayField: true
         };
@@ -126,22 +125,7 @@ export default class ReviewsDetails extends React.Component<any, any>{
     }
 
       public async componentDidMount(){
-        const userStorage = localStorage.getItem("User");
-        let user;
-   
-        if (userStorage !== null){
-           user = JSON.parse(userStorage);
-        }
-        else{
-        //   this.setState({errorMessage:"Musisz być użytkownikiem, żeby dodawać opinie!"})
-          return;
-        }
-
-        
-        const result = await fetch('https://localhost:44371/cinema/GetPoints?id='+ this.state.review.idReview + '&user=' + user.response.username);
-        const review = await result.json();
-        await this.setState({ review });
-    
+        this.setState({review: this.props.review})
       }
 
       public async upVote(){
@@ -170,14 +154,6 @@ export default class ReviewsDetails extends React.Component<any, any>{
         //   this.setState({errorMessage:"Musisz być użytkownikiem, żeby dodawać opinie!"})
           return;
         }
-       
-
-         
-
-        // console.log(this.state.review.idReview);
-        // const result = await fetch('https://localhost:44371/cinema/UpVote?id='+ this.state.review.idReview);
-        // const review = await result.json();
-        // this.setState({ review });
       }
 
       public async downVote(){
@@ -208,13 +184,6 @@ export default class ReviewsDetails extends React.Component<any, any>{
             body: data
           }).then(res=>res.json())
             .then(res => this.setState({review: res.response}));
-
-            // console.log(this.state.review);
-
-        // console.log(this.state.review.idReview);
-        // const result = await fetch('https://localhost:44371/cinema/UpVote?id='+ this.state.review.idReview);
-        // const review = await result.json();
-        // this.setState({ review });
       }
  
 
@@ -265,7 +234,7 @@ public render() {
             </div>
             
        
-           )
+           );
 }
 
 

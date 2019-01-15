@@ -21,7 +21,8 @@ export default class ReviewSection extends React.Component<any, any>{
               "review1": "",
               "idResponse": 0,
               "idMovies": 0,
-              "vote": 0
+              "vote": 0,
+              "points": 0
          },
         "textareaValue": "",
         "errorMessage": "",
@@ -46,7 +47,7 @@ export default class ReviewSection extends React.Component<any, any>{
           username = ""
         }
          const { Id } = this.props.match.params;
-         console.log(Id);
+    
         const result3 = await fetch('https://localhost:44371/cinema/GetReviewAnswers?id=' + Id + '&user=' + username)
             if (result3.ok){
                reviews = await result3.json();
@@ -90,8 +91,7 @@ export default class ReviewSection extends React.Component<any, any>{
           reviews
         });
      
-        console.log(this.props.match.params.Id)
-        // console.log(reviews)
+
       }
 
       public goPageBack(){

@@ -18,7 +18,8 @@ class Details extends React.Component<any, IState> {
       "author": "",
       "review1": "",
       "idMovies": 0,
-      "vote": 0
+      "vote": 0,
+      "points": 0
     },
     "loading": true,
     "currentRating": 0,
@@ -139,7 +140,6 @@ public async SendRating(){
       currentRating,
       reviews
     });
-    
   }
 
   public onChangeReview = (e: any) => {
@@ -328,5 +328,6 @@ export interface IReviews {
   idMovies: number,
   review1: string,
   author: string,
-  vote: number
+  vote: number,
+  points: number
 }
