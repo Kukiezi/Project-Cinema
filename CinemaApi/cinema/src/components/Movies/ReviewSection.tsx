@@ -35,9 +35,7 @@ export default class ReviewSection extends React.Component<any, any>{
       public onChangeReview = (e: any) => {
         e.preventDefault();
         const reviewCopy = JSON.parse(JSON.stringify(this.state.review));
-        const { Id } = this.props.match.params;
             reviewCopy[e.currentTarget.name] = e.currentTarget.value;
-        reviewCopy.idMovies = Id;
       
         this.setState({ review: reviewCopy, textareaValue: e.currentTarget.value});
     }
@@ -85,7 +83,7 @@ export default class ReviewSection extends React.Component<any, any>{
             'Content-Type': 'application/json',
             'Authorization': "Bearer " + user.response.token
           },
-          body: JSON.stringify({author: user.response.username, review1: this.state.review.review1, idMovies: 2, idResponse: Id })
+          body: JSON.stringify({author: user.response.username, review1: this.state.review.review1, idMovies: this.state.reviews[0].idMovies, idResponse: Id })
         }).then(res=>res.json())
          .then(res => console.log(res));
          this.setReviews();
@@ -147,7 +145,7 @@ export default class ReviewSection extends React.Component<any, any>{
           original,
           reviews
         });
-        
+        console.log(reviews)
       }
 
       public render(){

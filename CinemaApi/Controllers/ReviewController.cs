@@ -243,7 +243,8 @@ namespace CinemaApi.Controllers
                     Points = review.Points,
                     UserId = userIdentity.Id,
                     IdReview = review.IdReview,
-                    Vote = review.Vote
+                    Vote = review.Vote,
+                    IdResponse = review.IdResponse
                 }
             };
         }
@@ -286,33 +287,6 @@ namespace CinemaApi.Controllers
                 context.SaveChanges();
                 review.Vote = 0;
             }
-            //if (checkDownVote != null && review != null)
-            //{
-            //    context.UserReview.Remove(checkDownVote);
-            //    review.Points += 1;
-            //    context.SaveChanges();
-            //    review.Vote = 0;
-            //}
-
-            //else if (checkUpVote != null && review != null)
-            //{
-            //    checkUpVote.Vote = 2;
-            //    review.Points -= 2;
-            //    context.SaveChanges();
-            //    review.Vote = 2;
-            //}
-
-            //else
-            //{
-            //    review.Points -= 1;
-            //    UserReview userDownvote = new UserReview();
-            //    userDownvote.UserId = userIdentity.Id;
-            //    userDownvote.ReviewId = review.IdReview;
-            //    userDownvote.Vote = 2;
-            //    context.UserReview.Add(userDownvote);
-            //    context.SaveChanges();
-            //    review.Vote = 2;
-            //}
 
        
 
@@ -327,7 +301,8 @@ namespace CinemaApi.Controllers
                     Points = review.Points,
                     UserId = userIdentity.Id,
                     IdReview = review.IdReview,
-                    Vote =  review.Vote
+                    Vote =  review.Vote,
+                    IdResponse = review.IdResponse
                 }
             };
         }
