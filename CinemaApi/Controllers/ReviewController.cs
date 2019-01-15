@@ -205,9 +205,6 @@ namespace CinemaApi.Controllers
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
-            //var test = context.Users.Join(context.UserReview, a => a.Id, b => b.UserId, (a,b) = > a)
-
-            //var userIdentity2 = await mUserManager.FindByNameAsync(userReview.Username);
 
             var checkVote = (from a in context.UserReview
                           join b in context.Users on a.User.UserName equals userReview.Username
@@ -218,9 +215,6 @@ namespace CinemaApi.Controllers
                               userIdentity = a.User,
                               review = a.Review
                           }).FirstOrDefault();
-
-         
-
 
 
             //var checkVote = context.UserReview
@@ -235,10 +229,18 @@ namespace CinemaApi.Controllers
                 userUpvote.ReviewId = review.IdReview;
                 userUpvote.Vote = 1;
                 context.UserReview.Add(userUpvote);
-                
                 context.SaveChanges();
                 review.Vote = 1;
-              
+
+                stopWatch.Stop();
+                // Get the elapsed time as a TimeSpan value.
+                TimeSpan ts = stopWatch.Elapsed;
+
+                // Format and display the TimeSpan value.
+                string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                    ts.Hours, ts.Minutes, ts.Seconds,
+                    ts.Milliseconds / 10);
+                Trace.WriteLine("RunTime " + elapsedTime);
                 return new ApiResponse<Review>
                 {
                     Response = new Review
@@ -258,12 +260,8 @@ namespace CinemaApi.Controllers
             {
                 context.UserReview.Remove(checkVote.checkVote);
                 checkVote.checkVote.Review.Points -= 1;
-               
-                //Trace.WriteLine(context.ChangeTracker.AutoDetectChangesEnabled);
-                
-                context.ChangeTracker.AutoDetectChangesEnabled = true;
-            
-                    context;
+                context.SaveChanges();
+                checkVote.checkVote.Review.Vote = 0;
             }
             else
             {
@@ -276,14 +274,14 @@ namespace CinemaApi.Controllers
 
             stopWatch.Stop();
             // Get the elapsed time as a TimeSpan value.
-            TimeSpan ts = stopWatch.Elapsed;
+            TimeSpan ts2 = stopWatch.Elapsed;
 
             // Format and display the TimeSpan value.
-            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-                ts.Hours, ts.Minutes, ts.Seconds,
-                ts.Milliseconds / 10);
-            Trace.WriteLine("RunTime " + elapsedTime);
-            checkVote.checkVote.Review.Vote = 0;
+            string elapsedTime2 = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                ts2.Hours, ts2.Minutes, ts2.Seconds,
+                ts2.Milliseconds / 10);
+            Trace.WriteLine("RunTime " + elapsedTime2);
+
             return new ApiResponse<Review>
             {
                 Response = new Review
@@ -308,63 +306,103 @@ namespace CinemaApi.Controllers
         {
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
-            var review = context.Review.Where(a => a.IdReview == userReview.IdReview).FirstOrDefault();
-            var userIdentity = await mUserManager.FindByNameAsync(userReview.Username);
 
-            var checkVote = context.UserReview
-                .Where(a => a.UserId == userIdentity.Id && a.ReviewId == review.IdReview).FirstOrDefault();
-            //var checkUpVote = context.UserReview
-            //    .Where(a => a.UserId == userIdentity.Id && a.ReviewId == review.IdReview && a.Vote == 1).FirstOrDefault();
+
+            var checkVote = (from a in context.UserReview
+                join b in context.Users on a.User.UserName equals userReview.Username
+                join c in context.Review on a.ReviewId equals userReview.IdReview
+                select new
+                {
+                    checkVote = a,
+                    userIdentity = a.User,
+                    review = a.Review
+                }).FirstOrDefault();
 
             if (checkVote == null)
             {
+                var review = context.Review.Where(a => a.IdReview == userReview.IdReview).FirstOrDefault();
+                var userIdentity = await mUserManager.FindByNameAsync(userReview.Username);
                 review.Points -= 1;
                 UserReview userDownvote = new UserReview();
                 userDownvote.UserId = userIdentity.Id;
                 userDownvote.ReviewId = review.IdReview;
                 userDownvote.Vote = 2;
+
                 context.UserReview.Add(userDownvote);
+
                 context.SaveChanges();
                 review.Vote = 2;
+                stopWatch.Stop();
+                // Get the elapsed time as a TimeSpan value.
+                TimeSpan ts = stopWatch.Elapsed;
+
+                // Format and display the TimeSpan value.
+                string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                    ts.Hours, ts.Minutes, ts.Seconds,
+                    ts.Milliseconds / 10);
+                Trace.WriteLine("RunTime " + elapsedTime);
+                return new ApiResponse<Review>
+                {
+                    Response = new Review
+                    {
+                        Author = review.Author,
+                        Review1 = review.Review1,
+                        IdMovies = review.IdMovies,
+                        Points = review.Points,
+                        UserId = userIdentity.Id,
+                        IdReview = review.IdReview,
+                        Vote = review.Vote,
+                        IdResponse = review.IdResponse
+                    }
+                };
             }
-            else if (checkVote.Vote == 1)
+          
+
+            //var checkVote = context.UserReview
+            //    .Where(a => a.UserId == userIdentity.Id && a.ReviewId == review.IdReview).FirstOrDefault();
+            //var checkUpVote = context.UserReview
+            //    .Where(a => a.UserId == userIdentity.Id && a.ReviewId == review.IdReview && a.Vote == 1).FirstOrDefault();
+
+           
+            else if (checkVote.checkVote.Vote == 1)
             {
-                checkVote.Vote = 2;
-                review.Points -= 2;
+                checkVote.checkVote.Vote = 2;
+                checkVote.review.Points -= 2;
+              
                 context.SaveChanges();
-                review.Vote = 2;
+                checkVote.review.Vote = 2;
             }
             else
             {
-                context.UserReview.Remove(checkVote);
-                review.Points += 1;
+                context.UserReview.Remove(checkVote.checkVote);
+                checkVote.review.Points += 1;
                 context.SaveChanges();
-                review.Vote = 0;
+                checkVote.review.Vote = 0;
             }
 
 
             stopWatch.Stop();
             // Get the elapsed time as a TimeSpan value.
-            TimeSpan ts = stopWatch.Elapsed;
+            TimeSpan ts2 = stopWatch.Elapsed;
 
             // Format and display the TimeSpan value.
-            string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
-                ts.Hours, ts.Minutes, ts.Seconds,
-                ts.Milliseconds / 10);
-            Trace.WriteLine("RunTime " + elapsedTime);
+            string elapsedTime2 = String.Format("{0:00}:{1:00}:{2:00}.{3:00}",
+                ts2.Hours, ts2.Minutes, ts2.Seconds,
+                ts2.Milliseconds / 10);
+            Trace.WriteLine("RunTime " + elapsedTime2);
 
             return new ApiResponse<Review>
             {
                 Response = new Review
                 {
-                    Author = review.Author,
-                    Review1 = review.Review1,
-                    IdMovies = review.IdMovies,
-                    Points = review.Points,
-                    UserId = userIdentity.Id,
-                    IdReview = review.IdReview,
-                    Vote =  review.Vote,
-                    IdResponse = review.IdResponse
+                    Author = checkVote.review.Author,
+                    Review1 = checkVote.review.Review1,
+                    IdMovies = checkVote.review.IdMovies,
+                    Points = checkVote.review.Points,
+                    UserId = checkVote.userIdentity.Id,
+                    IdReview = checkVote.review.IdReview,
+                    Vote = checkVote.review.Vote,
+                    IdResponse = checkVote.review.IdResponse
                 }
             };
         }
