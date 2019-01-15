@@ -40,7 +40,6 @@ export default class Reviews extends React.Component<any, any>{
         const review = await result.json();
         const result2 = await fetch('https://localhost:44371/cinema/GetResponseCount?id='+ this.state.review.idReview);
         const responseCount = await result2.json();
-        console.log(responseCount);
         await this.setState({ review, responseCount });
     
       }

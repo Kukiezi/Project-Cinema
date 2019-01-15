@@ -160,7 +160,7 @@ public render() {
     }
   
         let reviewClass;
-        if (this.state.review.idResponse != null){
+        if (this.state.review.idResponse !== null){
             reviewClass = 'review-nohr'
         }
         return (
