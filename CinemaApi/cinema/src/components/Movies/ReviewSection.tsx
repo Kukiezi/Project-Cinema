@@ -1,7 +1,7 @@
 import * as React from "react";
 import 'src/assets/css/App.css'
 import ReviewsDetails from '../Movies/ReviewsDetails'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 export default class ReviewSection extends React.Component<any, any>{
@@ -9,7 +9,7 @@ export default class ReviewSection extends React.Component<any, any>{
 
     constructor(props: any) {
         super(props);
-
+        this.setReviews = this.setReviews.bind(this);
         this.state= {
 
           "original":[],
@@ -29,7 +29,34 @@ export default class ReviewSection extends React.Component<any, any>{
         }
       }
 
-     
+      
+
+      public async setReviews(){
+        let reviews;
+        const userStorage = localStorage.getItem("User");
+        let user;
+        let username;
+        if (userStorage !== null){
+           user = JSON.parse(userStorage);
+           this.setState({errorMessage:""})
+           username = user.response.username;
+        }
+        else{
+          username = ""
+        }
+         const { Id } = this.props.match.params;
+         console.log(Id);
+        const result3 = await fetch('https://localhost:44371/cinema/GetReviewAnswers?id=' + Id + '&user=' + username)
+            if (result3.ok){
+               reviews = await result3.json();
+            }
+            this.setState({
+              reviews,
+              loading: false
+            });
+         
+           
+      }    
 
       public async componentDidMount() {
         const userStorage = localStorage.getItem("User");
@@ -61,33 +88,41 @@ export default class ReviewSection extends React.Component<any, any>{
           original,
           reviews
         });
+     
+        console.log(this.props.match.params.Id)
         // console.log(reviews)
       }
 
+      // public goBack(){
+      //   this.props.history.goBack()
+      // }
+
       public render(){
         let reviewCheck;
-      
+     
         if (this.state.loading) {
           reviewCheck = <div className="lds-ring"><div /><div /><div /><div /></div>
         }
 
         else if (this.state.reviews !== undefined){
           reviewCheck =   <div className="reviews comment-form">
-          
+        {/* <button onClick={this.goBack}><h3 className="text-white monte"><FontAwesomeIcon className="text-white" icon="long-arrow-alt-left" /> POWRÓT</h3></button> */}
+        <br/><br/><br/>
           {this.state.original.map(review => 
-                            <ReviewsDetails key={review.idReview} review={review}/>)}
+                            <ReviewsDetails idResponse={this.props.match.params.Id} setReviews={this.setReviews} key={review.idReview} review={review}/>)}
 
                             
           
           {this.state.reviews.map(review => 
-                            <ReviewsDetails key={review.idReview} review={review}/>)}
+                            <ReviewsDetails idResponse={this.props.match.params.Id} setReviews={this.setReviews} key={review.idReview} review={review}/>)}
           </div>
         }
         else {
           reviewCheck =   <div className="reviews comment-form">
-          
+         {/* <button onClick={this.goBack}><h3 className="text-white monte"><FontAwesomeIcon className="text-white" icon="long-arrow-alt-left" /> POWRÓT</h3></button> */}
+        <br/><br/><br/>
           {this.state.original.map(review => 
-                            <ReviewsDetails key={review.idReview} review={review}/>)}
+                            <ReviewsDetails idResponse={this.props.match.params.Id} setReviews={this.setReviews} key={review.idReview} review={review}/>)}
 
           </div>
         }
@@ -95,6 +130,7 @@ export default class ReviewSection extends React.Component<any, any>{
       
           return(
             <div>
+                 
             {reviewCheck}
             </div>
           )

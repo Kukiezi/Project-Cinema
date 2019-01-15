@@ -3,17 +3,17 @@ import * as ReactDOM from 'react-dom';
 import './assets/css/index.css'
 import App from './components/App/App';
 import registerServiceWorker from './registerServiceWorker';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 // import ScrollToTop from './components/App/ScrollToTop';
-
+import history from './History';
 
 
 ReactDOM.render(
-<BrowserRouter>
+<Router history={history}>
 
     <Route component={App} />
 
-</BrowserRouter>,
+</Router>,
   
   document.getElementById('root') as HTMLElement
 );

@@ -53,6 +53,7 @@ export default class ReviewsDetails extends React.Component<any, any>{
     }
     
     public async addReview(){
+
       const userStorage = localStorage.getItem("User");
       let user;
       if (userStorage !== null){
@@ -90,41 +91,20 @@ export default class ReviewsDetails extends React.Component<any, any>{
             'Content-Type': 'application/json',
             'Authorization': "Bearer " + user.response.token
           },
-          body: JSON.stringify({author: user.response.username, review1: this.state.review2.review1, idMovies: this.state.review.idMovies, idResponse: this.state.review.idReview })
+          body: JSON.stringify({author: user.response.username, review1: this.state.review2.review1, idMovies: this.state.review.idMovies, idResponse: this.props.idResponse })
         }).then(res=>res.json())
         // .then(res => console.log(res));
-         this.setReviews();
+      
+        await this.setState({field: "", displayField: !this.state.displayField})
+        
+        this.props.setReviews();
     }
-    public async setReviews(){
-      let reviews;
-      const userStorage = localStorage.getItem("User");
-      let user;
-      let username;
-      if (userStorage !== null){
-         user = JSON.parse(userStorage);
-         this.setState({errorMessage:""})
-         username = user.response.username;
-      }
-      else{
-        username = ""
-      }
-      // const { Id } = this.state.review.idReview;
-      const result3 = await fetch('https://localhost:44371/cinema/GetReviewAnswers?id=' + this.state.review.idReview + '&user=' + username)
-          if (result3.ok){
-             reviews = await result3.json();
-          }
-          this.setState({
-            reviews,
-            loading: false
-          });
-       
-         
-    }    
+   
       public  displayField = () => {
         this.setState({
             displayField: !this.state.displayField
         })
-        console.log(this.state.displayField);
+      
         if(this.state.displayField)
         {
             this.setState({
@@ -148,7 +128,7 @@ export default class ReviewsDetails extends React.Component<any, any>{
       public async componentDidMount(){
         const userStorage = localStorage.getItem("User");
         let user;
-        console.log(this.state.review.idReview)
+   
         if (userStorage !== null){
            user = JSON.parse(userStorage);
         }
@@ -275,7 +255,8 @@ public render() {
                 <div className="vote-section">
                 <a id="arrow-up" onClick={this.upVote}><FontAwesomeIcon className={arrowUpClass} icon="arrow-up" /> </a>
                 <a id="arrow-down" onClick={this.downVote}><FontAwesomeIcon className={arrowDownClass} icon="arrow-down" /></a>
-                <button className="monte text-grey hover:text-white" onClick = {this.displayField}>Odpowiedz</button>
+                <br/>   <br/>
+                <button className="monte text-grey hover:text-white" onClick = {this.displayField}> <FontAwesomeIcon icon="comment" /> Odpowiedz</button>
                 {this.state.field}
                 </div>
                 </div>
