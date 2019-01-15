@@ -1,7 +1,7 @@
 import * as React from "react";
 import 'src/assets/css/App.css'
 import ReviewsDetails from '../Movies/ReviewsDetails'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 export default class ReviewSection extends React.Component<any, any>{
