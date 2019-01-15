@@ -8,9 +8,25 @@ export default class ReviewsDetails extends React.Component<any, any>{
 
     constructor(props: any) {
         super(props);
+        this.onChangeReview = this.onChangeReview.bind(this);
+        this.addReview = this.addReview.bind(this);
+        this.changeTextArea = this.changeTextArea.bind(this);
         this.upVote = this.upVote.bind(this);
         this.downVote = this.downVote.bind(this);
         this.state = {
+            "original":[],
+            "reviews":[],
+            "review2": {
+              "idReview": 0,
+              "author": "",
+              "review1": "",
+              "idResponse": 0,
+              "idMovies": 0,
+              "vote": 0
+            },
+            "textareaValue": "",
+            "errorMessage": "",
+            loading: true,
             review: this.props.review,
             points: 0,
             userReview: {
@@ -19,21 +35,104 @@ export default class ReviewsDetails extends React.Component<any, any>{
             },
             vote: 0,
             field: "",
-            displayField: false
+            displayField: true
         };
       }
       
+      public onChangeReview = (e: any) => {
+        e.preventDefault();
+        const reviewCopy = JSON.parse(JSON.stringify(this.state.review2));
+            reviewCopy[e.currentTarget.name] = e.currentTarget.value;
+      
+        this.setState({ review2: reviewCopy, textareaValue: e.currentTarget.value});
+    }
+    
+    public changeTextArea(){
+    
+      this.setState({textareaValue: ''})
+    }
+    
+    public async addReview(){
+      const userStorage = localStorage.getItem("User");
+      let user;
+      if (userStorage !== null){
+         user = JSON.parse(userStorage);
+          this.setState({errorMessage:""})
+          
+      }
+      else{
+        this.setState({errorMessage:"Musisz być użytkownikiem, żeby dodawać opinie!"})
+        return;
+      }
+    
+      if(this.state.textareaValue === ""){
+        this.setState({errorMessage:"Nie możesz dodawać pustych opinii!"})
+        return;
+      }
+      else{
+        this.setState({errorMessage:""})
+      }
+      
+     
+      await this.changeTextArea();
+      
+     
+      // await this.changeTextArea();
+    
+
+      
+      // const { Id } = this.state.review.idReview;
+      await fetch('https://localhost:44371/cinema/AddResponse', {
+          method: 'post',
+    
+          headers: {
+            'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+            'Authorization': "Bearer " + user.response.token
+          },
+          body: JSON.stringify({author: user.response.username, review1: this.state.review2.review1, idMovies: this.state.review.idMovies, idResponse: this.state.review.idReview })
+        }).then(res=>res.json())
+        // .then(res => console.log(res));
+         this.setReviews();
+    }
+    public async setReviews(){
+      let reviews;
+      const userStorage = localStorage.getItem("User");
+      let user;
+      let username;
+      if (userStorage !== null){
+         user = JSON.parse(userStorage);
+         this.setState({errorMessage:""})
+         username = user.response.username;
+      }
+      else{
+        username = ""
+      }
+      // const { Id } = this.state.review.idReview;
+      const result3 = await fetch('https://localhost:44371/cinema/GetReviewAnswers?id=' + this.state.review.idReview + '&user=' + username)
+          if (result3.ok){
+             reviews = await result3.json();
+          }
+          this.setState({
+            reviews,
+            loading: false
+          });
+       
+         
+    }    
       public  displayField = () => {
         this.setState({
             displayField: !this.state.displayField
         })
+        console.log(this.state.displayField);
         if(this.state.displayField)
         {
             this.setState({
                 field : (<div className="comment-form text-center"> 
                 <label className="error-label2 font-bold text-red">{this.state.errorMessage}</label>
-                <textarea value={this.state.textareaValue} rows={5} id="reviewArea" name="review1" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..."/><br/>
+                <textarea rows={5} id="reviewArea" name="review1" onChange={this.onChangeReview} className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..."/><br/>
                 
+                <button onClick={this.addReview} className="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">Dodaj Opinie!</button>
                 
                 </div> )
             })
@@ -49,7 +148,7 @@ export default class ReviewsDetails extends React.Component<any, any>{
       public async componentDidMount(){
         const userStorage = localStorage.getItem("User");
         let user;
-      
+        console.log(this.state.review.idReview)
         if (userStorage !== null){
            user = JSON.parse(userStorage);
         }
@@ -160,7 +259,7 @@ public render() {
     }
   
         let reviewClass;
-        if (this.state.review.idResponse !== null){
+        if (this.state.review.idResponse != null){
             reviewClass = 'review-nohr'
         }
         return (
@@ -176,7 +275,7 @@ public render() {
                 <div className="vote-section">
                 <a id="arrow-up" onClick={this.upVote}><FontAwesomeIcon className={arrowUpClass} icon="arrow-up" /> </a>
                 <a id="arrow-down" onClick={this.downVote}><FontAwesomeIcon className={arrowDownClass} icon="arrow-down" /></a>
-                <button className="btn" onClick = {this.displayField}>Odpowiedz</button>
+                <button className="monte text-grey hover:text-white" onClick = {this.displayField}>Odpowiedz</button>
                 {this.state.field}
                 </div>
                 </div>
