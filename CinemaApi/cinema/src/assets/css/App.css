@@ -377,3 +377,8 @@ footer p{
 .arrow-grey:hover{
   color: white;
 }
+
+.review-nohr{
+  position: relative;
+  left: 5%;
+}

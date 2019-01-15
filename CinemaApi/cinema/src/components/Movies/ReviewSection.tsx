@@ -1,6 +1,6 @@
 import * as React from "react";
 import 'src/assets/css/App.css'
-import Reviews from '../Movies/Reviews'
+import ReviewsDetails from '../Movies/ReviewsDetails'
 
 
 export default class ReviewSection extends React.Component<any, any>{
@@ -18,6 +18,7 @@ export default class ReviewSection extends React.Component<any, any>{
               "idMovies": 0,
               "vote": 0
             },
+            loading: true
         };
       }
 
@@ -47,7 +48,7 @@ export default class ReviewSection extends React.Component<any, any>{
            reviews = await result3.json();
         }
         this.setState({
-        //   loading: false,
+          loading: false,
           original,
           reviews
         });
@@ -57,18 +58,22 @@ export default class ReviewSection extends React.Component<any, any>{
       public render(){
         let reviewCheck;
       
-        
-        if (this.state.reviews !== undefined){
+        if (this.state.loading) {
+          reviewCheck = <div className="lds-ring"><div /><div /><div /><div /></div>
+        }
+
+        else if (this.state.reviews !== undefined){
           reviewCheck =   <div className="reviews comment-form">
           
           {this.state.original.map(review => 
-                            <Reviews key={review.idReview} review={review}/>)}
+                            <ReviewsDetails key={review.idReview} review={review}/>)}
           
           {this.state.reviews.map(review => 
-                            <Reviews key={review.idReview} review={review}/>)}
+                            <ReviewsDetails key={review.idReview} review={review}/>)}
           </div>
-    
         }
+
+      
           return(
             <div>
             {reviewCheck}

@@ -112,7 +112,16 @@ namespace CinemaApi.Controllers
 
             return NotFound();
         }
+
+        [HttpGet]
+        [Route("GetResponseCount")]
+        public async Task<int> GetResponseCount(int id)
+        {
+            var reviewList = context.Review.Where(a => a.IdResponse == id).ToList();
+            
         
+                return reviewList.Count;
+        }
 
         [Route("AddReview")]
         [AuthorizeToken]

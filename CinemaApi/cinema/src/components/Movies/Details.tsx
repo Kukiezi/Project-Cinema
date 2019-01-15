@@ -221,7 +221,7 @@ public async setReviews(){
       {this.state.reviews.map(review => 
                         <Reviews key={review.idReview} review={review}/>)}
       </div>
-
+      
     }
     else{
       reviewCheck =   <div className="reviews comment-form"> <br/><br/>

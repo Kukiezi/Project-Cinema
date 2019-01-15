@@ -24,9 +24,9 @@ import MovieSchedule from '../MovieSchedule/MovieSchedule';
 import UserProfil from '../Users/UserProfil';
 import decode from 'jwt-decode';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUp, faArrowDown, faComment } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faArrowUp, faArrowDown);
+library.add(faArrowUp, faArrowDown, faComment);
 // dostaje użytkownika i w razie errora wylogowuje go bądź jeżeli dostaliśmy nowy token pomyślnie dodaje go do localStorage
 function addToStorage(res: any){
   try{

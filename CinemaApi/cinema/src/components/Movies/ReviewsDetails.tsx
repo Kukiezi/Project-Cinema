@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink } from 'react-router-dom';
 
 
-export default class Reviews extends React.Component<any, any>{
+export default class ReviewsDetails extends React.Component<any, any>{
 
     constructor(props: any) {
         super(props);
@@ -17,8 +17,7 @@ export default class Reviews extends React.Component<any, any>{
                 "username": "",
                 "idReview": 0,
             },
-            vote: 0,
-            responseCount: 0
+            vote: 0
         };
       }
 
@@ -38,10 +37,7 @@ export default class Reviews extends React.Component<any, any>{
         
         const result = await fetch('https://localhost:44371/cinema/GetPoints?id='+ this.state.review.idReview + '&user=' + user.response.username);
         const review = await result.json();
-        const result2 = await fetch('https://localhost:44371/cinema/GetResponseCount?id='+ this.state.review.idReview);
-        const responseCount = await result2.json();
-        console.log(responseCount);
-        await this.setState({ review, responseCount });
+        await this.setState({ review });
     
       }
 
@@ -139,11 +135,15 @@ public render() {
         }
     }
   
-    
+        let reviewClass;
+        if (this.state.review.idResponse != null){
+            reviewClass = 'review-nohr'
+        }
         return (
          
       
             <div className="text-white monte border-white">
+             <div className={reviewClass}> 
                 <p className="font-bold">{this.state.review.author}</p><br/>
                 <p className="review-text italic">{this.state.review.review1}</p><br/>
                 <div className="points-section">
@@ -152,16 +152,18 @@ public render() {
                 <div className="vote-section">
                 <a id="arrow-up" onClick={this.upVote}><FontAwesomeIcon className={arrowUpClass} icon="arrow-up" /> </a>
                 <a id="arrow-down" onClick={this.downVote}><FontAwesomeIcon className={arrowDownClass} icon="arrow-down" /></a>
-                <br/> <br/>
-                <NavLink className="no-underline" to={{
+                <NavLink to={{
                 pathname: '/ReviewSection/'+this.state.review.idReview
               }}>
-              <p className="monte text-grey hover:text-white"> <FontAwesomeIcon icon="comment" /> Odpowiedzi({this.state.responseCount})</p> 
+              <p>Odpowiedz</p> 
          </NavLink>
+                </div>
                 </div>
                 <hr className="white-hr"/>
                 <br/> <br/>
             </div>
+            
+       
            )
 }
 
