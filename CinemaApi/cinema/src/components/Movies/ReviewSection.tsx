@@ -10,6 +10,7 @@ export default class ReviewSection extends React.Component<any, any>{
     constructor(props: any) {
         super(props);
         this.setReviews = this.setReviews.bind(this);
+        this.goPageBack = this.goPageBack.bind(this);
         this.state= {
 
           "original":[],
@@ -93,9 +94,9 @@ export default class ReviewSection extends React.Component<any, any>{
         // console.log(reviews)
       }
 
-      // public goBack(){
-      //   this.props.history.goBack()
-      // }
+      public goPageBack(){
+        this.props.history.goBack()
+      }
 
       public render(){
         let reviewCheck;
@@ -106,7 +107,7 @@ export default class ReviewSection extends React.Component<any, any>{
 
         else if (this.state.reviews !== undefined){
           reviewCheck =   <div className="reviews comment-form">
-        {/* <button onClick={this.goBack}><h3 className="text-white monte"><FontAwesomeIcon className="text-white" icon="long-arrow-alt-left" /> POWRÓT</h3></button> */}
+        <button onClick={this.goPageBack}><p className="text-white monte font-bold"><FontAwesomeIcon className="text-white text-xl" icon="long-arrow-alt-left" /> POWRÓT</p></button>
         <br/><br/><br/>
           {this.state.original.map(review => 
                             <ReviewsDetails idResponse={this.props.match.params.Id} setReviews={this.setReviews} key={review.idReview} review={review}/>)}
@@ -119,7 +120,7 @@ export default class ReviewSection extends React.Component<any, any>{
         }
         else {
           reviewCheck =   <div className="reviews comment-form">
-         {/* <button onClick={this.goBack}><h3 className="text-white monte"><FontAwesomeIcon className="text-white" icon="long-arrow-alt-left" /> POWRÓT</h3></button> */}
+        <button onClick={this.goPageBack}><p className="text-white monte font-bold"><FontAwesomeIcon className="text-white text-xl" icon="long-arrow-alt-left" /> POWRÓT</p></button>
         <br/><br/><br/>
           {this.state.original.map(review => 
                             <ReviewsDetails idResponse={this.props.match.params.Id} setReviews={this.setReviews} key={review.idReview} review={review}/>)}

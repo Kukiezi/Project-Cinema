@@ -49,8 +49,9 @@ namespace CinemaApi.Controllers
                     rev.UserReview.Clear();
                 }
             }
+            List<Review> revList = reviewList.OrderByDescending(o => o.Points).ToList();
             if (reviewList.Count != 0)
-                return Ok(reviewList);
+                return Ok(revList);
 
             return NotFound();
         }
