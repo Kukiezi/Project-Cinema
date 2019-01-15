@@ -150,7 +150,44 @@ namespace CinemaApi.Controllers
                 }
             };
         }
+        [Route("AddResponse")]
+        [AuthorizeToken]
+        [HttpPost]
+        public async Task<ApiResponse<Review>> AddResponse(Review review)
+        {
 
+            var errorResponse = new ApiResponse<Review>
+            {
+                // Set error message
+                ErrorMessage = "Nie mogliśmy znaleźć użytkownika, który dodawał opinie!"
+            };
+
+            var userIdentity = await mUserManager.FindByNameAsync(review.Author);
+            if (userIdentity == null)
+                return errorResponse;
+
+            context.Review.Add(new Review
+            {
+                UserId = userIdentity.Id,
+                Review1 = review.Review1,
+                IdMovies = review.IdMovies,
+                Author = review.Author,
+                IdResponse = review.IdResponse
+                
+            });
+
+            context.SaveChanges();
+
+            return new ApiResponse<Review>
+            {
+                Response = new Review
+                {
+                    Author = review.Author,
+                    Review1 = review.Review1,
+                    IdMovies = review.IdMovies
+                }
+            };
+        }
         [Route("UpVote")]
         [AuthorizeToken]
         [HttpPost]
