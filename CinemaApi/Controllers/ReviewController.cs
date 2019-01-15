@@ -30,7 +30,7 @@ namespace CinemaApi.Controllers
         [Route("GetReviews")]
         public ActionResult GetReviews(int id, string user)
         {
-            var reviewList = context.Review.Where(a => a.IdMovies == id).ToList();
+            var reviewList = context.Review.Where(a => a.IdMovies == id && a.IdResponse == null).ToList();
             if (user != null)
             {
                 var userContext = context.Users.Where(a => a.UserName == user).FirstOrDefault();
