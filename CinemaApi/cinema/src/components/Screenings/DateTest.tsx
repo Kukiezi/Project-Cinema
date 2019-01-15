@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './Screening.css';
-import {Alert} from 'react-native';
+import { Alert } from 'react-native';
  
 export default class DateTest extends React.Component {
  
