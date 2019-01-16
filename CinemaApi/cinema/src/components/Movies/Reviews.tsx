@@ -16,9 +16,11 @@ export default class Reviews extends React.Component<any, any>{
             userReview: {
                 "username": "",
                 "idReview": 0,
+                "action": 0
             },
             vote: 0,
-            responseCount: 0
+            responseCount: 0,
+            disabled: false
         };
       }
 
@@ -30,14 +32,40 @@ export default class Reviews extends React.Component<any, any>{
       }
 
       public async upVote(){
+  
         const userStorage = localStorage.getItem("User");
         let user;
         let data;
+        let action;
         if (userStorage !== null){
+            await this.setState({disabled: true})
+            if (this.state.review.vote === 0){
+               const reviewCopy = {...this.state.review}
+               reviewCopy.vote = 1;
+               reviewCopy.points += 1;
+               action = 0;
+               this.setState({review:reviewCopy})
+           }
+           else if (this.state.review.vote === 1){
+            const reviewCopy = {...this.state.review}
+            reviewCopy.vote = 0;
+            reviewCopy.points -=1;
+            action = 1;
+             this.setState({review:reviewCopy})
+           }
+           else if (this.state.review.vote === 2){
+            const reviewCopy = {...this.state.review}
+            reviewCopy.vote = 1;
+            reviewCopy.points += 2;
+            action = 2;
+             this.setState({review:reviewCopy})
+           }
+    
            user = JSON.parse(userStorage);
             await this.setState({userReview:{
                 username: user.response.username,
                 idReview: this.state.review.idReview,
+                action
             }})
             data = JSON.stringify(this.state.userReview);
             await fetch('https://localhost:44371/cinema/UpVote', {
@@ -48,11 +76,14 @@ export default class Reviews extends React.Component<any, any>{
                   'Authorization': "Bearer " + user.response.token
                 },
                 body: data
-              }).then(res=>res.json())
-                .then(res => this.setState({review: res.response}));
+              }).then(res=>res.json());
+                // .then(res => this.setState({review: res.response}));
+
+                await this.setState({disabled: false})
         }
         else{
         //   this.setState({errorMessage:"Musisz być użytkownikiem, żeby dodawać opinie!"})
+        await this.setState({disabled: false})
           return;
         }
        
@@ -69,31 +100,59 @@ export default class Reviews extends React.Component<any, any>{
         const userStorage = localStorage.getItem("User");
         let user;
         let data;
+        let action;
         if (userStorage !== null){
+            await this.setState({disabled: true})
+            if (this.state.review.vote === 0){
+               const reviewCopy = {...this.state.review}
+               reviewCopy.vote = 2;
+               reviewCopy.points -= 1;
+               action = 0;
+               this.setState({review:reviewCopy})
+           }
+           else if (this.state.review.vote === 1){
+            const reviewCopy = {...this.state.review}
+            reviewCopy.vote = 2;
+            reviewCopy.points -=2;
+            action = 1;
+             this.setState({review:reviewCopy})
+           }
+           else if (this.state.review.vote === 2){
+            const reviewCopy = {...this.state.review}
+            reviewCopy.vote = 0;
+            reviewCopy.points += 1;
+            action = 2;
+             this.setState({review:reviewCopy})
+           }
            user = JSON.parse(userStorage);
             await this.setState({userReview:{
                 username: user.response.username,
                 idReview: this.state.review.idReview,
+                action
             }})
             data = JSON.stringify(this.state.userReview);
-         
+            await fetch('https://localhost:44371/cinema/DownVote', {
+                method: 'post',
+                headers: {
+                  'Accept': 'application/json, text/plain, */*',
+                  'Content-Type': 'application/json',
+                  'Authorization': "Bearer " + user.response.token
+                },
+                body: data
+              }).then(res=>res.json());
+
+              await this.setState({disabled: false})
+               // .then(res => this.setState({review: res.response}));
         }
         else{
+            await this.setState({disabled: false})
         //   this.setState({errorMessage:"Musisz być użytkownikiem, żeby dodawać opinie!"})
           return;
         }
     
-        await fetch('https://localhost:44371/cinema/DownVote', {
-            method: 'post',
-            headers: {
-              'Accept': 'application/json, text/plain, */*',
-              'Content-Type': 'application/json',
-              'Authorization': "Bearer " + user.response.token
-            },
-            body: data
-          }).then(res=>res.json())
-            .then(res => this.setState({review: res.response}));
-
+      
+   
+          
             // console.log(this.state.review);
 
         // console.log(this.state.review.idReview);
@@ -134,8 +193,8 @@ public render() {
                     <p>{this.state.review.points}</p>
                 </div>
                 <div className="vote-section">
-                <a id="arrow-up" onClick={this.upVote}><FontAwesomeIcon className={arrowUpClass} icon="arrow-up" /> </a>
-                <a id="arrow-down" onClick={this.downVote}><FontAwesomeIcon className={arrowDownClass} icon="arrow-down" /></a>
+                <button id="arrow-up" disabled={this.state.disabled} onClick={this.upVote}><FontAwesomeIcon className={arrowUpClass} icon="arrow-up" /> </button>
+                <button id="arrow-down" disabled={this.state.disabled} onClick={this.downVote}><FontAwesomeIcon className={arrowDownClass} icon="arrow-down" /></button>
                 <br/> <br/>
                 <NavLink className="no-underline" to={{
                 pathname: '/ReviewSection/'+this.state.review.idReview
