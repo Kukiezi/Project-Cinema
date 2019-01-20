@@ -173,6 +173,14 @@ public async addReview(){
     this.setState({errorMessage:"Nie możesz dodawać pustych opinii!"})
     return;
   }
+  if (this.state.textareaValue.length < 6){
+    await this.setState({errorMessage:"Opinia musi mieć więcej niż 6 znaków!"})
+    return;
+  }
+  if (!this.state.textareaValue.replace(/\s/g, '').length) {
+    await this.setState({errorMessage:"Opinia musi mieć więcej niż 6 znaków!"})
+    return;
+  }
   else{
     this.setState({errorMessage:""})
   }

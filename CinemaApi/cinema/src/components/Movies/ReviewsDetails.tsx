@@ -22,19 +22,22 @@ export default class ReviewsDetails extends React.Component<any, any>{
               "review1": "",
               "idResponse": 0,
               "idMovies": 0,
-              "vote": 0
+              "vote": 0, 
+              "points": 0
             },
-            "textareaValue": "",
-            "errorMessage": "",
+            textareaValue: "",
+            errorMessage: "",
             loading: true,
             review: [],
             points: 0,
             userReview: {
                 "username": "",
                 "idReview": 0,
+                "action": 0
             },
             field: "",
-            displayField: true
+            displayField: true,
+            disabled: false
         };
       }
       
@@ -43,7 +46,9 @@ export default class ReviewsDetails extends React.Component<any, any>{
         const reviewCopy = JSON.parse(JSON.stringify(this.state.review2));
             reviewCopy[e.currentTarget.name] = e.currentTarget.value;
       
+            console.log(reviewCopy);
         this.setState({ review2: reviewCopy, textareaValue: e.currentTarget.value});
+        console.log(this.state.textareaValue);
     }
     
     public changeTextArea(){
@@ -61,12 +66,59 @@ export default class ReviewsDetails extends React.Component<any, any>{
           
       }
       else{
-        this.setState({errorMessage:"Musisz być użytkownikiem, żeby dodawać opinie!"})
+          console.log("heh");
+          this.changeTextArea();
+         await this.setState({errorMessage:"Musisz być użytkownikiem, żeby dodawać opinie!"})
+        console.log(this.state.errorMessage);
+        this.setState({
+            field : (<div className="comment-form text-center"> 
+            <label className="error-label2 font-bold text-red">{this.state.errorMessage}</label>
+            <textarea defaultValue={this.state.textareaValue} rows={5} id="reviewArea" name="review1" onChange={this.onChangeReview} className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..."/><br/>
+            
+            <button onClick={this.addReview} className="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">Dodaj Opinie!</button>
+            
+            </div> )
+        })
         return;
       }
     
       if(this.state.textareaValue === ""){
-        this.setState({errorMessage:"Nie możesz dodawać pustych opinii!"})
+        await this.setState({errorMessage:"Nie możesz dodawać pustych opinii!"})
+        this.setState({
+            field : (<div className="comment-form text-center"> 
+            <label className="error-label2 font-bold text-red">{this.state.errorMessage}</label>
+            <textarea defaultValue={this.state.textareaValue} rows={5} id="reviewArea" name="review1" onChange={this.onChangeReview} className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..."/><br/>
+            
+            <button onClick={this.addReview} className="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">Dodaj Opinie!</button>
+            
+            </div> )
+        })
+        return;
+      }
+      if (this.state.textareaValue.length < 6){
+        await this.setState({errorMessage:"Opinia musi mieć więcej niż 6 znaków!"})
+        this.setState({
+            field : (<div className="comment-form text-center"> 
+            <label className="error-label2 font-bold text-red">{this.state.errorMessage}</label>
+            <textarea defaultValue={this.state.textareaValue} rows={5} id="reviewArea" name="review1" onChange={this.onChangeReview} className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..."/><br/>
+            
+            <button onClick={this.addReview} className="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">Dodaj Opinie!</button>
+            
+            </div> )
+        })
+        return;
+      }
+      if (!this.state.textareaValue.replace(/\s/g, '').length) {
+        await this.setState({errorMessage:"Opinia musi mieć więcej niż 6 znaków!"})
+        this.setState({
+            field : (<div className="comment-form text-center"> 
+            <label className="error-label2 font-bold text-red">{this.state.errorMessage}</label>
+            <textarea defaultValue={this.state.textareaValue} rows={5} id="reviewArea" name="review1" onChange={this.onChangeReview} className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..."/><br/>
+            
+            <button onClick={this.addReview} className="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">Dodaj Opinie!</button>
+            
+            </div> )
+        })
         return;
       }
       else{
@@ -109,7 +161,7 @@ export default class ReviewsDetails extends React.Component<any, any>{
             this.setState({
                 field : (<div className="comment-form text-center"> 
                 <label className="error-label2 font-bold text-red">{this.state.errorMessage}</label>
-                <textarea rows={5} id="reviewArea" name="review1" onChange={this.onChangeReview} className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..."/><br/>
+                <textarea defaultValue={this.state.textareaValue} rows={5} id="reviewArea" name="review1" onChange={this.onChangeReview} className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..."/><br/>
                 
                 <button onClick={this.addReview} className="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">Dodaj Opinie!</button>
                 
@@ -132,11 +184,35 @@ export default class ReviewsDetails extends React.Component<any, any>{
         const userStorage = localStorage.getItem("User");
         let user;
         let data;
+        let action
         if (userStorage !== null){
+            await this.setState({disabled: true})
+            if (this.state.review.vote === 0){
+               const reviewCopy = {...this.state.review}
+               reviewCopy.vote = 1;
+               reviewCopy.points += 1;
+               action = 0;
+               this.setState({review:reviewCopy})
+           }
+           else if (this.state.review.vote === 1){
+            const reviewCopy = {...this.state.review}
+            reviewCopy.vote = 0;
+            reviewCopy.points -=1;
+            action = 1;
+             this.setState({review:reviewCopy})
+           }
+           else if (this.state.review.vote === 2){
+            const reviewCopy = {...this.state.review}
+            reviewCopy.vote = 1;
+            reviewCopy.points += 2;
+            action = 2;
+             this.setState({review:reviewCopy})
+           }
            user = JSON.parse(userStorage);
             await this.setState({userReview:{
                 username: user.response.username,
                 idReview: this.state.review.idReview,
+                action
             }})
             data = JSON.stringify(this.state.userReview);
             await fetch('https://localhost:44371/cinema/UpVote', {
@@ -148,10 +224,12 @@ export default class ReviewsDetails extends React.Component<any, any>{
                 },
                 body: data
               }).then(res=>res.json())
-                .then(res => this.setState({review: res.response}));
+                // .then(res => this.setState({review: res.response}));
+                await this.setState({disabled: false})
         }
         else{
         //   this.setState({errorMessage:"Musisz być użytkownikiem, żeby dodawać opinie!"})
+             await this.setState({disabled: false})
           return;
         }
       }
@@ -160,21 +238,39 @@ export default class ReviewsDetails extends React.Component<any, any>{
         const userStorage = localStorage.getItem("User");
         let user;
         let data;
+        let action;
         if (userStorage !== null){
+            await this.setState({disabled: true})
+            if (this.state.review.vote === 0){
+               const reviewCopy = {...this.state.review}
+               reviewCopy.vote = 2;
+               reviewCopy.points -= 1;
+               action = 0;
+               this.setState({review:reviewCopy})
+           }
+           else if (this.state.review.vote === 1){
+            const reviewCopy = {...this.state.review}
+            reviewCopy.vote = 2;
+            reviewCopy.points -=2;
+            action = 1;
+             this.setState({review:reviewCopy})
+           }
+           else if (this.state.review.vote === 2){
+            const reviewCopy = {...this.state.review}
+            reviewCopy.vote = 0;
+            reviewCopy.points += 1;
+            action = 2;
+             this.setState({review:reviewCopy})
+           }
            user = JSON.parse(userStorage);
             await this.setState({userReview:{
                 username: user.response.username,
                 idReview: this.state.review.idReview,
+                action
             }})
             data = JSON.stringify(this.state.userReview);
          
-        }
-        else{
-        //   this.setState({errorMessage:"Musisz być użytkownikiem, żeby dodawać opinie!"})
-          return;
-        }
-    
-        await fetch('https://localhost:44371/cinema/DownVote', {
+            await fetch('https://localhost:44371/cinema/DownVote', {
             method: 'post',
             headers: {
               'Accept': 'application/json, text/plain, */*',
@@ -183,7 +279,15 @@ export default class ReviewsDetails extends React.Component<any, any>{
             },
             body: data
           }).then(res=>res.json())
-            .then(res => this.setState({review: res.response}));
+          await this.setState({disabled: false})
+            // .then(res => this.setState({review: res.response}));
+        }
+        else{
+            await this.setState({disabled: false})
+        //   this.setState({errorMessage:"Musisz być użytkownikiem, żeby dodawać opinie!"})
+          return;
+        }
+     
       }
  
 
@@ -222,8 +326,8 @@ public render() {
                     <p>{this.state.review.points}</p>
                 </div>
                 <div className="vote-section">
-                <a id="arrow-up" onClick={this.upVote}><FontAwesomeIcon className={arrowUpClass} icon="arrow-up" /> </a>
-                <a id="arrow-down" onClick={this.downVote}><FontAwesomeIcon className={arrowDownClass} icon="arrow-down" /></a>
+                <button id="arrow-up" disabled={this.state.disabled} onClick={this.upVote}><FontAwesomeIcon className={arrowUpClass} icon="arrow-up" /> </button>
+                <button id="arrow-down" disabled={this.state.disabled} onClick={this.downVote}><FontAwesomeIcon className={arrowDownClass} icon="arrow-down" /></button>
                 <br/>   <br/>
                 <button className="monte text-grey hover:text-white" onClick = {this.displayField}> <FontAwesomeIcon icon="comment" /> Odpowiedz</button>
                 {this.state.field}

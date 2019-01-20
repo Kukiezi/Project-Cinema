@@ -21,6 +21,18 @@ namespace CinemaApi.Controllers
         public ActionResult GetScreening()
         {
             var screeningsList = context.Screening.ToList();
+            foreach (var item in screeningsList)
+            {
+                ScreeningExt ext = new ScreeningExt
+                {
+                    IdMovies = item.IdMovies,
+                    IdRoom = item.IdRoom,
+                    IdScreening = item.IdScreening,
+                    ScreeningDate = item.ScreeningDate,
+                    MovieName = context.Movies.Where(a => a.Id == item.IdMovies).FirstOrDefault().Title
+                };
+            }
+         
             if (screeningsList.Count != 0)
                 return Ok(screeningsList);
 
