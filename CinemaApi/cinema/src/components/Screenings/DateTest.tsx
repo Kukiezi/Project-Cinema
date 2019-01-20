@@ -1,28 +1,28 @@
-import * as React from 'react';
-import './Screening.css';
-import { Alert } from 'react-native';
+// import * as React from 'react';
+// import './Screening.css';
+// import { Alert } from 'react-native';
  
-export default class DateTest extends React.Component {
+// export default class DateTest extends React.Component {
  
      
-  ShowCurrentDate=()=>{
+//   ShowCurrentDate=()=>{
  
-      var date = new Date().getDate();
-      var month = new Date().getMonth() + 1;
-      var year = new Date().getFullYear();
+//       var date = new Date().getDate();
+//       var month = new Date().getMonth() + 1;
+//       var year = new Date().getFullYear();
  
-      Alert.alert(date + '-' + month + '-' + year);
+//       Alert.alert(date + '-' + month + '-' + year);
  
-     }
+//      }
  
-  render() {
+//   render() {
  
-    return (
+//     return (
    
-        <div className="Day-header">{this.ShowCurrentDate} </div>
+//         <div className="Day-header">{this.ShowCurrentDate} </div>
        
  
-    );
-  }
-}
+//     );
+//   }
+// }
  

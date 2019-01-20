@@ -22,7 +22,7 @@ import { DeleteMovie } from '../AdminPanel/Movies/DeleteMovie';
 import Screenings from '../Screenings/MovieSchedule';
 // import decode from 'jwt-decode';
 
-import DateTest from '../Screenings/DateTest';
+import MovieSchedule from '../Screenings/MovieSchedule';
 
 class App extends React.Component<any, any> {
 
@@ -77,7 +77,7 @@ public render() {
      <Route path="/Reservation/:Reserved" component={Reservation}/>
      <Route path="/Events" component={Events}/>
      <Route path="/Repertuar" component={Screenings}/>
-     <Route path="/Date" component={DateTest}/>
+     <Route path="/Date" component={MovieSchedule}/>
      <Route component={NotExist}/>
      {/* <AuthRoute exact path="/auth" component={Auth}/> */}
     </Switch>

@@ -20,7 +20,30 @@ namespace CinemaApi.Controllers
         [Route("GetScreenings")]
         public ActionResult GetScreening()
         {
+            /*DateTime Day1 = DateTime.Now;
+            DateTime Day2 = Day1.AddDays(1);
+            DateTime Day3 = Day1.AddDays(2);
+            DateTime Day4 = Day1.AddDays(3);
+            DateTime Day5 = Day1.AddDays(4);
+            DateTime Day6 = Day1.AddDays(5);
+            DateTime Day7 = Day1.AddDays(6);
+
+            var screeningsList = context.Screening.Where(a => a.ScreeningDate >= Day1 && a.ScreeningDate < Day2).ToList();*/
+
             var screeningsList = context.Screening.ToList();
+
+            foreach (var item in screeningsList)
+            {
+                ScreeningExt ext = new ScreeningExt
+                {
+                    IdMovies = item.IdMovies,
+                    IdRoom = item.IdRoom,
+                    IdScreening = item.IdScreening,
+                    ScreeningDate = item.ScreeningDate,
+                    MovieName = context.Movies.Where(a => a.Id == item.IdMovies).FirstOrDefault().Title
+                };
+            }
+
             if (screeningsList.Count != 0)
                 return Ok(screeningsList);
 
