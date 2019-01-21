@@ -145,6 +145,103 @@ namespace CinemaApi.Controllers
                 };
         }
 
+
+        [AllowAnonymous]
+        [Route("personalData")]
+        public async Task<ApiResponse<RegisterResultApiModel>> PersonalDataAsync(
+           [FromBody] RegisterCredentialsApiModel registerCredentials)
+        {
+            // TODO: Localize all strings
+            // The message when we fail to login
+            var invalidErrorMessage = "Prosze wypełnić wszystkie pola do zarejestrowania się";
+            // The error response for a failed login
+            var errorResponse = new ApiResponse<RegisterResultApiModel>
+            {
+                // Set error message
+                ErrorMessage = invalidErrorMessage
+            };
+
+            var exist = await mUserManager.FindByEmailAsync(registerCredentials.Email);
+            if (exist != null)
+            {
+                exist.LastName = registerCredentials.LastName;
+                exist.FirstName = registerCredentials.FirstName;
+                await mUserManager.UpdateAsync(exist);
+                return new ApiResponse<RegisterResultApiModel>
+                {
+                    ErrorMessage = "Sukces"
+                };
+
+
+            }
+            else
+            {
+                // If we have no credentials...
+                if (registerCredentials == null)
+                    // Return failed response
+                    return errorResponse;
+
+                // Make sure we have a user name
+                if (string.IsNullOrWhiteSpace(registerCredentials.FirstName) || string.IsNullOrWhiteSpace(registerCredentials.LastName) || string.IsNullOrWhiteSpace(registerCredentials.Email))
+                    // Return error message to user
+                    return errorResponse;
+
+                // Create the desired user from the given details
+                var user = new ApplicationUser
+                {
+                    FirstName = registerCredentials.FirstName,
+                    LastName = registerCredentials.LastName,
+                    Email = registerCredentials.Email
+                };
+                user.UserName = user.Id;
+                // Try and create a user
+                var result = await mUserManager.CreateAsync(user, "Password");
+
+                // If the registration was successful...
+                if (result.Succeeded)
+                {
+                    // Get the user details
+                    var userIdentity = await mUserManager.FindByNameAsync(user.UserName);
+
+                    // Send email verification
+                    //await SendUserEmailVerificationAsync(user);
+
+                    // Return valid response containing all users details
+                    return new ApiResponse<RegisterResultApiModel>
+                    {
+                        ErrorMessage = "Sukces"
+                    };
+
+
+                }
+                // Otherwise if it failed...
+                else
+                    // Return the failed response
+                    return new ApiResponse<RegisterResultApiModel>
+                    {
+                        // Aggregate all errors into a single error string
+                        ErrorMessage = result.Errors.AggregateErrors()
+                    };
+            }
+        }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("GetId")]
+        public List<string> GetId(string FirstName ,string LastName, string Email)
+        {
+            //var room = mContext.Screening.Where(a => a.IdScreening == id).Select(a => a.IdRoom).FirstOrDefault();
+            //var userIdentity = await mUserManager.FindByNameAsync(user.UserName);
+
+            List<string> id = new List<string>
+            {
+                 mContext.Users.Where(a => a.Email == Email &&  a.LastName == LastName && a.FirstName == FirstName).Select(a => a.Id).FirstOrDefault()
+            };
+            return id;
+
+        }
+
         /// <summary>
         /// Logs in a user using token-based authentication
         /// </summary>

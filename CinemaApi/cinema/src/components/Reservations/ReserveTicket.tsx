@@ -4,12 +4,6 @@ import './ReserveTicket.css';
 import Seats, { IReservation } from './Seats'
 import { NavLink } from 'react-router-dom';
 
-
-
-
-
-
-
 class ReserveTicket extends React.Component <any, IState>{
  
   public state: IState = {
@@ -64,12 +58,12 @@ public updateReservation(value: string, check: boolean)
       <div className="w-full h-64 text-grey-darker text-center bg-white px-4 py-2 m-2 row-left room-width">
          
       {this.state.seats.map(seat => 
-                    <Seats triggerUpdate={this.updateReservation} key={i=i+1} seat={seat}/>)}
-                    
+                    <Seats triggerUpdate={this.updateReservation} key={i=i+1} seat={seat}/>)}                 
   </div> 
   
   <NavLink className="buy-btn" to={{
-                pathname: '/Reservation/'+this.state.Reserved +"/" + this.state.Screening,
+               // pathname: '/Reservation/'+this.state.Reserved +"/" + this.state.Screening,
+               pathname: '/PersonalData/'+this.state.Reserved +"/"+ this.state.Screening,
               }}> 
               Zarezerwuj 
       </NavLink>
