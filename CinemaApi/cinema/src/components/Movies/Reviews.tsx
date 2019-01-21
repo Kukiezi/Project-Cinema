@@ -163,6 +163,16 @@ export default class Reviews extends React.Component<any, any>{
  
 
 public render() {
+    let user;
+    let checkRole = false;
+    let deleteOpinion;
+    const userStorage = localStorage.getItem("User");
+    if (userStorage != null){
+       user = JSON.parse(userStorage);
+       if (user.response.role === "Moderator"){
+           checkRole = true;
+       }
+    }
     const arrowUp = document.getElementById('arrow-up');
     const arrowDown = document.getElementById('arrow-down');
     let arrowUpClass;
@@ -180,6 +190,13 @@ public render() {
             arrowUpClass = 'arrow-grey'
             arrowDownClass = 'arrow-white'
         }
+    }
+
+    if (checkRole){
+        deleteOpinion = <div><h1>DELETE</h1></div>
+    } 
+    else{
+        deleteOpinion = <></>
     }
   
     
@@ -201,6 +218,7 @@ public render() {
               }}>
               <p className="monte text-grey hover:text-white"> <FontAwesomeIcon icon="comment" /> Odpowiedzi({this.state.responseCount})</p> 
          </NavLink>
+                {deleteOpinion}
                 </div>
                 <hr className="white-hr"/>
                 <br/> <br/>

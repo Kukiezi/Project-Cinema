@@ -10,6 +10,12 @@ namespace CinemaApi.Models.UserModels
         #region Public Properties
 
         /// <summary>
+        /// Role of the current user
+        /// </summary>
+        /// <remarks>Sends Role of the current user</remarks>
+        public string Role { get; set; }
+
+        /// <summary>
         /// The authentication token used to stay authenticated through future requests
         /// </summary>
         /// <remarks>The Token is only provided when called from the login methods</remarks>

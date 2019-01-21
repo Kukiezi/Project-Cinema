@@ -420,66 +420,6 @@ namespace CinemaApi.Controllers
             }
 
             return errorResponse;
-
-
-            //if (checkVote == null)
-            //{
-            //    var review = context.Review.Where(a => a.IdReview == userReview.IdReview).FirstOrDefault();
-            //    var userIdentity = await mUserManager.FindByNameAsync(userReview.Username);
-            //    review.Points -= 1;
-            //    UserReview userDownvote = new UserReview();
-            //    userDownvote.UserId = userIdentity.Id;
-            //    userDownvote.ReviewId = review.IdReview;
-            //    userDownvote.Vote = 2;
-
-            //    context.UserReview.Add(userDownvote);
-
-            //    context.SaveChanges();
-            //    review.Vote = 2;
-
-            //    return new ApiResponse<Review>
-            //    {
-            //        Response = new Review
-            //        {
-            //            Author = review.Author,
-            //            Review1 = review.Review1,
-            //            IdMovies = review.IdMovies,
-            //            Points = review.Points,
-            //            UserId = userIdentity.Id,
-            //            IdReview = review.IdReview,
-            //            Vote = review.Vote,
-            //            IdResponse = review.IdResponse
-            //        }
-            //    };
-            //}
-
-
-            //var checkVote = context.UserReview
-            //    .Where(a => a.UserId == userIdentity.Id && a.ReviewId == review.IdReview).FirstOrDefault();
-            //var checkUpVote = context.UserReview
-            //    .Where(a => a.UserId == userIdentity.Id && a.ReviewId == review.IdReview && a.Vote == 1).FirstOrDefault();
-
-
-            //else if (checkVote.checkVote.Vote == 1)
-            //{
-            //    checkVote.checkVote.Vote = 2;
-            //    checkVote.review.Points -= 2;
-
-            //    context.SaveChanges();
-            //    checkVote.review.Vote = 2;
-            //}
-            //else
-            //{
-            //    context.UserReview.Remove(checkVote.checkVote);
-            //    checkVote.review.Points += 1;
-            //    context.SaveChanges();
-            //    checkVote.review.Vote = 0;
-            //}
-
-
-
-
-
         }
         [Route("GetPoints")]
         [HttpGet]
@@ -504,26 +444,11 @@ namespace CinemaApi.Controllers
             return Ok(review);
         }
 
-        //[Route("GetVote")]
-        //[HttpGet]
-        //public IActionResult GetVote(int id, string user)
-        //{
-        //    var review = context.Review.Where(a => a.IdReview == id).FirstOrDefault();
-        //    if (user != null)
-        //    {
-        //        var userContext = context.Users.Where(a => a.UserName == user).FirstOrDefault();
+        [HttpPost]
+        public IActionResult DeleteReview(int id, )
+        {
 
-        //        var checkVote = context.UserReview
-        //            .Where(a => a.UserId == userContext.Id && a.ReviewId == review.IdReview).FirstOrDefault();
+        }
 
-        //        if (checkVote == null)
-        //            review.Vote = 0;
-        //        else if (checkVote.Vote == 1)
-        //            review.Vote = 1;
-        //        else if (checkVote.Vote == 2)
-        //            review.Vote = 2;
-        //    }
-        //    return Ok(review);
-        //}
     }
 }

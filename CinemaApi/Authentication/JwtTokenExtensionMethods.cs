@@ -1,5 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -18,8 +19,9 @@ namespace CinemaApi
         /// </summary>
         /// <param name="user">The users details</param>
         /// <returns></returns>
-        public static string GenerateJwtToken(this ApplicationUser user)
+        public static string GenerateJwtToken(this ApplicationUser user, string role)
         {
+           
             // Set our tokens claims
             var claims = new[]
             {
@@ -30,7 +32,9 @@ namespace CinemaApi
                 new Claim(ClaimsIdentity.DefaultNameClaimType, user.UserName),
 
                 // Add user Id so that UserManager.GetUserAsync can find the user based on Id
-                new Claim(ClaimTypes.NameIdentifier, user.Id)
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+
+                new Claim(ClaimTypes.Role, role)
             };
 
             // Create the credentials used to generate the token
@@ -60,7 +64,7 @@ namespace CinemaApi
         /// <returns></returns>
       
 
-        public static string GenerateJwtRefreshToken(this ApplicationUser user)
+        public static string GenerateJwtRefreshToken(this ApplicationUser user, string role)
         {
             // Set our tokens claims
             var claims = new[]
@@ -69,10 +73,12 @@ namespace CinemaApi
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("N")),
 
                 // The username using the Identity name so it fills out the HttpContext.User.Identity.Name value
-                //new Claim(ClaimsIdentity.DefaultNameClaimType, user.UserName),
+                new Claim(ClaimsIdentity.DefaultNameClaimType, user.UserName),
 
                 // Add user Id so that UserManager.GetUserAsync can find the user based on Id
-                new Claim(ClaimTypes.NameIdentifier, user.Id)
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+
+                new Claim(ClaimTypes.Role, role)
             };
 
             // Create the credentials used to generate the token
