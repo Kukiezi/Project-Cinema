@@ -5,10 +5,13 @@ import Fade from '../App/Fade';
 import Movies from '../Movies/Movies';
 import { NavLink } from 'react-router-dom';
 
-class Screenings extends React.Component<any, IState>{
+class MovieSchedule extends React.Component<any, IState>{
 
     public state: IState = {
-        "screenings": [],
+        "screenings": {
+        "day1": [], 
+        "day2": []
+        },
         "movies": []
     };
 
@@ -20,10 +23,12 @@ class Screenings extends React.Component<any, IState>{
     public async componentDidMount() {
         const result = await fetch('https://localhost:44371/cinema/GetScreenings');
         const screenings = await result.json();
-        this.setState({ screenings });
+        await this.setState({ screenings });
         const result2 = await fetch('https://localhost:44371/cinema/GetMovies');
   const movies = await result2.json();
   this.setState({ movies });
+  console.log(this.state.screenings[0][0].idScreening);
+
     }
     
 
@@ -50,9 +55,10 @@ class Screenings extends React.Component<any, IState>{
           <Fade>
           <div className="Day-header">        
             <div className="Days" ><br/><br/>
+            
               <div>
 
-                       ({this.state.screenings.map(screening => 
+                       ({this.state.screenings[0].map(screening => 
                            <Screening key={screening.idScreening} screening={screening}/>)} 
                         
                    
@@ -86,17 +92,24 @@ class Screenings extends React.Component<any, IState>{
     }
 
 }
-export default Screenings;
+export default MovieSchedule;
 
 export interface IState {
- screenings: IScreening[],
- movies: IMovies[]
+ screenings: IList,
+ movies: IMovies[],
 }
+
+export interface IList {
+  day1: IScreening[],
+  day2: IScreening[],
+ }
 
 export interface IScreening {
   idScreening: number,
   screeningDate: Date,
+  movieName: string,
 }
+
 
 export interface IMovies {
     id: number,

@@ -20,7 +20,7 @@ namespace CinemaApi.Controllers
         [Route("GetScreenings")]
         public ActionResult GetScreening()
         {
-            /*DateTime Day1 = DateTime.Now;
+            DateTime Day1 = DateTime.Now;
             DateTime Day2 = Day1.AddDays(1);
             DateTime Day3 = Day1.AddDays(2);
             DateTime Day4 = Day1.AddDays(3);
@@ -28,9 +28,14 @@ namespace CinemaApi.Controllers
             DateTime Day6 = Day1.AddDays(5);
             DateTime Day7 = Day1.AddDays(6);
 
-            var screeningsList = context.Screening.Where(a => a.ScreeningDate >= Day1 && a.ScreeningDate < Day2).ToList();*/
+            /*var screeningsList = context.Screening.Where(a => a.ScreeningDate >= Day1 && a.ScreeningDate < Day2).ToList();*/
 
             var screeningsList = context.Screening.ToList();
+
+            List<ScreeningExt> screeningsExtList = new List<ScreeningExt>();
+            List<List<ScreeningExt>> list = new List<List<ScreeningExt>>();
+            List<ScreeningExt> day1 = new List<ScreeningExt>();
+            List<ScreeningExt> day2 = new List<ScreeningExt>();
 
             foreach (var item in screeningsList)
             {
@@ -40,12 +45,31 @@ namespace CinemaApi.Controllers
                     IdRoom = item.IdRoom,
                     IdScreening = item.IdScreening,
                     ScreeningDate = item.ScreeningDate,
-                    MovieName = context.Movies.Where(a => a.Id == item.IdMovies).FirstOrDefault().Title
-                };
-            }
+                    MovieName = context.Movies.Where(a => a.Id == item.IdMovies).FirstOrDefault().Title,
+                    showtime1 = item.showtime1,
+                    showtime2 = item.showtime2,
+                    showtime3 = item.showtime3
 
-            if (screeningsList.Count != 0)
-                return Ok(screeningsList);
+                };
+
+                if (item.ScreeningDate >= Day2 && item.ScreeningDate < Day3)
+                {
+                    day1.Add(ext);
+                }
+                else if (item.ScreeningDate >= Day3 && item.ScreeningDate < Day4)
+                {
+                    day2.Add(ext);
+                }
+
+                //screeningsExtList.Add(ext);
+            }
+            list.Add(day1);
+            list.Add(day2);
+
+          
+
+            if (list.Count != 0)
+                return Ok(list);
 
             return NotFound();
         }

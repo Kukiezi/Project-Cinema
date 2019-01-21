@@ -11,6 +11,9 @@ namespace CinemaApi.Models
         public int IdRoom { get; set; }
         public DateTime ScreeningDate { get; set; }
         public int IdMovies { get; set; }
+        public TimeSpan showtime1 { get; set; }
+        public TimeSpan showtime2 { get; set; }
+        public TimeSpan showtime3 { get; set; }
 
         public string MovieName { get; set; }
     }

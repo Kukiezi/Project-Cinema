@@ -19,10 +19,9 @@ import DetailsPanel from '../AdminPanel/Movies/DetailsPanel';
 import { AddMovie } from '../AdminPanel/Movies/AddMovie';
 import { DeleteMovie } from '../AdminPanel/Movies/DeleteMovie';
 
-import Screenings from '../Screenings/MovieSchedule';
+import MovieSchedule from '../Screenings/MovieSchedule';
 // import decode from 'jwt-decode';
 
-import MovieSchedule from '../Screenings/MovieSchedule';
 
 class App extends React.Component<any, any> {
 
@@ -76,8 +75,7 @@ public render() {
      <Route path="/MovieManagment" component={MovieManagment}/>
      <Route path="/Reservation/:Reserved" component={Reservation}/>
      <Route path="/Events" component={Events}/>
-     <Route path="/Repertuar" component={Screenings}/>
-     <Route path="/Date" component={MovieSchedule}/>
+     <Route path="/Repertuar" component={MovieSchedule}/>
      <Route component={NotExist}/>
      {/* <AuthRoute exact path="/auth" component={Auth}/> */}
     </Switch>

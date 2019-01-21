@@ -24,44 +24,10 @@ constructor(props: IState) {
    
   public render() {
     return (
-      <div><button className="day-btn">{this.props.screening.screeningDate}</button> </div>
-      // <div className="App">
-        
-      //   <Fade>
-      //   <p className="p-8 List-header">
-      //     Repetuar
-      //   </p>
-      //   </Fade>
-
-      // <Fade>
-      // <div className="Movie-list" id="Movie-list"> 
-      
-         
-      // {this.state.movies.map(movie => <Movies key={movie.id} movie={movie}/>)}<br/>
-
-      // </div>
-      // </Fade>
-
-      // <Fade>
-      // <div className="Day-header">        
-      //   <div className="Days" ><br/><br/>
-      //   <button className="day-btn">{this.props.screening.screeningDate}</button> 
-      //   </div>
-      //  </div>
-      //  </Fade>
-    
-      // <div className="Day-header">
-      // <br/><NavLink className="title-btn" to="/Details/1" >Garfield</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >9:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >11:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >14:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >20:00</NavLink>
-      // <br/><NavLink className="title-btn" to="/Details/2" >Iniemamocni</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >9:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >11:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >14:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >20:00</NavLink>
-      // <br/><NavLink className="title-btn" to="/Details/3" >Robin Hood</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >9:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >11:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >14:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >20:00</NavLink>
-      // <br/><NavLink className="title-btn" to="/Details/4" >Kraina Lodu</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >9:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >11:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >14:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >20:00</NavLink>
-      // <br/><NavLink className="title-btn" to="/Details/5" >Ted 2</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >9:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >11:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >14:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >20:00</NavLink>
-      // <br/><NavLink className="title-btn" to="/Details/8" >Avatar</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >9:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >11:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >14:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >20:00</NavLink>
-      // </div>
-   
-      //   </div>
-
-    
+      <div>
+      <div><button className="day-btn">{this.props.screening.day1.movieName}</button> </div>     
+      <div><button className="day-btn">{this.props.screening.day1.screeningDate}</button> </div>
+      </div>
     );
   }
 }
