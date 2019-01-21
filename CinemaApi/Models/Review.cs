@@ -17,6 +17,7 @@ namespace CinemaApi.Models
         public string UserId { get; set; }
         public int Points { get; set; }
         public int Vote { get; set; }
+        public int? IdResponse { get; set; }
 
         public Movies IdMoviesNavigation { get; set; }
         public ICollection<UserReview> UserReview { get; set; }
