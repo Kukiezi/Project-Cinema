@@ -9,7 +9,7 @@ import NotExist from "./NotExist";
 import Navbar from '../Navbar/Navbar';
 import ReserveTicket from '../Reservations/ReserveTicket';
 import ResetPassword from '../Users/ResetPassword';
-
+import PersonalData from '../Reservations/PersonalData';
 import Reservation from '../Reservations/Reservation';
 import Events from '../Events/Events';
 
@@ -113,7 +113,8 @@ public render() {
      <AuthRoute path="/ResetPassword" component={ResetPassword}/>
      <AuthRoute path="/AdminPanel" component={AdminPanel}/>
      <AuthRoute path="/MovieManagment" component={MovieManagment}/>
-     <AuthRoute path="/Reservation/:Reserved" component={Reservation}/>
+     <AuthRoute path="/Reservation/:Reserved/:Screening/:UserId" component={Reservation}/>
+     <AuthRoute path="/PersonalData/:Reserved/:Screening" component={PersonalData}/>
      <AuthRoute path="/Events" component={Events}/>
      <AuthRoute path="/Repertuar" component={MovieSchedule}/>
      <AuthRoute path="/UserProfil" component={UserProfil}/>

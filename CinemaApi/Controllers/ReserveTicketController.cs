@@ -45,7 +45,14 @@ namespace CinemaApi.Controllers
             return layout;
 
         }
+        [HttpGet]
+        [Route("GetUser")]
+        public ApplicationUser GetUser(string id)
+        {
+            var user = context.Users.Where(a => a.Id == id).FirstOrDefault();
+            return user;
 
+        }
         [HttpPost]
         [Route("AddReservation")]
         public ActionResult AddReservation(int user, int screening, string seat)
