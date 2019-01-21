@@ -55,12 +55,12 @@ namespace CinemaApi.Controllers
         }
         [HttpPost]
         [Route("AddReservation")]
-        public ActionResult AddReservation(int user, int screening, string seat)
+        public ActionResult AddReservation(string user, int screening, string seat)
         {
             context.Reservation.Add(new Reservation
             {
-               
-                IdUserAccount = user,
+                
+                IdUser = "",
                 IdScreening = screening,
                 SeatsReserved = seat
             });
