@@ -5,34 +5,50 @@ import Fade from '../App/Fade';
 import Movies from '../Movies/Movies';
 import { NavLink } from 'react-router-dom';
 
-class MovieSchedule extends React.Component<any, IState>{
+class MovieSchedule extends React.Component<any, any>{
 
-    public state: IState = {
-        "screenings": {
-        "day1": [], 
-        "day2": []
-        },
-        "movies": []
-    };
+    // public state: IState = {
+    //     "screenings": {
+    //     "day1": [], 
+    //     "day2": []
+    //     },
+    //     "movies": []
+    // };
 
-    constructor(props: IState) {
+    constructor(props: any) {
         super(props);
+       
+        this.state = {
+          screenings: {
+            day1: [],
+            day2: [],
+            day3: [],
+            day4: [],
+            day5: [],
+            day6: []
+          },
+          movies: [],
+          refresh: 0
+        }
       
       } 
 
     public async componentDidMount() {
         const result = await fetch('https://localhost:44371/cinema/GetScreenings');
         const screenings = await result.json();
-        await this.setState({ screenings });
+       this.setState({ screenings });
         const result2 = await fetch('https://localhost:44371/cinema/GetMovies');
-  const movies = await result2.json();
-  this.setState({ movies });
-  console.log(this.state.screenings[0][0].idScreening);
+        const movies = await result2.json();
+        this.setState({ movies });
+        // console.log(this.state.screenings.day1[0]);
 
     }
     
 
     public render() {
+ 
+    
+     
 
         return(
 
@@ -48,21 +64,16 @@ class MovieSchedule extends React.Component<any, IState>{
           <div className="Movie-list" id="Movie-list"> 
              
           {this.state.movies.map(movie => <Movies key={movie.id} movie={movie}/>)}<br/>
+       
     
           </div>
           </Fade>
-    
+       
           <Fade>
           <div className="Day-header">        
             <div className="Days" ><br/><br/>
-            
-              <div>
-
-                       ({this.state.screenings[0].map(screening => 
-                           <Screening key={screening.idScreening} screening={screening}/>)} 
-                        
-                   
-                    </div>
+            <div>{this.state.screenings.day2.map(day => 
+              <Screening key={day.idScreening} screening={day}/>)}</div>
             </div>
            </div>
            </Fade>
@@ -94,31 +105,31 @@ class MovieSchedule extends React.Component<any, IState>{
 }
 export default MovieSchedule;
 
-export interface IState {
- screenings: IList,
- movies: IMovies[],
-}
+// export interface IState {
+//  screenings: IList,
+//  movies: IMovies[],
+// }
 
-export interface IList {
-  day1: IScreening[],
-  day2: IScreening[],
- }
+// export interface IList {
+//   day1: IScreening[],
+//   day2: IScreening[],
+//  }
 
-export interface IScreening {
-  idScreening: number,
-  screeningDate: Date,
-  movieName: string,
-}
+// export interface IScreening {
+//   idScreening: number,
+//   screeningDate: Date,
+//   movieName: string,
+// }
 
 
-export interface IMovies {
-    id: number,
-    title: string,
-    description: string,
-    picture: string,
-    icon: string,
-    genre: string,
-    watchingTime: string,
-    director: string,
-  }
+// export interface IMovies {
+//     id: number,
+//     title: string,
+//     description: string,
+//     picture: string,
+//     icon: string,
+//     genre: string,
+//     watchingTime: string,
+//     director: string,
+//   }
   

@@ -10,40 +10,47 @@ import 'src/assets/css/Spinner.css';
 
 
 
-class Screening extends React.Component<any, IState> {
+class Screening extends React.Component<any, any> {
 
-  public state: IState = {
-    "movies": []
-};
+//   public state: IState = {
+//     "movies": []
+// };
 
-constructor(props: IState) {
+constructor(props: any) {
   super(props);
 
+  this.state = {
+    movies: [],
+    screening: this.props.screening
+  }
 } 
 
-   
+  public componentDidMount(){
+    console.log(this.props.screening)
+  }   
+
   public render() {
     return (
       <div>
-      <div><button className="day-btn">{this.props.screening.day1.movieName}</button> </div>     
-      <div><button className="day-btn">{this.props.screening.day1.screeningDate}</button> </div>
+      <div><button className="day-btn">{this.state.screening.movieName}</button> </div>     
+      <div><button className="day-btn">{this.state.screening.screeningDate}</button> </div>
       </div>
     );
   }
 }
 
 export default Screening;
-export interface IState {
-  movies: IMovies[]
-}
+// export interface IState {
+//   movies: IMovies[]
+// }
 
-export interface IMovies {
-  id: number,
-  title: string,
-  description: string,
-  picture: string,
-  icon: string,
-  genre: string,
-  watchingTime: string,
-  director: string,
-}
+// export interface IMovies {
+//   id: number,
+//   title: string,
+//   description: string,
+//   picture: string,
+//   icon: string,
+//   genre: string,
+//   watchingTime: string,
+//   director: string,
+// }

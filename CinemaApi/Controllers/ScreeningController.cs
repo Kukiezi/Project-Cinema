@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CinemaApi.Models;
+using CinemaApi.Models.WeekModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaApi.Controllers
@@ -18,7 +19,7 @@ namespace CinemaApi.Controllers
         }
         [HttpGet]
         [Route("GetScreenings")]
-        public ActionResult GetScreening()
+        public ActionResult<WeekModel> GetScreening()
         {
             DateTime Day1 = DateTime.Now;
             DateTime Day2 = Day1.AddDays(1);
@@ -65,11 +66,15 @@ namespace CinemaApi.Controllers
             }
             list.Add(day1);
             list.Add(day2);
-
-          
+            WeekModel week = new WeekModel
+            {
+                Day1 = day1,
+                Day2 = day2
+            };
+            
 
             if (list.Count != 0)
-                return Ok(list);
+                return Ok(week);
 
             return NotFound();
         }
