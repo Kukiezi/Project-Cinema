@@ -28,7 +28,8 @@ Dawid Weltrowski-Knopik:
 - repertuar
 
 Filip Czyż:
-- rezerwacja i zakup biletów
+- rezerwacja biletów
+- system tworzenia tymczasowych użytkowników
 - szczegóły filmu, rating i komentarze
 - repertuar
 - profil użytkownika
@@ -37,6 +38,7 @@ Alicja Wolak:
 - repertuar
 - stylizacja repertuaru
 - struktura bazy danych
+- profil użytkownika
 
 Jagoda Ossowska:
 - profil użytkownika
@@ -44,3 +46,4 @@ Jagoda Ossowska:
 - stylizacja profilu użytkownika
 - stylizacja panelu administratora
 - stylizacja repertuaru
+- stylizowanie
