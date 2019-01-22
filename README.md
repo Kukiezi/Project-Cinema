@@ -9,9 +9,11 @@ Zespół:
 
 
 Opis: 
-Aplikacja internetowa dla kina studyjnego do obsługi klienta jak i strony samej w sobie. Aplikacja będzie gromadzić dane na
-temat seansów, wydarzeń filmowych, newsów dotyczących produkcji filmowych, a także umożliwi prowadzenie użytkownikom
-dyskusji na naszym forum. Ze strony pracownika możliwe będzie dodawanie wydarzeń, nowych placówek.
+Kino Studyjne jest aplikacją internetową imitującą działanie strony kina jak i implementującej mechanizmy forumowe (komentarze, opinie, głosowanie) oraz użytkowników wraz z rolami. Dzięki technologii React aplikacja łączy w sobie płynność jak i szybkość co powinno umilić czas użytkowników podczas przeglądania strony.
+Aplikacja oferuje również możliwość przeglądania wydarzeń, które odbędą się na terenie kina.
+Oczywiście nie zapominamy o podstawowych funkcjach kin, czyli rezerwacji biletów. Może to być wykonane przez użytkownika zalogowanego jak i niezalogowanego dzięki systemu, który tworzy konta tymczasowe dla każdego kto próbuje zarezerwować bilet.
+
+Dla pracownik stworzyliśmy Admin Panel używając Reacta z Electronem, który jest aplikacją desktopową i dzięki której pracownicy będą mogli z tej aplikacji zarządzać aplikacją webową naszego Kina Studyjnego. Wyszukiwanie, edytowanie i usuwanie, wszystkie te opcje zobaczymy w Admin Panelu.
 
 Podział obowiązków:
 
