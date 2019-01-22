@@ -46,6 +46,7 @@ class Details extends React.Component<any, IState> {
     this.addReview = this.addReview.bind(this);
     this.onChange = this.onChange.bind(this);
     this.changeTextArea = this.changeTextArea.bind(this);
+    this.setReviews = this.setReviews.bind(this);
   }
 
   public onChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -200,21 +201,32 @@ public async addReview(){
       body: JSON.stringify({author: user.response.username, review1: this.state.review.review1, idMovies: this.state.review.idMovies})
     }).then(res=>res.json());
       // .then(res => console.log(res));
-    this.setReviews();
+    this.setReviews(null);
 }
 
-public async setReviews(){
+public async setReviews(IdMovies){
   let reviews;
-  const { Id } = this.props.match.params;
-  const result3 = await fetch('https://localhost:44371/cinema/GetReviews?id=' + Id)
-      if (result3.ok){
-         reviews = await result3.json();
-      }
-      this.setState({
-        reviews
-      });
-   
-     
+
+  if (IdMovies === null){
+    const { Id } = this.props.match.params;
+    const result3 = await fetch('https://localhost:44371/cinema/GetReviews?id=' + Id)
+    if (result3.ok){
+       reviews = await result3.json();
+    }
+    this.setState({
+      reviews
+    });
+  }
+  else{
+    const Id = IdMovies;
+    const result3 = await fetch('https://localhost:44371/cinema/GetReviews?id=' + Id)
+    if (result3.ok){
+       reviews = await result3.json();
+    }
+    this.setState({
+      reviews
+    });
+  }
 }
 
   public render() {
@@ -227,7 +239,7 @@ public async setReviews(){
       reviewCheck =   <div className="reviews comment-form">
       
       {this.state.reviews.map(review => 
-                        <Reviews key={review.idReview} review={review}/>)}
+                        <Reviews key={review.idReview} setReviews={this.setReviews} review={review}/>)}
       </div>
       
     }

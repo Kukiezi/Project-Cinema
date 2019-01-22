@@ -444,17 +444,26 @@ namespace CinemaApi.Controllers
             return Ok(review);
         }
 
+        [Route("DeleteReview")]
         [HttpPost]
         [AuthorizeToken]
-        public IActionResult DeleteReview(int id, string user)
+        public IActionResult DeleteReview(UserReviewApiModel userReview)
         {
-            var review = context.Review.FirstOrDefault(a => a.IdReview == id);
-
-            List<List<ScreeningExt>> list = new List<List<ScreeningExt>>();
+            var review = context.Review.FirstOrDefault(a => a.IdReview == userReview.IdReview);
+            var userReviewList = context.UserReview.Where(a => a.ReviewId == userReview.IdReview).ToList();
             if (review != null)
             {
+                if (userReviewList.Count > 0)
+                {
+                    foreach (var item in userReviewList)
+                    {
+                        context.Remove(item);
+                    }
+                }
                 context.Remove(review);
-                return Ok();
+
+                context.SaveChanges();
+                return Ok("Opinia została usunięta");
             }
                
            

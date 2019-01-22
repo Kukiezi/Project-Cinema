@@ -390,3 +390,16 @@ footer p{
 .delete-btn{
   font-size: 30px;
 }
+
+.comment{
+
+  word-wrap: break-word;
+}
+
+.comment-left{
+  word-wrap: break-word;
+}
+.comment-right{
+  position: relative;
+  left: 90%;
+}
