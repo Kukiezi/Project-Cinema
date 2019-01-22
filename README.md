@@ -1,13 +1,17 @@
 # Project-Cinema
 Projekt stworzony na Zajęcia Zespołowe UG 2018
 
-
 Zespół:
 - Dawid Weltrowski-Knopik
 - Filip Czyż
 - Alicja Wolak
 - Jagoda Ossowska
 
+
+Opis: 
+Aplikacja internetowa dla kina studyjnego do obsługi klienta jak i strony samej w sobie. Aplikacja będzie gromadzić dane na
+temat seansów, wydarzeń filmowych, newsów dotyczących produkcji filmowych, a także umożliwi prowadzenie użytkownikom
+dyskusji na naszym forum. Ze strony pracownika możliwe będzie dodawanie wydarzeń, nowych placówek.
 
 Podział obowiązków:
 
