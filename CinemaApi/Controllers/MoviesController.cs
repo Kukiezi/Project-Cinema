@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaApi.Controllers
 {
-    
+
     [Route("cinema/")]
     [ApiController]
     public class MoviesController : ControllerBase
@@ -40,7 +40,7 @@ namespace CinemaApi.Controllers
         {
             var movie = context.Movies.Where(a => a.Id == id).FirstOrDefault();
 
-            if (movie != null) { 
+            if (movie != null) {
                 return movie;
             }
 
@@ -52,7 +52,7 @@ namespace CinemaApi.Controllers
         /// </summary>
         /// <param name="movies"></param>
         /// <returns>Dodane filmy; Wiadomość jeżeli nie zostały dodane z jakiegoś powodu</returns>
-  
+
         [Route("AddMovie")]
         [HttpPost]
         public ActionResult AddMovie(Movies movies)
@@ -117,15 +117,20 @@ namespace CinemaApi.Controllers
 
         [HttpPost]
         [Route("UpdateMovie")]
-        public ActionResult UpdateMovie(int id, string title, string description, string picture)
+        public ActionResult UpdateMovie(int id, string title, string description, string picture, string icon,string watchingTime, int ageRestriction, string genre, string director)
         {
             var movie = context.Movies.Where(e => e.Id == id).FirstOrDefault();
 
-            if (title != movie.Title || description != movie.Description || picture != movie.Picture)
+            if (title != movie.Title || description != movie.Description || picture != movie.Picture || watchingTime != movie.WatchingTime || ageRestriction != movie.AgeRestriction || genre != movie.Genre || director != movie.Director )
             {
                 movie.Title = title;
                 movie.Description = description;
                 movie.Picture = picture;
+                movie.WatchingTime = watchingTime;
+                movie.AgeRestriction = ageRestriction;
+                movie.Genre = genre;
+                movie.Director = director;
+                movie.Icon = icon;
                 context.SaveChanges();
             }
           

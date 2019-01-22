@@ -110,27 +110,28 @@ export default class AddMovie extends React.Component {
                     </div>
                 </div>
 
-                <div className="text-center w-2/5 ml-auto mr-auto align-content: center">
-                    <div className="w-full">
+                <div className="text-center w-3/5 ml-auto mr-auto align-content: center">
+                    <div className="add-form-item">
                         <label htmlFor="picture" className="block text-sm font-bold  mt-4 text-white ">ZDJĘCIE</label>
                         <input onChange={this.onChange} placeholder="Podaj link do zdjęcia "  id="picture" type="picture" name="picture" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3  focus:text-blue focus:outline-none focus:shadow-outline" />
                     </div>
 
-                    <div className="w-full">
+                    <div className="add-form-item">
                         <label htmlFor="icon" className="block text-sm font-bold  text-white">IKONA</label>
                         <input onChange={this.onChange} placeholder="Podaj link do ikony "  id="icon" type="icon" name="icon" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3  focus:text-blue focus:outline-none focus:shadow-outline" />
                     </div>
 
-                    <div className="w-full">
+                    <div className="add-form-item">
                         <label htmlFor="description" className="block text-sm font-bold  text-white ">OPIS</label>
                         <input onChange={this.onChange}  placeholder="..."  id="description" type="description" name="description" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3  focus:text-blue focus:outline-none focus:shadow-outline" />
                     </div>
                     
-                    <div className="text-center pt-4">
+                    
+                </div>
+                <div className="text-center pt-4">
                         <label className="block text-sm font-bold  text-red">{this.state.message}</label><br/>
                         <button onClick={this.addMovies} disabled={!this.state.valid} className={validState}>Zapisz</button>
                     </div>
-                </div>
                 </div>
          </div>
           )

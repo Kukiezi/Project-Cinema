@@ -1,7 +1,7 @@
 import * as React from "react";
 import './Events.css'
 import Modal from 'react-modal';
-
+import Moment from 'react-moment';
 
 
 export default class CulturalEvents extends React.Component<any, any>{
@@ -28,6 +28,7 @@ export default class CulturalEvents extends React.Component<any, any>{
     public render(){
 
         return(
+
             <div className='event-wrap'>
                 <div className='event-title text-lg '>                    
                         {this.props.culturalevent.eventName}
@@ -46,8 +47,18 @@ export default class CulturalEvents extends React.Component<any, any>{
                     </div>
                     <div className="event-more-details">
                          <div className="date">
-                            <h3 className="mb-2">Kiedy?<br/></h3>
-                            {this.props.culturalevent.eventDate}
+                            <h3 className="mb-2">Kiedy ?<br/></h3>
+                            
+                            <Moment format="YYYY-MM-DD">
+                                {this.props.culturalevent.eventDate}
+                            </Moment>
+                            </div>
+                        <div className="event-time">
+                            <h3 className="mb-2">O której ?<br/></h3>
+                            <Moment format=" kk:mm">
+                                {this.props.culturalevent.eventDate}
+                            </Moment>
+                        
                         </div> 
                         <div className="seats">
                             <h3 className="mb-2">Liczba miejsc:<br/></h3>

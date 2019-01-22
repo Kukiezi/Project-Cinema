@@ -148,10 +148,20 @@
 
 .date{
     margin-bottom: 5px;
+    width: 150px;
+    display: inline-block;
 }
 
 .seats{
     margin: 10px 0 10px 0;
+    width: 150px;
+    display: inline-block;
+}
+
+.event-time{
+    margin: 10px 0 10px 0;
+    width: 150px;
+    display: inline-block;
 }
 
 
