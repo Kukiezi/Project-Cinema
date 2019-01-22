@@ -47,7 +47,7 @@ class Reservation extends React.Component<any, IState> {
   public render() {
     
     return (
-        <div>
+        <div className="info">
         <h3 className="white">Potwierdzenie:</h3>
         <h3 className="white">Dane:</h3>
         <p className="white">Imię: {this.state.User.firstName}</p>
