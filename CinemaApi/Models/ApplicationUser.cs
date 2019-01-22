@@ -8,6 +8,7 @@ namespace CinemaApi.Models
 {
     public class ApplicationUser : IdentityUser
     {
+
         /// <summary>
         /// The users first name
         /// </summary>
