@@ -27,7 +27,9 @@
 		"react": "^16.4.1",
 		"react-dev-utils": "^5.0.1",
 		"react-dom": "^16.6.3",
-		"react-router-dom": "^4.3.1"
+		"react-html-table-to-excel": "^2.0.0",
+		"react-router-dom": "^4.3.1",
+		"react-table": "^6.8.6"
 	},
 	"devDependencies": {
 		"concurrently": "^3.6.0",

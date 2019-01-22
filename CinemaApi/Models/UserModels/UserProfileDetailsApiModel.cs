@@ -9,6 +9,7 @@ namespace CinemaApi.Models.UserModels
     {
         #region Public Properties
 
+        public string Id { get; set; }
         /// <summary>
         /// The authentication token used to stay authenticated through future requests
         /// </summary>
@@ -60,6 +61,7 @@ namespace CinemaApi.Models.UserModels
         {
             return new LoginCredentialsDataModel
             {
+                Id = Id,
                 Email = Email,
                 FirstName = FirstName,
                 LastName = LastName,

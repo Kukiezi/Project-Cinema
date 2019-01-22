@@ -1,5 +1,5 @@
 import * as React from 'react';
-import '../assets/css/Spinner.css';
+import '../../assets/css/Spinner.css';
 import { NavLink } from 'react-router-dom';
 
 class DetailsPanel extends React.Component {

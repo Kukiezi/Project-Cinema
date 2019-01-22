@@ -32,7 +32,6 @@ namespace CinemaApi.Models
         public virtual DbSet<UserReview> UserReview { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
 
-       
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -34,7 +34,7 @@ export default class CulturalEvents extends React.Component<any, any>{
                 </div>
                 <div className='event-details'>
                 <button className="details-btn text-sm" onClick={this.toggleModal}>Zobacz szczegóły</button>
-                <Modal className='modal-style' isOpen={this.state.isActive} onRequestClose={this.toggleModal}>
+                <Modal className='modal-events' isOpen={this.state.isActive} onRequestClose={this.toggleModal}>
                     
                     <button className="details-btn-inner text-sm"onClick={this.toggleModal}>Zamknij</button>
                     <div className="title">
@@ -46,16 +46,15 @@ export default class CulturalEvents extends React.Component<any, any>{
                     </div>
                     <div className="event-more-details">
                          <div className="date">
-                            <h3>Kiedy?<br/></h3>
+                            <h3 className="mb-2">Kiedy?<br/></h3>
                             {this.props.culturalevent.eventDate}
                         </div> 
                         <div className="seats">
-                            <h3>Liczba miejsc:<br/></h3>
+                            <h3 className="mb-2">Liczba miejsc:<br/></h3>
                             {this.props.culturalevent.seatsLimit}
                         </div>
                     </div>
-                    <button className="sign-in-btn text-lg">Zapisz się</button>
-                    
+                
                     
                 </Modal>
             </div>
