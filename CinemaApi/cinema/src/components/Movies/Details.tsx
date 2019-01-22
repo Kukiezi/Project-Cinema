@@ -37,7 +37,7 @@ class Details extends React.Component<any, IState> {
       "rating": 0
     },
     textareaValue: "",
-    errorMessage: ""
+    errorMessage: "",
   };
 
   constructor(props: IState) {
@@ -50,6 +50,8 @@ class Details extends React.Component<any, IState> {
   }
 
   public onChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const userStorage = localStorage.getItem("User");
+    if (userStorage !== null){
     const { Id } = this.props.match.params;
     const checkValue = document.querySelectorAll("input");
     const checkStar = document.querySelectorAll("label");
@@ -66,7 +68,7 @@ class Details extends React.Component<any, IState> {
         checkSmiley[j].style.display = "none";
     }
     
-    for(let k=checkCount; k<checkValue.length-1; k++){
+    for(let k=checkCount; k<checkValue.length; k++){
      
         checkValue[k].checked = false;
         checkStar[k].className = "check"
@@ -93,10 +95,17 @@ class Details extends React.Component<any, IState> {
     ratingCopy.idMovies = Id;
     this.setState({ratingTest: ratingCopy})
    this.SendRating();
+  }
 }
 
 public async SendRating(){
-    const result =  await fetch('https://localhost:44371/cinema/AddRating?rating=' + this.state.ratingTest.ratingNumber + '&id=' + this.state.ratingTest.idMovies, {
+  const userStorage = localStorage.getItem("User");
+    let user;
+    if (userStorage !== null){
+       user = JSON.parse(userStorage);
+    
+
+    const result =  await fetch('https://localhost:44371/cinema/AddRating?rating=' + this.state.ratingTest.ratingNumber + '&id=' + this.state.ratingTest.idMovies + '&userId=' + user.response.id, {
       method: 'POST'
     });
     let currentRating = await result.json();
@@ -104,6 +113,7 @@ public async SendRating(){
     currentRating = Math.round(currentRating);
     currentRating /= 2;
     this.setState({currentRating});
+  }
 }
 
 
@@ -131,7 +141,6 @@ public async SendRating(){
     if (result3.ok){
        reviews = await result3.json();
     }
-    
     currentRating *= 2;
     currentRating = Math.round(currentRating);
     currentRating /= 2;
@@ -141,6 +150,56 @@ public async SendRating(){
       currentRating,
       reviews
     });
+    
+    if (userStorage != null){
+      const result4 = await fetch('https://localhost:44371/cinema/GetUserRating?id=' + Id + '&userId=' + user.response.id);
+      const userRating = await result4.json();
+
+      const checkValue = document.querySelectorAll("input");
+      const checkStar = document.querySelectorAll("label");
+      const checkSmiley = document.querySelectorAll("i");
+      if (userRating === 1){
+        for(let j=0; j<1; j++){
+          checkValue[j].checked = true;
+          checkStar[j].className = "rated";
+          checkSmiley[j].style.display = "none";
+        }
+      }
+      else if (userRating === 2){
+        for(let j=0; j<2; j++){
+          checkValue[j].checked = true;
+          checkStar[j].className = "rated";
+          checkSmiley[j].style.display = "none";
+        }
+      }
+      else if (userRating === 3){
+        for(let j=0; j<3; j++){
+          checkValue[j].checked = true;
+          checkStar[j].className = "rated";
+          checkSmiley[j].style.display = "none";
+        }
+      }
+      else if (userRating === 4){
+        for(let j=0; j<4; j++){
+          checkValue[j].checked = true;
+          checkStar[j].className = "rated";
+          checkSmiley[j].style.display = "none";
+        }
+      }
+      else if (userRating === 5){
+        for(let j=0; j<5; j++){
+          checkValue[j].checked = true;
+          checkStar[j].className = "rated";
+          checkSmiley[j].style.display = "none";
+        }
+      }
+    }
+   
+
+
+   
+    
+
   }
 
   public onChangeReview = (e: any) => {

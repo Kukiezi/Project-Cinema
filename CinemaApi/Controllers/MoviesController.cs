@@ -100,19 +100,46 @@ namespace CinemaApi.Controllers
         }
         [HttpPost]
         [Route("AddRating")]
-        public ActionResult<float> AddRating(int rating, int id)
+        public ActionResult<float> AddRating(int rating, int id, string userId)
         {
-            context.Rating.Add(new Rating
+            if (userId == null)
+                return Ok("Coś poszło nie tak");
+
+            var ratingCheck = context.Rating.FirstOrDefault(a => a.UserId == userId && a.IdMovies == id);
+
+            if (ratingCheck != null)
             {
-                IdMovies = id,
-                RatingNumber = rating
-            });
-            context.SaveChanges();
-            var movie = context.Movies.Where(e => e.Id == id).FirstOrDefault();
+                ratingCheck.RatingNumber = rating;
+
+                context.SaveChanges();
+            }
+            else
+            {
+                context.Rating.Add(new Rating
+                {
+                    IdMovies = id,
+                    RatingNumber = rating,
+                    UserId = userId
+                });
+                context.SaveChanges();
+            }
+          
+            var movie = context.Movies.FirstOrDefault(e => e.Id == id);
             var newRating = RatingCounter(id);
             movie.Rating = newRating;
             context.SaveChanges();
             return newRating;
+        }
+
+        [HttpGet]
+        [Route("GetUserRating")]
+        public ActionResult GetUserRating(int id, string userId)
+        {
+            var rating = context.Rating.FirstOrDefault(a => a.UserId == userId && a.IdMovies == id);
+
+            if (rating != null)
+                return Ok(rating.RatingNumber);
+            return Ok(0);
         }
 
         [HttpPost]

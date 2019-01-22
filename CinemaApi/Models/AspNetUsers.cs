@@ -11,6 +11,7 @@ namespace CinemaApi.Models
             AspNetUserLogins = new HashSet<AspNetUserLogins>();
             AspNetUserRoles = new HashSet<AspNetUserRoles>();
             AspNetUserTokens = new HashSet<AspNetUserTokens>();
+            Rating = new HashSet<Rating>();
             Reservation = new HashSet<Reservation>();
             Review = new HashSet<Review>();
             UserReview = new HashSet<UserReview>();
@@ -39,6 +40,7 @@ namespace CinemaApi.Models
         public ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
         public ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
         public ICollection<AspNetUserTokens> AspNetUserTokens { get; set; }
+        public ICollection<Rating> Rating { get; set; }
         public ICollection<Reservation> Reservation { get; set; }
         public ICollection<Review> Review { get; set; }
         public ICollection<UserReview> UserReview { get; set; }
