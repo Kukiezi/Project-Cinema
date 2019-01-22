@@ -500,10 +500,15 @@ namespace CinemaApi.Controllers
             // Attempt to commit changes to data store
             var result = await mUserManager.UpdateAsync(user);
 
-      
+
 
             #endregion
-
+            var roles = await mUserManager.GetRolesAsync(user);
+            string role = "";
+            foreach (var r in roles)
+            {
+                role = r;
+            }
             #region Respond
 
             // If we were successful...
@@ -519,7 +524,7 @@ namespace CinemaApi.Controllers
                         LastName = user.LastName,
                         Email = user.Email,
                         Username = user.UserName,
-                        Token = user.GenerateJwtToken(),
+                        Token = user.GenerateJwtToken(role),
                     }
                 };
             // Otherwise if it failed...
