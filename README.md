@@ -12,10 +12,12 @@ Zespół:
 Podział obowiązków:
 
 Dawid Weltrowski-Knopik:
-- strona główna
-- rejestracja i logowanie
+- szkielet i mechanizm strony głównej
+- implemenacja JWT Token oraz JWT Refresh Token do logowania jak i rejestracji
 - panel administratora
-- szczegóły filmu, rating i komentarze
+- szczegóły filmów, rating i komentarze
+- system komentarzy z możliwością upvote / downvote przez użytkowników
+- role użytkowników
 - profil użytkownika
 - repertuar
 
@@ -23,12 +25,16 @@ Filip Czyż:
 - rezerwacja i zakup biletów
 - szczegóły filmu, rating i komentarze
 - repertuar
+- profil użytkownika
 
 Alicja Wolak:
-- baza danych
 - repertuar
+- stylizacja repertuaru
+- struktura bazy danych
+- 
 
 Jagoda Ossowska:
+- profil użytkownika
 - wydarzenia
 - stylizacja profilu użytkownika
 - stylizacja panelu administratora
