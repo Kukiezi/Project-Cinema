@@ -382,3 +382,7 @@ footer p{
   position: relative;
   left: 5%;
 }
+
+.delete-btn{
+  font-size: 30px;
+}

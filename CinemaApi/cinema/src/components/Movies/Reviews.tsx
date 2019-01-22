@@ -169,7 +169,7 @@ public render() {
     const userStorage = localStorage.getItem("User");
     if (userStorage != null){
        user = JSON.parse(userStorage);
-       if (user.response.role === "Moderator"){
+       if (user.response.role === "User"){
            checkRole = true;
        }
     }
@@ -193,7 +193,7 @@ public render() {
     }
 
     if (checkRole){
-        deleteOpinion = <div><h1>DELETE</h1></div>
+        deleteOpinion = <><FontAwesomeIcon className="delete-btn" icon="times" /></>
     } 
     else{
         deleteOpinion = <></>
