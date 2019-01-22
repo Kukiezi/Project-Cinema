@@ -55,6 +55,13 @@
   font-family: 'Courier New', Courier, monospace;
   size: 2px;
 }
+.info{
+  border: 1px solid white;
+  margin-top: 100px;
+  margin-bottom: 100px;
+  margin-right: 150px;
+  margin-left: 80px;
+}
 .line{
   display: inline-block;  
 }

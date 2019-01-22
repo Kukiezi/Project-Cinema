@@ -328,13 +328,9 @@ public async setReviews(IdMovies){
           <h3 className="font-thin">{this.state.movie.description}</h3>
           </Fade>
         
-        
-              {/* <FontAwesomeIcon className="fontawesome" icon="ticket-alt" /> */}
-
-          <NavLink className="buy-btn" to="/BuyTicket" >
-              Kup Bilet
-            </NavLink>
-          <NavLink className="buy-btn" to="/ReserveTicket" >
+          <NavLink className="buy-btn" to={{
+                 pathname: '/Schedule/'+ this.props.match.params.Id,
+               }}>
               Zarezerwuj Bilet
       </NavLink>
         </div>
