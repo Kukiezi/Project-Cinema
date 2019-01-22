@@ -53,16 +53,32 @@ namespace CinemaApi.Controllers
             return user;
 
         }
+
+        [HttpGet]
+        [Route("GetMovieInfo")]
+        public List<string> GetMovieInfo(int id)
+        {
+            var screening = context.Screening.Where(a => a.IdScreening == id).FirstOrDefault();
+
+            List<string> movie = new List<string>
+            {
+                context.Movies.Where(a => a.Id == screening.IdMovies).Select(a => a.Title).FirstOrDefault()
+        };
+            return movie;
+
+        }
         [HttpPost]
         [Route("AddReservation")]
-        public ActionResult AddReservation(string user, int screening, string seat)
+        public ActionResult AddReservation(string user, int screening, string seat, TimeSpan time)
         {
             context.Reservation.Add(new Reservation
             {
                 
                 IdUser = user,
                 IdScreening = screening,
-                SeatsReserved = seat
+                SeatsReserved = seat,
+                Showtime = time
+                
             });
             context.SaveChanges();
 
@@ -71,10 +87,10 @@ namespace CinemaApi.Controllers
         }
         [HttpGet]
         [Route("MapRoom")]
-        public ActionResult MapRoom(string mask, int id)
+        public ActionResult MapRoom(string mask, int id, TimeSpan time)
         {
             List<string> s = MapSeats(mask);
-            List<string> t = MapSeatsTaken(id);
+            List<string> t = MapSeatsTaken(id, time);
             for (int i = 0; i < s.Count; i++)
             {
                 for (int j = 0; j < t.Count; j++)
@@ -157,12 +173,12 @@ namespace CinemaApi.Controllers
         }
         [NonAction]
 
-        public List<string> MapSeatsTaken(int id)
+        public List<string> MapSeatsTaken(int id, TimeSpan time)
         {
             //List<string> reservations = new List<string>();
             string reservations="";
            // var seats = context.Reservation.Where(a => a.IdScreening == 3).ToList();
-            List<string> seats = context.Reservation.Where(a => a.IdScreening == id).Select(a=>a.SeatsReserved).ToList();
+            List<string> seats = context.Reservation.Where(a => a.IdScreening == id && a.Showtime == time).Select(a=>a.SeatsReserved).ToList();
             foreach(string element in seats )
             {
                 reservations += element;

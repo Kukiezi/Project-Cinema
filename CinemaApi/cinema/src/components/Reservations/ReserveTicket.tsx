@@ -11,6 +11,7 @@ class ReserveTicket extends React.Component <any, IState>{
   "Reserved":"",
   "Layout": "",
   "Screening": 0
+  
 };
 
 constructor(props: IState) {
@@ -19,13 +20,13 @@ constructor(props: IState) {
 } 
 
 public async componentDidMount() {
-  const { Screening } = this.props.match.params;
-  this.state.Screening = Screening;
-  const result2 = await fetch('https://localhost:44371/cinema/GetLayout?id=' + Screening ,{
+
+  console.log(this.props.match.params.Showtime)
+  const result2 = await fetch('https://localhost:44371/cinema/GetLayout?id=' + this.props.match.params.Screening ,{
     method: 'GET'
   });
   const layout = await result2.json();
-  const result = await fetch('https://localhost:44371/cinema/MapRoom?mask=' + layout + "&id=" + Screening);
+  const result = await fetch('https://localhost:44371/cinema/MapRoom?mask=' + layout + "&id=" + this.props.match.params.Screening +"&time="+ this.props.match.params.Showtime);
   const seats = await result.json();
   this.setState({
   seats });
@@ -64,7 +65,7 @@ public updateReservation(value: string, check: boolean)
    </div> 
    
    <NavLink className="buy-btn" to={{
-                 pathname: '/Reservation/'+this.state.Reserved +"/" + this.state.Screening + "/" + user.response.id,
+                 pathname: '/Reservation/'+this.state.Reserved +"/" + this.props.match.params.Screening + "/" + user.response.id + "/" + this.props.match.params.Showtime,
                 // pathname: '/PersonalData/'+this.state.Reserved +"/"+ this.state.Screening,
                }}> 
                Zarezerwuj 
@@ -84,7 +85,7 @@ public updateReservation(value: string, check: boolean)
   
   <NavLink className="buy-btn" to={{
                // pathname: '/Reservation/'+this.state.Reserved +"/" + this.state.Screening,
-               pathname: '/PersonalData/'+this.state.Reserved +"/"+ this.state.Screening,
+               pathname: '/PersonalData/'+this.state.Reserved +"/"+ this.props.match.params.Screening + "/" + this.props.match.params.Showtime,
               }}> 
               Zarezerwuj 
       </NavLink>

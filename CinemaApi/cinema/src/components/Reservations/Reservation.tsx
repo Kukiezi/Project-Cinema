@@ -9,6 +9,7 @@ class Reservation extends React.Component<any, IState> {
       "Screening": this.props.match.params.Screening,
       "Reserved": this.props.match.params.Reserved,
       "UserId": this.props.match.params.UserId,
+      "Title": "",
       "User":{
         "firstName": "",
         "lastName": "",
@@ -20,7 +21,7 @@ class Reservation extends React.Component<any, IState> {
         super(props);
       }
       public async Reserve(){
-        await fetch('https://localhost:44371/cinema/AddReservation?user=' + this.state.UserId + '&screening=' + this.state.Screening + '&seat=' + this.state.Reserved, {
+        await fetch('https://localhost:44371/cinema/AddReservation?user=' + this.state.UserId + '&screening=' + this.state.Screening + '&seat=' + this.state.Reserved + "&time=" + this.props.match.params.Showtime, {
           method: 'POST',
           mode: 'no-cors'
 
@@ -31,9 +32,10 @@ class Reservation extends React.Component<any, IState> {
         const seatsReservation = await result.json();
         const result2 = await fetch('https://localhost:44371/cinema/GetUser?id=' + this.state.UserId);
         const User = await result2.json();
+        const result3 = await fetch('https://localhost:44371/cinema/GetMovieInfo?id=' + this.state.Screening);
+        const Title = await result3.json();
         this.setState({
-          seatsReservation, User
-          
+          seatsReservation, User ,Title        
         });
         console.log(this.state.User.email);
     }
@@ -51,6 +53,8 @@ class Reservation extends React.Component<any, IState> {
         <p className="white">Imię: {this.state.User.firstName}</p>
         <p className="white">Nazwisko: {this.state.User.lastName}</p>
         <p className="white">Email: {this.state.User.email}</p>
+        <h3 className="white">Film: {this.state.Title}</h3>
+        <h3 className="white">Godzina: {this.props.match.params.Showtime}</h3>
         <h3 className="white">Miejsca:</h3>
         {this.state.seatsReservation.map(seatReservation => 
                     <SeatReservation key={seatReservation} seatReservation={seatReservation}/>)}
@@ -73,6 +77,7 @@ export interface IState {
   seatsReservation: string[],
   Screening: number,
   Reserved: string,
+  Title: string,
   UserId: string,
   User: IUser 
   }
