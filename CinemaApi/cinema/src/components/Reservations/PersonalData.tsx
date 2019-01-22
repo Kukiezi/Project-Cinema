@@ -120,7 +120,7 @@ class Registration extends React.Component<any, any> {
         else if(this.state.Succes)
         {
             content = <Redirect to={{
-                pathname: '/Reservation/'+this.state.Reserved +"/"+ this.state.Screening +"/" + this.state.id,
+                pathname: '/Reservation/'+this.state.Reserved +"/"+ this.props.match.params.Screening +"/" + this.state.id + "/" + this.props.match.params.Showtime,
                }}/>
         }
         else{
