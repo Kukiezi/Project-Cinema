@@ -291,7 +291,7 @@ namespace CinemaApi.Models
 
                 entity.Property(e => e.ScreeningDate)
                     .HasColumnName("screening_date")
-                    .HasColumnType("date");
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.Showtime1).HasColumnName("showtime1");
 

@@ -5,7 +5,7 @@ import Fade from '../App/Fade';
 import { NavLink } from 'react-router-dom';
 import Registration from '../Users/Registration';
 import Login from '../Users/Login';
-import Newsletter from '../Newsletter/Newsletter';
+//  import NewsletterForm from '../Newsletter/NewsletterForm';
 import UserOptions from '../Users/UserOptions';
 // import Logout from '../Users/Logout';
 

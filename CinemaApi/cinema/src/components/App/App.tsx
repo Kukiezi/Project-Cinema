@@ -26,6 +26,8 @@ import UserProfil from '../Users/UserProfil';
 import decode from 'jwt-decode';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faArrowUp, faArrowDown, faComment, faLongArrowAltLeft, faTimes } from '@fortawesome/free-solid-svg-icons';
+import MovieSchedule from '../Screenings/MovieSchedule';
+// import decode from 'jwt-decode';
 
 library.add(faArrowUp, faArrowDown, faComment, faLongArrowAltLeft, faTimes);
 // dostaje użytkownika i w razie errora wylogowuje go bądź jeżeli dostaliśmy nowy token pomyślnie dodaje go do localStorage

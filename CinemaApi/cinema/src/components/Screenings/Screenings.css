@@ -1,6 +1,6 @@
-/* body{
-    overflow: hidden;
-} */
+body{
+    overflow-y: scroll;
+} 
 
 .form{
     display: flex;
@@ -9,13 +9,14 @@
 
 .inner{
     
-    width: 70%;
+    width: 100%;
     color: white;
     background-color: black;
     position: fixed;
     font-family: Monte;
     bottom: 0;
     top: 66px;
+    
     
 }
 

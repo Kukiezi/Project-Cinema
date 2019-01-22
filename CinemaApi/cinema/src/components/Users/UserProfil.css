@@ -1,57 +1,123 @@
-.form{
-    display: flex;
-    justify-content: center
-}
 
-.inner{
-    
-    width: 70%;
-    color: white;
+
+body{
+    position: relative;
+    margin: 0;
+    padding-bottom: 1rem;
+    min-height: 100%;
     background-color: black;
-    position: fixed;
-    font-family: Monte;
-    bottom: 0;
-    top: 70px;   
-}
-
-.profile{
-    height:150px;
-    text-align: center;
-    color:white;
-
-}
-
-.username{
-    font-size: 40px;
-    position: absolute;
-    top:60px;
-    right: 70px;
-    border-bottom: 1px solid red;
-}
-
-.menu{
-    text-align: center;
-    width: 100%;
-  border-bottom: 1px solid red;
-} 
-
-.menu-details{
-
-    padding: 8px 5px;
-    text-align: center;
-    color: white;
-    font-size: 20px;
-    font-family: Monte;  
-    display: inline-block; 
-    padding: 15px 120px 15px 120px;
+  }
+  
+  .form{
+      display: flex;
+      justify-content: center;
     
-}
-/* 
-.info{
-
-} */
-/* 
-.menu-details:active{
-
-} */
-
+  }
+  
+  .inner-details{
+      
+      width: 70%;
+      color: white;
+      background-color: black;
+      position: relative;
+      font-family: Monte;
+      bottom: 0;  
+  }
+  
+  .profile{
+      height:150px;
+      text-align: center;
+      color:white;
+  
+  }
+  
+  .username{
+      font-size: 40px;
+      position: absolute;
+      top:60px;
+      right: 70px;
+      border-bottom: 1px solid red;
+  }
+  
+  .menu{
+      width: 100%;
+      background-color: black;
+      top: 0;
+  } 
+  
+  .menu-details{
+  
+      padding: 8px 5px;
+      text-align: center;
+      color: white;
+      font-size: 20px;
+      font-family: Monte;  
+      display: inline-block; 
+      padding: 15px 120px 15px 120px;
+      
+  }
+  
+  .info{
+      text-align: center;
+      color: white;
+      font-size: 20px;
+      font-family: Monte;  
+  } 
+  
+  .react-tabs {
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    .react-tabs__tab-list {
+      
+      margin: 0 0 10px;
+      padding: 0;
+    }
+    
+    .react-tabs__tab {
+      display: inline-block;
+      border: 1px solid transparent;
+      bottom: -1px;
+      position: relative;
+      list-style: none;
+      padding: 10px 55px 10px 55px;
+      cursor: pointer;
+    }
+    
+    .react-tabs__tab--selected {
+      border-bottom: red solid 1px;
+      color: white;
+    }
+    
+    .react-tabs__tab--disabled {
+   
+      cursor: default;
+    }
+    
+    .react-tabs__tab:focus {
+      box-shadow: 0 0 5px hsl(208, 99%, 50%);
+      border-color: hsl(208, 99%, 50%);
+      outline: none;
+    }
+    
+    .react-tabs__tab:focus:after {
+      content: "";
+      position: absolute;
+      height: 5px;
+      left: -4px;
+      right: -4px;
+      bottom: -5px;
+      background: #fff;
+    }
+    
+    .react-tabs__tab-panel {
+      display: none;
+    }
+    
+    .react-tabs__tab-panel--selected {
+      display: inline-block;
+    }
+  
+    /* .react-tabs__tab-panel{
+        
+    } */
