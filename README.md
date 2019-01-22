@@ -8,16 +8,16 @@ Zespół:
 - Jagoda Ossowska
 
 
-Opis: 
+<h3>Opis:</h3> 
 Kino Studyjne jest aplikacją internetową imitującą działanie strony kina jak i implementującej mechanizmy forumowe (komentarze, opinie, głosowanie) oraz użytkowników wraz z rolami. Dzięki technologii React aplikacja łączy w sobie płynność jak i szybkość co powinno umilić czas użytkowników podczas przeglądania strony.
 Aplikacja oferuje również możliwość przeglądania wydarzeń, które odbędą się na terenie kina.
 Oczywiście nie zapominamy o podstawowych funkcjach kin, czyli rezerwacji biletów. Może to być wykonane przez użytkownika zalogowanego jak i niezalogowanego dzięki systemu, który tworzy konta tymczasowe dla każdego kto próbuje zarezerwować bilet.
 
-Dla pracownik stworzyliśmy Admin Panel używając Reacta z Electronem, który jest aplikacją desktopową i dzięki której pracownicy będą mogli z tej aplikacji zarządzać aplikacją webową naszego Kina Studyjnego. Wyszukiwanie, edytowanie i usuwanie, wszystkie te opcje zobaczymy w Admin Panelu.
+Dla pracowników stworzyliśmy Admin Panel używając Reacta z Electronem, który jest aplikacją desktopową i dzięki której pracownicy będą mogli z tej aplikacji zarządzać aplikacją webową naszego Kina Studyjnego. Wyszukiwanie, edytowanie i usuwanie, wszystkie te opcje zobaczymy w Admin Panelu.
 
-Podział obowiązków:
+<h3>Podział obowiązków:</h3>
 
-Dawid Weltrowski-Knopik:
+<h4>Dawid Weltrowski-Knopik:</h4>
 - szkielet i mechanizm strony głównej
 - implemenacja JWT Token oraz JWT Refresh Token do logowania jak i rejestracji
 - panel administratora
@@ -27,19 +27,18 @@ Dawid Weltrowski-Knopik:
 - profil użytkownika
 - repertuar
 
-Filip Czyż:
+<h4>Filip Czyż:</h4>
 - rezerwacja i zakup biletów
 - szczegóły filmu, rating i komentarze
 - repertuar
 - profil użytkownika
 
-Alicja Wolak:
+<h4>Alicja Wolak:</h4>
 - repertuar
 - stylizacja repertuaru
 - struktura bazy danych
-- 
 
-Jagoda Ossowska:
+<h4>Jagoda Ossowska:</h4>
 - profil użytkownika
 - wydarzenia
 - stylizacja profilu użytkownika
