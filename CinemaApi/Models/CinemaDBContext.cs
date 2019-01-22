@@ -195,6 +195,8 @@ namespace CinemaApi.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Showtime).HasColumnName("showtime");
+
                 entity.HasOne(d => d.IdScreeningNavigation)
                     .WithMany(p => p.Reservation)
                     .HasForeignKey(d => d.IdScreening)
