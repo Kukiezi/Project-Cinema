@@ -18,6 +18,8 @@ namespace CinemaApi.Models
         public TimeSpan showtime2 { get; set; }
         public TimeSpan showtime3 { get; set; }
 
+        public string MovieName { get; set; }
+
         public Movies IdMoviesNavigation { get; set; }
         public Room IdRoomNavigation { get; set; }
         public ICollection<Reservation> Reservation { get; set; }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using CinemaApi.Models;
@@ -31,9 +32,10 @@ namespace CinemaApi.Controllers
             DateTime Day7 = Day1.AddDays(6);
 
             /*var screeningsList = context.Screening.Where(a => a.ScreeningDate >= Day1 && a.ScreeningDate < Day2).ToList();*/
-
+          
             var screeningsList = context.Screening.ToList();
-
+        
+        
             List<ScreeningExt> screeningsExtList = new List<ScreeningExt>();
             List<List<ScreeningExt>> list = new List<List<ScreeningExt>>();
             List<ScreeningExt> day1 = new List<ScreeningExt>();
@@ -42,7 +44,7 @@ namespace CinemaApi.Controllers
             List<ScreeningExt> day4 = new List<ScreeningExt>();
             List<ScreeningExt> day5 = new List<ScreeningExt>();
             List<ScreeningExt> day6 = new List<ScreeningExt>();
-
+           
             foreach (var item in screeningsList)
             {
                 ScreeningExt ext = new ScreeningExt
@@ -51,7 +53,7 @@ namespace CinemaApi.Controllers
                     IdRoom = item.IdRoom,
                     IdScreening = item.IdScreening,
                     ScreeningDate = item.ScreeningDate,
-                    MovieName = context.Movies.Where(a => a.Id == item.IdMovies).FirstOrDefault().Title,
+                    MovieName = item.MovieName,
                     showtime1 = item.showtime1,
                     showtime2 = item.showtime2,
                     showtime3 = item.showtime3
@@ -84,6 +86,7 @@ namespace CinemaApi.Controllers
                 }
                 //screeningsExtList.Add(ext);
             }
+
             list.Add(day1);
             list.Add(day2);
             list.Add(day3);
