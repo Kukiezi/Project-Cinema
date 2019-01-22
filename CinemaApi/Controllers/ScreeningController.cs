@@ -53,7 +53,7 @@ namespace CinemaApi.Controllers
                     IdRoom = item.IdRoom,
                     IdScreening = item.IdScreening,
                     ScreeningDate = item.ScreeningDate,
-                    MovieName = item.MovieName,
+                    MovieName = context.Movies.Where(a => a.Id == item.IdMovies).FirstOrDefault().Title,
                     showtime1 = item.showtime1,
                     showtime2 = item.showtime2,
                     showtime3 = item.showtime3
