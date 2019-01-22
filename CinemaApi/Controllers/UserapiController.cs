@@ -393,7 +393,7 @@ namespace CinemaApi.Controllers
                         Id = user.Id,
                         FirstName = user.FirstName,
                         LastName = user.LastName,
-
+                        Email = user.Email,
                         Username = user.UserName,
                         Token = user.GenerateJwtToken(),
                     }

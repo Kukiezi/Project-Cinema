@@ -40,20 +40,21 @@ export default class UserProfil extends React.Component<any,any>{
          user = JSON.parse(userStorage);
          console.log(user.response.lastName);
          if(this.state.credentials.firstName === ""){
-            await this.setState({credentials: {
-                 firstName: user.response.firstName
-             }})
+            const credentialsCopy = JSON.parse(JSON.stringify(this.state.credentials));
+            credentialsCopy.firstName = user.response.firstName;
+            await this.setState({credentials: credentialsCopy})
+            
    
          }
          if(this.state.credentials.lastName === ""){
-            await this.setState({credentials: {
-                lastName: user.response.lastName
-            }})
+            const credentialsCopy = JSON.parse(JSON.stringify(this.state.credentials));
+            credentialsCopy.lastName = user.response.lastName;
+            await this.setState({credentials: credentialsCopy})
         }
         if(this.state.credentials.username === ""){
-            await this.setState({credentials: {
-                username: user.response.username
-            }})
+            const credentialsCopy = JSON.parse(JSON.stringify(this.state.credentials));
+            credentialsCopy.username = user.response.username;
+            await this.setState({credentials: credentialsCopy})
         }
 
         await fetch('https://localhost:44371/api/update', {
@@ -75,15 +76,10 @@ export default class UserProfil extends React.Component<any,any>{
       }
 
       public updateStorage(){
-        let user;
         const userStorage = localStorage.getItem("User");
         if (userStorage != null){
-           user = JSON.parse(userStorage);
-        console.log(this.state.res.response.username);
-        console.log(this.state.res.response.firstName);
-      user.response.firstName = this.state.res.response.firstName;
-      user.response.lastName = this.state.res.response.lastName;
-      user.response.username = this.state.res.response.username;
+            localStorage.setItem("User", JSON.stringify(this.state.res))
+            window.location.reload();
         }
       }
 
