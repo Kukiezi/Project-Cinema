@@ -60,7 +60,7 @@ namespace CinemaApi.Controllers
             context.Reservation.Add(new Reservation
             {
                 
-                IdUser = "",
+                IdUser = user,
                 IdScreening = screening,
                 SeatsReserved = seat
             });

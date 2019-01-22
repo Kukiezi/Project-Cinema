@@ -16,6 +16,11 @@ namespace CinemaApi.Models.UserModels
         public string Token { get; set; }
 
         /// <summary>
+        /// The users id
+        /// </summary>
+        public string Id { get; set; }
+
+        /// <summary>
         /// The users first name
         /// </summary>
         public string FirstName { get; set; }
@@ -60,6 +65,7 @@ namespace CinemaApi.Models.UserModels
         {
             return new LoginCredentialsDataModel
             {
+                Id = Id,
                 Email = Email,
                 FirstName = FirstName,
                 LastName = LastName,

@@ -1,18 +1,13 @@
 import * as React from 'react';
 import 'src/assets/css/App.css';
 import './ReserveTicket.css';
-import Seats, { IReservation } from './Seats'
+import Seats from './Seats'
 import { NavLink } from 'react-router-dom';
 
 class ReserveTicket extends React.Component <any, IState>{
  
   public state: IState = {
     "seats": [],
-    "reservation":{
-      "IdReservation": 1,
-      "IdUserAccount": 1,
-      "IdScreening": 3
-  },
   "Reserved":"",
   "Layout": "",
   "Screening": 0
@@ -53,10 +48,36 @@ public updateReservation(value: string, check: boolean)
 
   public render() {  
     let i = 1;
-    return (     
-      <div className="flex content-center whitespace-nowrap">
-      <div className="w-full h-64 text-grey-darker text-center bg-white px-4 py-2 m-2 row-left room-width">
-         
+    let user;
+    let content
+    const userStorage = localStorage.getItem("User");
+    if (userStorage != null){
+       user = JSON.parse(userStorage);
+       content = <div className="flex content-center whitespace-nowrap">
+      
+      <div className="w-full h-full text-grey-darker text-center bg-white px-6 py-4 m-4 row-left room-width">
+      <div className="screen">Ekran</div>
+      <br/>
+      <br/>  
+       {this.state.seats.map(seat => 
+                     <Seats triggerUpdate={this.updateReservation} key={i=i+1} seat={seat}/>)}                 
+   </div> 
+   
+   <NavLink className="buy-btn" to={{
+                 pathname: '/Reservation/'+this.state.Reserved +"/" + this.state.Screening + "/" + user.response.id,
+                // pathname: '/PersonalData/'+this.state.Reserved +"/"+ this.state.Screening,
+               }}> 
+               Zarezerwuj 
+       </NavLink>
+   </div>
+    }
+    else
+    {
+      content =       <div className="flex content-center whitespace-nowrap">
+      <div className="w-full h-full text-grey-darker text-center bg-white px-6 py-4 m-4 row-left room-width">
+      <div className="screen">Ekran</div>
+      <br/>
+      <br/>  
       {this.state.seats.map(seat => 
                     <Seats triggerUpdate={this.updateReservation} key={i=i+1} seat={seat}/>)}                 
   </div> 
@@ -68,7 +89,11 @@ public updateReservation(value: string, check: boolean)
               Zarezerwuj 
       </NavLink>
   </div>
-
+    }
+    return (    
+      <div> 
+      {content}
+      </div>
       
     );
   }
@@ -77,7 +102,6 @@ public updateReservation(value: string, check: boolean)
 export default ReserveTicket;
 export interface IState {
   seats: string[],
-  reservation: IReservation,
   Reserved:string,
   Layout:string,
   Screening: number

@@ -20,16 +20,11 @@ class Reservation extends React.Component<any, IState> {
         super(props);
       }
       public async Reserve(){
-
-
         await fetch('https://localhost:44371/cinema/AddReservation?user=' + this.state.UserId + '&screening=' + this.state.Screening + '&seat=' + this.state.Reserved, {
           method: 'POST',
           mode: 'no-cors'
 
         });
-
-
-
     }
       public async componentDidMount() {
         const result = await fetch('https://localhost:44371/cinema/GetSeat2?mask=' + this.state.Reserved);

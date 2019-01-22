@@ -127,6 +127,7 @@ namespace CinemaApi.Controllers
                 {
                     Response = new RegisterResultApiModel
                     {
+                        Id = userIdentity.Id,
                         FirstName = userIdentity.FirstName,
                         LastName = userIdentity.LastName,
                         Email = userIdentity.Email,
@@ -318,6 +319,7 @@ namespace CinemaApi.Controllers
                 // Pass back the user details and the token
                 Response = new UserProfileDetailsApiModel
                 {
+                    Id = user.Id,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Email = user.Email,

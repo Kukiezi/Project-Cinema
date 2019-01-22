@@ -13,6 +13,6 @@ namespace CinemaApi.Models
 
         public Screening IdScreeningNavigation { get; set; }
         public UserAccount IdUserAccountNavigation { get; set; }
-        public ApplicationUser IdUserNavigation { get; set; }
+       
     }
 }

@@ -130,6 +130,7 @@ class Registration extends React.Component<any, any> {
         return (
            
                     <div className="form-inner">
+                    <h1 className="white">Podaj Dane osobowe potrzebne do rezerwacji</h1>
                             <div className="form-item">
                                 <label htmlFor="firstName-id" className="block text-sm font-bold mb-2">IMIĘ</label>
                                 <input onChange={this.onChange} placeholder="Podaj imię " id="firstName-id"  name="firstName" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
