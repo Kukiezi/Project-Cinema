@@ -30,7 +30,6 @@ Alicja Wolak:
 
 Jagoda Ossowska:
 - wydarzenia
-- profil użytkowanika
 - stylizacja profilu użytkownika
 - stylizacja panelu administratora
 - stylizacja repertuaru
