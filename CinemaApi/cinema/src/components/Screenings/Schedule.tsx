@@ -2,7 +2,7 @@ import * as React from 'react';
 import Screening from './Screening';
 import './Screening.css';
 import Fade from '../App/Fade';
-import Movies from '../Movies/Movies';
+// import Movies from '../Movies/Movies';
 // import { NavLink } from 'react-router-dom';
 import '../Users/UserProfil.css';
 import {Tabs, Tab, TabList, TabPanel} from 'react-tabs';
@@ -30,19 +30,27 @@ class MovieSchedule extends React.Component<any, any>{
             day5: [],
             day6: []
           },
-          movies: [],
-          refresh: 0
+          movie:{
+            "id": 0,
+            "title": "",
+            "description": "",
+            "picture": "",
+            "rating": 0
+          },
+          refresh: 0,
+          id: this.props.match.params.Id
         }
       
       } 
 
     public async componentDidMount() {
-        const result = await fetch('https://localhost:44371/cinema/GetScreenings');
+        console.log(this.state.id)
+        const result = await fetch('https://localhost:44371/cinema/GetScreeningMovie?id='+ this.state.id);
         const screenings = await result.json();
        this.setState({ screenings });
-        const result2 = await fetch('https://localhost:44371/cinema/GetMovies');
-        const movies = await result2.json();
-        this.setState({ movies });
+       const result2 = await fetch('https://localhost:44371/cinema/GetMovie?id=' + this.state.id);
+       const movie = await result2.json();
+        this.setState({ movie });
         // console.log(this.state.screenings.day1[0]);
 
     }
@@ -59,23 +67,21 @@ class MovieSchedule extends React.Component<any, any>{
         
             <Fade>
             <p className="p-8 List-header">
-              Repertuar
+              Repetuar
             </p>
             </Fade>
     
-          <Fade>
-          <div className="Movie-Schedlist" id="Movie-list"> 
-             
-          {this.state.movies.map(movie => <Movies key={movie.id} movie={movie}/>)}<br/>
-       
-    
-          </div>
+            <div className="content-center  bg-black px-8 py-4 m-4">
+        <Fade>
+          <img src={this.state.movie.picture} />
           </Fade>
+        </div>
+      
           <div className="w-full mb-12">
        <Fade>
 
        <Tabs>
-                            <TabList className='day-navbar text-white mt-16 mb-8'>
+                            <TabList className='day-navbar text-white mt-16'>
                                 <Tab>Dzisiaj</Tab>
                                 <Tab>Jutro</Tab>
                                 <Tab>Czwartek</Tab>

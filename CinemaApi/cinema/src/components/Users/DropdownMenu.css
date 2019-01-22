@@ -29,31 +29,9 @@ li {
     font-size: 20px;
     font-family: Monte;
 }
-li:last-child {
-    border-bottom: none;
-}
+
 li:hover {
     background-color: #31383f;
     color: white;
 
 }
-
-/* .arrow{
-
-    padding:12px;
-    border-radius:5px;
-    font-weight:bold;
-    color:white;
-}
-
-.arrow:before{
-    content:"";
-    position:absolute;
-    width:0px;
-    height:0px;
-    border: 10px solid;
-    border-color: white transparent transparent transparent;
-    right:6px;
-    top:18px;
-} */
-

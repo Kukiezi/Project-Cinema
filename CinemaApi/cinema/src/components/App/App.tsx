@@ -26,6 +26,7 @@ import decode from 'jwt-decode';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faArrowUp, faArrowDown, faComment, faLongArrowAltLeft, faTimes } from '@fortawesome/free-solid-svg-icons';
 import MovieSchedule from '../Screenings/MovieSchedule';
+import Schedule from '../Screenings/Schedule';
 // import decode from 'jwt-decode';
 
 library.add(faArrowUp, faArrowDown, faComment, faLongArrowAltLeft, faTimes);
@@ -122,6 +123,7 @@ public render() {
      <AuthRoute path="/Repertuar" component={MovieSchedule}/>
      <AuthRoute path="/UserProfil" component={UserProfil}/>
      <AuthRoute path="/ReviewSection/:Id" component={ReviewSection}/>
+     <AuthRoute path="/Schedule/:Id" component={Schedule}/>
      <Route component={NotExist}/>
      {/* <AuthRoute exact path="/auth" component={Auth}/> */}
     </Switch>
