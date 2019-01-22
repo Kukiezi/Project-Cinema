@@ -355,4 +355,5 @@ table.resource-table tr td:last-child, /*table.scheduler-bg-table tr td:last-chi
     width: 100%;
     background-color: black;
     font-size: 25px;
+    position: inherit;
 }

@@ -59,12 +59,12 @@ class MovieSchedule extends React.Component<any, any>{
         
             <Fade>
             <p className="p-8 List-header">
-              Repetuar
+              Repertuar
             </p>
             </Fade>
     
           <Fade>
-          <div className="Movie-list" id="Movie-list"> 
+          <div className="Movie-Schedlist" id="Movie-list"> 
              
           {this.state.movies.map(movie => <Movies key={movie.id} movie={movie}/>)}<br/>
        
@@ -75,7 +75,7 @@ class MovieSchedule extends React.Component<any, any>{
        <Fade>
 
        <Tabs>
-                            <TabList className='day-navbar text-white mt-16'>
+                            <TabList className='day-navbar text-white mt-16 mb-8'>
                                 <Tab>Dzisiaj</Tab>
                                 <Tab>Jutro</Tab>
                                 <Tab>Czwartek</Tab>
