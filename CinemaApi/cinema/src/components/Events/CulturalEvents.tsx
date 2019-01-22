@@ -33,6 +33,11 @@ export default class CulturalEvents extends React.Component<any, any>{
                 <div className='event-title text-lg '>                    
                         {this.props.culturalevent.eventName}
                 </div>
+                <div className="event-date">
+                    <Moment format="YYYY/MM/DD">
+                        {this.props.culturalevent.eventDate}
+                    </Moment>
+                </div>
                 <div className='event-details'>
                 <button className="details-btn text-sm" onClick={this.toggleModal}>Zobacz szczegóły</button>
                 <Modal className='modal-events' isOpen={this.state.isActive} onRequestClose={this.toggleModal}>
