@@ -293,11 +293,11 @@ namespace CinemaApi.Models
                     .HasColumnName("screening_date")
                     .HasColumnType("datetime");
 
-                entity.Property(e => e.Showtime1).HasColumnName("showtime1");
+                entity.Property(e => e.showtime1).HasColumnName("showtime1");
 
-                entity.Property(e => e.Showtime2).HasColumnName("showtime2");
+                entity.Property(e => e.showtime2).HasColumnName("showtime2");
 
-                entity.Property(e => e.Showtime3).HasColumnName("showtime3");
+                entity.Property(e => e.showtime3).HasColumnName("showtime3");
 
                 entity.HasOne(d => d.IdMoviesNavigation)
                     .WithMany(p => p.Screening)

@@ -21,7 +21,6 @@ import DetailsPanel from '../AdminPanel/Movies/DetailsPanel';
 import { AddMovie } from '../AdminPanel/Movies/AddMovie';
 import { DeleteMovie } from '../AdminPanel/Movies/DeleteMovie';
 
-import MovieSchedule from '../MovieSchedule/MovieSchedule';
 import UserProfil from '../Users/UserProfil';
 import decode from 'jwt-decode';
 import { library } from '@fortawesome/fontawesome-svg-core';

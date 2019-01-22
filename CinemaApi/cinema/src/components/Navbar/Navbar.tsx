@@ -47,7 +47,7 @@ class Navbar extends React.Component<any, any>{
             <NavLink to="/Repertuar" className="block no-underline mt-4 lg:inline-block lg:mt-0 text-white mr-6">Repertuar</NavLink>
             <NavLink to="/Events" className="block no-underline mt-4 lg:inline-block lg:mt-0 text-white mr-6">Wydarzenia</NavLink>
             <NavLink to="/AdminPanel" className="block mt-4 no-underline lg:inline-block lg:mt-0 text-white mr-6">Administracja</NavLink>            
-            <Newsletter/>
+            {/* <Newsletter/> */}
      
           </div>
           </Fade>
