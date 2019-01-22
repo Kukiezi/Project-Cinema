@@ -451,11 +451,20 @@ namespace CinemaApi.Controllers
         {
             var review = context.Review.FirstOrDefault(a => a.IdReview == userReview.IdReview);
             var userReviewList = context.UserReview.Where(a => a.ReviewId == userReview.IdReview).ToList();
+            var responseList = context.Review.Where(a => a.IdResponse == userReview.IdReview).ToList();
             if (review != null)
             {
                 if (userReviewList.Count > 0)
                 {
                     foreach (var item in userReviewList)
+                    {
+                        context.Remove(item);
+                    }
+                }
+
+                if (responseList.Count > 0)
+                {
+                    foreach (var item in responseList)
                     {
                         context.Remove(item);
                     }

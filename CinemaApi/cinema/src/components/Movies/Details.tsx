@@ -66,7 +66,7 @@ class Details extends React.Component<any, IState> {
         checkSmiley[j].style.display = "none";
     }
     
-    for(let k=checkCount; k<checkValue.length-1; k++){
+    for(let k=checkCount; k<checkValue.length; k++){
      
         checkValue[k].checked = false;
         checkStar[k].className = "check"
@@ -141,6 +141,14 @@ public async SendRating(){
       currentRating,
       reviews
     });
+    const checkValue = document.querySelectorAll("input");
+    const checkStar = document.querySelectorAll("label");
+    const checkSmiley = document.querySelectorAll("i");
+    for(let j=0; j<2; j++){
+      checkValue[j].checked = true;
+      checkStar[j].className = "rated";
+      checkSmiley[j].style.display = "none";
+  }
   }
 
   public onChangeReview = (e: any) => {
