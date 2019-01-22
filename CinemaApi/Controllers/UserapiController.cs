@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
@@ -37,6 +38,8 @@ namespace CinemaApi.Controllers
         /// </summary>
         protected SignInManager<ApplicationUser> mSignInManager;
 
+        protected RoleManager<IdentityRole> mRoleManager;
+
         #endregion
 
         #region Constructor
@@ -50,11 +53,13 @@ namespace CinemaApi.Controllers
         public UserapiController(
             CinemaDBContext context,
             UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager)
+            SignInManager<ApplicationUser> signInManager,
+            RoleManager<IdentityRole> roleManager)
         {
             mContext = context;
             mUserManager = userManager;
             mSignInManager = signInManager;
+            mRoleManager = roleManager;
         }
 
         #endregion
@@ -76,6 +81,7 @@ namespace CinemaApi.Controllers
             var invalidErrorMessage = "Prosze wypełnić wszystkie pola do zarejestrowania się";
             var invalidConfirmPassword = "Hasło i Powtórz Hasło nie zgadzają się ze sobą";
             // The error response for a failed login
+            
             var errorResponse = new ApiResponse<RegisterResultApiModel>
             {
                 // Set error message
@@ -113,25 +119,34 @@ namespace CinemaApi.Controllers
             // Try and create a user
             var result = await mUserManager.CreateAsync(user, registerCredentials.Password);
 
+
+            //var userRoles = await mUserManager.GetRolesAsync(user);
+
             // If the registration was successful...
             if (result.Succeeded)
             {
                 // Get the user details
                 var userIdentity = await mUserManager.FindByNameAsync(user.UserName);
-
+                await mUserManager.AddToRoleAsync(userIdentity, "User");
                 // Send email verification
                 //await SendUserEmailVerificationAsync(user);
-
+                var roles = await mUserManager.GetRolesAsync(user);
+                string role = "";
+                foreach (var r in roles)
+                {
+                    role = r;
+                }
                 // Return valid response containing all users details
                 return new ApiResponse<RegisterResultApiModel>
                 {
                     Response = new RegisterResultApiModel
                     {
+                        Id = userIdentity.Id,
                         FirstName = userIdentity.FirstName,
                         LastName = userIdentity.LastName,
                         Email = userIdentity.Email,
                         Username = userIdentity.UserName,
-                        Token = userIdentity.GenerateJwtToken(),
+                        Token = userIdentity.GenerateJwtToken(role),
                     }
                 };
             }
@@ -143,6 +158,103 @@ namespace CinemaApi.Controllers
                     // Aggregate all errors into a single error string
                     ErrorMessage = result.Errors.AggregateErrors()
                 };
+        }
+
+
+        [AllowAnonymous]
+        [Route("personalData")]
+        public async Task<ApiResponse<RegisterResultApiModel>> PersonalDataAsync(
+           [FromBody] RegisterCredentialsApiModel registerCredentials)
+        {
+            // TODO: Localize all strings
+            // The message when we fail to login
+            var invalidErrorMessage = "Prosze wypełnić wszystkie pola do zarejestrowania się";
+            // The error response for a failed login
+            var errorResponse = new ApiResponse<RegisterResultApiModel>
+            {
+                // Set error message
+                ErrorMessage = invalidErrorMessage
+            };
+
+            var exist = await mUserManager.FindByEmailAsync(registerCredentials.Email);
+            if (exist != null)
+            {
+                exist.LastName = registerCredentials.LastName;
+                exist.FirstName = registerCredentials.FirstName;
+                await mUserManager.UpdateAsync(exist);
+                return new ApiResponse<RegisterResultApiModel>
+                {
+                    ErrorMessage = "Sukces"
+                };
+
+
+            }
+            else
+            {
+                // If we have no credentials...
+                if (registerCredentials == null)
+                    // Return failed response
+                    return errorResponse;
+
+                // Make sure we have a user name
+                if (string.IsNullOrWhiteSpace(registerCredentials.FirstName) || string.IsNullOrWhiteSpace(registerCredentials.LastName) || string.IsNullOrWhiteSpace(registerCredentials.Email))
+                    // Return error message to user
+                    return errorResponse;
+
+                // Create the desired user from the given details
+                var user = new ApplicationUser
+                {
+                    FirstName = registerCredentials.FirstName,
+                    LastName = registerCredentials.LastName,
+                    Email = registerCredentials.Email
+                };
+                user.UserName = user.Id;
+                // Try and create a user
+                var result = await mUserManager.CreateAsync(user, "Password");
+
+                // If the registration was successful...
+                if (result.Succeeded)
+                {
+                    // Get the user details
+                    var userIdentity = await mUserManager.FindByNameAsync(user.UserName);
+
+                    // Send email verification
+                    //await SendUserEmailVerificationAsync(user);
+
+                    // Return valid response containing all users details
+                    return new ApiResponse<RegisterResultApiModel>
+                    {
+                        ErrorMessage = "Sukces"
+                    };
+
+
+                }
+                // Otherwise if it failed...
+                else
+                    // Return the failed response
+                    return new ApiResponse<RegisterResultApiModel>
+                    {
+                        // Aggregate all errors into a single error string
+                        ErrorMessage = result.Errors.AggregateErrors()
+                    };
+            }
+        }
+
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("GetId")]
+        public List<string> GetId(string FirstName ,string LastName, string Email)
+        {
+            //var room = mContext.Screening.Where(a => a.IdScreening == id).Select(a => a.IdRoom).FirstOrDefault();
+            //var userIdentity = await mUserManager.FindByNameAsync(user.UserName);
+
+            List<string> id = new List<string>
+            {
+                 mContext.Users.Where(a => a.Email == Email &&  a.LastName == LastName && a.FirstName == FirstName).Select(a => a.Id).FirstOrDefault()
+            };
+            return id;
+
         }
 
         /// <summary>
@@ -208,12 +320,18 @@ namespace CinemaApi.Controllers
 
             // get user table
             var userDb = mContext.Users.Where(a => a.Id == user.Id).FirstOrDefault();
-
+            var roles = await mUserManager.GetRolesAsync(user);
+            string role = "";
+            foreach (var r in roles)
+            {
+                role = r;
+            }
             // Generate new refresh token for user
             if (userDb != null) 
-                userDb.RefreshToken = user.GenerateJwtRefreshToken();
+                userDb.RefreshToken = user.GenerateJwtRefreshToken(role);
 
             mContext.SaveChanges();
+
 
             // Return token to user
             return new ApiResponse<UserProfileDetailsApiModel>
@@ -221,11 +339,13 @@ namespace CinemaApi.Controllers
                 // Pass back the user details and the token
                 Response = new UserProfileDetailsApiModel
                 {
+                    Id = user.Id,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Email = user.Email,
                     Username = user.UserName,
-                    Token = user.GenerateJwtToken(),
+                    Token = user.GenerateJwtToken(role),
+                    Role = role
                 }
             };
         }
@@ -286,7 +406,12 @@ namespace CinemaApi.Controllers
                 return errorResponse2;
 
             var refreshTokenExpirationDate = handlerRefreshToken.ValidTo;
-          
+            var roles = await mUserManager.GetRolesAsync(user);
+            string role = "";
+            foreach (var r in roles)
+            {
+                role = r;
+            }
             //var refreshToken = mContext.UserAccount.Where()
             if (tokenExpirationDate < DateTime.Now)
             {
@@ -296,6 +421,7 @@ namespace CinemaApi.Controllers
                 }
                 return new ApiResponse<UserProfileDetailsApiModel>
                 {
+
                     // Pass back the user details and the token
                     Response = new UserProfileDetailsApiModel
                     {
@@ -303,7 +429,7 @@ namespace CinemaApi.Controllers
                         LastName = user.LastName,
                         Email = user.Email,
                         Username = user.UserName,
-                        Token = user.GenerateJwtToken(),
+                        Token = user.GenerateJwtToken(role),
                     }
                 };
             }

@@ -361,6 +361,10 @@ footer p{
   color: white !important;
 }
 
+.arrow-down:hover {
+  color: white !important;
+}
+
 .points-section{
   position: relative;
   left: 8px;
@@ -376,4 +380,26 @@ footer p{
 
 .arrow-grey:hover{
   color: white;
+}
+
+.review-nohr{
+  position: relative;
+  left: 5%;
+}
+
+.delete-btn{
+  font-size: 30px;
+}
+
+.comment{
+
+  word-wrap: break-word;
+}
+
+.comment-left{
+  word-wrap: break-word;
+}
+.comment-right{
+  position: relative;
+  left: 90%;
 }

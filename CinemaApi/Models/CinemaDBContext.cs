@@ -16,7 +16,6 @@ namespace CinemaApi.Models
         {
         }
 
-       
         public virtual DbSet<CulturalEvent> CulturalEvent { get; set; }
         public virtual DbSet<EventAddress> EventAddress { get; set; }
         public virtual DbSet<Movies> Movies { get; set; }
@@ -32,9 +31,7 @@ namespace CinemaApi.Models
         public virtual DbSet<SigningIn> SigningIn { get; set; }
         public virtual DbSet<UserAccount> UserAccount { get; set; }
         public virtual DbSet<UserReview> UserReview { get; set; }
-        public virtual DbSet<UserRole> UserRole { get; set; }
 
-       
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -186,6 +183,10 @@ namespace CinemaApi.Models
 
                 entity.Property(e => e.IdScreening).HasColumnName("id_screening");
 
+                entity.Property(e => e.IdUser)
+                    .HasColumnName("id_user")
+                    .HasMaxLength(450);
+
                 entity.Property(e => e.IdUserAccount).HasColumnName("id_user_account");
 
                 entity.Property(e => e.SeatsReserved)
@@ -193,6 +194,8 @@ namespace CinemaApi.Models
                     .HasColumnName("seats_reserved")
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Showtime).HasColumnName("showtime");
 
                 entity.HasOne(d => d.IdScreeningNavigation)
                     .WithMany(p => p.Reservation)
@@ -203,7 +206,6 @@ namespace CinemaApi.Models
                 entity.HasOne(d => d.IdUserAccountNavigation)
                     .WithMany(p => p.Reservation)
                     .HasForeignKey(d => d.IdUserAccount)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Reservati__id_us__40F9A68C");
             });
 
@@ -220,6 +222,8 @@ namespace CinemaApi.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.IdMovies).HasColumnName("id_Movies");
+
+                entity.Property(e => e.IdResponse).HasColumnName("id_response");
 
                 entity.Property(e => e.Review1)
                     .IsRequired()
@@ -287,7 +291,13 @@ namespace CinemaApi.Models
 
                 entity.Property(e => e.ScreeningDate)
                     .HasColumnName("screening_date")
-                    .HasColumnType("datetime");
+                    .HasColumnType("date");
+
+                entity.Property(e => e.Showtime1).HasColumnName("showtime1");
+
+                entity.Property(e => e.Showtime2).HasColumnName("showtime2");
+
+                entity.Property(e => e.Showtime3).HasColumnName("showtime3");
 
                 entity.HasOne(d => d.IdMoviesNavigation)
                     .WithMany(p => p.Screening)
@@ -406,31 +416,6 @@ namespace CinemaApi.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__User_Revi__UserI__04AFB25B");
-            });
-
-            modelBuilder.Entity<UserRole>(entity =>
-            {
-                entity.HasKey(e => e.IdUserRole);
-
-                entity.ToTable("User_role");
-
-                entity.Property(e => e.IdUserRole).HasColumnName("id_user_role");
-
-                entity.Property(e => e.IdRoles).HasColumnName("id_roles");
-
-                entity.Property(e => e.IdUserAccount).HasColumnName("id_user_account");
-
-                entity.HasOne(d => d.IdRolesNavigation)
-                    .WithMany(p => p.UserRole)
-                    .HasForeignKey(d => d.IdRoles)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__User_role__id_ro__3864608B");
-
-                entity.HasOne(d => d.IdUserAccountNavigation)
-                    .WithMany(p => p.UserRole)
-                    .HasForeignKey(d => d.IdUserAccount)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__User_role__id_us__37703C52");
             });
         }
     }

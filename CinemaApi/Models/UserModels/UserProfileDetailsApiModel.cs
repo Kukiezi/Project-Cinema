@@ -10,10 +10,21 @@ namespace CinemaApi.Models.UserModels
         #region Public Properties
 
         /// <summary>
+        /// Role of the current user
+        /// </summary>
+        /// <remarks>Sends Role of the current user</remarks>
+        public string Role { get; set; }
+
+        /// <summary>
         /// The authentication token used to stay authenticated through future requests
         /// </summary>
         /// <remarks>The Token is only provided when called from the login methods</remarks>
         public string Token { get; set; }
+
+        /// <summary>
+        /// The users id
+        /// </summary>
+        public string Id { get; set; }
 
         /// <summary>
         /// The users first name
@@ -60,6 +71,7 @@ namespace CinemaApi.Models.UserModels
         {
             return new LoginCredentialsDataModel
             {
+                Id = Id,
                 Email = Email,
                 FirstName = FirstName,
                 LastName = LastName,

@@ -18,7 +18,8 @@ class Details extends React.Component<any, IState> {
       "author": "",
       "review1": "",
       "idMovies": 0,
-      "vote": 0
+      "vote": 0,
+      "points": 0
     },
     "loading": true,
     "currentRating": 0,
@@ -45,6 +46,7 @@ class Details extends React.Component<any, IState> {
     this.addReview = this.addReview.bind(this);
     this.onChange = this.onChange.bind(this);
     this.changeTextArea = this.changeTextArea.bind(this);
+    this.setReviews = this.setReviews.bind(this);
   }
 
   public onChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -139,7 +141,6 @@ public async SendRating(){
       currentRating,
       reviews
     });
-    
   }
 
   public onChangeReview = (e: any) => {
@@ -173,6 +174,14 @@ public async addReview(){
     this.setState({errorMessage:"Nie możesz dodawać pustych opinii!"})
     return;
   }
+  if (this.state.textareaValue.length < 6){
+    await this.setState({errorMessage:"Opinia musi mieć więcej niż 6 znaków!"})
+    return;
+  }
+  if (!this.state.textareaValue.replace(/\s/g, '').length) {
+    await this.setState({errorMessage:"Opinia musi mieć więcej niż 6 znaków!"})
+    return;
+  }
   else{
     this.setState({errorMessage:""})
   }
@@ -192,21 +201,32 @@ public async addReview(){
       body: JSON.stringify({author: user.response.username, review1: this.state.review.review1, idMovies: this.state.review.idMovies})
     }).then(res=>res.json());
       // .then(res => console.log(res));
-    this.setReviews();
+    this.setReviews(null);
 }
 
-public async setReviews(){
+public async setReviews(IdMovies){
   let reviews;
-  const { Id } = this.props.match.params;
-  const result3 = await fetch('https://localhost:44371/cinema/GetReviews?id=' + Id)
-      if (result3.ok){
-         reviews = await result3.json();
-      }
-      this.setState({
-        reviews
-      });
-   
-     
+
+  if (IdMovies === null){
+    const { Id } = this.props.match.params;
+    const result3 = await fetch('https://localhost:44371/cinema/GetReviews?id=' + Id)
+    if (result3.ok){
+       reviews = await result3.json();
+    }
+    this.setState({
+      reviews
+    });
+  }
+  else{
+    const Id = IdMovies;
+    const result3 = await fetch('https://localhost:44371/cinema/GetReviews?id=' + Id)
+    if (result3.ok){
+       reviews = await result3.json();
+    }
+    this.setState({
+      reviews
+    });
+  }
 }
 
   public render() {
@@ -219,9 +239,9 @@ public async setReviews(){
       reviewCheck =   <div className="reviews comment-form">
       
       {this.state.reviews.map(review => 
-                        <Reviews key={review.idReview} review={review}/>)}
+                        <Reviews key={review.idReview} setReviews={this.setReviews} review={review}/>)}
       </div>
-
+      
     }
     else{
       reviewCheck =   <div className="reviews comment-form"> <br/><br/>
@@ -328,5 +348,6 @@ export interface IReviews {
   idMovies: number,
   review1: string,
   author: string,
-  vote: number
+  vote: number,
+  points: number
 }
