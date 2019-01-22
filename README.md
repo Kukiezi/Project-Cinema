@@ -17,7 +17,7 @@ Dla pracowników stworzyliśmy Admin Panel używając Reacta z Electronem, któr
 
 <h3>Podział obowiązków:</h3>
 
-<h4>Dawid Weltrowski-Knopik:</h4>
+Dawid Weltrowski-Knopik:
 - szkielet i mechanizm strony głównej
 - implemenacja JWT Token oraz JWT Refresh Token do logowania jak i rejestracji
 - panel administratora
@@ -27,18 +27,18 @@ Dla pracowników stworzyliśmy Admin Panel używając Reacta z Electronem, któr
 - profil użytkownika
 - repertuar
 
-<h4>Filip Czyż:</h4>
+Filip Czyż:
 - rezerwacja i zakup biletów
 - szczegóły filmu, rating i komentarze
 - repertuar
 - profil użytkownika
 
-<h4>Alicja Wolak:</h4>
+Alicja Wolak:
 - repertuar
 - stylizacja repertuaru
 - struktura bazy danych
 
-<h4>Jagoda Ossowska:</h4>
+Jagoda Ossowska:
 - profil użytkownika
 - wydarzenia
 - stylizacja profilu użytkownika
