@@ -16,6 +16,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaApi.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Route("api/")]
     [ApiController]
     public class UserapiController : ControllerBase
@@ -425,6 +428,7 @@ namespace CinemaApi.Controllers
                     // Pass back the user details and the token
                     Response = new UserProfileDetailsApiModel
                     {
+                        Id = user.Id,
                         FirstName = user.FirstName,
                         LastName = user.LastName,
                         Email = user.Email,
@@ -436,5 +440,100 @@ namespace CinemaApi.Controllers
          
             return errorResponse2;
         }
+
+        /// <summary>
+        /// Attempts to update the users profile details
+        /// </summary>
+        /// <param name="model">The user profile details to update</param>
+        /// <returns>
+        ///     Returns successful response if the update was successful, 
+        ///     otherwise returns the error reasons for the failure
+        /// </returns>
+        [AuthorizeToken]
+        [Route("update")]
+        public async Task<ApiResponse> UpdateUserProfileAsync([FromBody]UpdateUserProfileApiModel model)
+        {
+            #region Declare Variables
+
+            // Make a list of empty errors
+            var errors = new List<string>();
+
+            #endregion
+
+            #region Get User
+
+            // Get the current user
+            var user = await mUserManager.FindByIdAsync(model.Id);
+
+            // If we have no user...
+            if (user == null)
+                return new ApiResponse
+                {
+                    // TODO: Localization
+                    ErrorMessage = "User not found"
+                };
+
+
+            #endregion
+
+            #region Update Profile
+
+            // If we have a first name...
+            if (model.FirstName != null)
+                // Update the profile details
+                user.FirstName = model.FirstName;
+
+            // If we have a last name...
+            if (model.LastName != null)
+                // Update the profile details
+                user.LastName = model.LastName;
+
+            // If we have a username...
+            if (model.Username != null)
+                // Update the profile details
+                user.UserName = model.Username;
+
+            #endregion
+
+            #region Save Profile
+
+            // Attempt to commit changes to data store
+            var result = await mUserManager.UpdateAsync(user);
+
+      
+
+            #endregion
+
+            #region Respond
+
+            // If we were successful...
+            if (result.Succeeded)
+                // Return successful response
+                return new ApiResponse<UserProfileDetailsApiModel>
+                {
+                    // Pass back the user details and the token
+                    Response = new UserProfileDetailsApiModel
+                    {
+                        Id = user.Id,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        Email = user.Email,
+                        Username = user.UserName,
+                        Token = user.GenerateJwtToken(),
+                    }
+                };
+            // Otherwise if it failed...
+            else
+                // Return the failed response
+                return new ApiResponse
+                {
+                    ErrorMessage = result.Errors.AggregateErrors()
+                };
+
+            #endregion
+        }
+
+
+
     }
 }

@@ -68,6 +68,39 @@ namespace CinemaApi.Controllers
             return v != null;
         }
 
+        [HttpPost]
+        [Route("UpdateCulturalEvent")]
+        public ActionResult UpdateCulturalEvent(int id, string eventName, string eventDescription, int seatsLimit)
+        {
+            var culturalevent = context.CulturalEvent.Where(e => e.IdCulturalEvent == id).FirstOrDefault();
+
+            if (eventName != culturalevent.EventName || eventDescription != culturalevent.EventDescription || seatsLimit != culturalevent.SeatsLimit)
+            {
+                culturalevent.EventName = eventName;
+                culturalevent.EventDescription = eventDescription;
+                culturalevent.SeatsLimit = seatsLimit;
+                context.SaveChanges();
+            }
+
+
+            return Ok();
+        }
+
+        [HttpPost]
+        [Route("DeleteCulturalEvent")]
+        public ActionResult DeleteCulturalEvent(int id)
+        {
+            var culturalevent = context.CulturalEvent.Where(e => e.IdCulturalEvent == id).FirstOrDefault();
+
+            if (culturalevent != null)
+            {
+                context.CulturalEvent.Remove(culturalevent);
+                context.SaveChanges();
+            }
+
+            return Ok();
+        }
+
 
     }
 }
