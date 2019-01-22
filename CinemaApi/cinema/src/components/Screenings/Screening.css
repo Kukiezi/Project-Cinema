@@ -64,7 +64,7 @@
     transition: .5s;
     line-height: 52px;
     border-radius: 3px;
-    border: 1px solid black;
+
     font-family: Monte;
     font-weight: 400;
     text-decoration: none;
@@ -75,7 +75,7 @@
     padding: 10px 15px;
     position: static;
     background: transparent;
-    color: rgba(255, 255, 255, 0.541);
+    color: rgba(218, 216, 216, 0.959);
     font-size: 18px;
     transition: .5s;
     line-height: 52px;
@@ -320,4 +320,39 @@ table.resource-table tr td:last-child, /*table.scheduler-bg-table tr td:last-chi
 
 .selected-area {
     position: absolute;
+}
+
+.all-screenings{
+    width:80%;
+    margin-bottom: 2rem;
+}
+
+.screening-title{
+    width:20%;
+    display: inline-block;
+    margin: 10px 0 10px 0;
+    padding: 10px 15px;
+    position: static;
+    background: transparent;
+    color: rgba(218, 216, 216, 0.959);
+    font-size: 18px;
+    transition: .5s;
+    line-height: 52px;
+    font-family: Monte;
+    font-weight: bold;
+
+}
+
+.screening-time{
+    width:20%;
+    display: inline-block;
+    margin: 10px 0 10px 0;
+    border-right: 1px solid grey;
+    border-left: 1px solid grey;
+}
+
+.day-navbar{
+    width: 100%;
+    background-color: black;
+    font-size: 20px;
 }

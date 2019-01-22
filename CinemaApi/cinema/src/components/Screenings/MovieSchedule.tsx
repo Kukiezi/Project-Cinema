@@ -6,6 +6,7 @@ import Movies from '../Movies/Movies';
 // import { NavLink } from 'react-router-dom';
 import '../Users/UserProfil.css';
 import {Tabs, Tab, TabList, TabPanel} from 'react-tabs';
+import './Screening.css';
 
 class MovieSchedule extends React.Component<any, any>{
 
@@ -70,9 +71,11 @@ class MovieSchedule extends React.Component<any, any>{
     
           </div>
           </Fade>
+          <div className="w-full">
        <Fade>
+
        <Tabs>
-                            <TabList className='menu text-white'>
+                            <TabList className='day-navbar text-white mt-8'>
                                 <Tab>Dzisiaj</Tab>
                                 <Tab>Jutro</Tab>
                                 <Tab>Czwartek</Tab>
@@ -80,69 +83,42 @@ class MovieSchedule extends React.Component<any, any>{
                                 <Tab>Sobota</Tab>
                             </TabList>
                     
-                            <TabPanel>
-                                <div className="form-inner text-white">
-                                    <div className="form-item">
-                                        <label htmlFor="firstName-id" className="block text-sm font-bold mb-2">
+                            <TabPanel className="all-screenings">
+
                                         {this.state.screenings.day1.map(day => <Screening key={day.idScreening} screening={day}/>)}
-                                        </label>
-                                    </div>
                     
-                                </div>
+                               
                             </TabPanel>
-                            <TabPanel>
-                            <div className="form-inner text-white">
-                                    <div className="form-item">
-                                        <label htmlFor="firstName-id" className="block text-sm font-bold mb-2">
+                            <TabPanel className="all-screenings">
+                           
+
                                         {this.state.screenings.day2.map(day => <Screening key={day.idScreening} screening={day}/>)}
-                                        </label>
-                                    </div>
-                    
-                                </div>
+
                             </TabPanel>
-                            <TabPanel>
-                            <div className="form-inner text-white">
-                                    <div className="form-item">
-                                        <label htmlFor="firstName-id" className="block text-sm font-bold mb-2">
+                            <TabPanel className="all-screenings">
+                           
                                         {this.state.screenings.day3.map(day => <Screening key={day.idScreening} screening={day}/>)}
-                                        </label>
-                                    </div>
-                    
-                                </div>
+
                             </TabPanel>
-                            <TabPanel>
-                            <div className="form-inner text-white">
-                                    <div className="form-item">
-                                        <label htmlFor="firstName-id" className="block text-sm font-bold mb-2">
+                            <TabPanel className="all-screenings">
+                            
                                         {this.state.screenings.day4.map(day => <Screening key={day.idScreening} screening={day}/>)}
-                                        </label>
-                                    </div>
-                    
-                                </div>
+
                             </TabPanel>
-                            <TabPanel>
-                            <div className="form-inner text-white">
-                                    <div className="form-item">
-                                        <label htmlFor="firstName-id" className="block text-sm font-bold mb-2">
+                            <TabPanel className="all-screenings">
+                          
                                         {this.state.screenings.day5.map(day => <Screening key={day.idScreening} screening={day}/>)}
-                                        </label>
-                                    </div>
-                    
-                                </div>
+
                             </TabPanel>
-                            <TabPanel>
-                            <div className="form-inner text-white">
-                                    <div className="form-item">
-                                        <label htmlFor="firstName-id" className="block text-sm font-bold mb-2">
+                            <TabPanel className="all-screenings"> 
+                           
                                         {this.state.screenings.day6.map(day => <Screening key={day.idScreening} screening={day}/>)}
-                                        </label>
-                                    </div>
-                    
-                                </div>
+
                             </TabPanel>
                             
                         </Tabs>
 </Fade>
+</div>
 
         
           {/* {/* <div className="Day-header">

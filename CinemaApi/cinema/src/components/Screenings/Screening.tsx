@@ -31,11 +31,11 @@ constructor(props: any) {
 
   public render() {
     return (
-      <div>
-      <div><button className="day-btn">{this.state.screening.movieName}</button></div>    
-      <div><NavLink className="day-btn" to="/ReserveTicket">{this.state.screening.showtime1}</NavLink> </div>
-      <div><NavLink className="day-btn" to="/ReserveTicket">{this.state.screening.showtime2}</NavLink> </div>
-      <div><NavLink className="day-btn" to="/ReserveTicket">{this.state.screening.showtime3}</NavLink> </div>
+      <div className="mt-8">
+        <div className="screening-title">{this.state.screening.movieName}</div>    
+        <div className="screening-time"><NavLink className="day-btn" to="/ReserveTicket">{this.state.screening.showtime1}</NavLink> </div>
+        <div className="screening-time"><NavLink className="day-btn" to="/ReserveTicket">{this.state.screening.showtime2}</NavLink> </div>
+        <div className="screening-time"><NavLink className="day-btn" to="/ReserveTicket">{this.state.screening.showtime3}</NavLink> </div>
       </div>
     );
   }
