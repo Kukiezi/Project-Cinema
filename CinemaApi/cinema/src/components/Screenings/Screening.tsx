@@ -4,7 +4,7 @@ import './Screening.css';
 // import Fade from '../App/Fade';
 // import Movies from '../Movies/Movies';
 import 'src/assets/css/Spinner.css';
-// import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 // import Modal from 'react-modal';
 // import * as Datetime from 'react-datetime';
 
@@ -32,8 +32,10 @@ constructor(props: any) {
   public render() {
     return (
       <div>
-      <div><button className="day-btn">{this.state.screening.movieName}</button> </div>     
-      <div><button className="day-btn">{this.state.screening.screeningDate}</button> </div>
+      <div><button className="day-btn">{this.state.screening.movieName}</button></div>    
+      <div><NavLink className="day-btn" to="/ReserveTicket">{this.state.screening.showtime1}</NavLink> </div>
+      <div><NavLink className="day-btn" to="/ReserveTicket">{this.state.screening.showtime2}</NavLink> </div>
+      <div><NavLink className="day-btn" to="/ReserveTicket">{this.state.screening.showtime3}</NavLink> </div>
       </div>
     );
   }

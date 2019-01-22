@@ -21,7 +21,8 @@ namespace CinemaApi.Controllers
         [Route("GetScreenings")]
         public ActionResult<WeekModel> GetScreening()
         {
-            DateTime Day1 = DateTime.Now;
+            DateTime Day0 = DateTime.Now;
+            DateTime Day1 = Day0.AddDays(-1);
             DateTime Day2 = Day1.AddDays(1);
             DateTime Day3 = Day1.AddDays(2);
             DateTime Day4 = Day1.AddDays(3);
@@ -37,6 +38,10 @@ namespace CinemaApi.Controllers
             List<List<ScreeningExt>> list = new List<List<ScreeningExt>>();
             List<ScreeningExt> day1 = new List<ScreeningExt>();
             List<ScreeningExt> day2 = new List<ScreeningExt>();
+            List<ScreeningExt> day3 = new List<ScreeningExt>();
+            List<ScreeningExt> day4 = new List<ScreeningExt>();
+            List<ScreeningExt> day5 = new List<ScreeningExt>();
+            List<ScreeningExt> day6 = new List<ScreeningExt>();
 
             foreach (var item in screeningsList)
             {
@@ -53,23 +58,46 @@ namespace CinemaApi.Controllers
 
                 };
 
-                if (item.ScreeningDate >= Day2 && item.ScreeningDate < Day3)
+                if (item.ScreeningDate >= Day1 && item.ScreeningDate < Day2)
                 {
                     day1.Add(ext);
                 }
-                else if (item.ScreeningDate >= Day3 && item.ScreeningDate < Day4)
+                else if (item.ScreeningDate >= Day2 && item.ScreeningDate < Day3)
                 {
                     day2.Add(ext);
                 }
-
+                else if (item.ScreeningDate >= Day3 && item.ScreeningDate < Day4)
+                {
+                    day3.Add(ext);
+                }
+                else if (item.ScreeningDate >= Day4 && item.ScreeningDate < Day5)
+                {
+                    day4.Add(ext);
+                }
+                else if (item.ScreeningDate >= Day5 && item.ScreeningDate < Day6)
+                {
+                    day5.Add(ext);
+                }
+                else if (item.ScreeningDate >= Day6)
+                {
+                    day6.Add(ext);
+                }
                 //screeningsExtList.Add(ext);
             }
             list.Add(day1);
             list.Add(day2);
+            list.Add(day3);
+            list.Add(day4);
+            list.Add(day5);
+            list.Add(day6);
             WeekModel week = new WeekModel
             {
                 Day1 = day1,
-                Day2 = day2
+                Day2 = day2,
+                Day3 = day3,
+                Day4 = day4,
+                Day5 = day5,
+                Day6 = day6
             };
             
 

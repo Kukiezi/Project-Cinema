@@ -3,7 +3,9 @@ import Screening from './Screening';
 import './Screening.css';
 import Fade from '../App/Fade';
 import Movies from '../Movies/Movies';
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
+import '../Users/UserProfil.css';
+import {Tabs, Tab, TabList, TabPanel} from 'react-tabs';
 
 class MovieSchedule extends React.Component<any, any>{
 
@@ -68,68 +70,92 @@ class MovieSchedule extends React.Component<any, any>{
     
           </div>
           </Fade>
-       
-          <Fade>
-          <div className="Day-header">        
-            <div className="Days" ><br/><br/>
-            <div>{this.state.screenings.day2.map(day => 
-              <Screening key={day.idScreening} screening={day}/>)}</div>
-            </div>
-           </div>
-           </Fade>
+       <Fade>
+       <Tabs>
+                            <TabList className='menu text-white'>
+                                <Tab>Dzisiaj</Tab>
+                                <Tab>Jutro</Tab>
+                                <Tab>Czwartek</Tab>
+                                <Tab>Piątek</Tab>
+                                <Tab>Sobota</Tab>
+                            </TabList>
+                    
+                            <TabPanel>
+                                <div className="form-inner text-white">
+                                    <div className="form-item">
+                                        <label htmlFor="firstName-id" className="block text-sm font-bold mb-2">
+                                        {this.state.screenings.day1.map(day => <Screening key={day.idScreening} screening={day}/>)}
+                                        </label>
+                                    </div>
+                    
+                                </div>
+                            </TabPanel>
+                            <TabPanel>
+                            <div className="form-inner text-white">
+                                    <div className="form-item">
+                                        <label htmlFor="firstName-id" className="block text-sm font-bold mb-2">
+                                        {this.state.screenings.day2.map(day => <Screening key={day.idScreening} screening={day}/>)}
+                                        </label>
+                                    </div>
+                    
+                                </div>
+                            </TabPanel>
+                            <TabPanel>
+                            <div className="form-inner text-white">
+                                    <div className="form-item">
+                                        <label htmlFor="firstName-id" className="block text-sm font-bold mb-2">
+                                        {this.state.screenings.day3.map(day => <Screening key={day.idScreening} screening={day}/>)}
+                                        </label>
+                                    </div>
+                    
+                                </div>
+                            </TabPanel>
+                            <TabPanel>
+                            <div className="form-inner text-white">
+                                    <div className="form-item">
+                                        <label htmlFor="firstName-id" className="block text-sm font-bold mb-2">
+                                        {this.state.screenings.day4.map(day => <Screening key={day.idScreening} screening={day}/>)}
+                                        </label>
+                                    </div>
+                    
+                                </div>
+                            </TabPanel>
+                            <TabPanel>
+                            <div className="form-inner text-white">
+                                    <div className="form-item">
+                                        <label htmlFor="firstName-id" className="block text-sm font-bold mb-2">
+                                        {this.state.screenings.day5.map(day => <Screening key={day.idScreening} screening={day}/>)}
+                                        </label>
+                                    </div>
+                    
+                                </div>
+                            </TabPanel>
+                            <TabPanel>
+                            <div className="form-inner text-white">
+                                    <div className="form-item">
+                                        <label htmlFor="firstName-id" className="block text-sm font-bold mb-2">
+                                        {this.state.screenings.day6.map(day => <Screening key={day.idScreening} screening={day}/>)}
+                                        </label>
+                                    </div>
+                    
+                                </div>
+                            </TabPanel>
+                            
+                        </Tabs>
+</Fade>
+
         
-          <div className="Day-header">
+          {/* {/* <div className="Day-header">
           <br/><NavLink className="title-btn" to="/Details/1" >Garfield</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >9:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >11:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >14:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >20:00</NavLink>
           <br/><NavLink className="title-btn" to="/Details/2" >Iniemamocni</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >9:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >11:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >14:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >20:00</NavLink>
           <br/><NavLink className="title-btn" to="/Details/3" >Robin Hood</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >9:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >11:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >14:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >20:00</NavLink>
           <br/><NavLink className="title-btn" to="/Details/4" >Kraina Lodu</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >9:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >11:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >14:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >20:00</NavLink>
           <br/><NavLink className="title-btn" to="/Details/5" >Ted 2</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >9:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >11:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >14:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >20:00</NavLink>
           <br/><NavLink className="title-btn" to="/Details/8" >Avatar</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >9:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >11:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >14:30</NavLink> <NavLink className="buy-btn" to="/ReserveTicket" >20:00</NavLink>
+          </div> */}
           </div>
-       
-            </div>
-    
-            // <div>
-            //     <div >Repetuar</div>
-            //         <div>
-
-            //            {this.state.screenings.map(screening => 
-            //                <Screening key={screening.idScreening} screening={screening}/>)} 
-                        
-                   
-            //         </div>
-            // </div>
         );
     }
 
 }
 export default MovieSchedule;
-
-// export interface IState {
-//  screenings: IList,
-//  movies: IMovies[],
-// }
-
-// export interface IList {
-//   day1: IScreening[],
-//   day2: IScreening[],
-//  }
-
-// export interface IScreening {
-//   idScreening: number,
-//   screeningDate: Date,
-//   movieName: string,
-// }
-
-
-// export interface IMovies {
-//     id: number,
-//     title: string,
-//     description: string,
-//     picture: string,
-//     icon: string,
-//     genre: string,
-//     watchingTime: string,
-//     director: string,
-//   }
-  
