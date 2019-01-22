@@ -22,7 +22,7 @@ namespace CinemaApi.Controllers
         public ActionResult<WeekModel> GetScreening()
         {
             DateTime Day0 = DateTime.Now;
-            DateTime Day1 = Day0.AddDays(-1);
+            DateTime Day1 = new DateTime(2019, 1, 22);
             DateTime Day2 = Day1.AddDays(1);
             DateTime Day3 = Day1.AddDays(2);
             DateTime Day4 = Day1.AddDays(3);

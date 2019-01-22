@@ -55,12 +55,12 @@
 
 }
 
-.day-btn:focus {
+.day-btn:hover {
     padding: 10px 15px;
     position: static;
     background: transparent;
     color: #fff;
-    font-size: 18px;
+    font-size: 21px;
     transition: .5s;
     line-height: 52px;
     border-radius: 3px;
@@ -75,8 +75,8 @@
     padding: 10px 15px;
     position: static;
     background: transparent;
-    color: rgba(218, 216, 216, 0.959);
-    font-size: 18px;
+    color: gray;
+    font-size: 21px;
     transition: .5s;
     line-height: 52px;
     border-radius: 3px;
@@ -323,8 +323,7 @@ table.resource-table tr td:last-child, /*table.scheduler-bg-table tr td:last-chi
 }
 
 .all-screenings{
-    width:80%;
-    margin-bottom: 2rem;
+    width:80%
 }
 
 .screening-title{
@@ -335,11 +334,12 @@ table.resource-table tr td:last-child, /*table.scheduler-bg-table tr td:last-chi
     position: static;
     background: transparent;
     color: rgba(218, 216, 216, 0.959);
-    font-size: 18px;
+    font-size: 23px;
     transition: .5s;
-    line-height: 52px;
+    line-height: 32px;
     font-family: Monte;
     font-weight: bold;
+    border-right: 1px solid red;
 
 }
 
@@ -347,12 +347,12 @@ table.resource-table tr td:last-child, /*table.scheduler-bg-table tr td:last-chi
     width:20%;
     display: inline-block;
     margin: 10px 0 10px 0;
-    border-right: 1px solid grey;
-    border-left: 1px solid grey;
+    border-right: 1px solid red;
+    color: gray;
 }
 
 .day-navbar{
     width: 100%;
     background-color: black;
-    font-size: 20px;
+    font-size: 25px;
 }

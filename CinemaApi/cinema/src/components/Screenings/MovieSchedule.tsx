@@ -71,11 +71,11 @@ class MovieSchedule extends React.Component<any, any>{
     
           </div>
           </Fade>
-          <div className="w-full">
+          <div className="w-full mb-12">
        <Fade>
 
        <Tabs>
-                            <TabList className='day-navbar text-white mt-8'>
+                            <TabList className='day-navbar text-white mt-16'>
                                 <Tab>Dzisiaj</Tab>
                                 <Tab>Jutro</Tab>
                                 <Tab>Czwartek</Tab>
