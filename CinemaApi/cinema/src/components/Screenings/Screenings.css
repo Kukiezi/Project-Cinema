@@ -14,7 +14,7 @@
     left: 150px;
   }
 
-  .Movie-list {
+  .Movie-SchedList {
     color: white;
     font-family: Monte;
     font-size: 10px;
@@ -355,4 +355,5 @@ table.resource-table tr td:last-child, /*table.scheduler-bg-table tr td:last-chi
     width: 100%;
     background-color: black;
     font-size: 25px;
+    position: relative !important;
 }

@@ -35,7 +35,7 @@ public async componentDidMount() {
     this.dim(false);
     return (
       
-      <div className="App">
+      <div className="App mb-8">
       <div id="dimmer">
       <div className="lds-ring-login"><div /><div /><div /><div /></div>
       </div>

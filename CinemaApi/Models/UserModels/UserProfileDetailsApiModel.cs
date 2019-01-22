@@ -9,6 +9,7 @@ namespace CinemaApi.Models.UserModels
     {
         #region Public Properties
 
+       
         /// <summary>
         /// Role of the current user
         /// </summary>
