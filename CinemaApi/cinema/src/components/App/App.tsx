@@ -8,18 +8,12 @@ import Details from "../Movies/Details";
 import NotExist from "./NotExist";
 import Navbar from '../Navbar/Navbar';
 import ReserveTicket from '../Reservations/ReserveTicket';
-import ResetPassword from '../Users/ResetPassword';
 import ReviewSection from '../Movies/ReviewSection';
 
 import PersonalData from '../Reservations/PersonalData';
 import Reservation from '../Reservations/Reservation';
 import Events from '../Events/Events';
 
-import { AdminPanel } from '../AdminPanel/AdminPanel';
-import { MovieManagment } from '../AdminPanel/Movies/MovieManagment';
-import DetailsPanel from '../AdminPanel/Movies/DetailsPanel';
-import { AddMovie } from '../AdminPanel/Movies/AddMovie';
-import { DeleteMovie } from '../AdminPanel/Movies/DeleteMovie';
 
 import UserProfil from '../Users/UserProfil';
 import decode from 'jwt-decode';
@@ -109,14 +103,8 @@ public render() {
     <Navbar/>
     <Switch>
      <AuthRoute path="/" component={Home} exact={true}/>
-     <AuthRoute path="/AddMovie" component={AddMovie}/>
-     <AuthRoute path="/DeleteMovie/:Id" component={DeleteMovie}/>
      <AuthRoute path="/Details/:Id" component={Details}/>
-     <AuthRoute path="/DetailsPanel/:Id" component={DetailsPanel}/>
      <AuthRoute path="/ReserveTicket/:Screening/:Showtime" component={ReserveTicket}/>
-     <AuthRoute path="/ResetPassword" component={ResetPassword}/>
-     <AuthRoute path="/AdminPanel" component={AdminPanel}/>
-     <AuthRoute path="/MovieManagment" component={MovieManagment}/>
      <AuthRoute path="/Reservation/:Reserved/:Screening/:UserId/:Showtime" component={Reservation}/>
      <AuthRoute path="/PersonalData/:Reserved/:Screening/:Showtime" component={PersonalData}/>
      <AuthRoute path="/Events" component={Events}/>

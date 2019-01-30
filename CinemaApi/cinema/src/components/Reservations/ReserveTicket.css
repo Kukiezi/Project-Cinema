@@ -1,37 +1,39 @@
+/* przejrzane */
 .seat-free {
-    background: #3f9177;
-    height: 30px;
-    width: 30px;   
-    display: inline-block;  
-    border: 2px solid white;
-    -webkit-box-shadow: -1px 7px 7px -1px rgba(255,255,255,1);
-    -moz-box-shadow: -1px 7px 7px -1px rgba(255,255,255,1);
-    box-shadow: -1px 7x 7px -1px rgba(255,255,255,1);
+  background: #3f9177;
+  height: 30px;
+  width: 30px;   
+  display: inline-block;  
+  border: 2px solid white;
+  -webkit-box-shadow: -1px 7px 7px -1px rgba(255,255,255,1);
+  -moz-box-shadow: -1px 7px 7px -1px rgba(255,255,255,1);
+  box-shadow: -1px 7x 7px -1px rgba(255,255,255,1);
 
-  }
+}
 
-  .screen {
-    background: black;
-    height: 30px;
-    width: 300px;   
-    display: inline-block;  
-    border: 2px solid white;
-    -webkit-box-shadow: -1px 7px 7px -1px rgba(255,255,255,1);
-    -moz-box-shadow: -1px 7px 7px -1px rgba(255,255,255,1);
-    box-shadow: -1px 7x 7px -1px rgba(255,255,255,1);
+.screen {
+  background: black;
+  height: 30px;
+  width: 300px;   
+  display: inline-block;  
+  border: 2px solid white;
+  -webkit-box-shadow: -1px 7px 7px -1px rgba(255,255,255,1);
+  -moz-box-shadow: -1px 7px 7px -1px rgba(255,255,255,1);
+  box-shadow: -1px 7x 7px -1px rgba(255,255,255,1);
 
-  }
+}
 .seat-taken {
-    background: gray;
-    width: 30px;
-    height: 30px;
-    display: inline-block;  
-    border: 2px solid white;
-    -webkit-box-shadow: -1px 7px 7px -1px rgba(255,255,255,1);
-    -moz-box-shadow: -1px 7px 7px -1px rgba(255,255,255,1);
-    box-shadow: -1px 7x 7px -1px rgba(255,255,255,1);
+  background: gray;
+  width: 30px;
+  height: 30px;
+  display: inline-block;  
+  border: 2px solid white;
+  -webkit-box-shadow: -1px 7px 7px -1px rgba(255,255,255,1);
+  -moz-box-shadow: -1px 7px 7px -1px rgba(255,255,255,1);
+  box-shadow: -1px 7x 7px -1px rgba(255,255,255,1);
 
-  }
+}
+
 .seat-reserved {
   background: blue;
   height: 30px;
@@ -40,21 +42,25 @@
   -webkit-box-shadow: -1px 7px 7px -1px rgba(255,255,255,1);
   -moz-box-shadow: -1px 7px 7px -1px rgba(255,255,255,1);
   box-shadow: -1px 7x 7px -1px rgba(255,255,255,1);
-  }
-.seat-free:hover{
-    background: red;
-  }
-.row-left{
-    width: 40%;
-    float: left;
-    margin: auto;
-    padding: auto;
 }
+
+.seat-free:hover{
+  background: red;
+}
+
+.row-left{
+  width: 40%;
+  float: left;
+  margin: auto;
+  padding: auto;
+}
+
 .white{
   color:white;
   font-family: 'Courier New', Courier, monospace;
   size: 2px;
 }
+
 .info{
   border: 1px solid white;
   margin-top: 100px;
@@ -62,9 +68,11 @@
   margin-right: 150px;
   margin-left: 80px;
 }
+
 .line{
   display: inline-block;  
 }
+
 .seat-empty{
   height: 30px;
   width: 30px;
