@@ -538,7 +538,19 @@ namespace CinemaApi.Controllers
             #endregion
         }
 
+       
+        [Route("GetUserReservations")]
+        [HttpGet]
+        public async Task<List<Reservation>> GetUserReservations(string userId)
+        {
+            //var user = mUserManager.FindByIdAsync(userId);
 
+            var reservationList = mContext.Reservation.Where(a => a.IdUser == userId).ToList();
+
+           
+            // If we were successful...
+            return reservationList;
+        }
 
     }
 }

@@ -34,7 +34,11 @@ class Details extends React.Component<any, IState> {
       "title": "",
       "description": "",
       "picture": "",
-      "rating": 0
+      "rating": 0,
+      "director": "",
+      "watchingTime": "",
+      "genre": "",
+      "ageRestriction": 0
     },
     textareaValue: "",
     errorMessage: "",
@@ -158,41 +162,46 @@ public async SendRating(){
       const checkValue = document.querySelectorAll("input");
       const checkStar = document.querySelectorAll("label");
       const checkSmiley = document.querySelectorAll("i");
-      if (userRating === 1){
-        for(let j=0; j<1; j++){
-          checkValue[j].checked = true;
-          checkStar[j].className = "rated";
-          checkSmiley[j].style.display = "none";
+      if (checkValue !== undefined && checkStar !== undefined && checkSmiley !== undefined){
+        if (userRating === 1){
+          for(let j=0; j<1; j++){
+            checkValue[j].checked = true;
+            checkStar[j].className = "rated";
+            checkSmiley[j].style.display = "none";
+          }
+        }
+        else if (userRating === 2){
+          for(let j=0; j<2; j++){
+            checkValue[j].checked = true;
+            checkStar[j].className = "rated";
+            checkSmiley[j].style.display = "none";
+          }
+        }
+        else if (userRating === 3){
+          for(let j=0; j<3; j++){
+            checkValue[j].checked = true;
+            checkStar[j].className = "rated";
+            checkSmiley[j].style.display = "none";
+          }
+        }
+        else if (userRating === 4){
+          for(let j=0; j<4; j++){
+            checkValue[j].checked = true;
+            checkStar[j].className = "rated";
+            checkSmiley[j].style.display = "none";
+          }
+        }
+        else if (userRating === 5){
+          for(let j=0; j<5; j++){
+            checkValue[j].checked = true;
+            checkStar[j].className = "rated";
+            checkSmiley[j].style.display = "none";
+          }
         }
       }
-      else if (userRating === 2){
-        for(let j=0; j<2; j++){
-          checkValue[j].checked = true;
-          checkStar[j].className = "rated";
-          checkSmiley[j].style.display = "none";
-        }
-      }
-      else if (userRating === 3){
-        for(let j=0; j<3; j++){
-          checkValue[j].checked = true;
-          checkStar[j].className = "rated";
-          checkSmiley[j].style.display = "none";
-        }
-      }
-      else if (userRating === 4){
-        for(let j=0; j<4; j++){
-          checkValue[j].checked = true;
-          checkStar[j].className = "rated";
-          checkSmiley[j].style.display = "none";
-        }
-      }
-      else if (userRating === 5){
-        for(let j=0; j<5; j++){
-          checkValue[j].checked = true;
-          checkStar[j].className = "rated";
-          checkSmiley[j].style.display = "none";
-        }
-      }
+     
+      
+    
     }
    
 
@@ -325,6 +334,7 @@ public async setReviews(IdMovies){
         <div className="xl:w-2/5 sm:w-full flex-none monte text-white text-justify bg-black px-4 py-2 m-2">
         <Fade>
           <h1 className="leading-loose font-normal tracking-wide">{this.state.movie.title}</h1>
+          <p className="text-grey monte">Reżyser: {this.state.movie.director} / Gatunek: {this.state.movie.genre} / Czas: {this.state.movie.watchingTime} / Wiek: {this.state.movie.ageRestriction}</p>
           <h3 className="font-thin">{this.state.movie.description}</h3>
           </Fade>
         
@@ -391,7 +401,11 @@ export interface IMovie {
   title: string,
   description: string,
   picture: string,
-  rating: number
+  rating: number,
+  director: string,
+  genre: string,
+  watchingTime: string,
+  ageRestriction: number
 }
 export interface IRating {
   idRating: number,

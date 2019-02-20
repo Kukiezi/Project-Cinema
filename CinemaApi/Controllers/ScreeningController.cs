@@ -53,7 +53,7 @@ namespace CinemaApi.Controllers
                     IdRoom = item.IdRoom,
                     IdScreening = item.IdScreening,
                     ScreeningDate = item.ScreeningDate,
-                    MovieName = context.Movies.Where(a => a.Id == item.IdMovies).FirstOrDefault().Title,
+                    MovieName = item.MovieName,
                     showtime1 = item.showtime1,
                     showtime2 = item.showtime2,
                     showtime3 = item.showtime3
@@ -143,7 +143,7 @@ namespace CinemaApi.Controllers
                     IdRoom = item.IdRoom,
                     IdScreening = item.IdScreening,
                     ScreeningDate = item.ScreeningDate,
-                    MovieName = context.Movies.Where(a => a.Id == item.IdMovies).FirstOrDefault().Title,
+                    MovieName = item.MovieName,
                     showtime1 = item.showtime1,
                     showtime2 = item.showtime2,
                     showtime3 = item.showtime3

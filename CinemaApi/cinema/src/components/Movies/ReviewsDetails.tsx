@@ -334,7 +334,7 @@ export default class ReviewsDetails extends React.Component<any, any>{
         const userStorage = localStorage.getItem("User");
         if (userStorage != null) {
             user = JSON.parse(userStorage);
-            if (user.response.role === "User") {
+            if (user.response.role === "Moderator") {
                 checkRole = true;
             }
         }

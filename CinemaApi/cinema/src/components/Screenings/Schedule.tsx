@@ -44,13 +44,12 @@ class MovieSchedule extends React.Component<any, any>{
       } 
 
     public async componentDidMount() {
-        console.log(this.state.id)
-        const result = await fetch('https://localhost:44371/cinema/GetScreeningMovie?id='+ this.state.id);
-        const screenings = await result.json();
-       this.setState({ screenings });
-       const result2 = await fetch('https://localhost:44371/cinema/GetMovie?id=' + this.state.id);
-       const movie = await result2.json();
-        this.setState({ movie });
+      console.log(this.state.id)
+      const result = await fetch('https://localhost:44371/cinema/GetScreeningMovie?id='+ this.state.id);
+      const screenings = await result.json();
+      const result2 = await fetch('https://localhost:44371/cinema/GetMovie?id=' + this.state.id);
+      const movie = await result2.json();
+      this.setState({ movie, screenings });
         // console.log(this.state.screenings.day1[0]);
 
     }
@@ -70,14 +69,7 @@ class MovieSchedule extends React.Component<any, any>{
               Repetuar
             </p>
             </Fade>
-    
-            <div className="content-center  bg-black px-8 py-4 m-4">
-        <Fade>
-          <img src={this.state.movie.picture} />
-          </Fade>
-        </div>
-      
-          <div className="w-full mb-12">
+            <div className="w-full mb-12">
        <Fade>
 
        <Tabs>
@@ -125,6 +117,14 @@ class MovieSchedule extends React.Component<any, any>{
                         </Tabs>
 </Fade>
 </div>
+           
+        <Fade>
+          <img src={this.state.movie.picture} width="60%"/>
+        
+          </Fade>
+ 
+      
+       
 
         
           {/* {/* <div className="Day-header">

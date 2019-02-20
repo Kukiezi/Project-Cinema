@@ -48,14 +48,14 @@ class Reservation extends React.Component<any, IState> {
     
     return (
         <div className="info">
-        <h3 className="white">Potwierdzenie:</h3>
-        <h3 className="white">Dane:</h3>
-        <p className="white">Imię: {this.state.User.firstName}</p>
-        <p className="white">Nazwisko: {this.state.User.lastName}</p>
-        <p className="white">Email: {this.state.User.email}</p>
-        <h3 className="white">Film: {this.state.Title}</h3>
-        <h3 className="white">Godzina: {this.props.match.params.Showtime}</h3>
-        <h3 className="white">Miejsca:</h3>
+        <h3 className="white3">Potwierdzenie:</h3>
+        <h3 className="white3">Dane:</h3>
+        <p className="white3">Imię: {this.state.User.firstName}</p>
+        <p className="white3">Nazwisko: {this.state.User.lastName}</p>
+        <p className="white3">Email: {this.state.User.email}</p>
+        <h3 className="white3">Film: {this.state.Title}</h3>
+        <h3 className="white3">Godzina: {this.props.match.params.Showtime}</h3>
+        <h3 className="white3">Miejsca:</h3>
         {this.state.seatsReservation.map(seatReservation => 
                     <SeatReservation key={seatReservation} seatReservation={seatReservation}/>)}
 

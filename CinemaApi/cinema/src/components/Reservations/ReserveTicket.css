@@ -40,6 +40,7 @@
   -webkit-box-shadow: -1px 7px 7px -1px rgba(255,255,255,1);
   -moz-box-shadow: -1px 7px 7px -1px rgba(255,255,255,1);
   box-shadow: -1px 7x 7px -1px rgba(255,255,255,1);
+  border: 2px solid white;
   }
 .seat-free:hover{
     background: red;
@@ -52,15 +53,35 @@
 }
 .white{
   color:white;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: Monte;
   size: 2px;
+  text-align: center;
+  font-size: 13px;
+  /* margin-top: 20px; */
+}
+.white2{
+  color:white;
+  font-family: Monte;
+  size: 2px;
+  text-align: left;
+  /* font-size: 13px; */
+  margin-top: 20px;
+}
+.white3{
+  color:white;
+  font-family: Monte;
+  size: 2px;
+  text-align: center;
+  /* font-size: 13px; */
+  margin-top: 20px;
 }
 .info{
   border: 1px solid white;
-  margin-top: 100px;
-  margin-bottom: 100px;
-  margin-right: 150px;
-  margin-left: 80px;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  font-family: Monte;
+  /* margin-right: 150px;
+  margin-left: 80px; */
 }
 .line{
   display: inline-block;  
