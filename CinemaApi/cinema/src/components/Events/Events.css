@@ -1,21 +1,17 @@
-
-
+/* przejrzane */
 .form{
     display: flex;
-    justify-content: center
-   
+    justify-content: center  
 }
 
-.inner{
-    
+.inner{    
     width: 70%;
     color: white;
     background-color: black;
     position: fixed;
     font-family: Monte;
     bottom: 0;
-    top: 70px;
-    
+    top: 70px;    
 }
 
 .list-of-events{
@@ -31,11 +27,10 @@
    /* border-bottom: 3px solid red; */
     background-color: #22292f;
     margin-bottom: 10px;
-
 }
 
 .event-title{
-    width: 70%;
+    width: 50%;
     /* font-size: 15px; */
     line-height: 80px;
     padding-left: 10px;
@@ -44,10 +39,9 @@
 }
 
 .event-details{
-    width: 30%;
+    width: 20%;
     height: 80px;
     display: inline-block;
-
 }
 
 .event-description{
@@ -64,8 +58,7 @@
 }
 
 .modal-events{
-    background-color: #22292f;
-    
+    background-color: #22292f;    
     width: 50%;
     max-height: 60vh;
     /* height: 90%; */
@@ -108,14 +101,11 @@
 }
 
 .details-btn-inner:hover{
-
     background-color: red;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-
 }
 
 .sign-in-btn{
-
     background-color: darkred;
     color: white;
     /* font-size: 16px; */
@@ -124,19 +114,15 @@
     position: absolute;
     bottom: 15px;
     right: 350px;
-    margin: 0 auto;
-    
+    margin: 0 auto;    
 }
 
 .sign-in-btn:hover{
-
     background-color: red;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-
 }
 
-.title{
-    
+.title{    
     text-align: center;
     margin: 40px 5px 15px 5px;
     top: 20px;
@@ -168,4 +154,14 @@
 
 .ReactModal__Overlay--after-open{
     background-color: rgba(43, 44, 44, 0.6) !important;
+}
+
+.event-date{
+    width:90px;
+    display: inline-block;
+    color: black;
+    background-color: grey;
+    text-align: center;
+    border-radius: 5px;
+    margin-right: 40px;
 }

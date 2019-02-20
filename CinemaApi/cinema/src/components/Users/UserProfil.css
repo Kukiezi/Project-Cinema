@@ -1,21 +1,5 @@
-
-
-body{
-  position: relative;
-  margin: 0;
-  padding-bottom: 1rem;
-  min-height: 100%;
-  background-color: black;
-}
-
-.form{
-    display: flex;
-    justify-content: center;
-  
-}
-
-.inner-details{
-    
+/* przejrzane */
+.inner-details{    
     width: 70%;
     color: white;
     background-color: black;
@@ -28,7 +12,6 @@ body{
     height:150px;
     text-align: center;
     color:white;
-
 }
 
 .username{
@@ -39,23 +22,11 @@ body{
     border-bottom: 1px solid red;
 }
 
-.menu{
+.menu-user{
     width: 100%;
     background-color: black;
     top: 0;
 } 
-
-.menu-details{
-
-    padding: 8px 5px;
-    text-align: center;
-    color: white;
-    font-size: 20px;
-    font-family: Monte;  
-    display: inline-block; 
-    padding: 15px 120px 15px 120px;
-    
-}
 
 .info{
     text-align: center;
@@ -68,8 +39,7 @@ body{
     -webkit-tap-highlight-color: transparent;
   }
   
-  .react-tabs__tab-list {
-    
+  .react-tabs__tab-list {    
     margin: 0 0 10px;
     padding: 0;
   }
@@ -89,8 +59,7 @@ body{
     color: white;
   }
   
-  .react-tabs__tab--disabled {
- 
+  .react-tabs__tab--disabled { 
     cursor: default;
   }
   
@@ -117,7 +86,3 @@ body{
   .react-tabs__tab-panel--selected {
     display: inline-block;
   }
-
-  /* .react-tabs__tab-panel{
-      
-  } */

@@ -105,7 +105,7 @@ export default class UserProfil extends React.Component<any,any>{
                     <div className="info"> 
 
                         <Tabs>
-                            <TabList className='menu'>
+                            <TabList className='menu-user'>
                                 <Tab>Dane</Tab>
                                 <Tab>Rezerwacje</Tab>
 
