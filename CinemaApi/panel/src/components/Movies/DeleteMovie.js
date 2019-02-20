@@ -42,7 +42,7 @@ export default class DeleteMovie extends React.Component {
     render(){
        return(
            <div>
-             <h1 className="text-white text-center font-monte mt-4 mb-4 pb-4">Czy na pewno chcesz usunąć film: {this.state.movie.title}</h1>
+             <h1 className="text-white text-center font-monte mt-32 mb-16 pb-4">Czy na pewno chcesz usunąć film: {this.state.movie.title}</h1>
              <NavLink onClick={this.deleteMovie} className="yes-btn" to={{
                 pathname: '/MovieManagment'
              }}>TAK</NavLink>

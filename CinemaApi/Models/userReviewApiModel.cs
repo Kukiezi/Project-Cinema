@@ -9,5 +9,6 @@ namespace CinemaApi.Models
     {
         public string Username { get; set; }
         public int IdReview { get; set; }
+        public int Action { get; set; }
     }
 }

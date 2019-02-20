@@ -40,13 +40,13 @@ export default class Rating extends React.Component<any, any>{
     if(checkCount === 5){
         document.querySelectorAll("i")[4].style.display = "block";
     }
-    console.log(e.currentTarget.value);
+    // console.log(e.currentTarget.value);
     this.FetchIt();
 }
 
 public async FetchIt(){
 
-  const result = await fetch('https://localhost:44371/cinema/GetMovies');
+  const result = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetMovies');
   const movies = await result.json();
   this.setState({ movies });
 }

@@ -18,7 +18,8 @@ class Details extends React.Component<any, IState> {
       "author": "",
       "review1": "",
       "idMovies": 0,
-      "vote": 0
+      "vote": 0,
+      "points": 0
     },
     "loading": true,
     "currentRating": 0,
@@ -33,10 +34,14 @@ class Details extends React.Component<any, IState> {
       "title": "",
       "description": "",
       "picture": "",
-      "rating": 0
+      "rating": 0,
+      "director": "",
+      "watchingTime": "",
+      "genre": "",
+      "ageRestriction": 0
     },
     textareaValue: "",
-    errorMessage: ""
+    errorMessage: "",
   };
 
   constructor(props: IState) {
@@ -45,9 +50,12 @@ class Details extends React.Component<any, IState> {
     this.addReview = this.addReview.bind(this);
     this.onChange = this.onChange.bind(this);
     this.changeTextArea = this.changeTextArea.bind(this);
+    this.setReviews = this.setReviews.bind(this);
   }
 
   public onChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const userStorage = localStorage.getItem("User");
+    if (userStorage !== null){
     const { Id } = this.props.match.params;
     const checkValue = document.querySelectorAll("input");
     const checkStar = document.querySelectorAll("label");
@@ -64,7 +72,7 @@ class Details extends React.Component<any, IState> {
         checkSmiley[j].style.display = "none";
     }
     
-    for(let k=checkCount; k<checkValue.length-1; k++){
+    for(let k=checkCount; k<checkValue.length; k++){
      
         checkValue[k].checked = false;
         checkStar[k].className = "check"
@@ -91,10 +99,17 @@ class Details extends React.Component<any, IState> {
     ratingCopy.idMovies = Id;
     this.setState({ratingTest: ratingCopy})
    this.SendRating();
+  }
 }
 
 public async SendRating(){
-    const result =  await fetch('https://localhost:44371/cinema/AddRating?rating=' + this.state.ratingTest.ratingNumber + '&id=' + this.state.ratingTest.idMovies, {
+  const userStorage = localStorage.getItem("User");
+    let user;
+    if (userStorage !== null){
+       user = JSON.parse(userStorage);
+    
+
+    const result =  await fetch('https://cinemaapi.azurewebsites.net/cinema/AddRating?rating=' + this.state.ratingTest.ratingNumber + '&id=' + this.state.ratingTest.idMovies + '&userId=' + user.response.id, {
       method: 'POST'
     });
     let currentRating = await result.json();
@@ -102,6 +117,7 @@ public async SendRating(){
     currentRating = Math.round(currentRating);
     currentRating /= 2;
     this.setState({currentRating});
+  }
 }
 
 
@@ -121,15 +137,14 @@ public async SendRating(){
     const { Id } = this.props.match.params;
     let reviews;
     // const { movie } = this.props.location.state
-    const result = await fetch('https://localhost:44371/cinema/GetMovie?id=' + Id);
+    const result = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetMovie?id=' + Id);
     const movie = await result.json();
-    const result2 = await fetch('https://localhost:44371/cinema/GetRating?id=' + Id);
+    const result2 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetRating?id=' + Id);
     let currentRating = await result2.json();
-    const result3 = await fetch('https://localhost:44371/cinema/GetReviews?id=' + Id + '&user=' + username)
+    const result3 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetReviews?id=' + Id + '&user=' + username)
     if (result3.ok){
        reviews = await result3.json();
     }
-    
     currentRating *= 2;
     currentRating = Math.round(currentRating);
     currentRating /= 2;
@@ -140,6 +155,60 @@ public async SendRating(){
       reviews
     });
     
+    if (userStorage != null){
+      const result4 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetUserRating?id=' + Id + '&userId=' + user.response.id);
+      const userRating = await result4.json();
+
+      const checkValue = document.querySelectorAll("input");
+      const checkStar = document.querySelectorAll("label");
+      const checkSmiley = document.querySelectorAll("i");
+      if (checkValue !== undefined && checkStar !== undefined && checkSmiley !== undefined){
+        if (userRating === 1){
+          for(let j=0; j<1; j++){
+            checkValue[j].checked = true;
+            checkStar[j].className = "rated";
+            checkSmiley[j].style.display = "none";
+          }
+        }
+        else if (userRating === 2){
+          for(let j=0; j<2; j++){
+            checkValue[j].checked = true;
+            checkStar[j].className = "rated";
+            checkSmiley[j].style.display = "none";
+          }
+        }
+        else if (userRating === 3){
+          for(let j=0; j<3; j++){
+            checkValue[j].checked = true;
+            checkStar[j].className = "rated";
+            checkSmiley[j].style.display = "none";
+          }
+        }
+        else if (userRating === 4){
+          for(let j=0; j<4; j++){
+            checkValue[j].checked = true;
+            checkStar[j].className = "rated";
+            checkSmiley[j].style.display = "none";
+          }
+        }
+        else if (userRating === 5){
+          for(let j=0; j<5; j++){
+            checkValue[j].checked = true;
+            checkStar[j].className = "rated";
+            checkSmiley[j].style.display = "none";
+          }
+        }
+      }
+     
+      
+    
+    }
+   
+
+
+   
+    
+
   }
 
   public onChangeReview = (e: any) => {
@@ -173,6 +242,14 @@ public async addReview(){
     this.setState({errorMessage:"Nie możesz dodawać pustych opinii!"})
     return;
   }
+  if (this.state.textareaValue.length < 6){
+    await this.setState({errorMessage:"Opinia musi mieć więcej niż 6 znaków!"})
+    return;
+  }
+  if (!this.state.textareaValue.replace(/\s/g, '').length) {
+    await this.setState({errorMessage:"Opinia musi mieć więcej niż 6 znaków!"})
+    return;
+  }
   else{
     this.setState({errorMessage:""})
   }
@@ -182,7 +259,7 @@ public async addReview(){
 
 
 
-  await fetch('https://localhost:44371/cinema/AddReview', {
+  await fetch('https://cinemaapi.azurewebsites.net/cinema/AddReview', {
       method: 'post',
       headers: {
         'Accept': 'application/json, text/plain, */*',
@@ -191,22 +268,33 @@ public async addReview(){
       },
       body: JSON.stringify({author: user.response.username, review1: this.state.review.review1, idMovies: this.state.review.idMovies})
     }).then(res=>res.json());
-      // .then(res => console.log(res));
-    this.setReviews();
+      // .then(res => // console.log(res));
+    this.setReviews(null);
 }
 
-public async setReviews(){
+public async setReviews(IdMovies){
   let reviews;
-  const { Id } = this.props.match.params;
-  const result3 = await fetch('https://localhost:44371/cinema/GetReviews?id=' + Id)
-      if (result3.ok){
-         reviews = await result3.json();
-      }
-      this.setState({
-        reviews
-      });
-   
-     
+
+  if (IdMovies === null){
+    const { Id } = this.props.match.params;
+    const result3 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetReviews?id=' + Id)
+    if (result3.ok){
+       reviews = await result3.json();
+    }
+    this.setState({
+      reviews
+    });
+  }
+  else{
+    const Id = IdMovies;
+    const result3 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetReviews?id=' + Id)
+    if (result3.ok){
+       reviews = await result3.json();
+    }
+    this.setState({
+      reviews
+    });
+  }
 }
 
   public render() {
@@ -219,7 +307,7 @@ public async setReviews(){
       reviewCheck =   <div className="reviews comment-form">
       
       {this.state.reviews.map(review => 
-                        <Reviews key={review.idReview} review={review}/>)}
+                        <Reviews key={review.idReview} setReviews={this.setReviews} review={review}/>)}
       </div>
       
     }
@@ -246,16 +334,13 @@ public async setReviews(){
         <div className="xl:w-2/5 sm:w-full flex-none monte text-white text-justify bg-black px-4 py-2 m-2">
         <Fade>
           <h1 className="leading-loose font-normal tracking-wide">{this.state.movie.title}</h1>
+          <p className="text-grey monte">Reżyser: {this.state.movie.director} / Gatunek: {this.state.movie.genre} / Czas: {this.state.movie.watchingTime} / Wiek: {this.state.movie.ageRestriction}</p>
           <h3 className="font-thin">{this.state.movie.description}</h3>
           </Fade>
         
-        
-              {/* <FontAwesomeIcon className="fontawesome" icon="ticket-alt" /> */}
-
-          <NavLink className="buy-btn" to="/BuyTicket" >
-              Kup Bilet
-            </NavLink>
-          <NavLink className="buy-btn" to="/ReserveTicket" >
+          <NavLink className="buy-btn" to={{
+                 pathname: '/Schedule/'+ this.props.match.params.Id,
+               }}>
               Zarezerwuj Bilet
       </NavLink>
         </div>
@@ -316,7 +401,11 @@ export interface IMovie {
   title: string,
   description: string,
   picture: string,
-  rating: number
+  rating: number,
+  director: string,
+  genre: string,
+  watchingTime: string,
+  ageRestriction: number
 }
 export interface IRating {
   idRating: number,
@@ -328,5 +417,6 @@ export interface IReviews {
   idMovies: number,
   review1: string,
   author: string,
-  vote: number
+  vote: number,
+  points: number
 }

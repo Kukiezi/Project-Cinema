@@ -29,8 +29,8 @@ class Newsletter extends React.Component<{}, {isActive: boolean}> {
     public render() {
 
         return (
-            <div className="login-form">
-            <button className="news-btn" onClick={this.toggleModal}>Newsletter</button>
+            <>
+            <button className="news-btn block mt-4 no-underline lg:inline-block lg:mt-0 text-white ml-6" onClick={this.toggleModal}>Newsletter</button>
                 <Modal className="modal-style"isOpen={this.state.isActive} onRequestClose={this.toggleModal}>
                 <div className="login-form-inner">
                     <h2 className="form-title">Zapisz się do Newslettera</h2>
@@ -47,7 +47,7 @@ class Newsletter extends React.Component<{}, {isActive: boolean}> {
                     </form>
                  </div>
                  </Modal>
-            </div>
+            </>
         )
     }
 }

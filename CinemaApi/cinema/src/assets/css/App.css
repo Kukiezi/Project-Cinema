@@ -17,8 +17,6 @@ body{
   height: 100%;
 }
 
-
-
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -50,7 +48,6 @@ body{
   text-align: center;
   
 }
-
 
 .text-left{
   text-align: center;
@@ -259,6 +256,16 @@ footer p{
   padding: 0; 
 }
 
+.white-hr2 {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0; 
+  margin-left: 5%;
+}
+
 .login-btn{
   color: white;
   font-family: Monte;
@@ -361,6 +368,10 @@ footer p{
   color: white !important;
 }
 
+.arrow-down:hover {
+  color: white !important;
+}
+
 .points-section{
   position: relative;
   left: 8px;
@@ -381,4 +392,21 @@ footer p{
 .review-nohr{
   position: relative;
   left: 5%;
+}
+
+.delete-btn{
+  font-size: 30px;
+}
+
+.comment{
+
+  word-wrap: break-word;
+}
+
+.comment-left{
+  word-wrap: break-word;
+}
+.comment-right{
+  position: relative;
+  left: 90%;
 }

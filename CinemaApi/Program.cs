@@ -20,6 +20,8 @@ namespace CinemaApi
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .CaptureStartupErrors(true)
+                .UseSetting("detailedErrors", "true")
                 .UseDnaFramework()
                 .UseStartup<Startup>();
     }

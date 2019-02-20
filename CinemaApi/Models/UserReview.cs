@@ -9,7 +9,6 @@ namespace CinemaApi.Models
         public string UserId { get; set; }
         public int ReviewId { get; set; }
         public int Vote { get; set; }
-
         public Review Review { get; set; }
         public ApplicationUser User { get; set; }
     }

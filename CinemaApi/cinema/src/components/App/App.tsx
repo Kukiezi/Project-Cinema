@@ -8,25 +8,22 @@ import Details from "../Movies/Details";
 import NotExist from "./NotExist";
 import Navbar from '../Navbar/Navbar';
 import ReserveTicket from '../Reservations/ReserveTicket';
-import ResetPassword from '../Users/ResetPassword';
 import ReviewSection from '../Movies/ReviewSection';
 
+import PersonalData from '../Reservations/PersonalData';
 import Reservation from '../Reservations/Reservation';
 import Events from '../Events/Events';
 
-import { AdminPanel } from '../AdminPanel/AdminPanel';
-import { MovieManagment } from '../AdminPanel/Movies/MovieManagment';
-import DetailsPanel from '../AdminPanel/Movies/DetailsPanel';
-import { AddMovie } from '../AdminPanel/Movies/AddMovie';
-import { DeleteMovie } from '../AdminPanel/Movies/DeleteMovie';
 
-import MovieSchedule from '../MovieSchedule/MovieSchedule';
 import UserProfil from '../Users/UserProfil';
 import decode from 'jwt-decode';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faArrowUp, faArrowDown, faComment, faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons';
+import { faArrowUp, faArrowDown, faComment, faLongArrowAltLeft, faTimes } from '@fortawesome/free-solid-svg-icons';
+import MovieSchedule from '../Screenings/MovieSchedule';
+import Schedule from '../Screenings/Schedule';
+// import decode from 'jwt-decode';
 
-library.add(faArrowUp, faArrowDown, faComment, faLongArrowAltLeft);
+library.add(faArrowUp, faArrowDown, faComment, faLongArrowAltLeft, faTimes);
 // dostaje użytkownika i w razie errora wylogowuje go bądź jeżeli dostaliśmy nowy token pomyślnie dodaje go do localStorage
 function addToStorage(res: any){
   try{
@@ -50,7 +47,7 @@ function addToStorage(res: any){
 }
 // komunikuje sie z api i prosi o nowy token dla użytkownika. Następnie odpala funkcje addToStorage
 async function refreshToken(user: any){
-  await fetch('https://localhost:44371/api/refresh', {
+  await fetch('https://cinemaapi.azurewebsites.net/api/refresh', {
     method: 'post',
     headers: {
       'Accept': 'application/json, text/plain, */*',
@@ -106,19 +103,15 @@ public render() {
     <Navbar/>
     <Switch>
      <AuthRoute path="/" component={Home} exact={true}/>
-     <AuthRoute path="/AddMovie" component={AddMovie}/>
-     <AuthRoute path="/DeleteMovie/:Id" component={DeleteMovie}/>
      <AuthRoute path="/Details/:Id" component={Details}/>
-     <AuthRoute path="/DetailsPanel/:Id" component={DetailsPanel}/>
-     <AuthRoute path="/ReserveTicket" component={ReserveTicket}/>
-     <AuthRoute path="/ResetPassword" component={ResetPassword}/>
-     <AuthRoute path="/AdminPanel" component={AdminPanel}/>
-     <AuthRoute path="/MovieManagment" component={MovieManagment}/>
-     <AuthRoute path="/Reservation/:Reserved" component={Reservation}/>
+     <AuthRoute path="/ReserveTicket/:Screening/:Showtime" component={ReserveTicket}/>
+     <AuthRoute path="/Reservation/:Reserved/:Screening/:UserId/:Showtime" component={Reservation}/>
+     <AuthRoute path="/PersonalData/:Reserved/:Screening/:Showtime" component={PersonalData}/>
      <AuthRoute path="/Events" component={Events}/>
      <AuthRoute path="/Repertuar" component={MovieSchedule}/>
      <AuthRoute path="/UserProfil" component={UserProfil}/>
      <AuthRoute path="/ReviewSection/:Id" component={ReviewSection}/>
+     <AuthRoute path="/Schedule/:Id" component={Schedule}/>
      <Route component={NotExist}/>
      {/* <AuthRoute exact path="/auth" component={Auth}/> */}
     </Switch>

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaApi.Controllers
 {
-    
+
     [Route("cinema/")]
     [ApiController]
     public class MoviesController : ControllerBase
@@ -40,7 +40,7 @@ namespace CinemaApi.Controllers
         {
             var movie = context.Movies.Where(a => a.Id == id).FirstOrDefault();
 
-            if (movie != null) { 
+            if (movie != null) {
                 return movie;
             }
 
@@ -52,7 +52,7 @@ namespace CinemaApi.Controllers
         /// </summary>
         /// <param name="movies"></param>
         /// <returns>Dodane filmy; Wiadomość jeżeli nie zostały dodane z jakiegoś powodu</returns>
-  
+
         [Route("AddMovie")]
         [HttpPost]
         public ActionResult AddMovie(Movies movies)
@@ -100,32 +100,64 @@ namespace CinemaApi.Controllers
         }
         [HttpPost]
         [Route("AddRating")]
-        public ActionResult<float> AddRating(int rating, int id)
+        public ActionResult<float> AddRating(int rating, int id, string userId)
         {
-            context.Rating.Add(new Rating
+            if (userId == null)
+                return Ok("Coś poszło nie tak");
+
+            var ratingCheck = context.Rating.FirstOrDefault(a => a.UserId == userId && a.IdMovies == id);
+
+            if (ratingCheck != null)
             {
-                IdMovies = id,
-                RatingNumber = rating
-            });
-            context.SaveChanges();
-            var movie = context.Movies.Where(e => e.Id == id).FirstOrDefault();
+                ratingCheck.RatingNumber = rating;
+
+                context.SaveChanges();
+            }
+            else
+            {
+                context.Rating.Add(new Rating
+                {
+                    IdMovies = id,
+                    RatingNumber = rating,
+                    UserId = userId
+                });
+                context.SaveChanges();
+            }
+          
+            var movie = context.Movies.FirstOrDefault(e => e.Id == id);
             var newRating = RatingCounter(id);
             movie.Rating = newRating;
             context.SaveChanges();
             return newRating;
         }
 
+        [HttpGet]
+        [Route("GetUserRating")]
+        public ActionResult GetUserRating(int id, string userId)
+        {
+            var rating = context.Rating.FirstOrDefault(a => a.UserId == userId && a.IdMovies == id);
+
+            if (rating != null)
+                return Ok(rating.RatingNumber);
+            return Ok(0);
+        }
+
         [HttpPost]
         [Route("UpdateMovie")]
-        public ActionResult UpdateMovie(int id, string title, string description, string picture)
+        public ActionResult UpdateMovie(int id, string title, string description, string picture, string icon,string watchingTime, int ageRestriction, string genre, string director)
         {
             var movie = context.Movies.Where(e => e.Id == id).FirstOrDefault();
 
-            if (title != movie.Title || description != movie.Description || picture != movie.Picture)
+            if (title != movie.Title || description != movie.Description || picture != movie.Picture || watchingTime != movie.WatchingTime || ageRestriction != movie.AgeRestriction || genre != movie.Genre || director != movie.Director )
             {
                 movie.Title = title;
                 movie.Description = description;
                 movie.Picture = picture;
+                movie.WatchingTime = watchingTime;
+                movie.AgeRestriction = ageRestriction;
+                movie.Genre = genre;
+                movie.Director = director;
+                movie.Icon = icon;
                 context.SaveChanges();
             }
           

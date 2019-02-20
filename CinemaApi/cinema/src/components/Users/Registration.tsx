@@ -49,7 +49,7 @@ class Registration extends React.Component<any, any> {
 
     public async performRegister(){
         this.setState({loading: true});
-        await fetch('https://localhost:44371/api/register', {
+        await fetch('https://cinemaapi.azurewebsites.net/api/register', {
             method: 'post',
             headers: {
               'Accept': 'application/json, text/plain, */*',
@@ -58,7 +58,7 @@ class Registration extends React.Component<any, any> {
             body: JSON.stringify({firstName: this.state.credentials.firstName, lastName: this.state.credentials.lastName, 
                 username: this.state.credentials.username, email: this.state.credentials.email, password: this.state.credentials.password, confirmPassword: this.state.credentials.confirmPassword})
           }).then(res2=>res2.json())
-            // .then(res2 => console.log(res2))
+            // .then(res2 => // console.log(res2))
             .then(res2 => this.setState({res: res2}));
 
             const tokenState = this.checkToken();
@@ -72,12 +72,12 @@ class Registration extends React.Component<any, any> {
         public checkToken(){
             try{
                 if (this.state.res.errorMessage !== null){
-                    console.log(this.state.res.errorMessage);
+                    // console.log(this.state.res.errorMessage);
                     this.setState({message: this.state.res.errorMessage, loading: false});
                     return false;
                 }
                 const { exp } = decode(this.state.res.response.token)
-                console.log(exp);
+                // console.log(exp);
                 if (exp < new Date().getTime() / 1000){
                   return false;
                 }
@@ -93,7 +93,7 @@ class Registration extends React.Component<any, any> {
         const credentialsCopy = JSON.parse(JSON.stringify(this.state.credentials));
         credentialsCopy[e.currentTarget.name] = e.currentTarget.value;
         this.setState({ credentials: credentialsCopy});
-        console.log(credentialsCopy);
+        // console.log(credentialsCopy);
     }
 
     public dim(bool: any){

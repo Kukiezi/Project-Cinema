@@ -1,73 +1,74 @@
-  .Navbar {
-    background-color: black;
-    height: 40px;
-    padding: 20px;
-    color: white;
-    border-bottom: 1px solid white;
-  }
+  /* przejrzane */
   
-  .monte{
-    font-family: Monte;
-  }
+.Navbar {
+  background-color: black;
+  height: 40px;
+  padding: 20px;
+  color: white;
+  border-bottom: 1px solid white;
+}
+  
+.monte{
+  font-family: Monte;
+}
 
-  .monte-bold{
-    font-family: MonteBold;
-  }
+.monte-bold{
+  font-family: MonteBold;
+}
 
-  .Nav-header {
-    vertical-align:top;
-    display: inline-block;
+.Nav-header {
+  vertical-align:top;
+  display: inline-block;
   font-size: 30px;
-   font-family: MonteBold;
-   color: white;
-   text-align: left;
+  font-family: MonteBold;
+  color: white;
+  text-align: left;
   justify-content: space-between;
-  }
+}
   
-  .Navbar li{
-    font-size: 20px;
-     font-family: MonteBold;
-     color: white;
-     text-align: left;
-    }
+.Navbar li{
+  font-size: 20px;
+  font-family: MonteBold;
+  color: white;
+  text-align: left;
+}
 
 
-
-  .menu{
-    position: relative;
-    margin: 0 auto;
-    width: 1000px;
-    overflow: hidden;
+.menu{
+  position: relative;
+  margin: 0 auto;
+  width: 1000px;
+  overflow: hidden;
 }
 .menu ul{
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
 
 }
 .menu ul li{
-    list-style: none;
+  list-style: none;
  
 }
 .menu ul li,
 .menu ul li a{
-    color: #fff;
-    line-height: 44px;
-    text-decoration: none;
+  color: #fff;
+  line-height: 44px;
+  text-decoration: none;
 }
 
 .menu ul li a.menu-item{
-    transform: scale(1);
-    transition: 0.5s;
-    display: block;
+  transform: scale(1);
+  transition: 0.5s;
+  display: block;
 }
 .menu ul li a.menu-item.hide-item{
-    transform: scale(0);
+  transform: scale(0);
 }
 .menu ul li:nth-child(1) a.menu-item{
-    transition-delay: 0.6s;
-    transform: scale(1.5);
+  transition-delay: 0.6s;
+  transform: scale(1.5);
    
 }
 
@@ -87,28 +88,23 @@
 .menu ul li:nth-child(2),
 .menu ul li:nth-child(3), 
 .menu ul li:nth-child(4){
-
   font-family: Monte;
   transform: scale(1.1);
 }
 
-
-
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
   
-  @keyframes App-logo-spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
+@font-face {
+  font-family: 'Monte';
+  font-weight: 500;
+  src: url('../../assets/fonts/Montserrat-Regular.ttf');
+}
   
-  
-  @font-face {
-    font-family: 'Monte';
-    font-weight: 500;
-    src: url('../../assets/fonts/Montserrat-Regular.ttf');
-  }
-  
-  @font-face {
-    font-family: 'MonteBold';
-    font-weight: 500;
-    src: url('../../assets/fonts/Montserrat-Black.ttf');
-  }
+@font-face {
+  font-family: 'MonteBold';
+  font-weight: 500;
+  src: url('../../assets/fonts/Montserrat-Black.ttf');
+}

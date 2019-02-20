@@ -1,58 +1,60 @@
-
+/* przejrzane */
 .container2{
-    width:100%;
-    position:relative;
-    overflow: hidden;
-    height: 600px;
-    background-color: black;
-  }
-  .slider{
-    width:500%;
-    position:relative;
-    animation:30s slidy infinite; 
-  }
-  .slide{
-    width:20%;
-    position:relative;
-    float:left;
-    height:100vh;
-    background-size:cover;
-  }
-  .slider-text{
-    margin:0;
-    padding:0;
-    position:absolute;
-    top:58%;
-    transform:translateY(-50%);
-    text-align:center;
-    font-size:3em;
-    width:100%;
-    
-    color:#fff;
-    font-family: Monte;
-    font-weight: 400;
-  }
-  .slide:nth-child(1)
-  {
-    background:linear-gradient(to bottom, rgba(0,0,0,0) , rgba(0,0,0,1)), url(http://badfeelingmag.com/wp-content/uploads/2018/09/contest-win-tickets-to-the-montreal-premiere-of-venom-2.jpg) no-repeat center center;
-  }
-  .slide:nth-child(2)
-  {
-    background:linear-gradient(to bottom, rgba(0,0,0,0) , rgba(0,0,0,1)), url(http://disneymowi.blox.pl/resource/Tarzandisneyscreencaps.com4632.jpg) no-repeat center center;
-  }
-  .slide:nth-child(3)
-  {
-    background:linear-gradient(to bottom, rgba(0,0,0,0) , rgba(0,0,0,1)), url(https://www.tapeciarnia.pl/tapety/normalne/tapeta-elsa-i-anna-w-filmie-dla-dzieci-kraina-lodu.jpg) no-repeat center center;
-  }
-  .slide:nth-child(4)
-  {
-    background:linear-gradient(to bottom, rgba(0,0,0,0) , rgba(0,0,0,1)), url(http://zpopk.pl/wp-content/uploads/2018/07/pobrane.jpg) no-repeat center center;
-  }
-  .slide:nth-child(5)
-  {
-    background:linear-gradient(to bottom, rgba(0,0,0,0) , rgba(0,0,0,1)), url(http://badfeelingmag.com/wp-content/uploads/2018/09/contest-win-tickets-to-the-montreal-premiere-of-venom-2.jpg) no-repeat center center;
-  }
-  @keyframes animate{
+  width:100%;
+  position:relative;
+  overflow: hidden;
+  height: 600px;
+  background-color: black;
+}
+
+.slider{
+  width:500%;
+  position:relative;
+  animation:30s slidy infinite; 
+}
+.slide{
+  width:20%;
+  position:relative;
+  float:left;
+  height:100vh;
+  background-size:cover;
+}
+
+.slider-text{
+  margin:0;
+  padding:0;
+  position:absolute;
+  top:58%;
+  transform:translateY(-50%);
+  text-align:center;
+  font-size:3em;
+  width:100%;    
+  color:#fff;
+  font-family: Monte;
+  font-weight: 400;
+}
+
+.slide:nth-child(1){
+  background:linear-gradient(to bottom, rgba(0,0,0,0) , rgba(0,0,0,1)), url(http://badfeelingmag.com/wp-content/uploads/2018/09/contest-win-tickets-to-the-montreal-premiere-of-venom-2.jpg) no-repeat center center;
+}
+
+.slide:nth-child(2){
+  background:linear-gradient(to bottom, rgba(0,0,0,0) , rgba(0,0,0,1)), url(http://disneymowi.blox.pl/resource/Tarzandisneyscreencaps.com4632.jpg) no-repeat center center;
+}
+
+.slide:nth-child(3){
+  background:linear-gradient(to bottom, rgba(0,0,0,0) , rgba(0,0,0,1)), url(https://www.tapeciarnia.pl/tapety/normalne/tapeta-elsa-i-anna-w-filmie-dla-dzieci-kraina-lodu.jpg) no-repeat center center;
+}
+
+.slide:nth-child(4){
+  background:linear-gradient(to bottom, rgba(0,0,0,0) , rgba(0,0,0,1)), url(http://zpopk.pl/wp-content/uploads/2018/07/pobrane.jpg) no-repeat center center;
+}
+
+.slide:nth-child(5){
+  background:linear-gradient(to bottom, rgba(0,0,0,0) , rgba(0,0,0,1)), url(http://badfeelingmag.com/wp-content/uploads/2018/09/contest-win-tickets-to-the-montreal-premiere-of-venom-2.jpg) no-repeat center center;
+}
+
+@keyframes animate{
     0%{
       left:0;
     }

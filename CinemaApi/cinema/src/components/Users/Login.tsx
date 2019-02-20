@@ -42,7 +42,7 @@ class Login extends React.Component<any, any> {
     public async performLogin(){
         this.setState({loading: true});
         // await this.dim(true);
-        await fetch('https://localhost:44371/api/login', {
+        await fetch('https://cinemaapi.azurewebsites.net/api/login', {
             method: 'post',
             headers: {
               'Accept': 'application/json, text/plain, */*',
@@ -50,7 +50,7 @@ class Login extends React.Component<any, any> {
             },
             body: JSON.stringify({usernameOrEmail: this.state.credentials.login, password: this.state.credentials.password})
           }).then(res2=>res2.json())
-            //  .then(res2 => console.log(res2))
+            //  .then(res2 => // console.log(res2))
             .then(res2 => this.setState({res: res2}));
          
             const tokenState = this.checkToken();
@@ -63,13 +63,13 @@ class Login extends React.Component<any, any> {
         public checkToken(){
             try{
                 if (this.state.res.errorMessage !== null){
-                    console.log(this.state.res.errorMessage);
+                    // console.log(this.state.res.errorMessage);
                     this.setState({message: this.state.res.errorMessage, loading: false});
                   
                     return false;
                 }
                 const { exp } = decode(this.state.res.response.token)
-                console.log(exp);
+                // console.log(exp);
                 if (exp < new Date().getTime() / 1000){
                   return false;
                 }
@@ -83,7 +83,7 @@ class Login extends React.Component<any, any> {
        
 
         public logState(){
-            console.log(this.state.res);
+            // console.log(this.state.res);
         }
             
 

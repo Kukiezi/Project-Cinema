@@ -21,7 +21,8 @@ export default class ReviewSection extends React.Component<any, any>{
               "review1": "",
               "idResponse": 0,
               "idMovies": 0,
-              "vote": 0
+              "vote": 0,
+              "points": 0
          },
         "textareaValue": "",
         "errorMessage": "",
@@ -46,8 +47,8 @@ export default class ReviewSection extends React.Component<any, any>{
           username = ""
         }
          const { Id } = this.props.match.params;
-         console.log(Id);
-        const result3 = await fetch('https://localhost:44371/cinema/GetReviewAnswers?id=' + Id + '&user=' + username)
+    
+        const result3 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetReviewAnswers?id=' + Id + '&user=' + username)
             if (result3.ok){
                reviews = await result3.json();
             }
@@ -76,11 +77,11 @@ export default class ReviewSection extends React.Component<any, any>{
         let reviews;
         let original;
 
-        const result2 = await fetch('https://localhost:44371/cinema/GetReviewOriginal?id=' + Id + '&user=' + username)
+        const result2 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetReviewOriginal?id=' + Id + '&user=' + username)
         if (result2.ok){
            original = await result2.json();
         }
-        const result3 = await fetch('https://localhost:44371/cinema/GetReviewAnswers?id=' + Id + '&user=' + username)
+        const result3 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetReviewAnswers?id=' + Id + '&user=' + username)
         if (result3.ok){
            reviews = await result3.json();
         }
@@ -90,8 +91,7 @@ export default class ReviewSection extends React.Component<any, any>{
           reviews
         });
      
-        console.log(this.props.match.params.Id)
-        // console.log(reviews)
+
       }
 
       public goPageBack(){
@@ -120,7 +120,7 @@ export default class ReviewSection extends React.Component<any, any>{
         }
         else {
           reviewCheck =   <div className="reviews comment-form">
-        <button onClick={this.goPageBack}><p className="text-white monte font-bold"><FontAwesomeIcon className="text-white text-xl" icon="long-arrow-alt-left" /> POWRÓT</p></button>
+         <button onClick={this.goPageBack}><h3 className="text-white monte"><FontAwesomeIcon className="text-white" icon="long-arrow-alt-left" /> POWRÓT</h3></button>
         <br/><br/><br/>
           {this.state.original.map(review => 
                             <ReviewsDetails idResponse={this.props.match.params.Id} setReviews={this.setReviews} key={review.idReview} review={review}/>)}
