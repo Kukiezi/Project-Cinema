@@ -28,7 +28,7 @@ class Seats extends React.Component<any, IState>{
     public async RemoveSeat(){
 
     
-        const result = await fetch('https://localhost:44371/cinema/RemoveSeat2?seat=' + this.state.seat.s, {
+        const result = await fetch('https://cinemaapi.azurewebsites.net/cinema/RemoveSeat2?seat=' + this.state.seat.s, {
           method: 'GET'
         });
         await result.json();

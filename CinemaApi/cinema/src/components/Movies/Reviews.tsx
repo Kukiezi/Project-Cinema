@@ -27,7 +27,7 @@ export default class Reviews extends React.Component<any, any>{
 
 
     public async componentDidMount() {
-        const result2 = await fetch('https://localhost:44371/cinema/GetResponseCount?id=' + this.state.review.idReview);
+        const result2 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetResponseCount?id=' + this.state.review.idReview);
         const responseCount = await result2.json();
         await this.setState({ responseCount });
     }
@@ -71,7 +71,7 @@ export default class Reviews extends React.Component<any, any>{
                 }
             })
             data = JSON.stringify(this.state.userReview);
-            await fetch('https://localhost:44371/cinema/UpVote', {
+            await fetch('https://cinemaapi.azurewebsites.net/cinema/UpVote', {
                 method: 'post',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
@@ -129,7 +129,7 @@ export default class Reviews extends React.Component<any, any>{
                 }
             })
             data = JSON.stringify(this.state.userReview);
-            await fetch('https://localhost:44371/cinema/DownVote', {
+            await fetch('https://cinemaapi.azurewebsites.net/cinema/DownVote', {
                 method: 'post',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
@@ -164,7 +164,7 @@ export default class Reviews extends React.Component<any, any>{
                 }
             })
             data = JSON.stringify(this.state.userReview);
-            await fetch('https://localhost:44371/cinema/DeleteReview', {
+            await fetch('https://cinemaapi.azurewebsites.net/cinema/DeleteReview', {
                 method: 'post',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',

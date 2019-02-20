@@ -120,7 +120,7 @@ namespace CinemaApi
             }
             //app.UseCors("AllowSpecificOrigin");
             app.UseCors(builder =>
-                builder.WithOrigins("http://localhost:3000").AllowAnyMethod().AllowAnyHeader());
+                builder.WithOrigins("http://localhost:3000", "https://www.kino-studyjne.pl").AllowAnyMethod().AllowAnyHeader());
             app.UseHttpsRedirection();
             // Force non-essential cookies to only store
             // if the user has consented

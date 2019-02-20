@@ -50,8 +50,8 @@ export default class UserProfil extends React.Component<any, any>{
 
         const credentialsCopy = JSON.parse(JSON.stringify(this.state.credentials));
         credentialsCopy[e.currentTarget.name] = e.currentTarget.value;
-        this.setState({ credentials: credentialsCopy });
-        console.log(credentialsCopy);
+        this.setState({ credentials: credentialsCopy});
+        // console.log(credentialsCopy);
     }
 
     public async performChange() {
@@ -129,7 +129,7 @@ export default class UserProfil extends React.Component<any, any>{
                     <div className="info">
 
                         <Tabs>
-                            <TabList className='menu'>
+                            <TabList className='menu-user'>
                                 <Tab>Dane</Tab>
                                 <Tab>Rezerwacje</Tab>
 

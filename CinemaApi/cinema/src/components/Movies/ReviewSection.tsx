@@ -48,7 +48,7 @@ export default class ReviewSection extends React.Component<any, any>{
         }
          const { Id } = this.props.match.params;
     
-        const result3 = await fetch('https://localhost:44371/cinema/GetReviewAnswers?id=' + Id + '&user=' + username)
+        const result3 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetReviewAnswers?id=' + Id + '&user=' + username)
             if (result3.ok){
                reviews = await result3.json();
             }
@@ -77,11 +77,11 @@ export default class ReviewSection extends React.Component<any, any>{
         let reviews;
         let original;
 
-        const result2 = await fetch('https://localhost:44371/cinema/GetReviewOriginal?id=' + Id + '&user=' + username)
+        const result2 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetReviewOriginal?id=' + Id + '&user=' + username)
         if (result2.ok){
            original = await result2.json();
         }
-        const result3 = await fetch('https://localhost:44371/cinema/GetReviewAnswers?id=' + Id + '&user=' + username)
+        const result3 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetReviewAnswers?id=' + Id + '&user=' + username)
         if (result3.ok){
            reviews = await result3.json();
         }

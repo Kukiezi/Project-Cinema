@@ -48,9 +48,9 @@ public render() {
                 <button className="user-options block  no-underline lg:inline-block lg:mt-0 text-white " onClick={this.showDropdownMenu}>Witaj, {user.response.username} &#11163;</button>
              
                 {this.state.displayMenu ? (
-                    <ul>
-                        <li><NavLink to="/UserProfil" className="text-white">Mój profil</NavLink></li>
-                        <li> <NavLink to='/' className="text-white" onClick={this.logOut}>Wyloguj</NavLink></li>
+                    <ul className='dropdown-list'>
+                        <li className='dropdown-lists-elements'><NavLink to="/UserProfil" className="text-white">Mój profil</NavLink></li>
+                        <li className='dropdown-lists-elements'> <NavLink to='/' className="text-white" onClick={this.logOut}>Wyloguj</NavLink></li>
                     </ul>
                 ):
             (null)

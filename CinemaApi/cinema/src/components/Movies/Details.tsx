@@ -109,7 +109,7 @@ public async SendRating(){
        user = JSON.parse(userStorage);
     
 
-    const result =  await fetch('https://localhost:44371/cinema/AddRating?rating=' + this.state.ratingTest.ratingNumber + '&id=' + this.state.ratingTest.idMovies + '&userId=' + user.response.id, {
+    const result =  await fetch('https://cinemaapi.azurewebsites.net/cinema/AddRating?rating=' + this.state.ratingTest.ratingNumber + '&id=' + this.state.ratingTest.idMovies + '&userId=' + user.response.id, {
       method: 'POST'
     });
     let currentRating = await result.json();
@@ -137,11 +137,11 @@ public async SendRating(){
     const { Id } = this.props.match.params;
     let reviews;
     // const { movie } = this.props.location.state
-    const result = await fetch('https://localhost:44371/cinema/GetMovie?id=' + Id);
+    const result = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetMovie?id=' + Id);
     const movie = await result.json();
-    const result2 = await fetch('https://localhost:44371/cinema/GetRating?id=' + Id);
+    const result2 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetRating?id=' + Id);
     let currentRating = await result2.json();
-    const result3 = await fetch('https://localhost:44371/cinema/GetReviews?id=' + Id + '&user=' + username)
+    const result3 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetReviews?id=' + Id + '&user=' + username)
     if (result3.ok){
        reviews = await result3.json();
     }
@@ -156,7 +156,7 @@ public async SendRating(){
     });
     
     if (userStorage != null){
-      const result4 = await fetch('https://localhost:44371/cinema/GetUserRating?id=' + Id + '&userId=' + user.response.id);
+      const result4 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetUserRating?id=' + Id + '&userId=' + user.response.id);
       const userRating = await result4.json();
 
       const checkValue = document.querySelectorAll("input");
@@ -259,7 +259,7 @@ public async addReview(){
 
 
 
-  await fetch('https://localhost:44371/cinema/AddReview', {
+  await fetch('https://cinemaapi.azurewebsites.net/cinema/AddReview', {
       method: 'post',
       headers: {
         'Accept': 'application/json, text/plain, */*',
@@ -268,7 +268,7 @@ public async addReview(){
       },
       body: JSON.stringify({author: user.response.username, review1: this.state.review.review1, idMovies: this.state.review.idMovies})
     }).then(res=>res.json());
-      // .then(res => console.log(res));
+      // .then(res => // console.log(res));
     this.setReviews(null);
 }
 
@@ -277,7 +277,7 @@ public async setReviews(IdMovies){
 
   if (IdMovies === null){
     const { Id } = this.props.match.params;
-    const result3 = await fetch('https://localhost:44371/cinema/GetReviews?id=' + Id)
+    const result3 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetReviews?id=' + Id)
     if (result3.ok){
        reviews = await result3.json();
     }
@@ -287,7 +287,7 @@ public async setReviews(IdMovies){
   }
   else{
     const Id = IdMovies;
-    const result3 = await fetch('https://localhost:44371/cinema/GetReviews?id=' + Id)
+    const result3 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetReviews?id=' + Id)
     if (result3.ok){
        reviews = await result3.json();
     }
