@@ -49,3 +49,9 @@ Jagoda Ossowska:
 - stylizacja panelu administratora
 - stylizacja repertuaru
 - stylizowanie
+
+TODO:
+- Poprawić stylizację
+- Dodać responsywność
+- Usprawnić WebApi
+- Dokończyć Profil Użytkownika
