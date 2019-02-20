@@ -26,7 +26,7 @@ constructor(props: any) {
 } 
 
   public componentDidMount(){
-    console.log(this.props.screening)
+    // console.log(this.props.screening)
   }   
 
   public render() {

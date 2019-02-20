@@ -40,13 +40,13 @@ export class AddMovie extends React.Component<any, IState> {
     }
 
     // public async addMovie(){
-    //     await fetch('https://localhost:44371/cinema/AddMovie?id=' + this.state.movie.id + '&title=' + this.state.movie.title + '&description=' + this.state.movie.description + '&picture=' + this.state.movie.picture + '&ageRestriction=' + this.state.movie.ageRestriction + '&picture=' + this.state.movie.picture, {
+    //     await fetch('https://cinemaapi.azurewebsites.net/cinema/AddMovie?id=' + this.state.movie.id + '&title=' + this.state.movie.title + '&description=' + this.state.movie.description + '&picture=' + this.state.movie.picture + '&ageRestriction=' + this.state.movie.ageRestriction + '&picture=' + this.state.movie.picture, {
     //          method: 'POST'
     //        });
     //  }
 
      public addMovies(){
-        fetch('https://localhost:44371/cinema/AddMovie', {
+        fetch('https://cinemaapi.azurewebsites.net/cinema/AddMovie', {
             method: 'post',
             headers: {
               'Accept': 'application/json, text/plain, */*',

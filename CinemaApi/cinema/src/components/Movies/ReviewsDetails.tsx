@@ -47,9 +47,9 @@ export default class ReviewsDetails extends React.Component<any, any>{
         const reviewCopy = JSON.parse(JSON.stringify(this.state.review2));
         reviewCopy[e.currentTarget.name] = e.currentTarget.value;
 
-        console.log(reviewCopy);
+        // console.log(reviewCopy);
         this.setState({ review2: reviewCopy, textareaValue: e.currentTarget.value });
-        console.log(this.state.textareaValue);
+        // console.log(this.state.textareaValue);
     }
 
     public changeTextArea() {
@@ -67,10 +67,10 @@ export default class ReviewsDetails extends React.Component<any, any>{
 
         }
         else {
-            console.log("heh");
+            // console.log("heh");
             this.changeTextArea();
             await this.setState({ errorMessage: "Musisz być użytkownikiem, żeby dodawać opinie!" })
-            console.log(this.state.errorMessage);
+            // console.log(this.state.errorMessage);
             this.setState({
                 field: (<div className="comment-form text-center">
                     <label className="error-label2 font-bold text-red">{this.state.errorMessage}</label>
@@ -135,7 +135,7 @@ export default class ReviewsDetails extends React.Component<any, any>{
 
 
         // const { Id } = this.state.review.idReview;
-        await fetch('https://localhost:44371/cinema/AddResponse', {
+        await fetch('https://cinemaapi.azurewebsites.net/cinema/AddResponse', {
             method: 'post',
 
             headers: {
@@ -145,7 +145,7 @@ export default class ReviewsDetails extends React.Component<any, any>{
             },
             body: JSON.stringify({ author: user.response.username, review1: this.state.review2.review1, idMovies: this.state.review.idMovies, idResponse: this.props.idResponse })
         }).then(res => res.json())
-        // .then(res => console.log(res));
+        // .then(res => // console.log(res));
 
         await this.setState({ field: "", displayField: !this.state.displayField })
 
@@ -216,7 +216,7 @@ export default class ReviewsDetails extends React.Component<any, any>{
                 }
             })
             data = JSON.stringify(this.state.userReview);
-            await fetch('https://localhost:44371/cinema/UpVote', {
+            await fetch('https://cinemaapi.azurewebsites.net/cinema/UpVote', {
                 method: 'post',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
@@ -273,7 +273,7 @@ export default class ReviewsDetails extends React.Component<any, any>{
             })
             data = JSON.stringify(this.state.userReview);
 
-            await fetch('https://localhost:44371/cinema/DownVote', {
+            await fetch('https://cinemaapi.azurewebsites.net/cinema/DownVote', {
                 method: 'post',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',
@@ -307,7 +307,7 @@ export default class ReviewsDetails extends React.Component<any, any>{
                 }
             })
             data = JSON.stringify(this.state.userReview);
-            await fetch('https://localhost:44371/cinema/DeleteReview', {
+            await fetch('https://cinemaapi.azurewebsites.net/cinema/DeleteReview', {
                 method: 'post',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',

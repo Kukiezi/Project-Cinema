@@ -53,7 +53,7 @@ function addToStorage(res: any){
 }
 // komunikuje sie z api i prosi o nowy token dla użytkownika. Następnie odpala funkcje addToStorage
 async function refreshToken(user: any){
-  await fetch('https://localhost:44371/api/refresh', {
+  await fetch('https://cinemaapi.azurewebsites.net/api/refresh', {
     method: 'post',
     headers: {
       'Accept': 'application/json, text/plain, */*',

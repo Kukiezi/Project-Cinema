@@ -15,7 +15,7 @@ export class MovieManagment extends React.Component<any, IState>{
     } 
 
     public async componentDidMount() {
-        const result = await fetch('https://localhost:44371/cinema/GetMovies');
+        const result = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetMovies');
         const movies = await result.json();
       
         this.setState({ movies });

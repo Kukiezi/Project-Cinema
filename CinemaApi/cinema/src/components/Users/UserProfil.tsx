@@ -28,7 +28,7 @@ export default class UserProfil extends React.Component<any,any>{
         const credentialsCopy = JSON.parse(JSON.stringify(this.state.credentials));
         credentialsCopy[e.currentTarget.name] = e.currentTarget.value;
         this.setState({ credentials: credentialsCopy});
-        console.log(credentialsCopy);
+        // console.log(credentialsCopy);
     }
     
     public async performChange(){
@@ -38,7 +38,7 @@ export default class UserProfil extends React.Component<any,any>{
       const userStorage = localStorage.getItem("User");
       if (userStorage != null){
          user = JSON.parse(userStorage);
-         console.log(user.response.lastName);
+         // console.log(user.response.lastName);
          if(this.state.credentials.firstName === ""){
             const credentialsCopy = JSON.parse(JSON.stringify(this.state.credentials));
             credentialsCopy.firstName = user.response.firstName;
@@ -57,7 +57,7 @@ export default class UserProfil extends React.Component<any,any>{
             await this.setState({credentials: credentialsCopy})
         }
 
-        await fetch('https://localhost:44371/api/update', {
+        await fetch('https://cinemaapi.azurewebsites.net/api/update', {
           method: 'post',
           headers: {
             'Accept': 'application/json, text/plain, */*',
@@ -67,7 +67,7 @@ export default class UserProfil extends React.Component<any,any>{
           body: JSON.stringify({id: user.response.id, firstName: this.state.credentials.firstName, lastName: this.state.credentials.lastName, 
               username: this.state.credentials.username})
         }).then(res2=>res2.json())
-          // .then(res2 => console.log(res2))
+          // .then(res2 => // console.log(res2))
           .then(res2 => this.setState({res: res2}));
          this.updateStorage();
       }

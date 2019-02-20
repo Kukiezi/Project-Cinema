@@ -26,7 +26,7 @@ export class DeleteMovie extends React.Component<any, IState> {
       public async componentDidMount() {
         const { Id } = this.props.match.params;
         // const { movie } = this.props.location.state
-        const result = await fetch('https://localhost:44371/cinema/GetMovie?id=' + Id);
+        const result = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetMovie?id=' + Id);
         const movie = await result.json();
       
         this.setState({
@@ -35,7 +35,7 @@ export class DeleteMovie extends React.Component<any, IState> {
       }
 
       public async deleteMovie(){
-       await fetch('https://localhost:44371/cinema/DeleteMovie?id=' + this.state.movie.id, {
+       await fetch('https://cinemaapi.azurewebsites.net/cinema/DeleteMovie?id=' + this.state.movie.id, {
             method: 'POST'
           });
       }

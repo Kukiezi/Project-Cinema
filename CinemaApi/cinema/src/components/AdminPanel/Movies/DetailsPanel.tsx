@@ -27,7 +27,7 @@ class DetailsPanel extends React.Component<any, IState> {
   public async componentDidMount() {
     const { Id } = this.props.match.params;
     // const { movie } = this.props.location.state
-    const result = await fetch('https://localhost:44371/cinema/GetMovie?id=' + Id);
+    const result = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetMovie?id=' + Id);
     const movie = await result.json();
   
     this.setState({
@@ -42,7 +42,7 @@ class DetailsPanel extends React.Component<any, IState> {
 }
 
 public async updateMovie(){
-   await fetch('https://localhost:44371/cinema/UpdateMovie?id=' + this.state.movie.id + '&title=' + this.state.movie.title + '&description=' + this.state.movie.description + '&picture=' + this.state.movie.picture, {
+   await fetch('https://cinemaapi.azurewebsites.net/cinema/UpdateMovie?id=' + this.state.movie.id + '&title=' + this.state.movie.title + '&description=' + this.state.movie.description + '&picture=' + this.state.movie.picture, {
         method: 'POST'
       });
 }
