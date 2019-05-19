@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using CinemaApi.Models;
 using System.Text.RegularExpressions;
+using MimeKit;
+using MailKit.Net.Smtp;
 
 namespace CinemaApi.Controllers
 {
@@ -73,18 +75,32 @@ namespace CinemaApi.Controllers
         {
             context.Reservation.Add(new Reservation
             {
-                
+
                 IdUser = user,
                 IdScreening = screening,
                 SeatsReserved = seat,
-                Showtime = time
+                Showtime = time,
+                Confirmed = false
                 
             });
+            context.SaveChanges();
+            SendMail(1);
+            return Ok();
+
+        }
+
+        [HttpPost]
+        [Route("ConfirmReservation")]
+        public ActionResult ConfirmReservation(int id)
+        {
+            var reservation = context.Reservation.Where(a => a.IdReservation == id).FirstOrDefault();
+            reservation.Confirmed = true;
             context.SaveChanges();
 
             return Ok();
 
         }
+
         [HttpGet]
         [Route("MapRoom")]
         public ActionResult MapRoom(string mask, int id, TimeSpan time)
@@ -187,6 +203,27 @@ namespace CinemaApi.Controllers
             List<string> s = ReservedSeats(reservations);
             return s;
             
+        }
+        [HttpGet]
+        [Route("SendMail")]
+        public void SendMail(int id)
+        {
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Kino", "kinostudyjne97@gmail.com"));
+            message.To.Add(new MailboxAddress("Filip", "filcz626@gmail.com"));
+            message.Subject = "Potwierdzenie rezerwacji";
+            message.Body = new TextPart("plain")
+            {
+                Text = @"http://localhost:3000/ConfirmReservation/1"
+            };
+
+            using (var client = new SmtpClient())
+            {
+                client.Connect("smtp.gmail.com", 587);
+                client.Authenticate("kinostudyjne97@gmail.com", "Kinostudyjne1");
+                client.Send(message);
+                client.Disconnect(true);
+            }
         }
     }
 }

@@ -13,6 +13,7 @@
   <ItemGroup>
     <PackageReference Include="Dna.Framework" Version="1.0.7.10" />
     <PackageReference Include="Dna.Framework.AspNet" Version="1.0.7" />
+    <PackageReference Include="MailKit" Version="2.1.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />

@@ -8,6 +8,7 @@ import Details from "../Movies/Details";
 import NotExist from "./NotExist";
 import Navbar from '../Navbar/Navbar';
 import ReserveTicket from '../Reservations/ReserveTicket';
+import ConfirmReservation from '../Reservations/ConfirmReservation';
 import ReviewSection from '../Movies/ReviewSection';
 
 import PersonalData from '../Reservations/PersonalData';
@@ -112,6 +113,7 @@ public render() {
      <AuthRoute path="/UserProfil" component={UserProfil}/>
      <AuthRoute path="/ReviewSection/:Id" component={ReviewSection}/>
      <AuthRoute path="/Schedule/:Id" component={Schedule}/>
+     <AuthRoute path="/ConfirmReservation/:Id" component={ConfirmReservation}/>
      <Route component={NotExist}/>
      {/* <AuthRoute exact path="/auth" component={Auth}/> */}
     </Switch>
