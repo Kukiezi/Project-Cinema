@@ -22,11 +22,11 @@ constructor(props: IState) {
 public async componentDidMount() {
 
   // console.log(this.props.match.params.Showtime)
-  const result2 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetLayout?id=' + this.props.match.params.Screening ,{
+  const result2 = await fetch('https://localhost:44371/cinema/GetLayout?id=' + this.props.match.params.Screening ,{
     method: 'GET'
   });
   const layout = await result2.json();
-  const result = await fetch('https://cinemaapi.azurewebsites.net/cinema/MapRoom?mask=' + layout + "&id=" + this.props.match.params.Screening +"&time="+ this.props.match.params.Showtime);
+  const result = await fetch('https://localhost:44371/cinema/MapRoom?mask=' + layout + "&id=" + this.props.match.params.Screening +"&time="+ this.props.match.params.Showtime);
   const seats = await result.json();
   this.setState({
   seats });
@@ -74,7 +74,7 @@ public updateReservation(value: string, check: boolean)
     }
     else
     {
-      content =       <div className="flex content-center whitespace-nowrap">
+      content = <div className="flex content-center whitespace-nowrap">
       <div className="w-full h-full text-grey-darker text-center bg-white px-6 py-4 m-4 row-left room-width">
       <div className="screen">Ekran</div>
       <br/>

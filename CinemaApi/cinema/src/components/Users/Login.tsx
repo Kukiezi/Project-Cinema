@@ -42,7 +42,7 @@ class Login extends React.Component<any, any> {
     public async performLogin(){
         this.setState({loading: true});
         // await this.dim(true);
-        await fetch('https://cinemaapi.azurewebsites.net/api/login', {
+        await fetch('https://localhost:44371/api/login', {
             method: 'post',
             headers: {
               'Accept': 'application/json, text/plain, */*',

@@ -84,12 +84,14 @@ namespace CinemaApi.Controllers
                 
             });
             context.SaveChanges();
-            SendMail(1);
+            var reservation = context.Reservation.Where(a => a.IdScreening == screening && a.SeatsReserved ==seat).FirstOrDefault();
+            var users = context.Users.Where(a => a.Id == user).FirstOrDefault();
+            SendMail(reservation.IdReservation, users.Email, users.FirstName);
             return Ok();
 
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("ConfirmReservation")]
         public ActionResult ConfirmReservation(int id)
         {
@@ -206,15 +208,15 @@ namespace CinemaApi.Controllers
         }
         [HttpGet]
         [Route("SendMail")]
-        public void SendMail(int id)
+        public void SendMail(int id, string email, string name)
         {
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("Kino", "kinostudyjne97@gmail.com"));
-            message.To.Add(new MailboxAddress("Filip", "filcz626@gmail.com"));
+            message.To.Add(new MailboxAddress(name, email));
             message.Subject = "Potwierdzenie rezerwacji";
             message.Body = new TextPart("plain")
             {
-                Text = @"http://localhost:3000/ConfirmReservation/1"
+                Text = @"http://localhost:3000/ConfirmReservation/" + id 
             };
 
             using (var client = new SmtpClient())

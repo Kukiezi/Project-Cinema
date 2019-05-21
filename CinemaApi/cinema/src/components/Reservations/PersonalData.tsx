@@ -50,7 +50,7 @@ class Registration extends React.Component<any, any> {
 
     public async performRegister(){
         this.setState({loading: true});
-        await fetch('https://cinemaapi.azurewebsites.net/api/personalData', {
+        await fetch('https://localhost:44371/api/personalData', {
             method: 'post',
             headers: {
               'Accept': 'application/json, text/plain, */*',
@@ -68,7 +68,7 @@ class Registration extends React.Component<any, any> {
                 window.location.reload();
             } 
             if(this.state.res.errorMessage === "Sukces"){          
-            const result = await fetch('https://cinemaapi.azurewebsites.net/api/GetId?FirstName=' + this.state.credentials.firstName + "&LastName=" + this.state.credentials.lastName + "&Email=" + this.state.credentials.email);
+            const result = await fetch('https://localhost:44371/api/GetId?FirstName=' + this.state.credentials.firstName + "&LastName=" + this.state.credentials.lastName + "&Email=" + this.state.credentials.email);
             const id = await result.json();
             this.setState({
                 id, Succes:true });

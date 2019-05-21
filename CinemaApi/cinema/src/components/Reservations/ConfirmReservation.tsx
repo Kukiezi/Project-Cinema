@@ -9,9 +9,9 @@ class ConfirmReservation extends React.Component<any, any> {
         super(props);
       }
       public componentDidMount() {
-        fetch('https://localhost:44371/cinema/ConfirmReservation?id=' + this.props.match.params);
+        fetch('https://localhost:44371/cinema/ConfirmReservation?id=' + this.props.match.params.Id);
 
-        // console.log(this.state.User.email);
+         console.log( this.props.match.params.Id);
     }
 
   public render() {

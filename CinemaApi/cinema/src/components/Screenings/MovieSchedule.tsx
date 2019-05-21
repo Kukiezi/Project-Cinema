@@ -37,21 +37,21 @@ class MovieSchedule extends React.Component<any, any>{
       } 
 
     public async componentDidMount() {
-        const result = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetScreenings');
+        const result = await fetch('https://localhost:44371/cinema/GetScreenings');
         const screenings = await result.json();
        this.setState({ screenings });
-        const result2 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetMovies');
+        const result2 = await fetch('https://localhost:44371/cinema/GetMovies');
         const movies = await result2.json();
         this.setState({ movies });
         // // console.log(this.state.screenings.day1[0]);
 
     }
-    
+
 
     public render() {
  
-    
-     
+      const d= new Date();
+      const days = ['Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota', 'Niedziela'];
 
         return(
 
@@ -77,10 +77,10 @@ class MovieSchedule extends React.Component<any, any>{
        <Tabs>
                             <TabList className='day-navbar text-white mt-16 mb-8'>
                                 <Tab>Dzisiaj</Tab>
-                                <Tab>Jutro</Tab>
-                                <Tab>Czwartek</Tab>
-                                <Tab>Piątek</Tab>
-                                <Tab>Sobota</Tab>
+                                <Tab>{days[d.getDay()]}</Tab>
+                                <Tab>{days[d.getDay() + 1]}</Tab>
+                                <Tab>{days[d.getDay() + 2]}</Tab>
+                                <Tab>{days[d.getDay() + 3]}</Tab>
                             </TabList>
                     
                             <TabPanel className="all-screenings">

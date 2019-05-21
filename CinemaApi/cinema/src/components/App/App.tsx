@@ -12,11 +12,13 @@ import ConfirmReservation from '../Reservations/ConfirmReservation';
 import ReviewSection from '../Movies/ReviewSection';
 
 import PersonalData from '../Reservations/PersonalData';
+import EmailSent from '../Reservations/EmailSent';
 import Reservation from '../Reservations/Reservation';
 import Events from '../Events/Events';
-
+import ConfirmCulturalEvent from '../Events/ConfirmCulturalEvent';
 
 import UserProfil from '../Users/UserProfil';
+import ConfirmEmail from '../Users/ConfirmEmail';
 import decode from 'jwt-decode';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faArrowUp, faArrowDown, faComment, faLongArrowAltLeft, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -48,7 +50,7 @@ function addToStorage(res: any){
 }
 // komunikuje sie z api i prosi o nowy token dla użytkownika. Następnie odpala funkcje addToStorage
 async function refreshToken(user: any){
-  await fetch('https://cinemaapi.azurewebsites.net/api/refresh', {
+  await fetch('https://localhost:44371/api/refresh', {
     method: 'post',
     headers: {
       'Accept': 'application/json, text/plain, */*',
@@ -114,6 +116,9 @@ public render() {
      <AuthRoute path="/ReviewSection/:Id" component={ReviewSection}/>
      <AuthRoute path="/Schedule/:Id" component={Schedule}/>
      <AuthRoute path="/ConfirmReservation/:Id" component={ConfirmReservation}/>
+     <AuthRoute path="/EmailSent" component={EmailSent}/>
+     <AuthRoute path="/ConfirmEmail/:Email" component={ConfirmEmail}/>
+     <AuthRoute path="/ConfirmCulturalEvent/:Id" component={ConfirmCulturalEvent}/>
      <Route component={NotExist}/>
      {/* <AuthRoute exact path="/auth" component={Auth}/> */}
     </Switch>

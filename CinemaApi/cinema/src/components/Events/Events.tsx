@@ -17,7 +17,7 @@ class Events extends React.Component<any, IState>{
       } 
 
     public async componentDidMount() {
-        const result = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetCulturalEvents');
+        const result = await fetch('https://localhost:44371/cinema/GetCulturalEvents');
         const culturalevents = await result.json();
         this.setState({ culturalevents });
     }

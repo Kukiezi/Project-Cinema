@@ -21,18 +21,18 @@ class Reservation extends React.Component<any, IState> {
         super(props);
       }
       public async Reserve(){
-        await fetch('https://cinemaapi.azurewebsites.net/cinema/AddReservation?user=' + this.state.UserId + '&screening=' + this.state.Screening + '&seat=' + this.state.Reserved + "&time=" + this.props.match.params.Showtime, {
+        await fetch('https://localhost:44371/cinema/AddReservation?user=' + this.state.UserId + '&screening=' + this.state.Screening + '&seat=' + this.state.Reserved + "&time=" + this.props.match.params.Showtime, {
           method: 'POST',
           mode: 'no-cors'
 
         });
     }
       public async componentDidMount() {
-        const result = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetSeat2?mask=' + this.state.Reserved);
+        const result = await fetch('https://localhost:44371/cinema/GetSeat2?mask=' + this.state.Reserved);
         const seatsReservation = await result.json();
-        const result2 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetUser?id=' + this.state.UserId);
+        const result2 = await fetch('https://localhost:44371/cinema/GetUser?id=' + this.state.UserId);
         const User = await result2.json();
-        const result3 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetMovieInfo?id=' + this.state.Screening);
+        const result3 = await fetch('https://localhost:44371/cinema/GetMovieInfo?id=' + this.state.Screening);
         const Title = await result3.json();
         this.setState({
           seatsReservation, User ,Title        
@@ -59,7 +59,7 @@ class Reservation extends React.Component<any, IState> {
         {this.state.seatsReservation.map(seatReservation => 
                     <SeatReservation key={seatReservation} seatReservation={seatReservation}/>)}
 
-            <NavLink className="buy-btn" to='/'
+            <NavLink className="buy-btn" to='/EmailSent'
                
                onClick={this.handleClick}> 
               Zarezerwuj 

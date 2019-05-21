@@ -7,9 +7,11 @@ namespace CinemaApi.Models
     {
         public int IdSigningIn { get; set; }
         public int IdCulturalEvent { get; set; }
-        public int IdUserAccount { get; set; }
+       // public int IdUserAccount { get; set; }
+        public string IdUsers { get; set; }
+        public bool Confirmed { get; set; }
 
         public CulturalEvent IdCulturalEventNavigation { get; set; }
-        public UserAccount IdUserAccountNavigation { get; set; }
+        //public UserAccount IdUserAccountNavigation { get; set; }
     }
 }
