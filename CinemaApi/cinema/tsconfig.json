@@ -32,7 +32,7 @@
     "tests"
   ],
   "include": [
-		"src"
+    "src"
 	]
 
 }

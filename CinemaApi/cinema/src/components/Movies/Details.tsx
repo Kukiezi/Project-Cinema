@@ -42,6 +42,10 @@ class Details extends React.Component<any, IState> {
     },
     textareaValue: "",
     errorMessage: "",
+    movies: {
+      fileName: "",
+      src: ""
+    }
   };
 
   constructor(props: IState) {
@@ -109,7 +113,7 @@ public async SendRating(){
        user = JSON.parse(userStorage);
     
 
-    const result =  await fetch('https://cinemaapi.azurewebsites.net/cinema/AddRating?rating=' + this.state.ratingTest.ratingNumber + '&id=' + this.state.ratingTest.idMovies + '&userId=' + user.response.id, {
+    const result =  await fetch('https://localhost:44371/cinema/AddRating?rating=' + this.state.ratingTest.ratingNumber + '&id=' + this.state.ratingTest.idMovies + '&userId=' + user.response.id, {
       method: 'POST'
     });
     let currentRating = await result.json();
@@ -137,11 +141,11 @@ public async SendRating(){
     const { Id } = this.props.match.params;
     let reviews;
     // const { movie } = this.props.location.state
-    const result = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetMovie?id=' + Id);
+    const result = await fetch('https://localhost:44371/cinema/GetMovie?id=' + Id);
     const movie = await result.json();
-    const result2 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetRating?id=' + Id);
+    const result2 = await fetch('https://localhost:44371/cinema/GetRating?id=' + Id);
     let currentRating = await result2.json();
-    const result3 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetReviews?id=' + Id + '&user=' + username)
+    const result3 = await fetch('https://localhost:44371/cinema/GetReviews?id=' + Id + '&user=' + username)
     if (result3.ok){
        reviews = await result3.json();
     }
@@ -156,7 +160,7 @@ public async SendRating(){
     });
     
     if (userStorage != null){
-      const result4 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetUserRating?id=' + Id + '&userId=' + user.response.id);
+      const result4 = await fetch('https://localhost:44371/cinema/GetUserRating?id=' + Id + '&userId=' + user.response.id);
       const userRating = await result4.json();
 
       const checkValue = document.querySelectorAll("input");
@@ -206,7 +210,17 @@ public async SendRating(){
    
 
 
-   
+    const movies = this.state.movies;
+    const movieIconProps = this.state.movie.picture
+    const req = require.context("../../assets/images", false, /.*\.(jpg|png|jpeg)$/);
+    for (const key of req.keys()) {
+      movies.fileName = key.substring(2);
+      if (movies.fileName === movieIconProps)
+      {
+        movies.src = req(key);
+        this.setState({movies})
+      }
+    }
     
 
   }
@@ -259,7 +273,7 @@ public async addReview(){
 
 
 
-  await fetch('https://cinemaapi.azurewebsites.net/cinema/AddReview', {
+  await fetch('https://localhost:44371/cinema/AddReview', {
       method: 'post',
       headers: {
         'Accept': 'application/json, text/plain, */*',
@@ -277,7 +291,7 @@ public async setReviews(IdMovies){
 
   if (IdMovies === null){
     const { Id } = this.props.match.params;
-    const result3 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetReviews?id=' + Id)
+    const result3 = await fetch('https://localhost:44371/cinema/GetReviews?id=' + Id)
     if (result3.ok){
        reviews = await result3.json();
     }
@@ -287,7 +301,7 @@ public async setReviews(IdMovies){
   }
   else{
     const Id = IdMovies;
-    const result3 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetReviews?id=' + Id)
+    const result3 = await fetch('https://localhost:44371/cinema/GetReviews?id=' + Id)
     if (result3.ok){
        reviews = await result3.json();
     }
@@ -326,7 +340,7 @@ public async setReviews(IdMovies){
       
         <div className="xl:w-1/2 sm:w-full flex-none text-white text-center  bg-black px-4 py-2 m-2">
         <Fade>
-          <img src={this.state.movie.picture} />
+          <img className="img-header" src={this.state.movies.src} />
           </Fade>
         </div>
       
@@ -394,7 +408,8 @@ export interface IState {
   reviews: IReviews[],
   review: IReviews,
   textareaValue: string,
-  errorMessage: string
+  errorMessage: string,
+  movies: ISrc
 }
 export interface IMovie {
   id: number,
@@ -419,4 +434,9 @@ export interface IReviews {
   author: string,
   vote: number,
   points: number
+}
+
+export interface ISrc {
+  fileName: string,
+  src: string
 }

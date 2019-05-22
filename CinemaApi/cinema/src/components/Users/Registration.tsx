@@ -49,7 +49,7 @@ class Registration extends React.Component<any, any> {
 
     public async performRegister(){
         this.setState({loading: true});
-        await fetch('https://cinemaapi.azurewebsites.net/api/register', {
+        await fetch('https://localhost:44371/api/register', {
             method: 'post',
             headers: {
               'Accept': 'application/json, text/plain, */*',

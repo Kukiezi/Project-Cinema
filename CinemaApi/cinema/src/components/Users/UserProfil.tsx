@@ -35,9 +35,9 @@ export default class UserProfil extends React.Component<any, any>{
          user = JSON.parse(userStorage);
          console.log(user.response.id)
       }
-        const result = await fetch('https://cinemaapi.azurewebsites.net/api/GetUserReservations?userId=' + user.response.id);
+        const result = await fetch('https://localhost:44371/api/GetUserReservations?userId=' + user.response.id);
         const reservations = await result.json();
-        const result2 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetUser?id=' + user.response.id);
+        const result2 = await fetch('https://localhost:44371/cinema/GetUser?id=' + user.response.id);
         const User = await result2.json();
         console.log(User)
         // console.log(seatsReservation[0])
@@ -80,7 +80,7 @@ export default class UserProfil extends React.Component<any, any>{
                 await this.setState({ credentials: credentialsCopy })
             }
 
-            await fetch('https://cinemaapi.azurewebsites.net/api/update', {
+            await fetch('https://localhost:44371/api/update', {
                 method: 'post',
                 headers: {
                     'Accept': 'application/json, text/plain, */*',

@@ -45,10 +45,10 @@ class MovieSchedule extends React.Component<any, any>{
 
     public async componentDidMount() {
         // console.log(this.state.id)
-        const result = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetScreeningMovie?id='+ this.state.id);
+        const result = await fetch('https://localhost:44371/cinema/GetScreeningMovie?id='+ this.state.id);
         const screenings = await result.json();
        this.setState({ screenings });
-       const result2 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetMovie?id=' + this.state.id);
+       const result2 = await fetch('https://localhost:44371/cinema/GetMovie?id=' + this.state.id);
        const movie = await result2.json();
         this.setState({ movie });
         // // console.log(this.state.screenings.day1[0]);

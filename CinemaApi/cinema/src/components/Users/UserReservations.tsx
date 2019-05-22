@@ -20,9 +20,9 @@ class Reservations extends React.Component<any, IState> {
     
       public async componentDidMount() {
 
-        const result = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetSeat2?mask=' + this.props.reservations.seatsReserved);
+        const result = await fetch('https://localhost:44371/cinema/GetSeat2?mask=' + this.props.reservations.seatsReserved);
         const seatsReservation = await result.json();
-        const result3 = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetMovieInfo?id=' + this.props.reservations.idScreening);
+        const result3 = await fetch('https://localhost:44371/cinema/GetMovieInfo?id=' + this.props.reservations.idScreening);
         const Title = await result3.json();
         this.setState({
           seatsReservation,Title        

@@ -46,7 +46,7 @@ export default class Rating extends React.Component<any, any>{
 
 public async FetchIt(){
 
-  const result = await fetch('https://cinemaapi.azurewebsites.net/cinema/GetMovies');
+  const result = await fetch('https://localhost:44371/cinema/GetMovies');
   const movies = await result.json();
   this.setState({ movies });
 }
