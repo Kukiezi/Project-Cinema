@@ -23,13 +23,13 @@ namespace CinemaApi.Controllers
         public ActionResult<WeekModel> GetScreening()
         {
             DateTime Day0 = DateTime.Now;
-            DateTime Day1 = new DateTime(2019, 1, 22);
-            DateTime Day2 = Day1.AddDays(1);
-            DateTime Day3 = Day1.AddDays(2);
-            DateTime Day4 = Day1.AddDays(3);
-            DateTime Day5 = Day1.AddDays(4);
-            DateTime Day6 = Day1.AddDays(5);
-            DateTime Day7 = Day1.AddDays(6);
+            DateTime Day1 = DateTime.Now;
+            DateTime Day2 = Day1.AddDays(0);
+            DateTime Day3 = Day1.AddDays(1);
+            DateTime Day4 = Day1.AddDays(2);
+            DateTime Day5 = Day1.AddDays(3);
+            DateTime Day6 = Day1.AddDays(4);
+            DateTime Day7 = Day1.AddDays(5);
 
             /*var screeningsList = context.Screening.Where(a => a.ScreeningDate >= Day1 && a.ScreeningDate < Day2).ToList();*/
           

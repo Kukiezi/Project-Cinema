@@ -353,7 +353,7 @@ namespace CinemaApi.Models
 
                 entity.Property(e => e.IdCulturalEvent).HasColumnName("id_cultural_event");
 
-                entity.Property(e => e.IdUserAccount).HasColumnName("id_user_account");
+               // entity.Property(e => e.IdUserAccount).HasColumnName("id_user_account");
 
                 entity.HasOne(d => d.IdCulturalEventNavigation)
                     .WithMany(p => p.SigningIn)
@@ -361,11 +361,11 @@ namespace CinemaApi.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Signing_I__id_cu__1CBC4616");
 
-                entity.HasOne(d => d.IdUserAccountNavigation)
+                /*entity.HasOne(d => d.IdUserAccountNavigation)
                     .WithMany(p => p.SigningIn)
                     .HasForeignKey(d => d.IdUserAccount)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Signing_I__id_us__1DB06A4F");
+                    .HasConstraintName("FK__Signing_I__id_us__1DB06A4F"); */
             });
 
             modelBuilder.Entity<UserAccount>(entity =>

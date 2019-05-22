@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using CinemaApi.Models;
 using System.Text.RegularExpressions;
+using MimeKit;
+using MailKit.Net.Smtp;
 
 namespace CinemaApi.Controllers
 {
@@ -73,18 +75,34 @@ namespace CinemaApi.Controllers
         {
             context.Reservation.Add(new Reservation
             {
-                
+
                 IdUser = user,
                 IdScreening = screening,
                 SeatsReserved = seat,
-                Showtime = time
+                Showtime = time,
+                Confirmed = false
                 
             });
+            context.SaveChanges();
+            var reservation = context.Reservation.Where(a => a.IdScreening == screening && a.SeatsReserved ==seat).FirstOrDefault();
+            var users = context.Users.Where(a => a.Id == user).FirstOrDefault();
+            SendMail(reservation.IdReservation, users.Email, users.FirstName);
+            return Ok();
+
+        }
+
+        [HttpGet]
+        [Route("ConfirmReservation")]
+        public ActionResult ConfirmReservation(int id)
+        {
+            var reservation = context.Reservation.Where(a => a.IdReservation == id).FirstOrDefault();
+            reservation.Confirmed = true;
             context.SaveChanges();
 
             return Ok();
 
         }
+
         [HttpGet]
         [Route("MapRoom")]
         public ActionResult MapRoom(string mask, int id, TimeSpan time)
@@ -187,6 +205,27 @@ namespace CinemaApi.Controllers
             List<string> s = ReservedSeats(reservations);
             return s;
             
+        }
+        [HttpGet]
+        [Route("SendMail")]
+        public void SendMail(int id, string email, string name)
+        {
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Kino", "kinostudyjne97@gmail.com"));
+            message.To.Add(new MailboxAddress(name, email));
+            message.Subject = "Potwierdzenie rezerwacji";
+            message.Body = new TextPart("plain")
+            {
+                Text = @"http://localhost:3000/ConfirmReservation/" + id 
+            };
+
+            using (var client = new SmtpClient())
+            {
+                client.Connect("smtp.gmail.com", 587);
+                client.Authenticate("kinostudyjne97@gmail.com", "Kinostudyjne1");
+                client.Send(message);
+                client.Disconnect(true);
+            }
         }
     }
 }

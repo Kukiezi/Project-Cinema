@@ -74,7 +74,7 @@ public updateReservation(value: string, check: boolean)
     }
     else
     {
-      content =       <div className="flex content-center whitespace-nowrap">
+      content = <div className="flex content-center whitespace-nowrap">
       <div className="w-full h-full text-grey-darker text-center bg-white px-6 py-4 m-4 row-left room-width">
       <div className="screen">Ekran</div>
       <br/>

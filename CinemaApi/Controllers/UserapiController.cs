@@ -8,11 +8,13 @@ using CinemaApi.Models;
 using CinemaApi.Models.Error;
 using CinemaApi.Models.Tokens;
 using CinemaApi.Models.UserModels;
+using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using MimeKit;
 
 namespace CinemaApi.Controllers
 {
@@ -109,7 +111,7 @@ namespace CinemaApi.Controllers
 
             if (registerCredentials.Password != registerCredentials.ConfirmPassword)
                 return errorResponse2;
-
+            SendMail(registerCredentials.Email, registerCredentials.FirstName);
             // Create the desired user from the given details
             var user = new ApplicationUser
             {
@@ -121,7 +123,7 @@ namespace CinemaApi.Controllers
 
             // Try and create a user
             var result = await mUserManager.CreateAsync(user, registerCredentials.Password);
-
+            
 
             //var userRoles = await mUserManager.GetRolesAsync(user);
 
@@ -140,6 +142,7 @@ namespace CinemaApi.Controllers
                     role = r;
                 }
                 // Return valid response containing all users details
+               
                 return new ApiResponse<RegisterResultApiModel>
                 {
                     Response = new RegisterResultApiModel
@@ -152,15 +155,19 @@ namespace CinemaApi.Controllers
                         Token = userIdentity.GenerateJwtToken(role),
                     }
                 };
+
             }
             // Otherwise if it failed...
             else
-                // Return the failed response
+            {   // Return the failed response
                 return new ApiResponse<RegisterResultApiModel>
                 {
                     // Aggregate all errors into a single error string
                     ErrorMessage = result.Errors.AggregateErrors()
                 };
+            }
+
+            
         }
 
 
@@ -550,6 +557,40 @@ namespace CinemaApi.Controllers
            
             // If we were successful...
             return reservationList;
+        }
+
+        [HttpGet]
+        [Route("ConfirmEmail")]
+        public ActionResult ConfirmReservation(string email)
+        {
+            var user = mContext.Users.Where(a => a.Email == email).FirstOrDefault();
+            user.EmailConfirmed = true;
+            mContext.SaveChanges();
+
+            return Ok();
+
+        }
+
+        [HttpGet]
+        [Route("SendMail")]
+        public void SendMail( string email, string name)
+        {
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Kino", "kinostudyjne97@gmail.com"));
+            message.To.Add(new MailboxAddress(name, email));
+            message.Subject = "Potwierdzenie Adresu Email";
+            message.Body = new TextPart("plain")
+            {
+                Text = @"http://localhost:3000/ConfirmEmail/" + email
+            };
+
+            using (var client = new SmtpClient())
+            {
+                client.Connect("smtp.gmail.com", 587);
+                client.Authenticate("kinostudyjne97@gmail.com", "Kinostudyjne1");
+                client.Send(message);
+                client.Disconnect(true);
+            }
         }
 
     }

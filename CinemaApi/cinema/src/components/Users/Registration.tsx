@@ -66,6 +66,7 @@ class Registration extends React.Component<any, any> {
                 await localStorage.setItem("User", JSON.stringify(this.state.res))
                 window.location.reload();
             }
+            
   
         }
 

@@ -8,14 +8,17 @@ import Details from "../Movies/Details";
 import NotExist from "./NotExist";
 import Navbar from '../Navbar/Navbar';
 import ReserveTicket from '../Reservations/ReserveTicket';
+import ConfirmReservation from '../Reservations/ConfirmReservation';
 import ReviewSection from '../Movies/ReviewSection';
 
 import PersonalData from '../Reservations/PersonalData';
+import EmailSent from '../Reservations/EmailSent';
 import Reservation from '../Reservations/Reservation';
 import Events from '../Events/Events';
-
+import ConfirmCulturalEvent from '../Events/ConfirmCulturalEvent';
 
 import UserProfil from '../Users/UserProfil';
+import ConfirmEmail from '../Users/ConfirmEmail';
 import decode from 'jwt-decode';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faArrowUp, faArrowDown, faComment, faLongArrowAltLeft, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -112,6 +115,10 @@ public render() {
      <AuthRoute path="/UserProfil" component={UserProfil}/>
      <AuthRoute path="/ReviewSection/:Id" component={ReviewSection}/>
      <AuthRoute path="/Schedule/:Id" component={Schedule}/>
+     <AuthRoute path="/ConfirmReservation/:Id" component={ConfirmReservation}/>
+     <AuthRoute path="/EmailSent" component={EmailSent}/>
+     <AuthRoute path="/ConfirmEmail/:Email" component={ConfirmEmail}/>
+     <AuthRoute path="/ConfirmCulturalEvent/:Id" component={ConfirmCulturalEvent}/>
      <Route component={NotExist}/>
      {/* <AuthRoute exact path="/auth" component={Auth}/> */}
     </Switch>

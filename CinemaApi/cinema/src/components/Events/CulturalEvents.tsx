@@ -24,6 +24,12 @@ export default class CulturalEvents extends React.Component<any, any>{
             isActive:!this.state.isActive
         })
     }
+    public signFor =() => {
+        const userStorage = localStorage.getItem("User");
+        const user = JSON.parse(userStorage);
+        fetch('https://localhost:44371/cinema/AddSignFor?idEvent=' + this.props.culturalevent.idCulturalEvent + "&idUser=" + user.response.id);
+       // console.log(this.props);
+    }
 
     public render(){
 
@@ -69,8 +75,9 @@ export default class CulturalEvents extends React.Component<any, any>{
                             <h3 className="mb-2">Liczba miejsc:<br/></h3>
                             {this.props.culturalevent.seatsLimit}
                         </div>
+                        <button className="details-btn text-sm" onClick={this.signFor}>Zapisz się</button>
                     </div>
-                
+                    
                     
                 </Modal>
             </div>

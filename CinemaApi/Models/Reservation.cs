@@ -10,6 +10,7 @@ namespace CinemaApi.Models
         public int IdScreening { get; set; }
         public string SeatsReserved { get; set; }
         public string IdUser { get; set; }
+        public bool Confirmed { get; set; }
         public TimeSpan Showtime { get; set; }
 
         public Screening IdScreeningNavigation { get; set; }

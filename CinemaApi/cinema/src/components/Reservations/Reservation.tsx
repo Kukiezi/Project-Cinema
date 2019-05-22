@@ -59,7 +59,7 @@ class Reservation extends React.Component<any, IState> {
         {this.state.seatsReservation.map(seatReservation => 
                     <SeatReservation key={seatReservation} seatReservation={seatReservation}/>)}
 
-            <NavLink className="buy-btn" to='/'
+            <NavLink className="buy-btn" to='/EmailSent'
                
                onClick={this.handleClick}> 
               Zarezerwuj 

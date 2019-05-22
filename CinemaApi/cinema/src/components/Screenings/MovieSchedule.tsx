@@ -46,12 +46,12 @@ class MovieSchedule extends React.Component<any, any>{
         // // console.log(this.state.screenings.day1[0]);
 
     }
-    
+
 
     public render() {
  
-    
-     
+      const d= new Date();
+      const days = ['Poniedziałek','Wtorek','Środa','Czwartek','Piątek','Sobota', 'Niedziela'];
 
         return(
 
@@ -77,10 +77,10 @@ class MovieSchedule extends React.Component<any, any>{
        <Tabs>
                             <TabList className='day-navbar text-white mt-16 mb-8'>
                                 <Tab>Dzisiaj</Tab>
-                                <Tab>Jutro</Tab>
-                                <Tab>Czwartek</Tab>
-                                <Tab>Piątek</Tab>
-                                <Tab>Sobota</Tab>
+                                <Tab>{days[d.getDay()]}</Tab>
+                                <Tab>{days[d.getDay() + 1]}</Tab>
+                                <Tab>{days[d.getDay() + 2]}</Tab>
+                                <Tab>{days[d.getDay() + 3]}</Tab>
                             </TabList>
                     
                             <TabPanel className="all-screenings">

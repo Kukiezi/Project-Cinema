@@ -20,7 +20,9 @@ class Navbar extends React.Component<any, any>{
       "res": []
     }
   }
-
+  public Send = () => {
+     fetch('https://localhost:44371/cinema/SendMail'); 
+}
   public render() {
     function CheckUser(){
       let isUserLogged = false;
@@ -47,6 +49,7 @@ class Navbar extends React.Component<any, any>{
             <NavLink to="/" className="monte-bold text-white no-underline text-3xl tracking-tight text-center mr-20">Kino Studyjne</NavLink>
             <NavLink to="/Repertuar" className="block no-underline mt-4 lg:inline-block lg:mt-0 text-white mr-6">Repertuar</NavLink>
             <NavLink to="/Events" className="block no-underline mt-4 lg:inline-block lg:mt-0 text-white mr-6">Wydarzenia</NavLink>
+            <button className="text-white" onClick={this.Send}>Test Maila</button>
             {/* <NavLink to="/AdminPanel" className="block mt-4 no-underline lg:inline-block lg:mt-0 text-white mr-6">Administracja</NavLink>             */}
             {/* <Newsletter/> */}
      

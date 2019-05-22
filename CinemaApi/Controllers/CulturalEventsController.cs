@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CinemaApi.Models;
+using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Mvc;
+using MimeKit;
 
 namespace CinemaApi.Controllers
 {
@@ -85,7 +87,17 @@ namespace CinemaApi.Controllers
 
             return Ok();
         }
+        [HttpPost]
+        [Route("ReduceSeats")]
+        public ActionResult ReduceSeats(int id)
+        {
+            var culturalevent = context.CulturalEvent.Where(e => e.IdCulturalEvent == id).FirstOrDefault();
 
+                culturalevent.SeatsLimit --;
+                context.SaveChanges();
+           
+            return Ok();
+        }
         [HttpPost]
         [Route("DeleteCulturalEvent")]
         public ActionResult DeleteCulturalEvent(int id)
@@ -99,6 +111,57 @@ namespace CinemaApi.Controllers
             }
 
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("AddSignFor")]
+        public ActionResult AddSignFor(int idEvent, string idUser)
+        {
+            context.SigningIn.Add(new SigningIn
+            {
+                IdCulturalEvent = idEvent,
+                IdUsers = idUser,
+                Confirmed = false
+            });
+            context.SaveChanges();
+            ReduceSeats(idEvent);
+            var user = context.Users.Where(e => e.Id == idUser).FirstOrDefault();
+            SendMail(idUser, user.Email, user.FirstName);
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("ConfirmSignFor")]
+        public ActionResult ConfirmSignFor(string id)
+        {
+            var sign = context.SigningIn.Where(a => a.IdUsers == id).FirstOrDefault();
+            sign.Confirmed = true;
+            context.SaveChanges();
+
+            return Ok();
+
+        }
+
+        [HttpGet]
+        [Route("SendMail")]
+        public void SendMail(string id, string email, string name)
+        {
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Kino", "kinostudyjne97@gmail.com"));
+            message.To.Add(new MailboxAddress(name, email));
+            message.Subject = "Potwierdzenie rezerwacji";
+            message.Body = new TextPart("plain")
+            {
+                Text = @"http://localhost:3000/ConfirmCulturalEvent/" + id
+            };
+
+            using (var client = new SmtpClient())
+            {
+                client.Connect("smtp.gmail.com", 587);
+                client.Authenticate("kinostudyjne97@gmail.com", "Kinostudyjne1");
+                client.Send(message);
+                client.Disconnect(true);
+            }
         }
 
 

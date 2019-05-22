@@ -9,7 +9,7 @@ namespace CinemaApi.Models
         {
             Newsletter = new HashSet<Newsletter>();
             Reservation = new HashSet<Reservation>();
-            SigningIn = new HashSet<SigningIn>();
+            //SigningIn = new HashSet<SigningIn>();
         }
 
         public string Email { get; set; }
@@ -20,6 +20,6 @@ namespace CinemaApi.Models
 
         public ICollection<Newsletter> Newsletter { get; set; }
         public ICollection<Reservation> Reservation { get; set; }
-        public ICollection<SigningIn> SigningIn { get; set; }
+        //public ICollection<SigningIn> SigningIn { get; set; }
     }
 }
