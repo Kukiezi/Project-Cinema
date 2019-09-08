@@ -347,9 +347,9 @@ public async setReviews(IdMovies){
        
         <div className="xl:w-2/5 sm:w-full flex-none monte text-white text-justify bg-black px-4 py-2 m-2">
         <Fade>
-          <h1 className="leading-loose font-normal tracking-wide">{this.state.movie.title}</h1>
-          <p className="text-grey monte">Reżyser: {this.state.movie.director} / Gatunek: {this.state.movie.genre} / Czas: {this.state.movie.watchingTime} / Wiek: {this.state.movie.ageRestriction}</p>
-          <h3 className="font-thin">{this.state.movie.description}</h3>
+          <h1 className="leading-loose font-normal tracking-wide text-3xl">{this.state.movie.title}</h1>
+          <p className="text-gray-500 monte">Reżyser: {this.state.movie.director} / Gatunek: {this.state.movie.genre} / Czas: {this.state.movie.watchingTime} / Wiek: {this.state.movie.ageRestriction}</p> <br/>
+          <h3 className="font-thin italic">{this.state.movie.description}</h3>
           </Fade>
         
           <NavLink className="buy-btn" to={{
@@ -375,10 +375,10 @@ public async setReviews(IdMovies){
 
 reviewContent = <div> <h1 className="review-header text-white monte text-center">Opinie</h1><br/><br/>
 <div className="comment-form text-center"> 
-<label className="error-label2 font-bold text-red">{this.state.errorMessage}</label>
-<textarea value={this.state.textareaValue} rows={5} id="reviewArea" name="review1" onChange={this.onChangeReview} className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..."/><br/>
+<label className="error-label2 font-bold text-red-700">{this.state.errorMessage}</label>
+<textarea value={this.state.textareaValue} rows={5} id="reviewArea" name="review1" onChange={this.onChangeReview} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..."/><br/>
 
-<button onClick={this.addReview} className="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">Dodaj Opinie!</button>
+<button onClick={this.addReview} className="bg-transparent hover:bg-blue-500 text-blue-800 font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">Dodaj Opinie!</button>
 
 </div>
 

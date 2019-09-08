@@ -73,10 +73,10 @@ export default class ReviewsDetails extends React.Component<any, any>{
             // console.log(this.state.errorMessage);
             this.setState({
                 field: (<div className="comment-form text-center">
-                    <label className="error-label2 font-bold text-red">{this.state.errorMessage}</label>
-                    <textarea defaultValue={this.state.textareaValue} rows={5} id="reviewArea" name="review1" onChange={this.onChangeReview} className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..." /><br />
+                    <label className="error-label2 font-bold text-red-700">{this.state.errorMessage}</label>
+                    <textarea defaultValue={this.state.textareaValue} rows={5} id="reviewArea" name="review1" onChange={this.onChangeReview} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..." /><br />
 
-                    <button onClick={this.addReview} className="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">Dodaj Opinie!</button>
+                    <button onClick={this.addReview} className="bg-transparent hover:bg-blue-500 text-blue-800 font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">Dodaj Opinie!</button>
 
                 </div>)
             })
@@ -87,10 +87,10 @@ export default class ReviewsDetails extends React.Component<any, any>{
             await this.setState({ errorMessage: "Nie możesz dodawać pustych opinii!" })
             this.setState({
                 field: (<div className="comment-form text-center">
-                    <label className="error-label2 font-bold text-red">{this.state.errorMessage}</label>
-                    <textarea defaultValue={this.state.textareaValue} rows={5} id="reviewArea" name="review1" onChange={this.onChangeReview} className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..." /><br />
+                    <label className="error-label2 font-bold text-red-700">{this.state.errorMessage}</label>
+                    <textarea defaultValue={this.state.textareaValue} rows={5} id="reviewArea" name="review1" onChange={this.onChangeReview} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..." /><br />
 
-                    <button onClick={this.addReview} className="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">Dodaj Opinie!</button>
+                    <button onClick={this.addReview} className="bg-transparent hover:bg-blue-500 text-blue-800 font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">Dodaj Opinie!</button>
 
                 </div>)
             })
@@ -100,10 +100,10 @@ export default class ReviewsDetails extends React.Component<any, any>{
             await this.setState({ errorMessage: "Opinia musi mieć więcej niż 6 znaków!" })
             this.setState({
                 field: (<div className="comment-form text-center">
-                    <label className="error-label2 font-bold text-red">{this.state.errorMessage}</label>
-                    <textarea defaultValue={this.state.textareaValue} rows={5} id="reviewArea" name="review1" onChange={this.onChangeReview} className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..." /><br />
+                    <label className="error-label2 font-bold text-red-700">{this.state.errorMessage}</label>
+                    <textarea defaultValue={this.state.textareaValue} rows={5} id="reviewArea" name="review1" onChange={this.onChangeReview} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..." /><br />
 
-                    <button onClick={this.addReview} className="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">Dodaj Opinie!</button>
+                    <button onClick={this.addReview} className="bg-transparent hover:bg-blue-500 text-blue-800 font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">Dodaj Opinie!</button>
 
                 </div>)
             })
@@ -113,10 +113,10 @@ export default class ReviewsDetails extends React.Component<any, any>{
             await this.setState({ errorMessage: "Opinia musi mieć więcej niż 6 znaków!" })
             this.setState({
                 field: (<div className="comment-form text-center">
-                    <label className="error-label2 font-bold text-red">{this.state.errorMessage}</label>
-                    <textarea defaultValue={this.state.textareaValue} rows={5} id="reviewArea" name="review1" onChange={this.onChangeReview} className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..." /><br />
+                    <label className="error-label2 font-bold text-red-700">{this.state.errorMessage}</label>
+                    <textarea defaultValue={this.state.textareaValue} rows={5} id="reviewArea" name="review1" onChange={this.onChangeReview} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..." /><br />
 
-                    <button onClick={this.addReview} className="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">Dodaj Opinie!</button>
+                    <button onClick={this.addReview} className="bg-transparent hover:bg-blue-500 text-blue-800 font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">Dodaj Opinie!</button>
 
                 </div>)
             })
@@ -163,7 +163,7 @@ export default class ReviewsDetails extends React.Component<any, any>{
                     <label className="error-label2 font-bold text-red">{this.state.errorMessage}</label>
                     <textarea defaultValue={this.state.textareaValue} rows={5} id="reviewArea" name="review1" onChange={this.onChangeReview} className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" placeholder="Opinia..." /><br />
 
-                    <button onClick={this.addReview} className="bg-transparent hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">Dodaj Opinie!</button>
+                    <button onClick={this.addReview} className="bg-transparent hover:bg-blue-500 text-blue-800 font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded">Dodaj Opinie!</button>
 
                 </div>)
             })

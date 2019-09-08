@@ -139,15 +139,15 @@ export default class UserProfil extends React.Component<any, any>{
                                 <div className="form-inner">
                                     <div className="form-item">
                                         <label htmlFor="firstName-id" className="block text-sm font-bold mb-2">IMIĘ</label>
-                                        <input onChange={this.onChange} placeholder="Podaj imię " defaultValue={user.response.firstName} id="firstName-id" name="firstName" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
+                                        <input onChange={this.onChange} placeholder="Podaj imię " defaultValue={user.response.firstName} id="firstName-id" name="firstName" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
                                     </div>
                                     <div className="form-item">
                                         <label htmlFor="lastName-id" className="block text-sm font-bold mb-2">NAZWISKO</label>
-                                        <input onChange={this.onChange} placeholder="Podaj nazwisko " defaultValue={user.response.lastName} id="lastName-id" name="lastName" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
+                                        <input onChange={this.onChange} placeholder="Podaj nazwisko " defaultValue={user.response.lastName} id="lastName-id" name="lastName" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
                                     </div>
                                     <div className="form-item">
                                         <label htmlFor="username-id" className="block text-sm font-bold mb-2">LOGIN</label>
-                                        <input onChange={this.onChange} placeholder="Podaj login " defaultValue={user.response.username} id="username-id" name="username" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
+                                        <input onChange={this.onChange} placeholder="Podaj login " defaultValue={user.response.username} id="username-id" name="username" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-800 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
                                     </div>
 
                                     <div className="form-actions text-center pt-4">

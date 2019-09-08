@@ -34,7 +34,7 @@
   font-weight: 400;
 }
 
-.slide:nth-child(1){
+/* .slide:nth-child(1){
   background:linear-gradient(to bottom, rgba(0,0,0,0) , rgba(0,0,0,1)), url(http://badfeelingmag.com/wp-content/uploads/2018/09/contest-win-tickets-to-the-montreal-premiere-of-venom-2.jpg) no-repeat center center;
 }
 
@@ -52,7 +52,7 @@
 
 .slide:nth-child(5){
   background:linear-gradient(to bottom, rgba(0,0,0,0) , rgba(0,0,0,1)), url(http://badfeelingmag.com/wp-content/uploads/2018/09/contest-win-tickets-to-the-montreal-premiere-of-venom-2.jpg) no-repeat center center;
-}
+} */
 
 @keyframes animate{
     0%{
@@ -98,7 +98,7 @@
     50% { left: -200%; }
     70% { left: -200%; }
     75% { left: -300%; }
-    95% { left: -300%; }
+    90% { left: -300%; }
     100% { left: -400%; }
     }
   @media screen and(max-width:768px){

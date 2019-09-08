@@ -41,7 +41,7 @@ public async componentDidMount() {
       </div>
         
         <Fade>
-        <Slider/>
+        <Slider movies={this.state.movies}/>
         </Fade>
         <Fade>
         <p className="p-8 App-intro">

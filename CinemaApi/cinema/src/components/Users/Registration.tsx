@@ -124,30 +124,30 @@ class Registration extends React.Component<any, any> {
                             <button className="close-btn" onClick={this.toggleModal}>x</button>
                             <div className="form-item">
                                 <label htmlFor="firstName-id" className="block text-sm font-bold mb-2">IMIĘ</label>
-                                <input onChange={this.onChange} placeholder="Podaj imię " id="firstName-id"  name="firstName" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
+                                <input onChange={this.onChange} placeholder="Podaj imię " id="firstName-id"  name="firstName" className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="lastName-id" className="block text-sm font-bold mb-2">NAZWISKO</label>
-                                <input onChange={this.onChange} placeholder="Podaj nazwisko " id="lastName-id" name="lastName" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
+                                <input onChange={this.onChange} placeholder="Podaj nazwisko " id="lastName-id" name="lastName" className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="username-id" className="block text-sm font-bold mb-2">LOGIN</label>
-                                <input onChange={this.onChange} placeholder="Podaj login " id="username-id" name="username" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
+                                <input onChange={this.onChange} placeholder="Podaj login " id="username-id" name="username" className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="email-id" className="block text-sm font-bold mb-2">EMAIL</label>
-                                <input onChange={this.onChange} placeholder="Podaj email " id="email-id" type="email" name="email" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
+                                <input onChange={this.onChange} placeholder="Podaj email " id="email-id" type="email" name="email" className="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="password-id" className="block text-sm font-bold mb-2">HASŁO</label>
-                                <input onChange={this.onChange} placeholder="Podaj hasło "id="password-id" type="password" name="password" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
+                                <input onChange={this.onChange} placeholder="Podaj hasło "id="password-id" type="password" name="password" className="shadow appearance-none border rounded w-full py-2 px-3 text-black mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
                             </div>
                             <div className="form-item">
                                 <label htmlFor="confirmPassword-id" className="block text-sm font-bold mb-2">POWTÓRZ HASŁO</label>
-                                <input onChange={this.onChange} placeholder="Powtórz hasło "id="confirmPassword-id" type="password" name="confirmPassword" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />                           
+                                <input onChange={this.onChange} placeholder="Powtórz hasło "id="confirmPassword-id" type="password" name="confirmPassword" className="shadow appearance-none border rounded w-full py-2 px-3 text-black mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />                           
                             </div>
                             <div className="form-actions text-center pt-4">
-                                <button onClick={this.performRegister} className="button bg-red hover:bg-red-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Zarejestruj się</button><br/><br/>
+                                <button onClick={this.performRegister} className="button bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:shadow-outline">Zarejestruj się</button><br/><br/>
                                 {content}
                             </div>
                     </div>
