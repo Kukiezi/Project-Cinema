@@ -84,8 +84,29 @@ export default class ScreeningsManagement extends React.Component{
                   ),  
             },
             {
-                Header: 'Opis',
-                accessor: 'description',
+                Header: 'Data',
+                accessor: 'screeningDate',
+                sortable: false,
+                filterable: false,
+
+              },
+              {
+                Header: 'Seans 1',
+                accessor: 'showtime1',
+                sortable: false,
+                filterable: false,
+
+              },
+              {
+                Header: 'Seans 2',
+                accessor: 'showtime2',
+                sortable: false,
+                filterable: false,
+
+              },
+              {
+                Header: 'Seans 3',
+                accessor: 'showtime3',
                 sortable: false,
                 filterable: false,
 
