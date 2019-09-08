@@ -20,7 +20,6 @@
   -webkit-box-shadow: -1px 7px 7px -1px rgba(255,255,255,1);
   -moz-box-shadow: -1px 7px 7px -1px rgba(255,255,255,1);
   box-shadow: -1px 7x 7px -1px rgba(255,255,255,1);
-
 }
 .seat-taken {
   background: gray;
@@ -50,7 +49,7 @@
 
 .row-left{
   width: 40%;
-  float: left;
+  /* float: left; */
   margin: auto;
   padding: auto;
 }
@@ -74,19 +73,36 @@
 .white3{
   color:white;
   font-family: Monte;
-  size: 2px;
   text-align: center;
   /* font-size: 13px; */
   margin-top: 20px;
 }
 
+
 .info{
   border: 1px solid white;
   margin-top: 20px;
-  margin-bottom: 50px;
   font-family: Monte;
+  background: #2C2F33;
+  margin-left: 25%;
+  
   /* margin-right: 150px;
   margin-left: 80px; */
+}
+
+.info__data {
+  padding: 5px;
+}
+
+.info__title {
+  background: #23272A;
+  color: white;
+  padding: 5px;
+}
+
+.info__p {
+  color: white;
+  text-align: left;
 }
 
 .line{

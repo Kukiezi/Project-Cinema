@@ -126,7 +126,7 @@ export default class UserProfil extends React.Component<any, any>{
                             {user.response.username}
                         </div>
                     </div>
-                    <div className="info">
+                    <div className="info-user">
 
                         <Tabs>
                             <TabList className='menu-user'>
@@ -151,7 +151,7 @@ export default class UserProfil extends React.Component<any, any>{
                                     </div>
 
                                     <div className="form-actions text-center pt-4">
-                                        <button onClick={this.performChange} className="button bg-red hover:bg-red-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4">Zapisz zmiany</button><br /><br />
+                                        <button onClick={this.performChange} className="button bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4">Zapisz zmiany</button><br /><br />
                                     </div>
 
                                 </div>

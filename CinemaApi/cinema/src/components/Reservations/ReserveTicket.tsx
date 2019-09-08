@@ -84,27 +84,28 @@ public checkLength()
     const userStorage = localStorage.getItem("User");
     if (userStorage != null){
        user = JSON.parse(userStorage);
-       content = <div className="flex content-center whitespace-nowrap">
+       content = <div className="flex flex-col content-center whitespace-nowrap">
       
       <div className="w-full h-full text-grey-darker text-center bg-white px-6 py-4 m-4 row-left room-width">
-      <div className="screen">Ekran</div>
+      <div className="screen text-white">Ekran</div>
       <br/>
       <br/>  
        {this.state.seats.map(seat => 
                      <Seats triggerUpdate={this.updateReservation} check={this.checkLength} key={i=i+1} seat={seat}/>)}   
             
    </div> 
-   <div>
-     <h4 className="white flex content-center">
+   <div className="text-center">
+     <h1 className="text-white text-center text-lg">
         Miejsca: {this.state.Your} na {this.state.Max}
-     </h4>
-   </div>  
-   <NavLink className="buy-btn" to={{
+     </h1>
+     <NavLink className="buy-btn-reservation text-center content-center" to={{
                  pathname: '/Reservation/'+this.state.Reserved +"/" + this.props.match.params.Screening + "/" + user.response.id + "/" + this.props.match.params.Showtime,
                 // pathname: '/PersonalData/'+this.state.Reserved +"/"+ this.state.Screening,
                }}> 
                Zarezerwuj 
        </NavLink>
+   </div>  
+
    </div>
     }
     else
@@ -118,18 +119,19 @@ public checkLength()
                     <Seats triggerUpdate={this.updateReservation} check={this.checkLength} key={i=i+1} seat={seat}/>)}   
                  
   </div> 
-  <div>
-     <h1 className="white">
+  <div className="text-center">
+     <h1 className="text-white text-center text-lg">
         Miejsca: {this.state.Your} na {this.state.Max}
      </h1>
-   </div>   
-  
-  <NavLink className="buy-btn" to={{
+     <NavLink className="buy-btn-reservation text-center content-center" to={{
                // pathname: '/Reservation/'+this.state.Reserved +"/" + this.state.Screening,
                pathname: '/PersonalData/'+this.state.Reserved +"/"+ this.props.match.params.Screening + "/" + this.props.match.params.Showtime,
               }}> 
               Zarezerwuj 
       </NavLink>
+   </div>   
+  
+ 
   </div>
     }
     return (    

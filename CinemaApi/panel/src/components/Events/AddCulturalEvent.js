@@ -68,7 +68,8 @@ export default class AddMovie extends React.Component {
 
 
        render(){
-        
+        let validState = this.state.valid ? 'button bg-red hover:bg-red-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' : 'button bg-grey hover:bg-grey-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline';
+
           return(
         
             <div className="form-inner">
@@ -101,8 +102,8 @@ export default class AddMovie extends React.Component {
                     </div>
                     
                     <div className="text-center pt-4">
-                        <label className="block text-sm font-bold  text-red">{this.state.message}</label><br/>
-                        <button onClick={this.addEvent} disabled={!this.state.valid} >Zapisz</button>
+                        <label className="block text-sm font-bold text-red">{this.state.message}</label><br/>
+                        <button onClick={this.addEvent} disabled={!this.state.valid} className={validState} >Zapisz</button>
                     </div>
                 </div>
          </div>

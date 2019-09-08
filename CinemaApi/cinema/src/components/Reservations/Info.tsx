@@ -16,7 +16,7 @@ public render() {
 
         return (
             <div>
-            <p className ="white3 text-center">Miejsce: {this.props.seatReservation}</p>
+            <p>{this.props.seatReservation}</p>
             </div>
            )
 }
