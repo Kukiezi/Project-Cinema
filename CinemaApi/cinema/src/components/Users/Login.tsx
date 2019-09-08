@@ -54,6 +54,7 @@ class Login extends React.Component<any, any> {
             .then(res2 => this.setState({res: res2}));
          
             const tokenState = this.checkToken();
+            
             if (tokenState){
                 await localStorage.setItem("User", JSON.stringify(this.state.res))
                  window.location.reload();
@@ -69,6 +70,7 @@ class Login extends React.Component<any, any> {
                     return false;
                 }
                 const { exp } = decode(this.state.res.response.token)
+               
                 // console.log(exp);
                 if (exp < new Date().getTime() / 1000){
                   return false;

@@ -32,6 +32,8 @@ namespace CinemaApi.Models.UserModels
         /// </summary>
         public string Email { get; set; }
 
+        public bool Confirmed { get; set; }
+
         /// <summary>
         /// The users login token
         /// </summary>

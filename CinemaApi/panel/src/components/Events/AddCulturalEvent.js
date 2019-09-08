@@ -9,7 +9,8 @@ export default class AddMovie extends React.Component {
                 "id": 0,
                 "eventName":"",
                 "eventDescription": "",
-                "seatsLimit":""
+                "eventDate": new Date(),
+                "seatsLimit":0
             },
 
             valid: false,
@@ -25,8 +26,8 @@ export default class AddMovie extends React.Component {
         
        onChange = (e) => {
         const culturaleventCopy = JSON.parse(JSON.stringify(this.state.culturalevent));
-        
-        
+        culturaleventCopy[e.currentTarget.name] = e.currentTarget.value;
+        console.log(this.state.culturalevent);
         this.setState({ culturalevent: culturaleventCopy});
         if (culturaleventCopy.eventName !== "" && culturaleventCopy.eventDescription !== "" && culturaleventCopy.seatsLimit !== ""  )
         {
@@ -45,6 +46,14 @@ export default class AddMovie extends React.Component {
         console.log(this.state.valid);
     }
 
+    addEvent = () =>{
+        const movieCopy = JSON.parse(JSON.stringify(this.state.culturalevent));
+        console.log(movieCopy);
+        fetch('https://localhost:44371/cinema/AddEvent?eventName=' + movieCopy.eventName + '&eventDescription=' + movieCopy.eventDescription + '&eventDate=' + movieCopy.eventDate + '&seatsLimit=' + movieCopy.seatsLimit  , {
+           method: 'POST',
+           mode: 'no-cors'
+       });
+    }
     addCulturalEvents(){
         fetch('https://localhost:44371/cinema/AddCulturalEvent', {
             method: 'post',
@@ -52,7 +61,7 @@ export default class AddMovie extends React.Component {
               'Accept': 'application/json, text/plain, */*',
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({eventName: this.state.culturalevent.eventName, eventDescription: this.state.culturalevent.eventDescription, seatsLimit: this.state.culturalevent.seatsLimit})
+            body: JSON.stringify({eventName: this.state.culturalevent.eventName, eventDescription: this.state.culturalevent.eventDescription, eventDate: this.state.culturalevent.eventDate, seatsLimit: this.state.culturalevent.seatsLimit})
           }).then(res=>res.json())
             .then(res => console.log(res));
     }
@@ -63,7 +72,7 @@ export default class AddMovie extends React.Component {
           return(
         
             <div className="form-inner">
-            <h1 className="text-white text-center font-monte mt-4 mb-4 pb-4 border-b border-solid border-red">Dodaj film</h1>
+            <h1 className="text-white text-center font-monte mt-4 mb-4 pb-4 border-b border-solid border-red">Dodaj wydarzenie</h1>
             <div className="add-movie">
                     <NavLink className="add-btn btn-style" to="/CulturalEventManagment" >
                         &laquo; Powrót
@@ -83,13 +92,17 @@ export default class AddMovie extends React.Component {
                     </div>
 
                     <div className="add-form-item">
+                        <label htmlFor="eventDate" className="block text-sm font-bold  text-white">DATA</label>
+                        <input onChange={this.onChange} placeholder="Podaj opis wydarzenia "  id="eventDate" type="Date" name="eventDate" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
+                    </div>
+                    <div className="add-form-item">
                         <label htmlFor="seatsLimit" className="block text-sm font-bold  text-white ">LIMIT MIEJSC</label>
-                        <input onChange={this.onChange}  placeholder="Podaj limit miejsc"  id="seatsLimit" type="seatsLimit" name="seatsLimit" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
+                        <input onChange={this.onChange}  placeholder="Podaj limit miejsc"  id="seatsLimit" type="number" name="seatsLimit" className="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:text-blue focus:outline-none focus:shadow-outline" />
                     </div>
                     
                     <div className="text-center pt-4">
                         <label className="block text-sm font-bold  text-red">{this.state.message}</label><br/>
-                        <button onClick={this.addCulturalEvents} disabled={!this.state.valid} >Zapisz</button>
+                        <button onClick={this.addEvent} disabled={!this.state.valid} >Zapisz</button>
                     </div>
                 </div>
          </div>

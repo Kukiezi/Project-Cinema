@@ -62,7 +62,26 @@ namespace CinemaApi.Controllers
             context.SaveChanges();
             return Ok(culturalevents);
         }
+        [HttpPost]
+        [Route("AddEvent")]
+        public ActionResult AddEvent(string eventName, string eventDescription, DateTime eventDate, int seatsLimit)
+        {
+            context.CulturalEvent.Add(new CulturalEvent
+            {
+                EventName = eventName,
+                EventDescription = eventDescription,
+                EventDate = eventDate,
+                IdEventAddress = 1,
+                SeatsLimit = seatsLimit
+            });
 
+            var culturaleventExist = CulturalEventExists(eventName);
+            if (culturaleventExist)
+                return Ok("EVENT ALREADY EXISTS");
+
+            context.SaveChanges();
+            return Ok();
+        }
         [NonAction]
         public bool CulturalEventExists(string event_name)
         {
@@ -72,7 +91,7 @@ namespace CinemaApi.Controllers
 
         [HttpPost]
         [Route("UpdateCulturalEvent")]
-        public ActionResult UpdateCulturalEvent(int id, string eventName, string eventDescription, int seatsLimit)
+        public ActionResult UpdateCulturalEvent(int id, string eventName, string eventDescription, DateTime eventDate, int seatsLimit)
         {
             var culturalevent = context.CulturalEvent.Where(e => e.IdCulturalEvent == id).FirstOrDefault();
 
@@ -80,6 +99,7 @@ namespace CinemaApi.Controllers
             {
                 culturalevent.EventName = eventName;
                 culturalevent.EventDescription = eventDescription;
+                culturalevent.EventDate = eventDate;
                 culturalevent.SeatsLimit = seatsLimit;
                 context.SaveChanges();
             }

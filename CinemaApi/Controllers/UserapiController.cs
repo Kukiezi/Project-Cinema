@@ -280,11 +280,19 @@ namespace CinemaApi.Controllers
             // The message when we fail to login
             var invalidErrorMessage = "Niepoprawny login lub hasło";
 
+            var notConfirmedErrorMessage = "Podany adres email nie został potwierdzony";
+
             // The error response for a failed login
             var errorResponse = new ApiResponse<UserProfileDetailsApiModel>
             {
                 // Set error message
                 ErrorMessage = invalidErrorMessage
+            };
+
+            var errorResponse2 = new ApiResponse<UserProfileDetailsApiModel>
+            {
+                // Set error message
+                ErrorMessage = notConfirmedErrorMessage
             };
 
             // Make sure we have a user name
@@ -342,6 +350,9 @@ namespace CinemaApi.Controllers
 
             mContext.SaveChanges();
 
+            if ( user.EmailConfirmed == false)
+                // Return error message to user
+                return errorResponse2;
 
             // Return token to user
             return new ApiResponse<UserProfileDetailsApiModel>
@@ -353,6 +364,7 @@ namespace CinemaApi.Controllers
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Email = user.Email,
+                    Confirmed = user.EmailConfirmed,
                     Username = user.UserName,
                     Token = user.GenerateJwtToken(role),
                     Role = role

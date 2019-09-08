@@ -28,6 +28,7 @@ export default class AddMovie extends React.Component {
 
        onChange = (e) => {
         const movieCopy = JSON.parse(JSON.stringify(this.state.movie));
+        console.log(movieCopy);
         if (e.currentTarget.name === "ageRestriction"){
             movieCopy[e.currentTarget.name] = +e.currentTarget.value;
         }

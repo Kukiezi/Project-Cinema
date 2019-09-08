@@ -24,6 +24,16 @@ namespace CinemaApi.Controllers
         }
 
         [HttpGet]
+        [Route("GetRooms")]
+        public ActionResult GetRooms()
+        {
+            var roomsList = context.Room.ToList();
+            if (roomsList.Count != 0)
+                return Ok(roomsList);
+
+            return NotFound();
+        }
+        [HttpGet]
         [Route("GetSeat2")]
         public ActionResult GetSeat2(string mask)
         {
@@ -86,7 +96,7 @@ namespace CinemaApi.Controllers
             context.SaveChanges();
             var reservation = context.Reservation.Where(a => a.IdScreening == screening && a.SeatsReserved ==seat).FirstOrDefault();
             var users = context.Users.Where(a => a.Id == user).FirstOrDefault();
-            SendMail(reservation.IdReservation, users.Email, users.FirstName);
+            //SendMail(reservation.IdReservation, users.Email, users.FirstName);
             return Ok();
 
         }

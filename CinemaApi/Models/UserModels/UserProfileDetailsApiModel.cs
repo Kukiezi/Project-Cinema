@@ -42,6 +42,8 @@ namespace CinemaApi.Models.UserModels
         /// </summary>
         public string Username { get; set; }
 
+        public bool Confirmed { get; set; }
+
         /// <summary>
         /// The users email
         /// </summary>
@@ -75,6 +77,7 @@ namespace CinemaApi.Models.UserModels
                 Id = Id,
                 Email = Email,
                 FirstName = FirstName,
+                Confirmed = Confirmed,
                 LastName = LastName,
                 Username = Username,
                 Token = Token

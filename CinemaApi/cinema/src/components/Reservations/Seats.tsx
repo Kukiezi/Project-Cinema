@@ -15,11 +15,21 @@ class Seats extends React.Component<any, IState>{
             super(props);
           }
     public isFree = () => {
-
+        const check = this.props.check();
+        if(check){
         this.setState({
           free: !this.state.free        
         })
         this.props.triggerUpdate(this.state.seat.s,this.state.free)
+      }
+      if(!check && !this.state.free){
+        
+        this.setState({
+          free: true     
+        })
+        this.props.triggerUpdate(this.state.seat.s,this.state.free)
+      }
+        
  
       }
     public async RemoveSeat(){

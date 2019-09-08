@@ -18,9 +18,9 @@ export default class DeleteCulturalEvent extends React.Component {
       
       }
       async componentDidMount() {
-        const { idCulturalEvent } = this.props.match.params;
+        const { Id } = this.props.match.params;
         // const { movie } = this.props.location.state
-        const result = await fetch('https://localhost:44371/cinema/GetCulturalEvent?id=' + idCulturalEvent);
+        const result = await fetch('https://localhost:44371/cinema/GetCulturalEvent?IdCulturalEvent=' + Id);
         const culturalevent = await result.json();
       
         this.setState({
@@ -28,7 +28,7 @@ export default class DeleteCulturalEvent extends React.Component {
         });
       }
 
-       async deleteMovie(){
+       async deleteCulturalEvent(){
        await fetch('https://localhost:44371/cinema/DeleteCulturalEvent?id=' + this.state.culturalevent.idCulturalEvent, {
             method: 'POST'
           });

@@ -19,6 +19,16 @@ namespace CinemaApi.Controllers
             this.context = context;
         }
         [HttpGet]
+        [Route("GetAllScreenings")]
+        public ActionResult GetAllScreenings()
+        {
+            var screeningsList = context.Screening.ToList();
+            if (screeningsList.Count != 0)
+                return Ok(screeningsList);
+
+            return NotFound();
+        }
+        [HttpGet]
         [Route("GetScreenings")]
         public ActionResult<WeekModel> GetScreening()
         {
@@ -217,7 +227,89 @@ namespace CinemaApi.Controllers
             context.SaveChanges();
             return Ok(screenings);
         }
+        [NonAction]
+        public bool ScreeningExists(string title)
+        {
+            var v = context.Screening.Where(a => a.MovieName == title).FirstOrDefault();
+            return v != null;
+        }
+        [Route("AddScreenings")]
+        [HttpPost]
+        public ActionResult AddScreenings(int idMovie, int idRoom, string movieName, DateTime screeningDate, string showTime1, string showTime2, string showTime3)
+        {
+            TimeSpan time1 = TimeSpan.Parse(showTime1);
+            TimeSpan time2 = TimeSpan.Parse(showTime2);
+            TimeSpan time3 = TimeSpan.Parse(showTime3);
+            context.Screening.Add(new Screening
+              {
+                  MovieName = movieName,
+                  IdMovies = idMovie,
+                  IdRoom = idRoom,
+                  ScreeningDate = screeningDate,
+                  showtime1 = time1,
+                  showtime2 = time2,
+                  showtime3 = time3
 
+            });
+
+            var movieExist = ScreeningExists(movieName);
+            if (movieExist)
+                return Ok("MOVIE ALREADY EXISTS");
+
+            context.SaveChanges();
+            return Ok(); 
+            
+            
+        }
+        [HttpPost]
+        [Route("DeleteScreening")]
+        public ActionResult DeleteScreening(int id)
+        {
+            var screening = context.Screening.Where(e => e.IdScreening == id).FirstOrDefault();
+
+            if (screening != null)
+            {
+                context.Screening.Remove(screening);
+                context.SaveChanges();
+            }
+
+            return Ok();
+        }
+        [HttpGet]
+        [Route("GetScreening")]
+        public ActionResult<Screening> GetScreening(int id)
+        {
+            var movie = context.Screening.Where(a => a.IdScreening == id).FirstOrDefault();
+
+            if (movie != null)
+            {
+                return movie;
+            }
+
+            return NotFound();
+        }
+        [Route("EditScreenings")]
+        [HttpPost]
+        public ActionResult EditScreenings(int idScreening, int idMovie, int idRoom, string movieName, DateTime screeningDate, string showTime1, string showTime2, string showTime3)
+        {
+            var screening = context.Screening.Where(e => e.IdScreening == idScreening).FirstOrDefault();
+            TimeSpan time1 = TimeSpan.Parse(showTime1);
+            TimeSpan time2 = TimeSpan.Parse(showTime2);
+            TimeSpan time3 = TimeSpan.Parse(showTime3);
+
+            screening.MovieName = movieName;
+            screening.IdMovies = idMovie;
+            screening.IdRoom = idRoom;
+            screening.ScreeningDate = screeningDate;
+            screening.showtime1 = time1;
+            screening.showtime2 = time2;
+            screening.showtime3 = time3;
+            context.SaveChanges();
+
+            return Ok();
+
+
+        }
         [NonAction]
         public bool ScreeningExists(int idScreening)
         {
