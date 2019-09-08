@@ -14,6 +14,9 @@ export default class AdminPanel extends React.Component{
                     <NavLink className="managment-btn btn-style" to="/CulturalEventManagment" >
                          Wydarzenia
                     </NavLink>
+                    <NavLink className="managment-btn btn-style" to="/ScreeningsManagement" >
+                         Seanse
+                    </NavLink>
                     
                 </div>
             </div>
