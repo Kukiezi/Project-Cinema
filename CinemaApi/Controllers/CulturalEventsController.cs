@@ -42,7 +42,16 @@ namespace CinemaApi.Controllers
 
             return NotFound();
         }
+     /*   [HttpGet]
+        [Route("GetEventsByUser")]
+        public ActionResult<List<CulturalEvent>> GetEventsByUser(string IdUser)
+        {
+            var signIn = context.SigningIn.Where(a => a.IdUsers == IdUser).FirstOrDefault();
+            var events = context.CulturalEvent.Where(a => a.IdCulturalEvent == signIn.IdCulturalEvent).ToList();
 
+            return events;
+
+        } */
         [HttpPost]
         [Route("AddCulturalEvent")]
         public ActionResult AddCulturalEvents(CulturalEvent culturalevents)

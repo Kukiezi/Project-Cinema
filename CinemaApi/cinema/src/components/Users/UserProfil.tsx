@@ -2,6 +2,7 @@ import * as React from "react";
 import './UserProfil.css';
 import { Tabs, Tab, TabList, TabPanel } from 'react-tabs';
 import Reservations from '../Users/UserReservations';
+import UserEvents from '../Users/UserEvents';
 export default class UserProfil extends React.Component<any, any>{
 
     constructor(props: any) {
@@ -11,6 +12,7 @@ export default class UserProfil extends React.Component<any, any>{
         this.updateStorage = this.updateStorage.bind(this);
         this.state = {
             reservations:[],
+            events:[],
             credentials: {
                 firstName: "",
                 lastName: "",
@@ -37,11 +39,17 @@ export default class UserProfil extends React.Component<any, any>{
       }
         const result = await fetch('https://localhost:44371/api/GetUserReservations?userId=' + user.response.id);
         const reservations = await result.json();
+        const result4 = await fetch('https://localhost:44371/api/GetEvents?userId=' + user.response.id);
+        const events = await result4.json();
+        console.log(events);
+
         const result2 = await fetch('https://localhost:44371/cinema/GetUser?id=' + user.response.id);
         const User = await result2.json();
+        console.log(reservations);
+        console.log(events);
         console.log(User)
         // console.log(seatsReservation[0])
-        await this.setState({User, reservations})
+        await this.setState({User, reservations, events})
         console.log(this.state.seatsReservation)
         // console.log(this.state.seatsReservation.reservation)
     }
@@ -132,6 +140,7 @@ export default class UserProfil extends React.Component<any, any>{
                             <TabList className='menu-user'>
                                 <Tab>Dane</Tab>
                                 <Tab>Rezerwacje</Tab>
+                                <Tab>Wydarzenia</Tab>
 
                             </TabList>
 
@@ -163,6 +172,15 @@ export default class UserProfil extends React.Component<any, any>{
                                 <h3 className="white2">Twoje Rezerwacje:</h3>
                                     {this.state.reservations.map(reservations =>
                                         <Reservations key={reservations} reservations={reservations} />)}
+                                </div>
+                            </TabPanel>
+                            <TabPanel>
+                                {/* <p className="mt-12"> Nie dokonałeś jeszcze żadnych rezerwacji</p> */}
+                                <div className="content-center">
+                               
+                                <h3 className="white2">Twoje Wydarzenia:</h3>
+                                    {this.state.events.map(events =>
+                                        <UserEvents key={events.idSigningIn} events={events} />)}
                                 </div>
                             </TabPanel>
 

@@ -571,6 +571,29 @@ namespace CinemaApi.Controllers
             return reservationList;
         }
 
+        [Route("GetEvents")]
+        [HttpGet]
+        public async Task<List<SigningIn>> GetEvents(string userId)
+        {
+            //var user = mUserManager.FindByIdAsync(userId);
+            var signList = mContext.SigningIn.Where(a => a.IdUsers == userId).ToList();
+
+            // If we were successful...
+            return signList;
+        }
+
+        [Route("GetEventsByUser")]
+        [HttpGet]
+        public async Task<CulturalEvent> GetEventsByUser(int id)
+        {
+            //var user = mUserManager.FindByIdAsync(userId);      
+            var eventList = mContext.CulturalEvent.Where(a => a.IdCulturalEvent == id).FirstOrDefault();
+
+            // If we were successful...
+            return eventList;
+        }
+
+
         [HttpGet]
         [Route("ConfirmEmail")]
         public ActionResult ConfirmReservation(string email)

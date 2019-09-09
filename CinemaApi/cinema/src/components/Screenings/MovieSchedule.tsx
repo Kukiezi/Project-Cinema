@@ -65,9 +65,9 @@ class MovieSchedule extends React.Component<any, any>{
     
           <Fade>
           <div className="Movie-Schedlist" id="Movie-list"> 
-             
+
           {this.state.movies.map(movie => <Movies key={movie.id} movie={movie}/>)}<br/>
-       
+                  
     
           </div>
           </Fade>
