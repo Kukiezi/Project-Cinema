@@ -1,8 +1,6 @@
 # Project-Cinema
 Projekt stworzony na Zajęcia Zespołowe UG 2018
 
-Strona: https://www.kino-studyjne.pl
-
 Zespół:
 - Dawid Weltrowski-Knopik
 - Filip Czyż
