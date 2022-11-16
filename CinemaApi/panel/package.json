@@ -38,7 +38,7 @@
 		"electron": "^6.0.7",
 		"electron-builder": "^20.18.0",
 		"electron-devtools-installer": "^2.2.4",
-		"react-scripts": "1.1.4",
+		"react-scripts": "5.0.1",
 		"tailwindcss": "^0.7.3",
 		"version-bump-prompt": "^4.1.0",
 		"wait-on": "^3.2.0"
